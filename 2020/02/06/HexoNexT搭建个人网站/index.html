@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.1',
+    exturl: false,
+    sidebar: {"enable":true,"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="1. 搭建环境（2020-2-6） Git(v2.21.1): https:&#x2F;&#x2F;www.git-scm.com&#x2F;downloads&#x2F; Node.js(v12.14.1): https:&#x2F;&#x2F;nodejs.org&#x2F;zh-cn&#x2F; Hexo(v4.2.0): https:&#x2F;&#x2F;hexo.io&#x2F; NexT(v7.7.1): https:&#x2F;&#x2F;theme-next.org&#x2F;   2. 安装 Hexo1$ npm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo &amp; NexT 搭建个人网站">
+<meta property="og:url" content="http://yoursite.com/2020/02/06/HexoNexT%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99/index.html">
+<meta property="og:site_name" content="个人小站">
+<meta property="og:description" content="1. 搭建环境（2020-2-6） Git(v2.21.1): https:&#x2F;&#x2F;www.git-scm.com&#x2F;downloads&#x2F; Node.js(v12.14.1): https:&#x2F;&#x2F;nodejs.org&#x2F;zh-cn&#x2F; Hexo(v4.2.0): https:&#x2F;&#x2F;hexo.io&#x2F; NexT(v7.7.1): https:&#x2F;&#x2F;theme-next.org&#x2F;   2. 安装 Hexo1$ npm">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-02-06T08:07:28.000Z">
+<meta property="article:modified_time" content="2020-02-17T16:21:12.468Z">
+<meta property="article:author" content="Dench">
+<meta property="article:tag" content="个人建站">
+<meta property="article:tag" content=" Hexo">
+<meta property="article:tag" content=" NexT">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/02/06/HexoNexT%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Hexo & NexT 搭建个人网站 | 个人小站</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">个人小站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Dench's</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/DenchOpen" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/06/HexoNexT%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hexo & NexT 搭建个人网站
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-06 16:07:28" itemprop="dateCreated datePublished" datetime="2020-02-06T16:07:28+08:00">2020-02-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-18 00:21:12" itemprop="dateModified" datetime="2020-02-18T00:21:12+08:00">2020-02-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Develop/" itemprop="url" rel="index">
+                    <span itemprop="name">Develop</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Develop/Hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">Hexo</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="1-搭建环境（2020-2-6）"><a href="#1-搭建环境（2020-2-6）" class="headerlink" title="1. 搭建环境（2020-2-6）"></a>1. 搭建环境（2020-2-6）</h2><ul>
+<li>Git(v2.21.1): <a href="https://www.git-scm.com/downloads/" target="_blank" rel="noopener">https://www.git-scm.com/downloads/</a></li>
+<li>Node.js(v12.14.1): <a href="https://nodejs.org/zh-cn/" target="_blank" rel="noopener">https://nodejs.org/zh-cn/</a><!-- - npm v6.13.4 --></li>
+<li>Hexo(v4.2.0): <a href="https://hexo.io/" target="_blank" rel="noopener">https://hexo.io/</a></li>
+<li>NexT(v7.7.1): <a href="https://theme-next.org/" target="_blank" rel="noopener">https://theme-next.org/</a> </li>
+</ul>
+<h2 id="2-安装-Hexo"><a href="#2-安装-Hexo" class="headerlink" title="2. 安装 Hexo"></a>2. 安装 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-创建-hexo-工程"><a href="#3-创建-hexo-工程" class="headerlink" title="3. 创建 hexo 工程"></a>3. 创建 hexo 工程</h2><h3 id="新建工程"><a href="#新建工程" class="headerlink" title="新建工程"></a>新建工程</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init [folder]</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+
+<h3 id="新建post"><a href="#新建post" class="headerlink" title="新建post"></a>新建post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new [layout] &lt;title&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="编译工程"><a href="#编译工程" class="headerlink" title="编译工程"></a>编译工程</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<h3 id="本地服务"><a href="#本地服务" class="headerlink" title="本地服务"></a>本地服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<h3 id="其他常用命令"><a href="#其他常用命令" class="headerlink" title="其他常用命令"></a>其他常用命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean </span><br><span class="line">$ hexo g &amp;&amp; hexo s </span><br><span class="line">$ hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-一键发布到-Github-和-Coding"><a href="#4-一键发布到-Github-和-Coding" class="headerlink" title="4. 一键发布到 Github 和 Coding"></a>4. 一键发布到 Github 和 Coding</h2><p> 4.1 安装 <a href="https://github.com/hexojs/hexo-deployer-git" target="_blank" rel="noopener">hexo-deployer-git</a>.  </p>
+<p> 4.2 配置 <code>hexo/_config.yml</code>, 添加代码:</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">repo:</span></span><br><span class="line">    <span class="comment"># 下面两种写法都支持</span></span><br><span class="line">    <span class="attr">github:</span> <span class="string">https://github.com/user/project.git,branch</span></span><br><span class="line">    <span class="attr">coding:</span></span><br><span class="line">      <span class="attr">url:</span> <span class="string">https://git.coding.com/user/project.git</span></span><br><span class="line">      <span class="attr">branch:</span> <span class="string">branch_name</span></span><br></pre></td></tr></table></figure>
+
+<p> 4.3 部署使用 <code>hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</code>.</p>
+<h2 id="5-配置工程hexo-config-yml"><a href="#5-配置工程hexo-config-yml" class="headerlink" title="5. 配置工程hexo/_config.yml"></a>5. 配置工程<code>hexo/_config.yml</code></h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> </span><br><span class="line"><span class="attr">subtitle:</span> </span><br><span class="line"><span class="attr">author:</span> </span><br><span class="line"><span class="attr">description:</span> <span class="comment">#描述 SEO  </span></span><br><span class="line"><span class="attr">language:</span> <span class="string">zh-CN</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="comment">#建议不填</span></span><br><span class="line"></span><br><span class="line"><span class="attr">skip_render:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">README.md</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">CNAME</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="6-安装主题-NexT"><a href="#6-安装主题-NexT" class="headerlink" title="6. 安装主题 NexT"></a>6. 安装主题 <a href="https://theme-next.org/docs/getting-started/" target="_blank" rel="noopener">NexT</a></h2><p> 6.1 NexT 主题下载</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> hexo</span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
+<p> 6.2 应用主题，配置<code>hexo/_config.yml</code>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: next</span><br></pre></td></tr></table></figure>
+
+<p> <strong>更多主题:</strong> <a href="https://github.com/hexojs/hexo/wiki/Themes" target="_blank" rel="noopener">https://github.com/hexojs/hexo/wiki/Themes</a></p>
+<h2 id="7-配置主题-NexT"><a href="#7-配置主题-NexT" class="headerlink" title="7. 配置主题 NexT"></a>7. 配置主题 <a href="https://theme-next.org/docs/getting-started/" target="_blank" rel="noopener">NexT</a></h2><p>以下配置都在 NexT 主题配置文件 <code>next/_config.yml</code> 。</p>
+<h3 id="7-1-选择-Scheme"><a href="#7-1-选择-Scheme" class="headerlink" title="7.1 选择 Scheme"></a>7.1 选择 Scheme</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#scheme: Muse</span></span><br><span class="line"><span class="comment">#scheme: Mist</span></span><br><span class="line"><span class="comment">#scheme: Pisces</span></span><br><span class="line"><span class="attr">scheme:</span> <span class="string">Gemini</span></span><br></pre></td></tr></table></figure>
+<h3 id="7-2-选择语言"><a href="#7-2-选择语言" class="headerlink" title="7.2 选择语言"></a>7.2 选择语言</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">language:</span> <span class="string">zh-CN</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="7-3-配置-menu"><a href="#7-3-配置-menu" class="headerlink" title="7.3 配置 menu"></a>7.3 配置 menu</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">home:</span> <span class="string">/</span> <span class="string">||</span> <span class="string">home</span></span><br><span class="line">  <span class="comment">#about: /about/ || user</span></span><br><span class="line">  <span class="comment">#tags: /tags/ || tags</span></span><br><span class="line">  <span class="comment">#categories: /categories/ || th</span></span><br><span class="line">  <span class="attr">archives:</span> <span class="string">/archives/</span> <span class="string">||</span> <span class="string">archive</span></span><br><span class="line">  <span class="comment">#schedule: /schedule/ || calendar</span></span><br><span class="line">  <span class="comment">#sitemap: /sitemap.xml || sitemap</span></span><br><span class="line">  <span class="comment">#commonweal: /404/ || heartbeat</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="7-4-配置-Tags-和-Categories"><a href="#7-4-配置-Tags-和-Categories" class="headerlink" title="7.4 配置 Tags 和 Categories"></a>7.4 配置 Tags 和 Categories</h3><p> menu 中配置 tags 和 categories，需要自定义 page。<a href="https://theme-next.org/docs/theme-settings/custom-pages" target="_blank" rel="noopener">自定义Tags</a></p>
+<h3 id="7-5-配置-Sidebar"><a href="#7-5-配置-Sidebar" class="headerlink" title="7.5 配置 Sidebar"></a>7.5 配置 <a href="https://theme-next.org/docs/theme-settings/sidebar" target="_blank" rel="noopener">Sidebar</a></h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Sidebar Avatar</span></span><br><span class="line"><span class="attr">avatar:</span></span><br><span class="line">  <span class="comment"># Replace the default image and set the url here.</span></span><br><span class="line">  <span class="attr">url:</span> <span class="string">/images/avatar.png</span></span><br><span class="line">  <span class="comment"># If true, the avatar will be dispalyed in circle.</span></span><br><span class="line">  <span class="attr">rounded:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># If true, the avatar will be rotated with the cursor.</span></span><br><span class="line">  <span class="attr">rotated:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Posts / Categories / Tags in sidebar.</span></span><br><span class="line"><span class="attr">site_state:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="7-6-配置-Favicon"><a href="#7-6-配置-Favicon" class="headerlink" title="7.6 配置 Favicon"></a>7.6 配置 Favicon</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">favicon:</span></span><br><span class="line">  <span class="attr">small:</span> <span class="string">/images/favicon-16x16-next.png</span></span><br><span class="line">  <span class="attr">medium:</span> <span class="string">/images/favicon-32x32-next.png</span></span><br><span class="line">  <span class="attr">apple_touch_icon:</span> <span class="string">/images/apple-touch-icon-next.png</span></span><br><span class="line">  <span class="attr">safari_pinned_tab:</span> <span class="string">/images/logo.svg</span></span><br><span class="line">  <span class="attr">android_manifest:</span> <span class="string">/images/manifest.json</span></span><br><span class="line">  <span class="attr">ms_browserconfig:</span> <span class="string">/images/browserconfig.xml</span></span><br></pre></td></tr></table></figure>
+<h3 id="7-7-配置-Back2top"><a href="#7-7-配置-Back2top" class="headerlink" title="7.7 配置 Back2top"></a>7.7 配置 Back2top</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">back2top:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Back to top in sidebar.</span></span><br><span class="line">  <span class="attr">sidebar:</span> <span class="literal">false</span></span><br><span class="line">  <span class="comment"># Scroll percent label in b2t button.</span></span><br><span class="line">  <span class="attr">scrollpercent:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="7-8-配置字体"><a href="#7-8-配置字体" class="headerlink" title="7.8 配置字体"></a>7.8 配置字体</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">font:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">global:</span></span><br><span class="line">    <span class="attr">external:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">family:</span> <span class="string">Menlo</span></span><br><span class="line">    <span class="attr">size:</span> <span class="number">1.125</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="7-9-GitHub-Banner"><a href="#7-9-GitHub-Banner" class="headerlink" title="7.9 GitHub Banner"></a>7.9 GitHub Banner</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">github_banner:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">permalink:</span> <span class="string">https://github.com/yourname</span></span><br><span class="line">  <span class="attr">title:</span> <span class="string">Follow</span> <span class="string">me</span> <span class="string">on</span> <span class="string">GitHub</span></span><br></pre></td></tr></table></figure>
+<h3 id="7-10-阅读全文（控制首页显示位置）"><a href="#7-10-阅读全文（控制首页显示位置）" class="headerlink" title="7.10 阅读全文（控制首页显示位置）"></a>7.10 阅读全文（控制首页显示位置）</h3><p> 在 <code>&lt;_post&gt;.md</code> 中添加 <code>&lt;!-- more --&gt;</code> 标签</p>
+<p><strong>更多主题配置:</strong> <a href="https://theme-next.org/docs/theme-settings/" target="_blank" rel="noopener">https://theme-next.org/docs/theme-settings/</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/07/ZSH%E5%85%A5%E9%97%A8/" rel="prev" title="ZSH入门">
+      <i class="fa fa-chevron-left"></i> ZSH入门
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/02/04/%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86/" rel="next" title="时间管理">
+      时间管理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-搭建环境（2020-2-6）"><span class="nav-number">1.</span> <span class="nav-text">1. 搭建环境（2020-2-6）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-安装-Hexo"><span class="nav-number">2.</span> <span class="nav-text">2. 安装 Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-创建-hexo-工程"><span class="nav-number">3.</span> <span class="nav-text">3. 创建 hexo 工程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#新建工程"><span class="nav-number">3.1.</span> <span class="nav-text">新建工程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新建post"><span class="nav-number">3.2.</span> <span class="nav-text">新建post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译工程"><span class="nav-number">3.3.</span> <span class="nav-text">编译工程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本地服务"><span class="nav-number">3.4.</span> <span class="nav-text">本地服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部署"><span class="nav-number">3.5.</span> <span class="nav-text">部署</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他常用命令"><span class="nav-number">3.6.</span> <span class="nav-text">其他常用命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-一键发布到-Github-和-Coding"><span class="nav-number">4.</span> <span class="nav-text">4. 一键发布到 Github 和 Coding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-配置工程hexo-config-yml"><span class="nav-number">5.</span> <span class="nav-text">5. 配置工程hexo&#x2F;_config.yml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-安装主题-NexT"><span class="nav-number">6.</span> <span class="nav-text">6. 安装主题 NexT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-配置主题-NexT"><span class="nav-number">7.</span> <span class="nav-text">7. 配置主题 NexT</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-选择-Scheme"><span class="nav-number">7.1.</span> <span class="nav-text">7.1 选择 Scheme</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-选择语言"><span class="nav-number">7.2.</span> <span class="nav-text">7.2 选择语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-配置-menu"><span class="nav-number">7.3.</span> <span class="nav-text">7.3 配置 menu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-4-配置-Tags-和-Categories"><span class="nav-number">7.4.</span> <span class="nav-text">7.4 配置 Tags 和 Categories</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-5-配置-Sidebar"><span class="nav-number">7.5.</span> <span class="nav-text">7.5 配置 Sidebar</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-6-配置-Favicon"><span class="nav-number">7.6.</span> <span class="nav-text">7.6 配置 Favicon</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-7-配置-Back2top"><span class="nav-number">7.7.</span> <span class="nav-text">7.7 配置 Back2top</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-8-配置字体"><span class="nav-number">7.8.</span> <span class="nav-text">7.8 配置字体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-9-GitHub-Banner"><span class="nav-number">7.9.</span> <span class="nav-text">7.9 GitHub Banner</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-10-阅读全文（控制首页显示位置）"><span class="nav-number">7.10.</span> <span class="nav-text">7.10 阅读全文（控制首页显示位置）</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Dench"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Dench</p>
+  <div class="site-description" itemprop="description">Love & Peace</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DenchOpen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
