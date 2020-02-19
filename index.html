@@ -190,6 +190,81 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/19/Vim%E5%B8%B8%E7%94%A8%E8%AE%BE%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/19/Vim%E5%B8%B8%E7%94%A8%E8%AE%BE%E7%BD%AE/" class="post-title-link" itemprop="url">Vim 常用设置</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-02-19 21:52:19 / 修改时间：22:01:41" itemprop="dateCreated datePublished" datetime="2020-02-19T21:52:19+08:00">2020-02-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Develop/" itemprop="url" rel="index">
+                    <span itemprop="name">Develop</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Develop/Vim/" itemprop="url" rel="index">
+                    <span itemprop="name">Vim</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">set nu " 显示行号</span><br><span class="line">set showcmd " 显示输入的命令</span><br><span class="line">set ruler  " 显示标尺</span><br><span class="line">syntax on " 自动语法高亮</span><br><span class="line">set nobackup " 不自动备份</span><br><span class="line">set hlsearch " 搜索高亮</span><br><span class="line">set vb t_vb= " 没有错误提示音</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/17/VimTutor/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -221,7 +296,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-18 00:21:12" itemprop="dateModified" datetime="2020-02-18T00:21:12+08:00">2020-02-18</time>
+                <time title="修改时间：2020-02-18 21:29:57" itemprop="dateModified" datetime="2020-02-18T21:29:57+08:00">2020-02-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -255,20 +330,20 @@
           <h2 id="第一讲小结"><a href="#第一讲小结" class="headerlink" title="第一讲小结"></a>第一讲小结</h2><ol>
 <li><p>光标在屏幕文本中的移动既可以用箭头键，也可以使用 hjkl 字母键。<br>h (左移) j (下行)       k (上行)     l (右移)</p>
 </li>
-<li><p>欲进入 Vim 编辑器(从命令行提示符)，请输入：vim 文件名 &lt;回车&gt;</p>
+<li><p>欲进入 Vim 编辑器(从命令行提示符)，请输入：vim 文件名 <code>&lt;回车&gt;</code></p>
 </li>
 <li><p>欲退出 Vim 编辑器，请输入 </p>
-<pre><code>&lt;ESC&gt;   :q!   &lt;回车&gt; 放弃所有改动。
-&lt;ESC&gt;   :wq   &lt;回车&gt; 保存改动。</code></pre></li>
+<pre><code>`&lt;ESC&gt;`   :q!   `&lt;回车&gt;` 放弃所有改动。
+`&lt;ESC&gt;`   :wq   `&lt;回车&gt;` 保存改动。</code></pre></li>
 <li><p>在正常模式下删除光标所在位置的字符，请按： x</p>
 </li>
 <li><p>欲插入或添加文本，请输入：  </p>
-<pre><code>i   输入欲插入文本   &lt;ESC&gt;   在光标前插入文本
-I   输入欲插入文本   &lt;ESC&gt;   在一行前插入文本
-a   输入欲添加文本   &lt;ESC&gt;   在光标后添加文本
-A   输入欲添加文本   &lt;ESC&gt;   在一行后添加文本</code></pre></li>
+<pre><code>i   输入欲插入文本   `&lt;ESC&gt;`   在光标前插入文本
+I   输入欲插入文本   `&lt;ESC&gt;`   在一行前插入文本
+a   输入欲添加文本   `&lt;ESC&gt;`   在光标后添加文本
+A   输入欲添加文本   `&lt;ESC&gt;`   在一行后添加文本</code></pre></li>
 </ol>
-<p>特别提示：按下 <ESC> 键会带您回到正常模式或者撤消一个不想输入或部分完整<br>的命令。</p>
+<p>特别提示：按下 <code>&lt;ESC&gt;</code> 键会带您回到正常模式或者撤消一个不想输入或部分完整<br>的命令。</p>
 <h2 id="第二讲小结"><a href="#第二讲小结" class="headerlink" title="第二讲小结"></a>第二讲小结</h2><ol>
 <li><p>欲从当前光标删除至下一个单词，请输入：dw</p>
 </li>
@@ -332,7 +407,7 @@ A   输入欲添加文本   &lt;ESC&gt;   在一行后添加文本</code></pre><
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-18 00:21:12" itemprop="dateModified" datetime="2020-02-18T00:21:12+08:00">2020-02-18</time>
+                <time title="修改时间：2020-02-18 01:11:32" itemprop="dateModified" datetime="2020-02-18T01:11:32+08:00">2020-02-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -423,7 +498,7 @@ A   输入欲添加文本   &lt;ESC&gt;   在一行后添加文本</code></pre><
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-18 00:21:12" itemprop="dateModified" datetime="2020-02-18T00:21:12+08:00">2020-02-18</time>
+                <time title="修改时间：2020-02-18 01:11:32" itemprop="dateModified" datetime="2020-02-18T01:11:32+08:00">2020-02-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -522,7 +597,7 @@ A   输入欲添加文本   &lt;ESC&gt;   在一行后添加文本</code></pre><
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-18 00:21:12" itemprop="dateModified" datetime="2020-02-18T00:21:12+08:00">2020-02-18</time>
+                <time title="修改时间：2020-02-18 01:11:32" itemprop="dateModified" datetime="2020-02-18T01:11:32+08:00">2020-02-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -614,7 +689,7 @@ A   输入欲添加文本   &lt;ESC&gt;   在一行后添加文本</code></pre><
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-18 00:21:12" itemprop="dateModified" datetime="2020-02-18T00:21:12+08:00">2020-02-18</time>
+                <time title="修改时间：2020-02-18 01:11:32" itemprop="dateModified" datetime="2020-02-18T01:11:32+08:00">2020-02-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -661,99 +736,6 @@ A   输入欲添加文本   &lt;ESC&gt;   在一行后添加文本</code></pre><
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/02/10/ZSH%E8%BF%9B%E9%98%B6/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/10/Homebrew%E5%85%A5%E9%97%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/10/Homebrew%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">Homebrew 入门</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-02-10 14:57:27" itemprop="dateCreated datePublished" datetime="2020-02-10T14:57:27+08:00">2020-02-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-18 00:21:12" itemprop="dateModified" datetime="2020-02-18T00:21:12+08:00">2020-02-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Develop/" itemprop="url" rel="index">
-                    <span itemprop="name">Develop</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Develop/Homebrew/" itemprop="url" rel="index">
-                    <span itemprop="name">Homebrew</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Homebrew 是 macOS 或 Linux 缺失的软件包的管理器.</p>
-<p><strong>Homebrew 官网:</strong> <a href="https://brew.sh/" target="_blank" rel="noopener">https://brew.sh/</a></p>
-<h2 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-使用国内镜像"><a href="#2-使用国内镜像" class="headerlink" title="2. 使用国内镜像"></a>2. 使用国内镜像</h2><p><code>brew update</code> 卡死，没反应？原因一般都是国内获取资源太慢，可以使用国内镜像解决。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/02/10/Homebrew%E5%85%A5%E9%97%A8/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -845,7 +827,7 @@ A   输入欲添加文本   &lt;ESC&gt;   在一行后添加文本</code></pre><
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
