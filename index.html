@@ -190,7 +190,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/19/Vim%E5%B8%B8%E7%94%A8%E8%AE%BE%E7%BD%AE/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/19/Vim%E5%8D%87%E7%BA%A7%E5%92%8C%E9%85%8D%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -204,7 +204,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/02/19/Vim%E5%B8%B8%E7%94%A8%E8%AE%BE%E7%BD%AE/" class="post-title-link" itemprop="url">Vim 常用设置</a>
+            <a href="/2020/02/19/Vim%E5%8D%87%E7%BA%A7%E5%92%8C%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">Vim 升级和配置</a>
         </h1>
 
         <div class="post-meta">
@@ -213,10 +213,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-02-19 21:52:19 / 修改时间：22:01:41" itemprop="dateCreated datePublished" datetime="2020-02-19T21:52:19+08:00">2020-02-19</time>
+              <time title="创建时间：2020-02-19 21:52:19" itemprop="dateCreated datePublished" datetime="2020-02-19T21:52:19+08:00">2020-02-19</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-20 00:59:38" itemprop="dateModified" datetime="2020-02-20T00:59:38+08:00">2020-02-20</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -246,7 +252,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">set nu " 显示行号</span><br><span class="line">set showcmd " 显示输入的命令</span><br><span class="line">set ruler  " 显示标尺</span><br><span class="line">syntax on " 自动语法高亮</span><br><span class="line">set nobackup " 不自动备份</span><br><span class="line">set hlsearch " 搜索高亮</span><br><span class="line">set vb t_vb= " 没有错误提示音</span><br></pre></td></tr></table></figure>
+          <h2 id="1-Vim-升级"><a href="#1-Vim-升级" class="headerlink" title="1. Vim 升级"></a>1. Vim 升级</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install vim --with-lua --with-override-system-vim</span><br></pre></td></tr></table></figure>
+<p>以后想更新 vim 版本，直接输入 <code>brew upgrade vim</code> 。</p>
+<h2 id="2-配置自己的-vimrc-文件"><a href="#2-配置自己的-vimrc-文件" class="headerlink" title="2. 配置自己的 .vimrc 文件"></a>2. 配置自己的 .vimrc 文件</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">set nu " 显示行号</span><br><span class="line">set showcmd " 显示输入的命令</span><br><span class="line">set ruler  " 显示标尺</span><br><span class="line">syntax on " 自动语法高亮</span><br><span class="line">set nobackup " 不自动备份</span><br><span class="line">set hlsearch " 搜索高亮</span><br><span class="line">set vb t_vb= " 没有错误提示音</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-vundle-管理插件"><a href="#3-vundle-管理插件" class="headerlink" title="3.  vundle 管理插件"></a>3.  vundle 管理插件</h2><h3 id="3-1-安装"><a href="#3-1-安装" class="headerlink" title="3.1 安装"></a>3.1 安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim</span><br></pre></td></tr></table></figure>
+<h3 id="3-2-配置插件"><a href="#3-2-配置插件" class="headerlink" title="3.2 配置插件"></a>3.2 配置插件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">set nocompatible              &quot; be iMproved, required</span><br><span class="line">filetype off                  &quot; required</span><br><span class="line"></span><br><span class="line">&quot; set the runtime path to include Vundle and initialize</span><br><span class="line">set rtp+&#x3D;~&#x2F;.vim&#x2F;bundle&#x2F;Vundle.vim</span><br><span class="line">call vundle#begin()</span><br><span class="line">&quot; alternatively, pass a path where Vundle should install plugins</span><br><span class="line">&quot;call vundle#begin(&#39;~&#x2F;some&#x2F;path&#x2F;here&#39;)</span><br><span class="line"></span><br><span class="line">&quot; let Vundle manage Vundle, required</span><br><span class="line">Plugin &#39;VundleVim&#x2F;Vundle.vim&#39;</span><br><span class="line"></span><br><span class="line">&quot; The following are examples of different formats supported.</span><br><span class="line">&quot; Keep Plugin commands between vundle#begin&#x2F;end.</span><br><span class="line">&quot; plugin on GitHub repo</span><br><span class="line">Plugin &#39;altercation&#x2F;vim-colors-solarized&#39;</span><br><span class="line">Plugin &#39;Lokaltog&#x2F;vim-powerline&#39;</span><br><span class="line">Plugin &#39;octol&#x2F;vim-cpp-enhanced-highlight&#39;</span><br><span class="line">Plugin &#39;Raimondi&#x2F;delimitMate&#39;</span><br><span class="line"></span><br><span class="line">&quot; plugin from http:&#x2F;&#x2F;vim-scripts.org&#x2F;vim&#x2F;scripts.html</span><br><span class="line">&quot; Plugin &#39;L9&#39;</span><br><span class="line">&quot; Git plugin not hosted on GitHub</span><br><span class="line">Plugin &#39;git:&#x2F;&#x2F;git.wincent.com&#x2F;command-t.git&#39;</span><br><span class="line">&quot; git repos on your local machine (i.e. when working on your own plugin)</span><br><span class="line">Plugin &#39;file:&#x2F;&#x2F;&#x2F;home&#x2F;gmarik&#x2F;path&#x2F;to&#x2F;plugin&#39;</span><br><span class="line">&quot; The sparkup vim script is in a subdirectory of this repo called vim.</span><br><span class="line">&quot; Pass the path to set the runtimepath properly.</span><br><span class="line">Plugin &#39;rstacruz&#x2F;sparkup&#39;, &#123;&#39;rtp&#39;: &#39;vim&#x2F;&#39;&#125;</span><br><span class="line">&quot; Install L9 and avoid a Naming conflict if you&#39;ve already installed a</span><br><span class="line">&quot; different version somewhere else.</span><br><span class="line">&quot; Plugin &#39;ascenator&#x2F;L9&#39;, &#123;&#39;name&#39;: &#39;newL9&#39;&#125;</span><br><span class="line"></span><br><span class="line">&quot; All of your Plugins must be added before the following line</span><br><span class="line">call vundle#end()            &quot; required</span><br><span class="line">filetype plugin indent on    &quot; required</span><br><span class="line">&quot; To ignore plugin indent changes, instead use:</span><br><span class="line">&quot;filetype plugin on</span><br><span class="line">&quot;</span><br><span class="line">&quot; Brief help</span><br><span class="line">&quot; :PluginList       - lists configured plugins</span><br><span class="line">&quot; :PluginInstall    - installs plugins; append &#96;!&#96; to update or just :PluginUpdate</span><br><span class="line">&quot; :PluginSearch foo - searches for foo; append &#96;!&#96; to refresh local cache</span><br><span class="line">&quot; :PluginClean      - confirms removal of unused plugins; append &#96;!&#96; to auto-approve removal</span><br><span class="line">&quot;</span><br><span class="line">&quot; see :h vundle for more details or wiki for FAQ</span><br><span class="line">&quot; Put your non-Plugin stuff after this line</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&quot; 配色方案</span><br><span class="line">&quot;set background&#x3D;dark</span><br><span class="line">&quot;colorscheme solarized</span><br><span class="line"></span><br><span class="line">&quot; 设置状态栏主题风格</span><br><span class="line">let g:Powerline_colorscheme&#x3D;&#39;solarized256&#39;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-插件管理命令"><a href="#3-3-插件管理命令" class="headerlink" title="3.3 插件管理命令"></a>3.3 插件管理命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:PluginInstall</span><br><span class="line">:PluginClean </span><br><span class="line">:PluginUpdate</span><br></pre></td></tr></table></figure>
+
+
       
     </div>
 
@@ -296,7 +313,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-18 21:29:57" itemprop="dateModified" datetime="2020-02-18T21:29:57+08:00">2020-02-18</time>
+                <time title="修改时间：2020-02-19 23:07:27" itemprop="dateModified" datetime="2020-02-19T23:07:27+08:00">2020-02-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -376,7 +393,7 @@ A   输入欲添加文本   `&lt;ESC&gt;`   在一行后添加文本</code></pre
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/14/vim%E5%85%A5%E9%97%A8/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/14/Vim%E5%85%A5%E9%97%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -390,7 +407,7 @@ A   输入欲添加文本   `&lt;ESC&gt;`   在一行后添加文本</code></pre
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/02/14/vim%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">Vim 入门</a>
+            <a href="/2020/02/14/Vim%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">Vim 入门</a>
         </h1>
 
         <div class="post-meta">
@@ -407,7 +424,7 @@ A   输入欲添加文本   `&lt;ESC&gt;`   在一行后添加文本</code></pre
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-18 01:11:32" itemprop="dateModified" datetime="2020-02-18T01:11:32+08:00">2020-02-18</time>
+                <time title="修改时间：2020-02-19 23:07:27" itemprop="dateModified" datetime="2020-02-19T23:07:27+08:00">2020-02-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -443,7 +460,7 @@ A   输入欲添加文本   `&lt;ESC&gt;`   在一行后添加文本</code></pre
 <h2 id="1-3-github-vim-入门到精通"><a href="#1-3-github-vim-入门到精通" class="headerlink" title="1.3 github vim 入门到精通"></a>1.3 github vim 入门到精通</h2><p><strong>Vim 从入门到精通:</strong> <a href="https://github.com/wsdjeg/vim-galore-zh_cn" target="_blank" rel="noopener">https://github.com/wsdjeg/vim-galore-zh_cn</a></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/02/14/vim%E5%85%A5%E9%97%A8/#more" rel="contents">
+              <a class="btn" href="/2020/02/14/Vim%E5%85%A5%E9%97%A8/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -498,7 +515,7 @@ A   输入欲添加文本   `&lt;ESC&gt;`   在一行后添加文本</code></pre
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-18 01:11:32" itemprop="dateModified" datetime="2020-02-18T01:11:32+08:00">2020-02-18</time>
+                <time title="修改时间：2020-02-19 23:07:27" itemprop="dateModified" datetime="2020-02-19T23:07:27+08:00">2020-02-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
