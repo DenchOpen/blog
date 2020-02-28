@@ -48,20 +48,20 @@
   };
 </script>
 
-  <meta name="description" content="1.安装ZSH 和 oh my zsh1.1 安装ZSHmac os 预装了 zsh,切换 shell : 1chsh -s $(which zsh) 1.2 安装 oh my zsh1234# curlsh -c &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;ohmyzsh&#x2F;ohmyzsh&#x2F;master&#x2F;tools&#x2F;install.sh)&quot;# o">
+  <meta name="description" content="1. mac os gradlew 打包 apk进入 ...&#x2F;android 执行 .&#x2F;gradlew assembleRelease ，mac os 执行当前路径的脚本需要添加 .&#x2F;。 2. 常用命令12345678910111213.&#x2F;gradlew clean  #clean项目 .&#x2F;gradlew build  #构建项目 .&#x2F;gradlew assembleDebug or .&#x2F;grad">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ZSH入门">
-<meta property="og:url" content="http://yoursite.com/2020/02/07/ZSH%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:title" content="Gradlew 打包 APK">
+<meta property="og:url" content="http://yoursite.com/2020/02/28/APK%E6%89%93%E5%8C%85/index.html">
 <meta property="og:site_name" content="个人小站">
-<meta property="og:description" content="1.安装ZSH 和 oh my zsh1.1 安装ZSHmac os 预装了 zsh,切换 shell : 1chsh -s $(which zsh) 1.2 安装 oh my zsh1234# curlsh -c &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;ohmyzsh&#x2F;ohmyzsh&#x2F;master&#x2F;tools&#x2F;install.sh)&quot;# o">
+<meta property="og:description" content="1. mac os gradlew 打包 apk进入 ...&#x2F;android 执行 .&#x2F;gradlew assembleRelease ，mac os 执行当前路径的脚本需要添加 .&#x2F;。 2. 常用命令12345678910111213.&#x2F;gradlew clean  #clean项目 .&#x2F;gradlew build  #构建项目 .&#x2F;gradlew assembleDebug or .&#x2F;grad">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-02-07T14:37:25.000Z">
-<meta property="article:modified_time" content="2020-02-17T17:11:32.430Z">
+<meta property="article:published_time" content="2020-02-28T01:35:45.000Z">
+<meta property="article:modified_time" content="2020-02-28T02:15:57.557Z">
 <meta property="article:author" content="Dench">
-<meta property="article:tag" content="ZSH">
+<meta property="article:tag" content="Android">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2020/02/07/ZSH%E5%85%A5%E9%97%A8/">
+<link rel="canonical" href="http://yoursite.com/2020/02/28/APK%E6%89%93%E5%8C%85/">
 
 
 <script id="page-configurations">
@@ -73,7 +73,7 @@
   };
 </script>
 
-  <title>ZSH入门 | 个人小站</title>
+  <title>Gradlew 打包 APK | 个人小站</title>
   
 
 
@@ -190,7 +190,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/07/ZSH%E5%85%A5%E9%97%A8/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/28/APK%E6%89%93%E5%8C%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -203,7 +203,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          ZSH入门
+          Gradlew 打包 APK
         </h1>
 
         <div class="post-meta">
@@ -212,16 +212,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-02-07 22:37:25" itemprop="dateCreated datePublished" datetime="2020-02-07T22:37:25+08:00">2020-02-07</time>
+              <time title="创建时间：2020-02-28 09:35:45 / 修改时间：10:15:57" itemprop="dateCreated datePublished" datetime="2020-02-28T09:35:45+08:00">2020-02-28</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-18 01:11:32" itemprop="dateModified" datetime="2020-02-18T01:11:32+08:00">2020-02-18</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -234,8 +228,8 @@
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Develop/ZSH/" itemprop="url" rel="index">
-                    <span itemprop="name">ZSH</span>
+                  <a href="/categories/Develop/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
                   </a>
                 </span>
             </span>
@@ -251,23 +245,27 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="1-安装ZSH-和-oh-my-zsh"><a href="#1-安装ZSH-和-oh-my-zsh" class="headerlink" title="1.安装ZSH 和 oh my zsh"></a>1.安装ZSH 和 oh my zsh</h3><h4 id="1-1-安装ZSH"><a href="#1-1-安装ZSH" class="headerlink" title="1.1 安装ZSH"></a>1.1 安装ZSH</h4><p>mac os 预装了 zsh,切换 shell :</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chsh -s $(which zsh)</span><br></pre></td></tr></table></figure>
-<h4 id="1-2-安装-oh-my-zsh"><a href="#1-2-安装-oh-my-zsh" class="headerlink" title="1.2 安装 oh my zsh"></a>1.2 安装 oh my zsh</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> curl</span></span><br><span class="line">sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"</span><br><span class="line"><span class="meta">#</span><span class="bash"> or wget</span></span><br><span class="line">sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"</span><br></pre></td></tr></table></figure>
+        <h2 id="1-mac-os-gradlew-打包-apk"><a href="#1-mac-os-gradlew-打包-apk" class="headerlink" title="1. mac os gradlew 打包 apk"></a>1. mac os gradlew 打包 apk</h2><p>进入 <code>.../android</code> 执行 <code>./gradlew assembleRelease</code> ，mac os 执行当前路径的脚本需要添加 <code>./</code>。</p>
+<h2 id="2-常用命令"><a href="#2-常用命令" class="headerlink" title="2. 常用命令"></a>2. 常用命令</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">./gradlew clean  #clean项目</span><br><span class="line"> </span><br><span class="line">./gradlew build  #构建项目</span><br><span class="line"> </span><br><span class="line">./gradlew assembleDebug or ./gradlew aD #编译并打Debug包</span><br><span class="line"> </span><br><span class="line">./gradlew assembleRelease or ./gradlew aR #编译并打Release的包</span><br><span class="line"> </span><br><span class="line">./gradlew installRelease or ./gradlew iR #Release模式打包并安装</span><br><span class="line"> </span><br><span class="line">./gradlew installDebug or ./gradlew iD #Debug模式打包并安装</span><br><span class="line"> </span><br><span class="line">./gradlew uninstallRelease or ./gradlew uR #卸载Release模式包</span><br></pre></td></tr></table></figure>
 
 <a id="more"></a>
 
-<p><strong>oh my zsh 官网:</strong><a href="https://github.com/ohmyzsh/ohmyzsh" target="_blank" rel="noopener">https://github.com/ohmyzsh/ohmyzsh</a></p>
-<h3 id="2-配置ZSH-插件和主题"><a href="#2-配置ZSH-插件和主题" class="headerlink" title="2. 配置ZSH 插件和主题"></a>2. 配置ZSH 插件和主题</h3><p><strong>配置文件 <code>~/.zshrc</code></strong></p>
-<h4 id="2-1-主题"><a href="#2-1-主题" class="headerlink" title="2.1 主题"></a>2.1 主题</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ZSH_THEME&#x3D;&quot;robbyrussell&quot;</span><br></pre></td></tr></table></figure>
-
-<p>oh my zsh 官方为用户提供了上百种主题。</p>
-<h4 id="2-2-插件-推荐使用"><a href="#2-2-插件-推荐使用" class="headerlink" title="2.2 插件 推荐使用"></a>2.2 插件 推荐使用</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plugins&#x3D;(git sublime osx ruby autojump mvn gradle)</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-3-环境变量"><a href="#2-3-环境变量" class="headerlink" title="2.3 环境变量"></a>2.3 环境变量</h4><p>bash 的环境变量配置文件 <code>~/.bash_profile</code> , 而 zsh 的环境变量配置文件是 <code>~/.zshrc</code>。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Path to your oh-my-zsh installation.</span></span><br><span class="line">export ZSH="/Users/**/.oh-my-zsh"</span><br><span class="line">export PATH=/Users/**/Library/Android/sdk/platform-tools:$PATH</span><br></pre></td></tr></table></figure>
-
-
+<h2 id="3-命令集"><a href="#3-命令集" class="headerlink" title="3. 命令集"></a>3. 命令集</h2><p>清除build文件夹<br>./gradlew clean</p>
+<p>编译并安装debug包<br>./gradlew installDebug</p>
+<p>调试模式构建并打印堆栈日志<br>./gradlew build –info –debug –stacktrace</p>
+<p>强制更新最新依赖，清除构建并构建<br>./gradlew clean build –refresh-dependencies</p>
+<p>编译并打Release的包<br>./gradlew assembleRelease</p>
+<p>Release模式打包并安装<br>./gradlew installRelease</p>
+<p>卸载Release模式包<br>./gradlew uninstallRelease</p>
+<p>结合productFlavorsName<br>./gradlew install[productFlavorsName] app:assembleDebug</p>
+<p>Release模式 test 渠道打包<br>./gradlew assembleTestRelease</p>
+<p>依赖查看<br>./gradlew dependencies</p>
+<p>查看所有任务 包括缓存任务等<br>./gradlew tasks –all 查看所有任务</p>
+<h2 id="4-参数"><a href="#4-参数" class="headerlink" title="4. 参数"></a>4. 参数</h2><p><code>-d, --debug</code> 打印全部堆栈信息</p>
+<p><code>--info</code> 设置打印 info 级别日志</p>
+<p><code>--status</code> 显示最近或当前的打包进程状态</p>
+<p><code>--offline</code> 离线</p>
+<p><code>--daemon</code> 后台(守护)进程</p>
 
     </div>
 
@@ -277,7 +275,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/ZSH/" rel="tag"># ZSH</a>
+              <a href="/tags/Android/" rel="tag"># Android</a>
           </div>
 
         
@@ -285,13 +283,10 @@
 
         
     <div class="post-nav">
+      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2020/02/08/Python%E7%88%AC%E5%8F%96%E7%BD%91%E7%BB%9C%E5%9B%BE%E7%89%87/" rel="prev" title="Python爬取网络图片">
-      <i class="fa fa-chevron-left"></i> Python爬取网络图片
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/02/06/HexoNexT%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99/" rel="next" title="Hexo & NexT 搭建个人网站">
-      Hexo & NexT 搭建个人网站 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/02/26/AndroidStudio%E6%8F%92%E4%BB%B6%E4%B8%8B%E8%BD%BD%E4%BB%93%E5%BA%93%E8%AE%BE%E7%BD%AE/" rel="next" title="AndroidStudio插件下载仓库设置">
+      AndroidStudio插件下载仓库设置 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -352,7 +347,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-安装ZSH-和-oh-my-zsh"><span class="nav-number">1.</span> <span class="nav-text">1.安装ZSH 和 oh my zsh</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-安装ZSH"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 安装ZSH</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-安装-oh-my-zsh"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 安装 oh my zsh</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-配置ZSH-插件和主题"><span class="nav-number">2.</span> <span class="nav-text">2. 配置ZSH 插件和主题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-主题"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 主题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-插件-推荐使用"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 插件 推荐使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-环境变量"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 环境变量</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-mac-os-gradlew-打包-apk"><span class="nav-number">1.</span> <span class="nav-text">1. mac os gradlew 打包 apk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-常用命令"><span class="nav-number">2.</span> <span class="nav-text">2. 常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-命令集"><span class="nav-number">3.</span> <span class="nav-text">3. 命令集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-参数"><span class="nav-number">4.</span> <span class="nav-text">4. 参数</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
