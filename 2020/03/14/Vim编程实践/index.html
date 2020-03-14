@@ -56,7 +56,7 @@
 <meta property="og:description" content="1. 基础设置1234567891011121314&quot;显示行set nu&quot; 设置屏幕滚动时在光标上下方保留5行预览代码set so&#x3D;5&quot; 设置debug为 zdnnoremap zd :action Debug&lt;CR&gt;&quot; 设置run 为 zrnnoremap zr :action Run&lt;CR&gt;&quot; 插入模式下 jk 映射 Escinoremap jk &lt;Esc&gt;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-13T16:31:11.000Z">
-<meta property="article:modified_time" content="2020-03-13T18:24:56.166Z">
+<meta property="article:modified_time" content="2020-03-14T03:41:32.667Z">
 <meta property="article:author" content="Dench">
 <meta property="article:tag" content="Vim">
 <meta name="twitter:card" content="summary">
@@ -214,7 +214,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-03-14 00:31:11 / 修改时间：02:24:56" itemprop="dateCreated datePublished" datetime="2020-03-14T00:31:11+08:00">2020-03-14</time>
+              <time title="创建时间：2020-03-14 00:31:11 / 修改时间：11:41:32" itemprop="dateCreated datePublished" datetime="2020-03-14T00:31:11+08:00">2020-03-14</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -249,7 +249,8 @@
 
 <a id="more"></a>
 
-<h2 id="2-导航和查找"><a href="#2-导航和查找" class="headerlink" title="2. 导航和查找"></a>2. 导航和查找</h2><p>w 后面一个word</p>
+<h2 id="2-导航和查找"><a href="#2-导航和查找" class="headerlink" title="2. 导航和查找"></a>2. 导航和查找</h2><p>hjkl 光标在屏幕文本中的移动</p>
+<p>w 后面一个word</p>
 <p>W 后面一个WORD</p>
 <p>b 前面一个word</p>
 <p>B 前面一个WROD</p>
@@ -259,11 +260,12 @@
 <p>$ 行末</p>
 <p>gg 文档首</p>
 <p>G 文档尾</p>
-<h3 id="2-1-查找"><a href="#2-1-查找" class="headerlink" title="2.1 查找"></a>2.1 查找</h3><p><code>:&lt;行号&gt;</code> 或者 <code>&lt;行号&gt;G</code> 或者 <code>&lt;行号&gt;gg</code> 快速定位到行。</p>
-<p><code>&lt;行号&gt;&lt;回车&gt;</code> 往下跳转行数。</p>
-<p><code>/正则表达式</code> - 从光标位置到下一个匹配正则表达式的位置（跨行） </p>
-<p><code>?正则表达式</code> - 从光标位置到上一个匹配正则表达式的位置（跨行） </p>
-<h3 id="2-2-滚屏"><a href="#2-2-滚屏" class="headerlink" title="2.2 滚屏"></a>2.2 滚屏</h3><p><code>C-B</code> - 滚动屏幕上一屏</p>
+<p><code>:&lt;行号&gt;</code> or <code>&lt;行号&gt;G</code> or <code>&lt;行号&gt;gg</code> - 快速定位到行</p>
+<p><code>&lt;行号&gt;&lt;回车&gt;</code> - 往下跳转行数</p>
+<p><code>&lt;行号&gt;[j/k]</code> - 往下、往上跳转行数</p>
+<h3 id="2-1-查找"><a href="#2-1-查找" class="headerlink" title="2.1 查找"></a>2.1 查找</h3><p><code>fa</code> - 查找该行从光标位置首次出现a的位置<br><code>/text</code> - 查找text，按n健查找下一个，按N健查找前一个。<br><code>?text</code> - 查找text，反向查找，按n健查找下一个，按N健查找前一个。<br><code>%</code> - 括号匹配<br>vim中有一些特殊字符在查找时需要转义 <code>.*[]^%/?~$</code></p>
+<h3 id="2-2-替换"><a href="#2-2-替换" class="headerlink" title="2.2 替换"></a>2.2 替换</h3><p><code>ra</code> - 将当前字符替换为a，当期字符即光标所在字符。<br><code>s/old/new/</code> - 用old替换new，替换当前行的第一个匹配<br><code>s/old/new/g</code> - 用old替换new，替换当前行的所有匹配<br><code>%s/old/new/</code> - 用old替换new，替换所有行的第一个匹配<br><code>%s/old/new/g</code> - 用old替换new，替换整个文件的所有匹配<br><code>:10,20 s/^/    /g</code> - 在第10行知第20行每行前面加四个空格，用于缩进。</p>
+<h3 id="2-3-滚屏"><a href="#2-3-滚屏" class="headerlink" title="2.3 滚屏"></a>2.3 滚屏</h3><p><code>C-B</code> - 滚动屏幕上一屏</p>
 <p><code>C-F</code> - 滚动屏幕下一屏</p>
 <blockquote>
 <p>Ctrl + F 屏幕向下滚动一屏<br>Ctrl + B 屏幕向上滚动一屏<br>Ctrl + E 屏幕向下滚动一行<br>Ctrl + Y 屏幕向上滚动一行<br>Ctrl + D 屏幕向下滚动半屏<br>Ctrl + U 屏幕向上滚动半屏</p>
@@ -314,6 +316,7 @@
 <p>== 自动缩进当前行 </p>
 <p>&gt;&gt; 当前行缩进一格</p>
 <p>&lt;&lt; 当前行减少缩进</p>
+<h2 id="4-常用命令"><a href="#4-常用命令" class="headerlink" title="4. 常用命令"></a>4. 常用命令</h2><p>daw 删除一个单词<br>ndd 删除当前行之后的n行<br>xp 交换当前字符和其后一个字符<br>ddp 交换行<br>yyp 复制行<br>ci” 删除””内的字符串并插入<br>ca{ 删除{}内容并插入，包含{}本身<br>:1,10d 删除1-10行,利用p命令可将剪切后的内容进行粘贴<br>:1,$d 删除所有行<br>J 删除两行之间的空行，实际上是合并两行<br>P 在当前行前粘贴<br>:1,10 co 20 将1-10行插入到第20行之后<br>:1,$ co $ 将整个文件复制一份并添加到文件尾部<br>:1, 10 m 20 将第1-10行移动到第20行之后</p>
 
     </div>
 
@@ -331,7 +334,10 @@
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/14/%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95/" rel="prev" title="经典算法">
+      <i class="fa fa-chevron-left"></i> 经典算法
+    </a></div>
       <div class="post-nav-item">
     <a href="/2020/02/28/APK%E6%89%93%E5%8C%85/" rel="next" title="Gradlew 打包 APK">
       Gradlew 打包 APK <i class="fa fa-chevron-right"></i>
@@ -395,7 +401,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-基础设置"><span class="nav-number">1.</span> <span class="nav-text">1. 基础设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-导航和查找"><span class="nav-number">2.</span> <span class="nav-text">2. 导航和查找</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-查找"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-滚屏"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 滚屏</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-编辑"><span class="nav-number">3.</span> <span class="nav-text">3. 编辑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-范围指令"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 范围指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-范围"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 范围</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#范围-a-amp-i"><span class="nav-number">3.2.1.</span> <span class="nav-text">范围 a &amp; i</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-对光标所在行操作。"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 对光标所在行操作。</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-基础设置"><span class="nav-number">1.</span> <span class="nav-text">1. 基础设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-导航和查找"><span class="nav-number">2.</span> <span class="nav-text">2. 导航和查找</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-查找"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-替换"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 替换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-滚屏"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 滚屏</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-编辑"><span class="nav-number">3.</span> <span class="nav-text">3. 编辑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-范围指令"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 范围指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-范围"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 范围</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#范围-a-amp-i"><span class="nav-number">3.2.1.</span> <span class="nav-text">范围 a &amp; i</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-对光标所在行操作。"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 对光标所在行操作。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-常用命令"><span class="nav-number">4.</span> <span class="nav-text">4. 常用命令</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -411,20 +417,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
