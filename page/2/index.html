@@ -190,6 +190,99 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/19/Vim%E5%8D%87%E7%BA%A7%E5%92%8C%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/19/Vim%E5%8D%87%E7%BA%A7%E5%92%8C%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">Vim 升级和配置</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-19 21:52:19" itemprop="dateCreated datePublished" datetime="2020-02-19T21:52:19+08:00">2020-02-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-20 01:40:57" itemprop="dateModified" datetime="2020-02-20T01:40:57+08:00">2020-02-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Develop/" itemprop="url" rel="index">
+                    <span itemprop="name">Develop</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Develop/Vim/" itemprop="url" rel="index">
+                    <span itemprop="name">Vim</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <img src="/images/img20200220.png" width=60% height=60% div align=center />
+
+<h2 id="1-Vim-升级"><a href="#1-Vim-升级" class="headerlink" title="1. Vim 升级"></a>1. Vim 升级</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install vim --with-lua --with-override-system-vim</span><br></pre></td></tr></table></figure>
+<p>以后想更新 vim 版本，直接输入 <code>brew upgrade vim</code> 。</p>
+<h2 id="2-配置自己的-vimrc-文件"><a href="#2-配置自己的-vimrc-文件" class="headerlink" title="2. 配置自己的 .vimrc 文件"></a>2. 配置自己的 .vimrc 文件</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">set nu " 显示行号</span><br><span class="line">set showcmd " 显示输入的命令</span><br><span class="line">set ruler  " 显示标尺</span><br><span class="line">syntax on " 自动语法高亮</span><br><span class="line">set nobackup " 不自动备份</span><br><span class="line">set hlsearch " 搜索高亮</span><br><span class="line">set vb t_vb= " 没有错误提示音</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/02/19/Vim%E5%8D%87%E7%BA%A7%E5%92%8C%E9%85%8D%E7%BD%AE/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/17/VimTutor/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -691,107 +784,6 @@ A   输入欲添加文本   `&lt;ESC&gt;`   在一行后添加文本</code></pre
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/10/ZSH%E8%BF%9B%E9%98%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/10/ZSH%E8%BF%9B%E9%98%B6/" class="post-title-link" itemprop="url">ZSH进阶-插件篇</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-02-10 16:50:16" itemprop="dateCreated datePublished" datetime="2020-02-10T16:50:16+08:00">2020-02-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-18 01:11:32" itemprop="dateModified" datetime="2020-02-18T01:11:32+08:00">2020-02-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Develop/" itemprop="url" rel="index">
-                    <span itemprop="name">Develop</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Develop/ZSH/" itemprop="url" rel="index">
-                    <span itemprop="name">ZSH</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><strong>插件配置</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plugins&#x3D;(git-dw autojump sublime osx ruby  mvn gradle)</span><br></pre></td></tr></table></figure>
-
-<h3 id="1-推荐插件-autojump"><a href="#1-推荐插件-autojump" class="headerlink" title="1. 推荐插件 autojump"></a>1. 推荐插件 autojump</h3><p>j 是 autojump 命令的简写</p>
-<ul>
-<li><code>j</code>: 快速跳转</li>
-<li><code>jo</code>: 快速打开</li>
-</ul>
-<h3 id="2-推荐插件-sublime"><a href="#2-推荐插件-sublime" class="headerlink" title="2. 推荐插件 sublime"></a>2. 推荐插件 sublime</h3><ul>
-<li><code>st</code>: 用 Sublime Text 打开文件</li>
-<li><code>stt</code>: 用 Sublime Text 打开当前目录</li>
-<li><code>sst</code>: sudo <code>st</code>，用于编辑系统文件</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/02/10/ZSH%E8%BF%9B%E9%98%B6/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -864,7 +856,7 @@ A   输入欲添加文本   `&lt;ESC&gt;`   在一行后添加文本</code></pre
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
