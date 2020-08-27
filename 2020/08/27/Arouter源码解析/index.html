@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.1',
+    exturl: false,
+    sidebar: {"enable":true,"position":"left","width":300,"display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="ARouter源码解析0x01 init ()ARouter 的入口，初始化SDK ARouter.init(mApplication);： 1234567891011public static void init(Application application) &amp;#123;  if (!hasInit) &amp;#123; &#x2F;&#x2F; 避免重复初始化    logger &#x3D; _ARouter.logger">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ARouter源码解析">
+<meta property="og:url" content="http://yoursite.com/2020/08/27/Arouter%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/index.html">
+<meta property="og:site_name" content="个人小站">
+<meta property="og:description" content="ARouter源码解析0x01 init ()ARouter 的入口，初始化SDK ARouter.init(mApplication);： 1234567891011public static void init(Application application) &amp;#123;  if (!hasInit) &amp;#123; &#x2F;&#x2F; 避免重复初始化    logger &#x3D; _ARouter.logger">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-08-27T09:54:38.000Z">
+<meta property="article:modified_time" content="2020-08-27T14:29:41.568Z">
+<meta property="article:author" content="Dench">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/08/27/Arouter%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>ARouter源码解析 | 个人小站</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">个人小站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Dench's</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/DenchOpen" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/27/Arouter%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ARouter源码解析
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-08-27 17:54:38 / 修改时间：22:29:41" itemprop="dateCreated datePublished" datetime="2020-08-27T17:54:38+08:00">2020-08-27</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="ARouter源码解析"><a href="#ARouter源码解析" class="headerlink" title="ARouter源码解析"></a>ARouter源码解析</h2><h3 id="0x01-init"><a href="#0x01-init" class="headerlink" title="0x01 init ()"></a>0x01 init ()</h3><p>ARouter 的入口，初始化SDK <code>ARouter.init(mApplication);</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(Application application)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!hasInit) &#123; <span class="comment">// 避免重复初始化</span></span><br><span class="line">    logger = _ARouter.logger; <span class="comment">// 日志初始化</span></span><br><span class="line">    _ARouter.logger.info(Consts.TAG, <span class="string">"ARouter init start."</span>);</span><br><span class="line">    hasInit = _ARouter.init(application); <span class="comment">// 正式初始化</span></span><br><span class="line">    <span class="keyword">if</span> (hasInit) &#123; <span class="comment">// 初始化之后</span></span><br><span class="line">      _ARouter.afterInit(); <span class="comment">// 管理拦截器的服务 InterceptorService 初始化</span></span><br><span class="line">    &#125;</span><br><span class="line">    _ARouter.logger.info(Consts.TAG, <span class="string">"ARouter init over."</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>_ARouter.init()</code>：</p>
+<a id="more"></a>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">init</span><span class="params">(Application application)</span> </span>&#123;</span><br><span class="line">  mContext = application; <span class="comment">// 初始化application</span></span><br><span class="line">  LogisticsCenter.init(mContext, executor); <span class="comment">// 指定默认的线程池初始化</span></span><br><span class="line">  logger.info(Consts.TAG, <span class="string">"ARouter init success!"</span>);</span><br><span class="line">  hasInit = <span class="keyword">true</span>;<span class="comment">// 初始化成功</span></span><br><span class="line">  mHandler = <span class="keyword">new</span> Handler(Looper.getMainLooper());<span class="comment">// 初始化mHandler</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>LogisticsCenter.init()</code></p>
+<p>1 使用 arouter-auto-register 插件自动加载 routerMap</p>
+<p>2 手动加载的情况，release 仅第一次会去解析 routerMap，其他时候都读取 SharedPreferences</p>
+<p>3 根据routerMap三种类型，分别缓存在Warehouse 的Map中</p>
+<ul>
+<li>route and metas</li>
+<li>provider</li>
+<li>interceptor</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// LogisticsCenter init, load all metas in memory.</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(Context context, ThreadPoolExecutor tpe)</span> <span class="keyword">throws</span> HandlerException </span>&#123;</span><br><span class="line">  mContext = context;</span><br><span class="line">  executor = tpe; <span class="comment">// 线程池</span></span><br><span class="line">  <span class="comment">//...  </span></span><br><span class="line">    loadRouterMap();  <span class="comment">// 插件arouter-auto-register会生成这个方法的代码实现</span></span><br><span class="line">    <span class="keyword">if</span> (registerByPlugin) &#123;</span><br><span class="line">      logger.info(TAG, <span class="string">"Load router map by arouter-auto-register plugin."</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;<span class="comment">// 不用插件手动加载routerMap</span></span><br><span class="line">      Set&lt;String&gt; routerMap; <span class="comment">// routerMap</span></span><br><span class="line">      <span class="comment">// Debug 模式每次更新 routerMap，并更新SharedPreferences</span></span><br><span class="line">      <span class="keyword">if</span> (ARouter.debuggable() || PackageUtils.isNewVersion(context)) &#123; </span><br><span class="line">        routerMap = ClassUtils.getFileNameByPackageName(mContext, ROUTE_ROOT_PAKCAGE);</span><br><span class="line">        <span class="keyword">if</span> (!routerMap.isEmpty()) &#123;</span><br><span class="line">          context.getSharedPreferences(AROUTER_SP_CACHE_KEY, Context.MODE_PRIVATE).edit().putStringSet(AROUTER_SP_KEY_MAP, routerMap).apply();</span><br><span class="line">        &#125;</span><br><span class="line">        PackageUtils.updateVersion(context);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">       <span class="comment">// 直接从 SharedPreferences 读取 routerMap</span></span><br><span class="line">        routerMap = <span class="keyword">new</span> HashSet&lt;&gt;(context.getSharedPreferences(AROUTER_SP_CACHE_KEY, Context.MODE_PRIVATE).getStringSet(AROUTER_SP_KEY_MAP, <span class="keyword">new</span> HashSet&lt;String&gt;()));</span><br><span class="line">      &#125;</span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">      <span class="keyword">for</span> (String className : routerMap) &#123;</span><br><span class="line">        <span class="keyword">if</span> (className.startsWith(ROUTE_ROOT_PAKCAGE + DOT + SDK_NAME + SEPARATOR + SUFFIX_ROOT)) &#123;</span><br><span class="line">          <span class="comment">// Load root</span></span><br><span class="line">          ((IRouteRoot) (Class.forName(className).getConstructor().newInstance())).loadInto(Warehouse.groupsIndex);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (className.startsWith(ROUTE_ROOT_PAKCAGE + DOT + SDK_NAME + SEPARATOR + SUFFIX_INTERCEPTORS)) &#123;</span><br><span class="line">          <span class="comment">// Load interceptorMeta</span></span><br><span class="line">          ((IInterceptorGroup) (Class.forName(className).getConstructor().newInstance())).loadInto(Warehouse.interceptorsIndex);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (className.startsWith(ROUTE_ROOT_PAKCAGE + DOT + SDK_NAME + SEPARATOR + SUFFIX_PROVIDERS)) &#123;</span><br><span class="line">          <span class="comment">// Load providerIndex</span></span><br><span class="line">          ((IProviderGroup) (Class.forName(className).getConstructor().newInstance())).loadInto(Warehouse.providersIndex);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">   <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>class Warehouse</code> 缓存三种类型的数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Warehouse</span> </span>&#123;</span><br><span class="line">  <span class="comment">// Cache route and metas</span></span><br><span class="line">  <span class="keyword">static</span> Map&lt;String, Class&lt;? extends IRouteGroup&gt;&gt; groupsIndex = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">  <span class="keyword">static</span> Map&lt;String, RouteMeta&gt; routes = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Cache provider</span></span><br><span class="line">  <span class="keyword">static</span> Map&lt;Class, IProvider&gt; providers = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">  <span class="keyword">static</span> Map&lt;String, RouteMeta&gt; providersIndex = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Cache interceptor</span></span><br><span class="line">  <span class="keyword">static</span> Map&lt;Integer, Class&lt;? extends IInterceptor&gt;&gt; interceptorsIndex = <span class="keyword">new</span> UniqueKeyTreeMap&lt;&gt;(<span class="string">"More than one interceptors use same priority [%s]"</span>);</span><br><span class="line">  <span class="keyword">static</span> List&lt;IInterceptor&gt; interceptors = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>总结来说，init过程就是把所有注解的信息加载内存中，并且完成所有拦截器的初始化。</p>
+<h3 id="0x02-navigation"><a href="#0x02-navigation" class="headerlink" title="0x02 navigation()"></a>0x02 navigation()</h3><p>发起路由操作 <code>ARouter.getInstance().build(&quot;/test/activity&quot;).navigation();</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Postcard <span class="title">build</span><span class="params">(String path)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> _ARouter.getInstance().build(path);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>都是单例设计，最后调用 <code>_ARouter</code> 单例的 <code>build()</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> Postcard <span class="title">build</span><span class="params">(String path)</span> </span>&#123;</span><br><span class="line">  <span class="comment">//... </span></span><br><span class="line">  PathReplaceService pService = ARouter.getInstance().navigation(PathReplaceService<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">null</span> != pService) &#123;</span><br><span class="line">    path = pService.forString(path);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> build(path, extractGroup(path));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">protected</span> Postcard <span class="title">build</span><span class="params">(String path, String group)</span> </span>&#123;</span><br><span class="line">  <span class="comment">//... </span></span><br><span class="line">  PathReplaceService pService = ARouter.getInstance().navigation(PathReplaceService<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">null</span> != pService) &#123;</span><br><span class="line">    path = pService.forString(path);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> Postcard(path, group);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>PathReplaceService</code>，它是继承IProvider的接口，它是预留给用户实现路径动态变化功能。</p>
+<p><code>Postcard</code> 是一个继承自 RouteMeta 的数据 Bean。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Postcard</span> <span class="keyword">extends</span> <span class="title">RouteMeta</span> </span>&#123;</span><br><span class="line">  <span class="comment">// Base</span></span><br><span class="line">  <span class="keyword">private</span> Uri uri;</span><br><span class="line">  <span class="keyword">private</span> Object tag;             <span class="comment">// A tag prepare for some thing wrong.</span></span><br><span class="line">  <span class="keyword">private</span> Bundle mBundle;         <span class="comment">// Data to transform</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> flags = -<span class="number">1</span>;         <span class="comment">// Flags of route</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> timeout = <span class="number">300</span>;      <span class="comment">// Navigation timeout, TimeUnit.Second</span></span><br><span class="line">  <span class="keyword">private</span> IProvider provider;     <span class="comment">// It will be set value, if this postcard was provider.</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">boolean</span> greenChannel;</span><br><span class="line">  <span class="keyword">private</span> SerializationService serializationService;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Animation</span></span><br><span class="line">  <span class="keyword">private</span> Bundle optionsCompat;    <span class="comment">// The transition animation of activity</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> enterAnim = -<span class="number">1</span>;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> exitAnim = -<span class="number">1</span>;</span><br><span class="line">  <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Postcard 对象的 navigation 方法，最终还是调用的 <code>_Arouter</code> 的 <code>navigation</code>方法。</p>
+<p>1 PretreatmentService 进行跳转的拦截和检测</p>
+<p>2 <code>LogisticsCenter.completion(postcard)</code> Postcard 加载和自解析</p>
+<p>3 Postcard 解析异常 回调 callback.onLost，若 callback 为空则 DegradeService 降级回调处理</p>
+<p>4 Postcard 处理结束，回调 callback.onFound(postcard)</p>
+<p>5 GreenChannel 的 navigation，直接执行 <code>_navigation</code> 路由</p>
+<p>6 非 GreenChannel 的 navigation，异步执行注入拦截器。拦截之后回调 <code>callback.onInterrupt</code>, 通过所有的拦截器，则继续执行 <code>_navigation</code> 路由</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> Object <span class="title">navigation</span><span class="params">(<span class="keyword">final</span> Context context, <span class="keyword">final</span> Postcard postcard, <span class="keyword">final</span> <span class="keyword">int</span> requestCode, <span class="keyword">final</span> NavigationCallback callback)</span> </span>&#123;</span><br><span class="line">  PretreatmentService pretreatmentService = ARouter.getInstance().navigation(PretreatmentService<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">  <span class="comment">// ....pretreatmentService拦截</span></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    LogisticsCenter.completion(postcard);<span class="comment">// postcard 自解析</span></span><br><span class="line">  &#125; <span class="keyword">catch</span> (NoRouteFoundException ex) &#123;</span><br><span class="line">    <span class="comment">// ....</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">null</span> != callback) &#123;</span><br><span class="line">      callback.onLost(postcard);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// No callback for this invoke, then we use the global degrade service.</span></span><br><span class="line">      DegradeService degradeService = ARouter.getInstance().navigation(DegradeService<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">null</span> != degradeService) &#123;</span><br><span class="line">        degradeService.onLost(context, postcard);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">null</span> != callback) &#123;</span><br><span class="line">    callback.onFound(postcard); <span class="comment">// Postcard 处理结束，回调 callback.onFound(postcard)</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!postcard.isGreenChannel()) &#123;</span><br><span class="line">    interceptorService.doInterceptions(postcard, <span class="keyword">new</span> InterceptorCallback() &#123;</span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onContinue</span><span class="params">(Postcard postcard)</span> </span>&#123;</span><br><span class="line">        _navigation(context, postcard, requestCode, callback);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onInterrupt</span><span class="params">(Throwable exception)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> != callback) &#123;</span><br><span class="line">          callback.onInterrupt(postcard);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> _navigation(context, postcard, requestCode, callback);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> <code>_Arouter</code> 的 <code>_navigation</code> 方法</p>
+<p>1 根据 <code>postcard.getType()</code> 处理</p>
+<p>2 ACTIVITY 类型， 根据 <code>postcard.getDestination()</code> 生成一个 intent，然后 putExtras， 并设置对应的 flag 和 action 执行跳转</p>
+<p>3 PROVIDER 类型，直接返回在 <code>LogisticsCenter.completion(postcard)</code> 生成的 IProvider 实例 </p>
+<p>4 BOARDCAST，CONTENT_PROVIDER，FRAGMENT 类型分别返回 <code>newInstance()</code> 生成实例，Fragment 会 <code>setArguments</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> Object <span class="title">_navigation</span><span class="params">(<span class="keyword">final</span> Context context, <span class="keyword">final</span> Postcard postcard, <span class="keyword">final</span> <span class="keyword">int</span> requestCode, <span class="keyword">final</span> NavigationCallback callback)</span> </span>&#123;</span><br><span class="line"> <span class="comment">// ...</span></span><br><span class="line">  <span class="keyword">switch</span> (postcard.getType()) &#123;</span><br><span class="line">    <span class="keyword">case</span> ACTIVITY:</span><br><span class="line">      <span class="comment">// Build intent</span></span><br><span class="line">      <span class="keyword">final</span> Intent intent = <span class="keyword">new</span> Intent(currentContext, postcard.getDestination());</span><br><span class="line">      intent.putExtras(postcard.getExtras());</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Set flags.</span></span><br><span class="line">      <span class="keyword">int</span> flags = postcard.getFlags();</span><br><span class="line">      <span class="keyword">if</span> (-<span class="number">1</span> != flags) &#123;</span><br><span class="line">        intent.setFlags(flags);</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!(currentContext <span class="keyword">instanceof</span> Activity)) &#123;    <span class="comment">// Non activity, need less one flag.</span></span><br><span class="line">        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Set Actions</span></span><br><span class="line">      String action = postcard.getAction();</span><br><span class="line">      <span class="keyword">if</span> (!TextUtils.isEmpty(action)) &#123;</span><br><span class="line">        intent.setAction(action);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Navigation in main looper.</span></span><br><span class="line">      runInMainThread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">          startActivity(requestCode, currentContext, intent, postcard, callback);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> PROVIDER:</span><br><span class="line">      <span class="keyword">return</span> postcard.getProvider();</span><br><span class="line">    <span class="keyword">case</span> BOARDCAST:</span><br><span class="line">    <span class="keyword">case</span> CONTENT_PROVIDER:</span><br><span class="line">    <span class="keyword">case</span> FRAGMENT:</span><br><span class="line">      Class fragmentMeta = postcard.getDestination();</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        Object instance = fragmentMeta.getConstructor().newInstance();</span><br><span class="line">        <span class="keyword">if</span> (instance <span class="keyword">instanceof</span> Fragment) &#123;</span><br><span class="line">          ((Fragment) instance).setArguments(postcard.getExtras());</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (instance <span class="keyword">instanceof</span> android.support.v4.app.Fragment) &#123;</span><br><span class="line">          ((android.support.v4.app.Fragment) instance).setArguments(postcard.getExtras());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">      &#125; <span class="keyword">catch</span> (Exception ex) &#123;</span><br><span class="line">       <span class="comment">// ...</span></span><br><span class="line">      &#125;</span><br><span class="line">    <span class="keyword">case</span> METHOD:</span><br><span class="line">    <span class="keyword">case</span> SERVICE:</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Android/" rel="tag"># Android</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/27/Implementation%E5%92%8Capi/" rel="next" title="implementation compileOnly和api">
+      implementation compileOnly和api <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ARouter源码解析"><span class="nav-text">ARouter源码解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0x01-init"><span class="nav-text">0x01 init ()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x02-navigation"><span class="nav-text">0x02 navigation()</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Dench"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Dench</p>
+  <div class="site-description" itemprop="description">Love & Peace</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DenchOpen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
