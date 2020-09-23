@@ -48,20 +48,20 @@
   };
 </script>
 
-  <meta name="description" content="Java内存模型java内存模型(Java Memory Model，JMM)是java虚拟机规范定义的。 0x01.主内存与工作内存java内存模型规定了所有的变量都存储在住内存。每条线程还有自己的工作内存，线程的工作内存中保存了被该线程使用到的主内存中的变量的拷贝。线程对变量的所有操作都必须在工作内存中进行，而不能直接读写主内存中的变量。不同线程之间也无法直接访问对方工作内存中的变量，线程间变">
+  <meta name="description" content="Android JsBridge 混合开发框架0x01 Java 调用 Js我们知道，native层调用h5，在WebView中，如果java要调用js的方法， 0x0101 loadUrl &lt;4.4Android4.4以前使用WebView.loadUrl(&quot;javascript:function()&quot;)。 0x0102 evaluateJavascript &gt;4">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java内存模型JMM">
-<meta property="og:url" content="http://yoursite.com/2020/08/13/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8BJMM/index.html">
+<meta property="og:title" content="Android-JsBridge实现本地H5混合开发">
+<meta property="og:url" content="http://yoursite.com/2020/09/19/Android-JsBridge%E5%AE%9E%E7%8E%B0%E6%9C%AC%E5%9C%B0H5%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/index.html">
 <meta property="og:site_name" content="个人小站">
-<meta property="og:description" content="Java内存模型java内存模型(Java Memory Model，JMM)是java虚拟机规范定义的。 0x01.主内存与工作内存java内存模型规定了所有的变量都存储在住内存。每条线程还有自己的工作内存，线程的工作内存中保存了被该线程使用到的主内存中的变量的拷贝。线程对变量的所有操作都必须在工作内存中进行，而不能直接读写主内存中的变量。不同线程之间也无法直接访问对方工作内存中的变量，线程间变">
+<meta property="og:description" content="Android JsBridge 混合开发框架0x01 Java 调用 Js我们知道，native层调用h5，在WebView中，如果java要调用js的方法， 0x0101 loadUrl &lt;4.4Android4.4以前使用WebView.loadUrl(&quot;javascript:function()&quot;)。 0x0102 evaluateJavascript &gt;4">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-08-12T18:44:46.000Z">
-<meta property="article:modified_time" content="2020-09-20T07:15:08.770Z">
+<meta property="article:published_time" content="2020-09-19T04:28:27.000Z">
+<meta property="article:modified_time" content="2020-09-20T07:15:08.767Z">
 <meta property="article:author" content="Dench">
-<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Android">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2020/08/13/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8BJMM/">
+<link rel="canonical" href="http://yoursite.com/2020/09/19/Android-JsBridge%E5%AE%9E%E7%8E%B0%E6%9C%AC%E5%9C%B0H5%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/">
 
 
 <script id="page-configurations">
@@ -73,7 +73,7 @@
   };
 </script>
 
-  <title>Java内存模型JMM | 个人小站</title>
+  <title>Android-JsBridge实现本地H5混合开发 | 个人小站</title>
   
 
 
@@ -190,7 +190,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/13/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8BJMM/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/19/Android-JsBridge%E5%AE%9E%E7%8E%B0%E6%9C%AC%E5%9C%B0H5%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -203,7 +203,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Java内存模型JMM
+          Android-JsBridge实现本地H5混合开发
         </h1>
 
         <div class="post-meta">
@@ -213,7 +213,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-08-13 02:44:46" itemprop="dateCreated datePublished" datetime="2020-08-13T02:44:46+08:00">2020-08-13</time>
+              <time title="创建时间：2020-09-19 12:28:27" itemprop="dateCreated datePublished" datetime="2020-09-19T12:28:27+08:00">2020-09-19</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -234,35 +234,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Java内存模型"><a href="#Java内存模型" class="headerlink" title="Java内存模型"></a>Java内存模型</h1><p>java内存模型(Java Memory Model，JMM)是java虚拟机规范定义的。</p>
-<h3 id="0x01-主内存与工作内存"><a href="#0x01-主内存与工作内存" class="headerlink" title="0x01.主内存与工作内存"></a>0x01.主内存与工作内存</h3><p>java内存模型规定了所有的变量都存储在住内存。每条线程还有自己的工作内存，线程的工作内存中保存了被该线程使用到的主内存中的变量的拷贝。线程对变量的所有操作都必须在工作内存中进行，而不能直接读写主内存中的变量。不同线程之间也无法直接访问对方工作内存中的变量，线程间变量传递均需要通过主内存来完成。当多个线程操作的变量涉及到同一个主内存区域，将可能导致各自的工作线程数据不一致，这样就导致变量同步回主内存的时候可能冲突导致数据丢失。</p>
-<a id="more"></a>
+        <h2 id="Android-JsBridge-混合开发框架"><a href="#Android-JsBridge-混合开发框架" class="headerlink" title="Android JsBridge 混合开发框架"></a>Android JsBridge 混合开发框架</h2><h3 id="0x01-Java-调用-Js"><a href="#0x01-Java-调用-Js" class="headerlink" title="0x01 Java 调用 Js"></a>0x01 Java 调用 Js</h3><p>我们知道，native层调用h5，在WebView中，如果java要调用js的方法，</p>
+<h4 id="0x0101-loadUrl-lt-4-4"><a href="#0x0101-loadUrl-lt-4-4" class="headerlink" title="0x0101 loadUrl &lt;4.4"></a>0x0101 loadUrl &lt;4.4</h4><p>Android4.4以前使用<code>WebView.loadUrl(&quot;javascript:function()&quot;)</code>。</p>
+<h4 id="0x0102-evaluateJavascript-gt-4-4"><a href="#0x0102-evaluateJavascript-gt-4-4" class="headerlink" title="0x0102 evaluateJavascript &gt;4.4"></a>0x0102 evaluateJavascript &gt;4.4</h4><p>Android4.4以后，使用以下方式 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">webView.evaluateJavascript(<span class="string">"javascript:function()"</span>, <span class="keyword">new</span> ValueCallback&lt;String&gt;() &#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceiveValue</span><span class="params">(String value)</span> </span>&#123;</span><br><span class="line">    Toast.makeText(MainActivity.<span class="keyword">this</span>, <span class="string">"onReceiveValue From JS: "</span> + value, Toast.LENGTH_SHORT).show();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-<p>这里需要说明一下：</p>
-<p>1.主内存、工作内存与java内存区域中的java堆、虚拟机栈、方法区并不是一个层次的内存划分。</p>
-<p>2.这里的变量跟我们写java程序中的变量不是完全等同的。这里的变量是指实例字段，静态字段，构成数组对象的元素，但是不包括局部变量和方法参数(因为这是线程私有的)。这里可以简单的认为主内存是java虚拟机内存区域中的堆，局部变量和方法参数是在虚拟机栈中定义的。但是在堆中的变量如果在多线程中都使用，就涉及到了堆和不同虚拟机栈中变量的值的一致性问题了。</p>
-<h3 id="0x02-主内存与工作线程交互的基本操作"><a href="#0x02-主内存与工作线程交互的基本操作" class="headerlink" title="0x02.主内存与工作线程交互的基本操作"></a>0x02.主内存与工作线程交互的基本操作</h3><p>主内存与工作线程交互的基本操作有以下几种：</p>
-<ul>
-<li>lock（锁定）：作用于主内存的变量，它把一个变量标识为一条线程独占的状态</li>
-<li>unlock（解锁）：作用于主内存的变量，释放锁定状态的变量</li>
-<li>read（读取）：作用于主内存的变量，把一个变量从主内存传输到线程的工作内存中，以便随后的load动作使用</li>
-<li>load（载入）：作用于工作内存的变量，把read操作从主内存中得到的变量值放入工作内存的变量副本中。</li>
-<li>use（使用）：作用于工作内存的变量，把工作内存中一个变量的值传递给执行引擎，每当虚拟机遇到一个需要使用到变量的值的字节码指令时将会执行这个操作</li>
-<li>assign（赋值）：作用于工作内存的变量，把一个从执行引擎收到的值赋给工作内存的变量，每当虚拟机遇到一个给变量赋值的字节码指令时将会执行这个操作</li>
-<li>store（存储）：作用于工作内存的变量，把工作内存的一个变量值传送到主内存，以便随后的write操作使用</li>
-<li>write（写入）：作用于主内存的变量，把store操作从工作内存得到的变量的值放入主内存变量中</li>
-</ul>
-<p>虚拟机实现必须保证上面的每一种操作都是原子的。</p>
-<p>如果要把一个变量从主内存复制到工作内存，需要顺序执行read和load操作；如果要把变量从工作内存同步回主内存，就要顺序地执行store和write操作。</p>
-<h3 id="0x03-交互规则"><a href="#0x03-交互规则" class="headerlink" title="0x03.交互规则"></a>0x03.交互规则</h3><p>还规定上述8中基本操作时必须满足如下规则：</p>
-<p>1、read和load，store和write必须成对出现<br>2、不允许一个线程丢弃它的最近的assign操作，变量在工作内存中改变后必须写回主内存<br>3、不允许一个线程将没有assign过的数据从工作线程同步回主内存<br>4、一个新的变量只能在主内存中诞生，不允许工作内存中直接使用一个未被初始化（load或assgin）的变量，对一个变量进行use，store之前必须load，assign<br>5、一个变量同一时刻只允许一条线程对其进行lock，同一个线程对lock操作可重复执行多次，之后需要执行相同次数的unlock变量才会被解锁<br>6、对变量执行lock操作，将会清空工作内存中此变量的值，在执行引擎使用这个变量前，需要重新执行load或assign操作初始化变量的值。<br>7、一个变量未被lock不允许unlock，并且不能unlock一个被其他线程锁定住的变量<br>8、对一个变量执行unlock操作前，必须先把此变量同步回主内存中</p>
-<h3 id="0x04-volatile的特殊规则"><a href="#0x04-volatile的特殊规则" class="headerlink" title="0x04.volatile的特殊规则"></a>0x04.volatile的特殊规则</h3><p>1）Java内存模型对volatile变量定义了特殊规则：</p>
-<p>假定T表示一个线程，V和W分别表示两个volatile型变量，那么进行read，load，use，assign，store，write操作时需要满足如下规则<br>1、线程T对变量V执行的load和use操作必须成对执行，即执行的前一个动作是load，后一个动作才能是use。后一个动作是use，前一个动作才能是load，线程T对变量V的use动作可以认为是和线程T对变量V的load，read动作相关联，必须连续一起出现（这条规则要求在工作内存中，每次使用V前都必须先从主内存刷新最新的值，用于保证能看见其他线程对变量V所做的修改后的值）</p>
-<p>2、与1相对的，线程T对变量V执行的assign和store操作必须成对执行，线程T对变量V的assign动作可以认为是和线程T对变量V的store，write动作相关联，必须连续一个出现（这条规则要求在工作线程中，每次修改V后都必须立刻同步会主内存中，用于保证其他线程可以看到自己对变量V所做的修改）</p>
-<p>3、假定动作A是线程T对变量V实施的use或assign动作，假定动作F是和动作A相关联的load或store动作，动作P是和动作F相应的对变量V的read或write动作；类似的，假定动作B是线程T对变量W实施的use或assign动作，假定动作G是和动作B相关联的load或store动作，假定动作Q是和动作G相应的对变量W的read或write动作。如果A先于B，那么P先于Q（这条规则要求volatile修饰的变量不会被指令重排序优化，保证代码的执行顺序与程序的顺序相同）</p>
-<p>java内存模型是通过在变量修改后将新值同步回主内存，在变量读取前从主内存刷新变量值这种依赖主内存作为传递媒介的方式来实现可见性。volatile的特殊规则保证了新值能立即同步到主内存，以及每次使用前立即从主内存刷新。</p>
-<p>2）volatile对指令重排序的实现：</p>
-<p>volatile修饰的变量，赋值后多执行了一个“lock addl $0x0,(%esp)”操作，这个操作相当于一个屏障。<br>lock的作用是使得本CPU的Cache写入了内存，该写入动作也会引起别的CPU或者别的内核无效化其Cache，这种操作相当于对Cache中的变量做了一次前面介绍Java内存模式中所说的“store和write”操作。所以通过这样一个空操作，可让前面volatile变量的修改对其他CPU立即可见。<br>lock addl $0x0,(%esp。) 命令把修改同步回内存时，意味着所有之前的操作都已经执行完成，这样便形成了“指令重排序无法越过内存屏障”的效果。</p>
+
+
+<h3 id="0x02-Js-调用-Java"><a href="#0x02-Js-调用-Java" class="headerlink" title="0x02 Js 调用 Java"></a>0x02 Js 调用 Java</h3><p>h5层如何调native，有以下几种形式</p>
+<h4 id="0x0201-addJavascriptInterface-gt-4-2"><a href="#0x0201-addJavascriptInterface-gt-4-2" class="headerlink" title="0x0201 addJavascriptInterface &gt;4.2"></a>0x0201 addJavascriptInterface &gt;4.2</h4><p>在4.2之前有安全隐患，JS可以动态获取到整个底层的实例信息，漏洞已经在Android 4.2上修复了，即使用@JavascriptInterface注解。</p>
+<h4 id="0x0202-shouldOverrideUrlLoading拦截自定义scheme"><a href="#0x0202-shouldOverrideUrlLoading拦截自定义scheme" class="headerlink" title="0x0202 shouldOverrideUrlLoading拦截自定义scheme"></a>0x0202 shouldOverrideUrlLoading拦截自定义scheme</h4><h4 id="0x0203-onJsAlert-onJsConfirm-onJsPrompt"><a href="#0x0203-onJsAlert-onJsConfirm-onJsPrompt" class="headerlink" title="0x0203 onJsAlert,onJsConfirm,onJsPrompt"></a>0x0203 onJsAlert,onJsConfirm,onJsPrompt</h4><p>WebChromeClient对象中有三个方法，分别是onJsAlert,onJsConfirm,onJsPrompt，当js调用window对象的alert，confirm，prompt，WebChromeClient对象中的三个方法对应的就会被触发，进行拦截处理。</p>
+<p>推荐使用onJsPrompt，使用频次最少，支持返回值。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onJsPrompt</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">  view: <span class="type">WebView</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">  url: <span class="type">String</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">  message: <span class="type">String</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">  defaultValue: <span class="type">String</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">  result: <span class="type">JsPromptResult</span>?</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">  <span class="keyword">val</span> msg = handleMessage(message)</span><br><span class="line">  result?.confirm(<span class="string">"Java 处理之后的 Json 数据：<span class="variable">$msg</span>"</span>)</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="0x0204-onConsoleMessage"><a href="#0x0204-onConsoleMessage" class="headerlink" title="0x0204 onConsoleMessage"></a>0x0204 onConsoleMessage</h4><p>这是Android提供给Js调试在Native代码里面打印日志信息的API，同时这也成了其中一种Js与Native代码通信的方法。在Js代码中调用console.log(‘xxx’)方法。</p>
+<h3 id="0x03-自定义通信协议"><a href="#0x03-自定义通信协议" class="headerlink" title="0x03 自定义通信协议"></a>0x03 自定义通信协议</h3><p><code>jsbridge://className:callbackId/methodName?json</code></p>
+<p>假设我们需要调用native层的Logger类的log方法，参数是msg，执行完成后js层要有一个回调，那么地址就如下</p>
+<p><code>jsbridge://Logger:callbackId/log?{&quot;msg&quot;:&quot;message from js.&quot;}</code></p>
 
     </div>
 
@@ -272,7 +260,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/Android/" rel="tag"># Android</a>
           </div>
 
         
@@ -281,12 +269,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/08/20/%E9%93%BE%E8%A1%A8%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" rel="prev" title="链表常见问题">
-      <i class="fa fa-chevron-left"></i> 链表常见问题
+    <a href="/2020/09/23/%E8%87%AA%E5%AE%9A%E4%B9%89Notification%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/" rel="prev" title="自定义Notification遇到的坑">
+      <i class="fa fa-chevron-left"></i> 自定义Notification遇到的坑
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/08/13/KMP%E7%AE%97%E6%B3%95/" rel="next" title="KMP算法">
-      KMP算法 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/09/04/RecyclerView%E5%AE%9E%E7%8E%B0%E7%80%91%E5%B8%83%E6%B5%81%E4%BB%A5%E5%8F%8A%E7%BB%86%E8%8A%82%E9%97%AE%E9%A2%98/" rel="next" title="RecyclerView实现瀑布流以及细节问题">
+      RecyclerView实现瀑布流以及细节问题 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -347,7 +335,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java内存模型"><span class="nav-text">Java内存模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0x01-主内存与工作内存"><span class="nav-text">0x01.主内存与工作内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x02-主内存与工作线程交互的基本操作"><span class="nav-text">0x02.主内存与工作线程交互的基本操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x03-交互规则"><span class="nav-text">0x03.交互规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x04-volatile的特殊规则"><span class="nav-text">0x04.volatile的特殊规则</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Android-JsBridge-混合开发框架"><span class="nav-text">Android JsBridge 混合开发框架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0x01-Java-调用-Js"><span class="nav-text">0x01 Java 调用 Js</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#0x0101-loadUrl-lt-4-4"><span class="nav-text">0x0101 loadUrl &lt;4.4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x0102-evaluateJavascript-gt-4-4"><span class="nav-text">0x0102 evaluateJavascript &gt;4.4</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x02-Js-调用-Java"><span class="nav-text">0x02 Js 调用 Java</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#0x0201-addJavascriptInterface-gt-4-2"><span class="nav-text">0x0201 addJavascriptInterface &gt;4.2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x0202-shouldOverrideUrlLoading拦截自定义scheme"><span class="nav-text">0x0202 shouldOverrideUrlLoading拦截自定义scheme</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x0203-onJsAlert-onJsConfirm-onJsPrompt"><span class="nav-text">0x0203 onJsAlert,onJsConfirm,onJsPrompt</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x0204-onConsoleMessage"><span class="nav-text">0x0204 onConsoleMessage</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x03-自定义通信协议"><span class="nav-text">0x03 自定义通信协议</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
