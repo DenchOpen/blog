@@ -213,10 +213,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-12-26 20:37:18 / 修改时间：21:48:17" itemprop="dateCreated datePublished" datetime="2020-12-26T20:37:18+08:00">2020-12-26</time>
+              <time title="创建时间：2020-12-26 20:37:18" itemprop="dateCreated datePublished" datetime="2020-12-26T20:37:18+08:00">2020-12-26</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-27 03:17:36" itemprop="dateModified" datetime="2020-12-27T03:17:36+08:00">2020-12-27</time>
+              </span>
 
           
 
@@ -240,6 +246,10 @@
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在安卓5.0之后，默认不允许加载http与https混合内容，需要手动设置</span></span><br><span class="line"><span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.LOLLIPOP) &#123;</span><br><span class="line">  webSettings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>其他情景： 设置<code>domStorageEnabled</code> 和背景色需要验证，暂时没遇到。</p>
+<h3 id="0x02-卡顿问题"><a href="#0x02-卡顿问题" class="headerlink" title="0x02 卡顿问题"></a>0x02 卡顿问题</h3><p>由于设置了 <code>android:layerType=&quot;software&quot;</code>导致的 webview 卡顿。</p>
+<p>关于三个layerType属性介绍：<a href="https://blog.csdn.net/a345017062/article/details/7478667" target="_blank" rel="noopener">https://blog.csdn.net/a345017062/article/details/7478667</a></p>
+<p>解决：</p>
+<p>开启 Activity 硬件加速 ``android:hardwareAccelerated=”true”<code>, 并且设置 webview 的</code>android:layerType=”none”`。</p>
 
       
     </div>
