@@ -190,85 +190,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/01/11/Android%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2021/01/11/Android%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/" class="post-title-link" itemprop="url">Android文件存储</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-01-11 00:39:24 / 修改时间：00:55:59" itemprop="dateCreated datePublished" datetime="2021-01-11T00:39:24+08:00">2021-01-11</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="0x01-权限申请"><a href="#0x01-权限申请" class="headerlink" title="0x01 权限申请"></a>0x01 权限申请</h3><p>从Android Q(即 Android 10)开始，应用访问外部存储的私有目录（即<code>Context.getExternalFilesDir()</code>）不需要申请<code>READ_EXTERNAL_STORAGE</code> 或 <code>WRITE_EXTERNAL_STORAGE</code>权限。</p>
-<p>同时，正常情况下，就算应用申请了，也只能访问外部存储的私有目录，若是访问了除了私有目录之外的其他外部储存，会抛出FileNotFoundException异常。</p>
-<p>解决方案</p>
-<p>方案一：把应用的 targetSdkVersion设置为29以下即可</p>
-<p>方案二：在AndroidManifest.xml的Application节点设置<code>android:requestLegacyExternalStorage=“true”</code></p>
-<p>方案三：按照Android Q（10）文件访问机制进行适配，调整访问及存储路径；具体如下：</p>
-<p>1、访问私有文件</p>
-<p>应用需要将文件存储在应用的沙盒中，并且访问这个文件夹无需权限。官方推荐应用在沙盒内存储文件的地址为<code>Context.getExternalFilesDir()</code>下的文件夹。</p>
-<p>2、访问其他应用创建的文件</p>
-<p>只有在满足以下两个条件时，您的应用才能访问其他应用创建的文件：<br> （1）您的应用已获得 <code>READ_EXTERNAL_STORAGE</code> 权限。<br> （2）这些文件位于以下其中一个明确定义的媒体集合中：<br> 照片：存储在 <code>MediaStore.Images</code> 中。<br> 视频：存储在 <code>MediaStore.Video</code> 中。<br> 音乐文件：存储在 <code>MediaStore.Audio</code> 中。</p>
-<h3 id="0x02-动态权限"><a href="#0x02-动态权限" class="headerlink" title="0x02 动态权限"></a>0x02 动态权限</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">requirePermission</span><span class="params">()</span></span> &#123;</span><br><span class="line">  <span class="keyword">val</span> PERMISSIONS_STORAGE = arrayOf(</span><br><span class="line">    <span class="string">"android.permission.READ_EXTERNAL_STORAGE"</span>,</span><br><span class="line">    <span class="string">"android.permission.WRITE_EXTERNAL_STORAGE"</span></span><br><span class="line">  )</span><br><span class="line"></span><br><span class="line">  <span class="comment">//检查权限</span></span><br><span class="line">  <span class="comment">//检查版本是否大于M</span></span><br><span class="line">  <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.M) &#123;</span><br><span class="line">    <span class="keyword">if</span> (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE) !== PackageManager.PERMISSION_GRANTED) &#123;</span><br><span class="line">      <span class="comment">//进入到这里代表没有权限.</span></span><br><span class="line">      <span class="keyword">if</span> (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)) &#123;</span><br><span class="line">        <span class="comment">//已经禁止提示了</span></span><br><span class="line">        <span class="keyword">val</span> builder = AlertDialog.Builder(requireContext())</span><br><span class="line">        builder.setCancelable(<span class="literal">false</span>)</span><br><span class="line">        .setMessage(<span class="string">"应用需要存储权限来让您选择手机中的相片！"</span>)</span><br><span class="line">        .setNegativeButton(</span><br><span class="line">          <span class="string">"取消"</span></span><br><span class="line">        ) &#123; dialog, which -&gt;</span><br><span class="line">           Toast.makeText(requireContext(), <span class="string">"点击了取消按钮"</span>, Toast.LENGTH_LONG).show()</span><br><span class="line">          &#125;</span><br><span class="line">        .setPositiveButton(</span><br><span class="line">          <span class="string">"确定"</span></span><br><span class="line">        ) &#123; dialog, which -&gt;</span><br><span class="line">           ActivityCompat.requestPermissions(requireActivity(), PERMISSIONS_STORAGE, <span class="number">123</span>)</span><br><span class="line">          &#125;.show()</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        ActivityCompat.requestPermissions(requireActivity(), PERMISSIONS_STORAGE, <span class="number">123</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      checkVersion()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onRequestPermissionsResult</span><span class="params">(requestCode: <span class="type">Int</span>, permissions: <span class="type">Array</span>&lt;<span class="type">out</span> <span class="type">String</span>&gt;, grantResults: <span class="type">IntArray</span>)</span></span> &#123;</span><br><span class="line">  <span class="keyword">when</span> (requestCode) &#123;</span><br><span class="line">    <span class="number">123</span> -&gt; <span class="keyword">if</span> (grantResults.isNotEmpty() &amp;&amp; grantResults[<span class="number">0</span>] == PackageManager.PERMISSION_GRANTED) &#123;</span><br><span class="line">      <span class="comment">//用户同意授权</span></span><br><span class="line">      checkVersion()</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">//用户拒绝授权</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">super</span>.onRequestPermissionsResult(requestCode, permissions, grantResults)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="0x03-文件读写"><a href="#0x03-文件读写" class="headerlink" title="0x03 文件读写"></a>0x03 文件读写</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> android.content.Context;</span><br><span class="line"><span class="keyword">import</span> android.os.Environment;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.ByteArrayOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.FileNotFoundException;</span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileUtil</span> </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String configPath = <span class="string">"/sdcard/aaa/config.txt"</span>;<span class="comment">// config 文件</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">//保存到SD卡</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">saveToSDCard</span><span class="params">(String fileNameString, String fileContentString)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="comment">//Environment.getExternalStorageDirectory()获取系统SD卡目录</span></span><br><span class="line">    File file = <span class="keyword">new</span> File(Environment.getExternalStorageDirectory(), fileNameString);</span><br><span class="line">    FileOutputStream outStream = <span class="keyword">new</span> FileOutputStream(file);</span><br><span class="line">    outStream.write(fileContentString.getBytes());</span><br><span class="line">    outStream.close();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">(Context context, String fileNameString, String fileContentString)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="comment">//文件输出流</span></span><br><span class="line">    <span class="comment">//其中两个参数一个是文件名一个是文件的权限，Context.MODE_PRIVATE代表只允许本程序读写</span></span><br><span class="line">    FileOutputStream outStream = context.openFileOutput(fileNameString, Context.MODE_PRIVATE);</span><br><span class="line">    <span class="comment">//以字节流传入</span></span><br><span class="line">    outStream.write(fileContentString.getBytes());</span><br><span class="line">    outStream.close();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">read</span><span class="params">(Context context, String fileName)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    FileInputStream fis = context.openFileInput(fileName);</span><br><span class="line">    <span class="keyword">return</span> readFileInputStream(fis);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">readFileInputStream</span><span class="params">(FileInputStream fis)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="comment">//内存字节数组输出流，主要先将每次读取的字节流存入到内存中然后在进行输出</span></span><br><span class="line">      ByteArrayOutputStream outStream = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">      <span class="comment">//每次读取1024</span></span><br><span class="line">      <span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">      <span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">while</span> ((len = fis.read(buffer)) != -<span class="number">1</span>) &#123;</span><br><span class="line">        outStream.write(buffer, <span class="number">0</span>, len);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">//把内存中的数据转换为字节流</span></span><br><span class="line">      <span class="keyword">byte</span>[] data = outStream.toByteArray();</span><br><span class="line">      <span class="comment">//转换成字符串返回</span></span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> String(data);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">      e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 读取文件内容</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">readFromSdcard</span><span class="params">(String path)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    FileInputStream fis = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      fis = <span class="keyword">new</span> FileInputStream(path);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">      e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> readFileInputStream(fis);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<p>参考文献：<br><a href="https://www.jianshu.com/p/c8929610d112" target="_blank" rel="noopener">https://www.jianshu.com/p/c8929610d112</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/12/29/%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9Netty/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -813,11 +734,92 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/09/19/Android-JsBridge%E5%AE%9E%E7%8E%B0%E6%9C%AC%E5%9C%B0H5%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2020/09/19/Android-JsBridge%E5%AE%9E%E7%8E%B0%E6%9C%AC%E5%9C%B0H5%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/" class="post-title-link" itemprop="url">Android-JsBridge实现本地H5混合开发</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-19 12:28:27" itemprop="dateCreated datePublished" datetime="2020-09-19T12:28:27+08:00">2020-09-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-26 20:39:53" itemprop="dateModified" datetime="2020-12-26T20:39:53+08:00">2020-12-26</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Android-JsBridge-混合开发框架"><a href="#Android-JsBridge-混合开发框架" class="headerlink" title="Android JsBridge 混合开发框架"></a>Android JsBridge 混合开发框架</h2><h3 id="0x01-Java-调用-Js"><a href="#0x01-Java-调用-Js" class="headerlink" title="0x01 Java 调用 Js"></a>0x01 Java 调用 Js</h3><p>我们知道，native层调用h5，在WebView中，如果java要调用js的方法，</p>
+<h4 id="0x0101-loadUrl-lt-4-4"><a href="#0x0101-loadUrl-lt-4-4" class="headerlink" title="0x0101 loadUrl &lt;4.4"></a>0x0101 loadUrl &lt;4.4</h4><p>Android4.4以前使用<code>WebView.loadUrl(&quot;javascript:function()&quot;)</code>。</p>
+<h4 id="0x0102-evaluateJavascript-gt-4-4"><a href="#0x0102-evaluateJavascript-gt-4-4" class="headerlink" title="0x0102 evaluateJavascript &gt;4.4"></a>0x0102 evaluateJavascript &gt;4.4</h4><p>Android4.4以后，使用以下方式 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">webView.evaluateJavascript(<span class="string">"javascript:function()"</span>, <span class="keyword">new</span> ValueCallback&lt;String&gt;() &#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceiveValue</span><span class="params">(String value)</span> </span>&#123;</span><br><span class="line">    Toast.makeText(MainActivity.<span class="keyword">this</span>, <span class="string">"onReceiveValue From JS: "</span> + value, Toast.LENGTH_SHORT).show();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="0x02-Js-调用-Java"><a href="#0x02-Js-调用-Java" class="headerlink" title="0x02 Js 调用 Java"></a>0x02 Js 调用 Java</h3><p>h5层如何调native，有以下几种形式</p>
+<h4 id="0x0201-addJavascriptInterface-gt-4-2"><a href="#0x0201-addJavascriptInterface-gt-4-2" class="headerlink" title="0x0201 addJavascriptInterface &gt;4.2"></a>0x0201 addJavascriptInterface &gt;4.2</h4><p>在4.2之前有安全隐患，JS可以动态获取到整个底层的实例信息，漏洞已经在Android 4.2上修复了，即使用@JavascriptInterface注解。</p>
+<h4 id="0x0202-shouldOverrideUrlLoading拦截自定义scheme"><a href="#0x0202-shouldOverrideUrlLoading拦截自定义scheme" class="headerlink" title="0x0202 shouldOverrideUrlLoading拦截自定义scheme"></a>0x0202 shouldOverrideUrlLoading拦截自定义scheme</h4><h4 id="0x0203-onJsAlert-onJsConfirm-onJsPrompt"><a href="#0x0203-onJsAlert-onJsConfirm-onJsPrompt" class="headerlink" title="0x0203 onJsAlert,onJsConfirm,onJsPrompt"></a>0x0203 onJsAlert,onJsConfirm,onJsPrompt</h4><p>WebChromeClient对象中有三个方法，分别是onJsAlert,onJsConfirm,onJsPrompt，当js调用window对象的alert，confirm，prompt，WebChromeClient对象中的三个方法对应的就会被触发，进行拦截处理。</p>
+<p>推荐使用onJsPrompt，使用频次最少，支持返回值。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onJsPrompt</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">  view: <span class="type">WebView</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">  url: <span class="type">String</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">  message: <span class="type">String</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">  defaultValue: <span class="type">String</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">  result: <span class="type">JsPromptResult</span>?</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">  <span class="keyword">val</span> msg = handleMessage(message)</span><br><span class="line">  result?.confirm(<span class="string">"Java 处理之后的 Json 数据：<span class="variable">$msg</span>"</span>)</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="0x0204-onConsoleMessage"><a href="#0x0204-onConsoleMessage" class="headerlink" title="0x0204 onConsoleMessage"></a>0x0204 onConsoleMessage</h4><p>这是Android提供给Js调试在Native代码里面打印日志信息的API，同时这也成了其中一种Js与Native代码通信的方法。在Js代码中调用console.log(‘xxx’)方法。</p>
+<h3 id="0x03-自定义通信协议"><a href="#0x03-自定义通信协议" class="headerlink" title="0x03 自定义通信协议"></a>0x03 自定义通信协议</h3><p><code>jsbridge://className:callbackId/methodName?json</code></p>
+<p>假设我们需要调用native层的Logger类的log方法，参数是msg，执行完成后js层要有一个回调，那么地址就如下</p>
+<p><code>jsbridge://Logger:callbackId/log?{&quot;msg&quot;:&quot;message from js.&quot;}</code></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/7/">7</a><a class="extend next" rel="next" href="/blog/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/6/">6</a><a class="extend next" rel="next" href="/blog/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -885,7 +887,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-count">36</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
