@@ -190,6 +190,66 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/05/19/BottomFragment/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2021/05/19/BottomFragment/" class="post-title-link" itemprop="url">BottomFragment</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-05-19 02:16:30 / 修改时间：02:17:21" itemprop="dateCreated datePublished" datetime="2021-05-19T02:16:30+08:00">2021-05-19</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.dench.baselib.widget</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.os.Bundle</span><br><span class="line"><span class="keyword">import</span> android.util.Log</span><br><span class="line"><span class="keyword">import</span> android.view.LayoutInflater</span><br><span class="line"><span class="keyword">import</span> android.view.View</span><br><span class="line"><span class="keyword">import</span> android.view.ViewGroup</span><br><span class="line"><span class="keyword">import</span> androidx.fragment.app.Fragment</span><br><span class="line"><span class="keyword">import</span> androidx.fragment.app.FragmentManager</span><br><span class="line"><span class="keyword">import</span> com.dench.baselib.R</span><br><span class="line"><span class="keyword">import</span> com.dench.baselib.databinding.FragmentBottomBinding</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BottomFragment</span> : <span class="type">Fragment</span></span>() &#123;</span><br><span class="line">    <span class="keyword">companion</span> <span class="keyword">object</span> &#123;</span><br><span class="line">        <span class="function"><span class="keyword">fun</span> <span class="title">start</span><span class="params">(fm: <span class="type">FragmentManager</span>, fragment: <span class="type">Fragment</span>)</span></span>: BottomFragment &#123;</span><br><span class="line">            <span class="keyword">val</span> bottomFragment = BottomFragment().apply &#123;</span><br><span class="line">                setFragment(fragment)</span><br><span class="line">            &#125;</span><br><span class="line">            fm.beginTransaction()</span><br><span class="line">                .setCustomAnimations(R.anim.fragment_bottom_enter, R.anim.fragment_bottom_exit)</span><br><span class="line">                .add(android.R.id.content, bottomFragment)</span><br><span class="line">                .commitAllowingStateLoss()</span><br><span class="line">            <span class="keyword">return</span> bottomFragment</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> fragment: Fragment</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">setFragment</span><span class="params">(fragment: <span class="type">Fragment</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.fragment = fragment</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> binding: FragmentBottomBinding</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> TAG = <span class="string">"BottomFragment"</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreateView</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        inflater: <span class="type">LayoutInflater</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">        container: <span class="type">ViewGroup</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">        savedInstanceState: <span class="type">Bundle</span>?</span></span></span><br><span class="line"><span class="function"><span class="params">    )</span></span>: View? &#123;</span><br><span class="line">        binding = FragmentBottomBinding.inflate(inflater, container, <span class="literal">false</span>)</span><br><span class="line">        <span class="keyword">return</span> binding.root</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onViewCreated</span><span class="params">(view: <span class="type">View</span>, savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onViewCreated(view, savedInstanceState)</span><br><span class="line">        binding.run &#123;</span><br><span class="line">            binding.bottomFragmentRl.setOnClickListener(View.OnClickListener &#123;</span><br><span class="line">                Log.d(TAG, <span class="string">"bottom root view click."</span>)</span><br><span class="line">                dismissSelf()</span><br><span class="line">            &#125;)</span><br><span class="line"></span><br><span class="line">            <span class="comment">/** add fragment */</span></span><br><span class="line">            childFragmentManager.beginTransaction()</span><br><span class="line">                .add(R.id.container, fragment)</span><br><span class="line">                .commitAllowingStateLoss()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">dismissSelf</span><span class="params">()</span></span> &#123;</span><br><span class="line">        parentFragmentManager?.beginTransaction()</span><br><span class="line">            .setCustomAnimations(R.anim.fragment_bottom_enter, R.anim.fragment_bottom_exit)</span><br><span class="line">            .detach(<span class="keyword">this</span>)</span><br><span class="line">            .commitAllowingStateLoss()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/12/29/%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9Netty/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -734,92 +794,11 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/09/19/Android-JsBridge%E5%AE%9E%E7%8E%B0%E6%9C%AC%E5%9C%B0H5%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2020/09/19/Android-JsBridge%E5%AE%9E%E7%8E%B0%E6%9C%AC%E5%9C%B0H5%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/" class="post-title-link" itemprop="url">Android-JsBridge实现本地H5混合开发</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-09-19 12:28:27" itemprop="dateCreated datePublished" datetime="2020-09-19T12:28:27+08:00">2020-09-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-26 20:39:53" itemprop="dateModified" datetime="2020-12-26T20:39:53+08:00">2020-12-26</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Android-JsBridge-混合开发框架"><a href="#Android-JsBridge-混合开发框架" class="headerlink" title="Android JsBridge 混合开发框架"></a>Android JsBridge 混合开发框架</h2><h3 id="0x01-Java-调用-Js"><a href="#0x01-Java-调用-Js" class="headerlink" title="0x01 Java 调用 Js"></a>0x01 Java 调用 Js</h3><p>我们知道，native层调用h5，在WebView中，如果java要调用js的方法，</p>
-<h4 id="0x0101-loadUrl-lt-4-4"><a href="#0x0101-loadUrl-lt-4-4" class="headerlink" title="0x0101 loadUrl &lt;4.4"></a>0x0101 loadUrl &lt;4.4</h4><p>Android4.4以前使用<code>WebView.loadUrl(&quot;javascript:function()&quot;)</code>。</p>
-<h4 id="0x0102-evaluateJavascript-gt-4-4"><a href="#0x0102-evaluateJavascript-gt-4-4" class="headerlink" title="0x0102 evaluateJavascript &gt;4.4"></a>0x0102 evaluateJavascript &gt;4.4</h4><p>Android4.4以后，使用以下方式 </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">webView.evaluateJavascript(<span class="string">"javascript:function()"</span>, <span class="keyword">new</span> ValueCallback&lt;String&gt;() &#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceiveValue</span><span class="params">(String value)</span> </span>&#123;</span><br><span class="line">    Toast.makeText(MainActivity.<span class="keyword">this</span>, <span class="string">"onReceiveValue From JS: "</span> + value, Toast.LENGTH_SHORT).show();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="0x02-Js-调用-Java"><a href="#0x02-Js-调用-Java" class="headerlink" title="0x02 Js 调用 Java"></a>0x02 Js 调用 Java</h3><p>h5层如何调native，有以下几种形式</p>
-<h4 id="0x0201-addJavascriptInterface-gt-4-2"><a href="#0x0201-addJavascriptInterface-gt-4-2" class="headerlink" title="0x0201 addJavascriptInterface &gt;4.2"></a>0x0201 addJavascriptInterface &gt;4.2</h4><p>在4.2之前有安全隐患，JS可以动态获取到整个底层的实例信息，漏洞已经在Android 4.2上修复了，即使用@JavascriptInterface注解。</p>
-<h4 id="0x0202-shouldOverrideUrlLoading拦截自定义scheme"><a href="#0x0202-shouldOverrideUrlLoading拦截自定义scheme" class="headerlink" title="0x0202 shouldOverrideUrlLoading拦截自定义scheme"></a>0x0202 shouldOverrideUrlLoading拦截自定义scheme</h4><h4 id="0x0203-onJsAlert-onJsConfirm-onJsPrompt"><a href="#0x0203-onJsAlert-onJsConfirm-onJsPrompt" class="headerlink" title="0x0203 onJsAlert,onJsConfirm,onJsPrompt"></a>0x0203 onJsAlert,onJsConfirm,onJsPrompt</h4><p>WebChromeClient对象中有三个方法，分别是onJsAlert,onJsConfirm,onJsPrompt，当js调用window对象的alert，confirm，prompt，WebChromeClient对象中的三个方法对应的就会被触发，进行拦截处理。</p>
-<p>推荐使用onJsPrompt，使用频次最少，支持返回值。</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onJsPrompt</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">  view: <span class="type">WebView</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">  url: <span class="type">String</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">  message: <span class="type">String</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">  defaultValue: <span class="type">String</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">  result: <span class="type">JsPromptResult</span>?</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">  <span class="keyword">val</span> msg = handleMessage(message)</span><br><span class="line">  result?.confirm(<span class="string">"Java 处理之后的 Json 数据：<span class="variable">$msg</span>"</span>)</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="0x0204-onConsoleMessage"><a href="#0x0204-onConsoleMessage" class="headerlink" title="0x0204 onConsoleMessage"></a>0x0204 onConsoleMessage</h4><p>这是Android提供给Js调试在Native代码里面打印日志信息的API，同时这也成了其中一种Js与Native代码通信的方法。在Js代码中调用console.log(‘xxx’)方法。</p>
-<h3 id="0x03-自定义通信协议"><a href="#0x03-自定义通信协议" class="headerlink" title="0x03 自定义通信协议"></a>0x03 自定义通信协议</h3><p><code>jsbridge://className:callbackId/methodName?json</code></p>
-<p>假设我们需要调用native层的Logger类的log方法，参数是msg，执行完成后js层要有一个回调，那么地址就如下</p>
-<p><code>jsbridge://Logger:callbackId/log?{&quot;msg&quot;:&quot;message from js.&quot;}</code></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/6/">6</a><a class="extend next" rel="next" href="/blog/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/7/">7</a><a class="extend next" rel="next" href="/blog/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -887,7 +866,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
