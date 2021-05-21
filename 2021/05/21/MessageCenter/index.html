@@ -48,20 +48,21 @@
   };
 </script>
 
-  <meta name="description" content="Shortcuts Action    command+return 在当前行后插入新行   command+shift+return 在当前行前插入新行   command+control+up&amp;down 交换上下行   command+shift+D 复制（多）行   control+shift+K 删除行   command+L 选择行   command+&#x2F; 注释   com">
+  <meta name="description" content="观察者模式 + Kotlin 泛型实现的简易版消息中心 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849class MessageCenter&lt;T&gt; &amp;#123;  companion object &amp;#123;    private val centers">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Sublime Text3 Shortcuts（mac)">
-<meta property="og:url" content="https://denchopen.github.io/blog/2020/02/09/SublimeText%E5%BF%AB%E6%8D%B7%E9%94%AE/index.html">
+<meta property="og:title" content="观察者模式Kotlin泛型实现消息中心">
+<meta property="og:url" content="https://denchopen.github.io/blog/2021/05/21/MessageCenter/index.html">
 <meta property="og:site_name" content="个人小站">
-<meta property="og:description" content="Shortcuts Action    command+return 在当前行后插入新行   command+shift+return 在当前行前插入新行   command+control+up&amp;down 交换上下行   command+shift+D 复制（多）行   control+shift+K 删除行   command+L 选择行   command+&#x2F; 注释   com">
+<meta property="og:description" content="观察者模式 + Kotlin 泛型实现的简易版消息中心 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849class MessageCenter&lt;T&gt; &amp;#123;  companion object &amp;#123;    private val centers">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-02-09T07:20:38.000Z">
-<meta property="article:modified_time" content="2020-12-19T21:36:47.851Z">
+<meta property="article:published_time" content="2021-05-21T14:57:15.000Z">
+<meta property="article:modified_time" content="2021-05-21T15:07:50.902Z">
 <meta property="article:author" content="Dench">
-<meta property="article:tag" content="Shortcuts">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="Kotlin">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://denchopen.github.io/blog/2020/02/09/SublimeText%E5%BF%AB%E6%8D%B7%E9%94%AE/">
+<link rel="canonical" href="https://denchopen.github.io/blog/2021/05/21/MessageCenter/">
 
 
 <script id="page-configurations">
@@ -73,7 +74,7 @@
   };
 </script>
 
-  <title>Sublime Text3 Shortcuts（mac) | 个人小站</title>
+  <title>观察者模式Kotlin泛型实现消息中心 | 个人小站</title>
   
 
 
@@ -190,7 +191,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/02/09/SublimeText%E5%BF%AB%E6%8D%B7%E9%94%AE/">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/05/21/MessageCenter/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.png">
@@ -203,7 +204,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Sublime Text3 Shortcuts（mac)
+          观察者模式Kotlin泛型实现消息中心
         </h1>
 
         <div class="post-meta">
@@ -212,26 +213,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-02-09 15:20:38" itemprop="dateCreated datePublished" datetime="2020-02-09T15:20:38+08:00">2020-02-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-20 05:36:47" itemprop="dateModified" datetime="2020-12-20T05:36:47+08:00">2020-12-20</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Shortcuts/" itemprop="url" rel="index">
-                    <span itemprop="name">Shortcuts</span>
-                  </a>
-                </span>
+              <time title="创建时间：2021-05-21 22:57:15 / 修改时间：23:07:50" itemprop="dateCreated datePublished" datetime="2021-05-21T22:57:15+08:00">2021-05-21</time>
             </span>
 
           
@@ -245,66 +229,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <table>
-<thead>
-<tr>
-<th>Shortcuts</th>
-<th>Action</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>command+return</td>
-<td>在当前行后插入新行</td>
-</tr>
-<tr>
-<td>command+shift+return</td>
-<td>在当前行前插入新行</td>
-</tr>
-<tr>
-<td>command+control+up&amp;down</td>
-<td>交换上下行</td>
-</tr>
-<tr>
-<td>command+shift+D</td>
-<td>复制（多）行</td>
-</tr>
-<tr>
-<td>control+shift+K</td>
-<td>删除行</td>
-</tr>
-<tr>
-<td>command+L</td>
-<td>选择行</td>
-</tr>
-<tr>
-<td>command+/</td>
-<td>注释</td>
-</tr>
-<tr>
-<td>command+]</td>
-<td>向右缩进</td>
-</tr>
-<tr>
-<td>command+[</td>
-<td>向左缩进</td>
-</tr>
-<tr>
-<td>command+F</td>
-<td>查找</td>
-</tr>
-<tr>
-<td>command+option+F</td>
-<td>替换</td>
-</tr>
-<tr>
-<td>command+B</td>
-<td>编译</td>
-</tr>
-<tr>
-<td>control+G</td>
-<td>跳转到行</td>
-</tr>
-</tbody></table>
+        <p>观察者模式 + Kotlin 泛型实现的简易版消息中心</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MessageCenter</span>&lt;<span class="type">T</span>&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">companion</span> <span class="keyword">object</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> centers = mutableMapOf&lt;String, Any&gt;()</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="type">&lt;T&gt;</span> <span class="title">getInstance</span><span class="params">(clazz: <span class="type">Class</span>&lt;<span class="type">T</span>&gt;)</span></span>: MessageCenter&lt;T&gt; &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">if</span> (centers[clazz.simpleName] != <span class="literal">null</span>) &#123;</span><br><span class="line">        centers[clazz.simpleName] <span class="keyword">as</span> MessageCenter&lt;T&gt;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">val</span> messageCenter = MessageCenter&lt;T&gt;()</span><br><span class="line">        centers[clazz.simpleName] = messageCenter</span><br><span class="line">        messageCenter</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">register</span><span class="params">(observer: <span class="type">Observer</span>&lt;<span class="type">T</span>&gt;)</span></span> &#123;</span><br><span class="line">    observers.add(observer)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">unregister</span><span class="params">(observer: <span class="type">Observer</span>&lt;<span class="type">T</span>&gt;)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (observers.contains(observer)) &#123;</span><br><span class="line">      observers.remove(observer)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">post</span><span class="params">(t: <span class="type">T</span>)</span></span> &#123;</span><br><span class="line">    observers.forEach &#123;</span><br><span class="line">      it.receive(t)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">var</span> observers = mutableListOf&lt;Observer&lt;T&gt;&gt;()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Observer</span>&lt;<span class="type">T</span>&gt; </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">receive</span><span class="params">(t: <span class="type">T</span>)</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">  <span class="keyword">val</span> ob = <span class="keyword">object</span> : Observer&lt;String&gt; &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">receive</span><span class="params">(t: <span class="type">String</span>)</span></span> &#123;</span><br><span class="line">      println(<span class="string">"result is: <span class="variable">$t</span>"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  MessageCenter.getInstance(String::<span class="class"><span class="keyword">class</span>.<span class="title">java</span>).<span class="title">register</span></span>(ob)</span><br><span class="line">  MessageCenter.getInstance(String::<span class="class"><span class="keyword">class</span>.<span class="title">java</span>).<span class="title">post</span></span>(<span class="string">"txt post."</span>)</span><br><span class="line">  MessageCenter.getInstance(String::<span class="class"><span class="keyword">class</span>.<span class="title">java</span>).<span class="title">unregister</span></span>(ob)</span><br><span class="line"></span><br><span class="line">  MessageCenter.getInstance(<span class="built_in">Int</span>::<span class="class"><span class="keyword">class</span>.<span class="title">java</span>).<span class="title">post</span></span>(<span class="number">123</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 
     </div>
 
@@ -314,7 +243,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/blog/tags/Shortcuts/" rel="tag"># Shortcuts</a>
+              <a href="/blog/tags/Android/" rel="tag"># Android</a>
+              <a href="/blog/tags/Kotlin/" rel="tag"># Kotlin</a>
           </div>
 
         
@@ -322,13 +252,10 @@
 
         
     <div class="post-nav">
+      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/blog/2020/02/10/Homebrew%E5%85%A5%E9%97%A8/" rel="prev" title="Homebrew 入门">
-      <i class="fa fa-chevron-left"></i> Homebrew 入门
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/blog/2020/02/09/mac%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%B8%B8%E7%94%A8%E9%94%AE%E7%9B%98%E7%AC%A6%E5%8F%B7/" rel="next" title="mac快捷键常用键盘符号">
-      mac快捷键常用键盘符号 <i class="fa fa-chevron-right"></i>
+    <a href="/blog/2021/05/19/BottomFragment/" rel="next" title="BottomFragment">
+      BottomFragment <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>

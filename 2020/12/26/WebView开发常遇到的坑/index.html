@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://denchopen.github.io/blog').hostname,
+    root: '/blog/',
+    scheme: 'Gemini',
+    version: '7.7.1',
+    exturl: false,
+    sidebar: {"enable":true,"position":"left","width":280,"display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="WebView开发常遇到的坑0x00 常规WebViewActivity12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WebView开发常遇到的坑">
+<meta property="og:url" content="https://denchopen.github.io/blog/2020/12/26/WebView%E5%BC%80%E5%8F%91%E5%B8%B8%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/index.html">
+<meta property="og:site_name" content="个人小站">
+<meta property="og:description" content="WebView开发常遇到的坑0x00 常规WebViewActivity12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-12-26T12:37:18.000Z">
+<meta property="article:modified_time" content="2020-12-27T16:40:04.709Z">
+<meta property="article:author" content="Dench">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://denchopen.github.io/blog/2020/12/26/WebView%E5%BC%80%E5%8F%91%E5%B8%B8%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>WebView开发常遇到的坑 | 个人小站</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">个人小站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Dench's</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/blog/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/blog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/blog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/blog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/blog/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/DenchOpen" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/12/26/WebView%E5%BC%80%E5%8F%91%E5%B8%B8%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          WebView开发常遇到的坑
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-26 20:37:18" itemprop="dateCreated datePublished" datetime="2020-12-26T20:37:18+08:00">2020-12-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-28 00:40:04" itemprop="dateModified" datetime="2020-12-28T00:40:04+08:00">2020-12-28</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="WebView开发常遇到的坑"><a href="#WebView开发常遇到的坑" class="headerlink" title="WebView开发常遇到的坑"></a>WebView开发常遇到的坑</h2><h3 id="0x00-常规WebViewActivity"><a href="#0x00-常规WebViewActivity" class="headerlink" title="0x00 常规WebViewActivity"></a>0x00 常规WebViewActivity</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.dench.webviewlib</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.<span class="keyword">annotation</span>.SuppressLint</span><br><span class="line"><span class="keyword">import</span> android.graphics.Bitmap</span><br><span class="line"><span class="keyword">import</span> android.net.http.SslError</span><br><span class="line"><span class="keyword">import</span> android.os.Build</span><br><span class="line"><span class="keyword">import</span> android.os.Bundle</span><br><span class="line"><span class="keyword">import</span> android.text.TextUtils</span><br><span class="line"><span class="keyword">import</span> android.util.Log</span><br><span class="line"><span class="keyword">import</span> android.view.Gravity</span><br><span class="line"><span class="keyword">import</span> android.webkit.*</span><br><span class="line"><span class="keyword">import</span> android.widget.TextView</span><br><span class="line"><span class="keyword">import</span> android.widget.Toast</span><br><span class="line"><span class="keyword">import</span> androidx.appcompat.app.AppCompatActivity</span><br><span class="line"><span class="keyword">import</span> androidx.databinding.DataBindingUtil</span><br><span class="line"><span class="keyword">import</span> com.alibaba.android.arouter.facade.<span class="keyword">annotation</span>.Autowired</span><br><span class="line"><span class="keyword">import</span> com.alibaba.android.arouter.facade.<span class="keyword">annotation</span>.Route</span><br><span class="line"><span class="keyword">import</span> com.alibaba.android.arouter.launcher.ARouter</span><br><span class="line"><span class="keyword">import</span> com.dench.baselib.provider.WebViewService</span><br><span class="line"><span class="keyword">import</span> com.dench.baselib.utlis.StatusBarHelper</span><br><span class="line"><span class="keyword">import</span> com.dench.webviewlib.bridge.JsInterface</span><br><span class="line"><span class="keyword">import</span> com.dench.webviewlib.databinding.ActivityWebViewBinding</span><br><span class="line"><span class="keyword">import</span> kotlinx.android.synthetic.main.activity_web_view.*</span><br><span class="line"></span><br><span class="line"><span class="meta">@Route(path = WebViewService.activityPath)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WebViewActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line">  <span class="meta">@Autowired</span></span><br><span class="line">  <span class="keyword">lateinit</span> <span class="keyword">var</span> title: String</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Autowired</span></span><br><span class="line">  <span class="keyword">lateinit</span> <span class="keyword">var</span> url: String</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> dataViewBinding: ActivityWebViewBinding</span><br><span class="line"></span><br><span class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">    ARouter.getInstance().inject(<span class="keyword">this</span>)</span><br><span class="line">    StatusBarHelper.fitSystemBar(<span class="keyword">this</span>, <span class="literal">false</span>)</span><br><span class="line"></span><br><span class="line">    dataViewBinding = DataBindingUtil.setContentView(<span class="keyword">this</span>, R.layout.activity_web_view)</span><br><span class="line"></span><br><span class="line">    initToolbar()</span><br><span class="line"></span><br><span class="line">    initWebView()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onBackPressed</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (webView.canGoBack()) &#123;</span><br><span class="line">      webView.goBack()</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">super</span>.onBackPressed()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">initToolbar</span><span class="params">()</span></span> &#123;</span><br><span class="line">    dataViewBinding.toolbar.titleTv.text = title</span><br><span class="line">    <span class="keyword">val</span> backIv = dataViewBinding.toolbar.leftIv</span><br><span class="line">    backIv.setImageResource(R.drawable.ic_close)</span><br><span class="line">    backIv.setOnClickListener &#123;<span class="comment">// 关闭</span></span><br><span class="line">      finish()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@SuppressLint(<span class="meta-string">"JavascriptInterface"</span>)</span></span><br><span class="line">  <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">initWebView</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// webView Settings</span></span><br><span class="line">    initWebViewSetting()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// init Client</span></span><br><span class="line">    initClient()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// add Javascript Interface</span></span><br><span class="line">    webView.addJavascriptInterface(JsInterface(<span class="keyword">this</span>), JsInterface.NAME)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// register Scroll Listener</span></span><br><span class="line">    registerScrollListener()</span><br><span class="line"></span><br><span class="line">    loadUrl()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// webView Settings</span></span><br><span class="line">  <span class="meta">@SuppressLint(<span class="meta-string">"SetJavaScriptEnabled"</span>)</span></span><br><span class="line">  <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">initWebViewSetting</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">//声明WebSettings子类</span></span><br><span class="line">    <span class="keyword">val</span> webSettings = webView.settings</span><br><span class="line"></span><br><span class="line">    <span class="comment">//如果访问的页面中要与Javascript交互，则webView必须设置支持Javascript</span></span><br><span class="line">    webSettings.javaScriptEnabled = <span class="literal">true</span></span><br><span class="line">    webSettings.javaScriptCanOpenWindowsAutomatically = <span class="literal">true</span> <span class="comment">//支持通过JS打开新窗口</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//设置自适应屏幕，两者合用</span></span><br><span class="line">    webSettings.useWideViewPort = <span class="literal">true</span> <span class="comment">//将图片调整到适合webView的大小</span></span><br><span class="line">    webSettings.loadWithOverviewMode = <span class="literal">true</span> <span class="comment">// 缩放至屏幕的大小</span></span><br><span class="line">    <span class="comment">//缩放操作</span></span><br><span class="line">    webSettings.setSupportZoom(<span class="literal">true</span>)<span class="comment">//支持缩放，默认为true。是下面那个的前提。</span></span><br><span class="line">    webSettings.builtInZoomControls = <span class="literal">true</span> <span class="comment">//设置内置的缩放控件。若为false，则该WebView不可缩放</span></span><br><span class="line">    webSettings.displayZoomControls = <span class="literal">false</span> <span class="comment">//隐藏原生的缩放控件</span></span><br><span class="line">    <span class="comment">// 缓存</span></span><br><span class="line">    webSettings.cacheMode = WebSettings.LOAD_DEFAULT <span class="comment">//webView缓存策略</span></span><br><span class="line">    webSettings.domStorageEnabled = <span class="literal">true</span></span><br><span class="line">    webSettings.databaseEnabled = <span class="literal">true</span></span><br><span class="line">    webSettings.setAppCacheEnabled(<span class="literal">true</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">//其他</span></span><br><span class="line">    webSettings.allowFileAccess = <span class="literal">true</span> <span class="comment">//设置可以访问文件</span></span><br><span class="line">    webSettings.loadsImagesAutomatically = <span class="literal">true</span> <span class="comment">//支持自动加载图片</span></span><br><span class="line">    webSettings.defaultTextEncodingName = <span class="string">"utf-8"</span> <span class="comment">//设置编码格式</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 在安卓5.0之后，默认不允许加载http与https混合内容，需要手动设置</span></span><br><span class="line">    <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.LOLLIPOP) &#123;</span><br><span class="line">      webSettings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// init Client</span></span><br><span class="line">  <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">initClient</span><span class="params">()</span></span> &#123;</span><br><span class="line">    webView.webViewClient = <span class="keyword">object</span> : WebViewClient() &#123;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 在网页上的所有加载都经过这个方法</span></span><br><span class="line">      <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">shouldOverrideUrlLoading</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        view: <span class="type">WebView</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">        request: <span class="type">WebResourceRequest</span>?</span></span></span><br><span class="line"><span class="function"><span class="params">      )</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        Log.i(_tag, <span class="string">"shouldOverrideUrlLoading()"</span>)</span><br><span class="line">        request?.url?.let &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="keyword">when</span> (it.scheme) &#123;</span><br><span class="line">            <span class="string">"http"</span>, <span class="string">"https"</span> -&gt; &#123; <span class="comment">// 加载网络html</span></span><br><span class="line">              <span class="keyword">super</span>.shouldOverrideUrlLoading(view, request)</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="string">"file"</span>, <span class="string">"content"</span> -&gt; &#123; <span class="comment">// 加载本地html</span></span><br><span class="line">              <span class="keyword">super</span>.shouldOverrideUrlLoading(view, request)</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> -&gt; &#123; <span class="comment">// 特殊 scheme 不处理</span></span><br><span class="line">              showToast(<span class="string">"<span class="variable">$it</span>"</span>)</span><br><span class="line">              <span class="literal">true</span></span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 加载页面的服务器出现错误时（如404）调用</span></span><br><span class="line">      <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onReceivedError</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        view: <span class="type">WebView</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">        request: <span class="type">WebResourceRequest</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">        error: <span class="type">WebResourceError</span>?</span></span></span><br><span class="line"><span class="function"><span class="params">      )</span></span> &#123;</span><br><span class="line">        Log.i(_tag, <span class="string">"onReceivedError()"</span>)</span><br><span class="line">        <span class="keyword">super</span>.onReceivedError(view, request, error)</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// ssl 证书错误</span></span><br><span class="line">      <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onReceivedSslError</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        view: <span class="type">WebView</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">        handler: <span class="type">SslErrorHandler</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">        error: <span class="type">SslError</span>?</span></span></span><br><span class="line"><span class="function"><span class="params">      )</span></span> &#123;</span><br><span class="line">        Log.i(_tag, <span class="string">"onReceivedSslError()"</span>)</span><br><span class="line">        handler?.proceed()   <span class="comment">//表示等待证书响应</span></span><br><span class="line">        <span class="comment">// handler?.cancel()      //表示挂起连接，为默认方式</span></span><br><span class="line">        <span class="comment">// handler?.handleMessage(null)    //可做其他处理</span></span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 开始载入页面调用的。我们可以设定一个loading的页面，告诉用户程序在等待网络响应</span></span><br><span class="line">      <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onPageStarted</span><span class="params">(view: <span class="type">WebView</span>?, url: <span class="type">String</span>?, favicon: <span class="type">Bitmap</span>?)</span></span> &#123;</span><br><span class="line">        Log.i(_tag, <span class="string">"onPageStarted()"</span>)</span><br><span class="line">        Log.d(</span><br><span class="line">          _tag,</span><br><span class="line">          <span class="string">"onPageStarted() called with: view = <span class="variable">$view</span>, url = <span class="variable">$url</span>, favicon = <span class="variable">$favicon</span>"</span></span><br><span class="line">        )</span><br><span class="line">        <span class="keyword">super</span>.onPageStarted(view, url, favicon)</span><br><span class="line">        webViewProgress.show()</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 在页面加载结束时调用。我们可以关闭loading 条，切换程序动作</span></span><br><span class="line">      <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onPageFinished</span><span class="params">(view: <span class="type">WebView</span>?, url: <span class="type">String</span>?)</span></span> &#123;</span><br><span class="line">        Log.i(_tag, <span class="string">"onPageFinished()"</span>)</span><br><span class="line">        <span class="keyword">super</span>.onPageFinished(view, url)</span><br><span class="line">        webViewProgress.hide()</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 在加载页面资源时会调用，每一个资源（比如图片）的加载都会调用一次</span></span><br><span class="line">      <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onLoadResource</span><span class="params">(view: <span class="type">WebView</span>?, url: <span class="type">String</span>?)</span></span> &#123;</span><br><span class="line">        Log.d(_tag, <span class="string">"onLoadResource()"</span>)</span><br><span class="line">        Log.d(_tag, <span class="string">"onLoadResource() called with: view = <span class="variable">$view</span>, url = <span class="variable">$url</span>"</span>)</span><br><span class="line">        <span class="keyword">super</span>.onLoadResource(view, url)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    webView.webChromeClient = <span class="keyword">object</span> : WebChromeClient() &#123;</span><br><span class="line">      <span class="comment">// 加载进度</span></span><br><span class="line">      <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onProgressChanged</span><span class="params">(view: <span class="type">WebView</span>?, newProgress: <span class="type">Int</span>)</span></span> &#123;</span><br><span class="line">        webViewProgress.progress = newProgress</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Title</span></span><br><span class="line">      <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onReceivedTitle</span><span class="params">(view: <span class="type">WebView</span>?, title: <span class="type">String</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!TextUtils.isEmpty(title)) &#123;</span><br><span class="line">          findViewById&lt;TextView&gt;(R.id.titleTv).text = title</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 加载URL</span></span><br><span class="line">  <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">loadUrl</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">//方式1. 加载一个网页</span></span><br><span class="line">    webView.loadUrl(url)</span><br><span class="line">    <span class="comment">//        //方式2：加载apk包中的html页面</span></span><br><span class="line">    <span class="comment">//        webView.loadUrl("file:///android_asset/test.html")</span></span><br><span class="line">    <span class="comment">//        //方式3：加载手机本地的html页面</span></span><br><span class="line">    <span class="comment">//        webView.loadUrl("content://com.android.htmlfileprovider/sdcard/test.html")</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 注册监听</span></span><br><span class="line">  <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">registerScrollListener</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">//        if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.M) &#123;</span></span><br><span class="line">    <span class="comment">//            webView.setOnScrollChangeListener &#123; _, _, scrollY, _, oldScrollY -&gt;</span></span><br><span class="line">    <span class="comment">//                Log.d(_tag, "scrollY: $scrollY, oldScrollY: $oldScrollY")</span></span><br><span class="line">    <span class="comment">//            &#125;</span></span><br><span class="line">    <span class="comment">//        &#125;</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">val</span> _tag = <span class="string">"WebViewActivity"</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">showToast</span><span class="params">(info: <span class="type">String</span>?)</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> toast = Toast.makeText(<span class="keyword">this</span>, info, Toast.LENGTH_SHORT)</span><br><span class="line">    toast.setGravity(Gravity.CENTER_VERTICAL, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">    toast.show()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="0x01-白屏问题"><a href="#0x01-白屏问题" class="headerlink" title="0x01 白屏问题"></a>0x01 白屏问题</h3><p>情景一：如果访问的页面中要与Javascript交互，则webView必须设置支持Javascript</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> webSettings = webView.settings</span><br><span class="line"><span class="comment">//如果访问的页面中要与Javascript交互，则webView必须设置支持Javascript</span></span><br><span class="line">webSettings.javaScriptEnabled = <span class="literal">true</span></span><br><span class="line">webSettings.javaScriptCanOpenWindowsAutomatically = <span class="literal">true</span> <span class="comment">//支持通过JS打开新窗口</span></span><br></pre></td></tr></table></figure>
+
+<p>情景二：在安卓5.0之后，默认不允许加载http与https混合内容，需要手动设置</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在安卓5.0之后，默认不允许加载http与https混合内容，需要手动设置</span></span><br><span class="line"><span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.LOLLIPOP) &#123;</span><br><span class="line">  webSettings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其他情景： 设置<code>domStorageEnabled</code> 和背景色需要验证，暂时没遇到。</p>
+<h3 id="0x02-卡顿问题"><a href="#0x02-卡顿问题" class="headerlink" title="0x02 卡顿问题"></a>0x02 卡顿问题</h3><p>由于设置了 <code>android:layerType=&quot;software&quot;</code>导致的 webview 卡顿。</p>
+<p>关于三个layerType属性介绍：<a href="https://blog.csdn.net/a345017062/article/details/7478667" target="_blank" rel="noopener">https://blog.csdn.net/a345017062/article/details/7478667</a></p>
+<p>解决：</p>
+<p>开启 Activity 硬件加速 ``android:hardwareAccelerated=”true”<code>, 并且设置 webview 的</code>android:layerType=”none”`。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog/tags/Android/" rel="tag"># Android</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/blog/2020/12/29/%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9Netty/" rel="prev" title="为什么选择Netty">
+      <i class="fa fa-chevron-left"></i> 为什么选择Netty
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/blog/2020/12/20/Gradle%E9%85%8D%E7%BD%AE%E6%9E%84%E5%BB%BA%E5%A4%9AModule%E9%A1%B9%E7%9B%AE/" rel="next" title="Gradle配置构建多Module项目">
+      Gradle配置构建多Module项目 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#WebView开发常遇到的坑"><span class="nav-text">WebView开发常遇到的坑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0x00-常规WebViewActivity"><span class="nav-text">0x00 常规WebViewActivity</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x01-白屏问题"><span class="nav-text">0x01 白屏问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x02-卡顿问题"><span class="nav-text">0x02 卡顿问题</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Dench"
+      src="/blog/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Dench</p>
+  <div class="site-description" itemprop="description">Love & Peace</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/blog/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DenchOpen</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/blog/lib/anime.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/blog/js/utils.js"></script>
+
+<script src="/blog/js/motion.js"></script>
+
+
+<script src="/blog/js/schemes/pisces.js"></script>
+
+
+<script src="/blog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
