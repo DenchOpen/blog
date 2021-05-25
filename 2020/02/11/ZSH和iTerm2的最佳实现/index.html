@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://denchopen.github.io/blog').hostname,
+    root: '/blog/',
+    scheme: 'Gemini',
+    version: '7.7.1',
+    exturl: false,
+    sidebar: {"enable":true,"position":"left","width":280,"display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="最终效果  # ZSH &amp; iTerm2 的最佳实现  0x01 安装 iTerm 2iTerm 2 官网: https:&#x2F;&#x2F;www.iterm2.com&#x2F; 0x02 设置字体安装 powerline 字体, 适配 Agnoster 主题 Powerline Font Github : https:&#x2F;&#x2F;github.com&#x2F;powerline&#x2F;fonts 在iTerm 2 设置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ZSH &amp; iTerm2 的最佳实现">
+<meta property="og:url" content="https://denchopen.github.io/blog/2020/02/11/ZSH%E5%92%8CiTerm2%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E7%8E%B0/index.html">
+<meta property="og:site_name" content="个人小站">
+<meta property="og:description" content="最终效果  # ZSH &amp; iTerm2 的最佳实现  0x01 安装 iTerm 2iTerm 2 官网: https:&#x2F;&#x2F;www.iterm2.com&#x2F; 0x02 设置字体安装 powerline 字体, 适配 Agnoster 主题 Powerline Font Github : https:&#x2F;&#x2F;github.com&#x2F;powerline&#x2F;fonts 在iTerm 2 设置">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://denchopen.github.io/images/1581431679176.jpg">
+<meta property="article:published_time" content="2020-02-11T14:38:24.000Z">
+<meta property="article:modified_time" content="2021-05-25T17:25:06.326Z">
+<meta property="article:author" content="Dench">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="ZSH">
+<meta property="article:tag" content="iTerm2">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://denchopen.github.io/images/1581431679176.jpg">
+
+<link rel="canonical" href="https://denchopen.github.io/blog/2020/02/11/ZSH%E5%92%8CiTerm2%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E7%8E%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>ZSH & iTerm2 的最佳实现 | 个人小站</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">个人小站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Dench's</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/blog/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/blog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/blog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/blog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/blog/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/DenchOpen" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/02/11/ZSH%E5%92%8CiTerm2%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E7%8E%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ZSH & iTerm2 的最佳实现
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-11 22:38:24" itemprop="dateCreated datePublished" datetime="2020-02-11T22:38:24+08:00">2020-02-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-26 01:25:06" itemprop="dateModified" datetime="2021-05-26T01:25:06+08:00">2021-05-26</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="/images/1581431679176.jpg" width=80% height=80%>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">最终效果</div>
+</center>
+# ZSH & iTerm2 的最佳实现
+
+<h2 id="0x01-安装-iTerm-2"><a href="#0x01-安装-iTerm-2" class="headerlink" title="0x01 安装 iTerm 2"></a>0x01 安装 iTerm 2</h2><p><strong>iTerm 2 官网:</strong> <a href="https://www.iterm2.com/" target="_blank" rel="noopener">https://www.iterm2.com/</a></p>
+<h2 id="0x02-设置字体"><a href="#0x02-设置字体" class="headerlink" title="0x02 设置字体"></a>0x02 设置字体</h2><p>安装 <code>powerline</code> 字体, 适配 Agnoster 主题</p>
+<p><strong>Powerline Font Github</strong> : <a href="https://github.com/powerline/fonts" target="_blank" rel="noopener">https://github.com/powerline/fonts</a></p>
+<p>在iTerm 2 设置 <code>powerline</code> 字体，个人喜欢 <code>Source Code Pro for Powerline</code> 。</p>
+<h2 id="0x03-设置颜色方案"><a href="#0x03-设置颜色方案" class="headerlink" title="0x03 设置颜色方案"></a>0x03 设置颜色方案</h2><p><strong>Solarized Github:</strong> <a href="https://github.com/altercation/solarized" target="_blank" rel="noopener">https://github.com/altercation/solarized</a></p>
+<p>在 iTerm 2 已经预安装了 Solarized 配色方案，在 color 配色方案选择 <code>Solarized Dark</code> 。</p>
+<p>完了可以选择一张背景图片，并设置合适的透明度。</p>
+<h2 id="0x04-安装-oh-my-zsh"><a href="#0x04-安装-oh-my-zsh" class="headerlink" title="0x04 安装 oh-my-zsh"></a>0x04 安装 oh-my-zsh</h2><p>mac os 预装了 zsh,切换 shell :</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chsh -s $(which zsh)</span><br></pre></td></tr></table></figure>
+
+<p><strong>oh my zsh 官网:</strong><a href="https://github.com/ohmyzsh/ohmyzsh" target="_blank" rel="noopener">https://github.com/ohmyzsh/ohmyzsh</a></p>
+<p><code>oh-my-zsh</code> 的安装：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> curl</span></span><br><span class="line">sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"</span><br><span class="line"><span class="meta">#</span><span class="bash"> or wget</span></span><br><span class="line">sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"</span><br></pre></td></tr></table></figure>
+
+<p>bash 的环境变量配置文件 <code>~/.bash_profile</code> , 而 zsh 的环境变量配置文件是 <code>~/.zshrc</code>。</p>
+<h2 id="0x05-Agnoster-主题"><a href="#0x05-Agnoster-主题" class="headerlink" title="0x05 Agnoster 主题"></a>0x05 Agnoster 主题</h2><p>oh my zsh 官方为用户提供了上百种主题，在 <code>~/.zshrc</code> 文件中配置主题:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ZSH_THEME="agnoster"</span><br></pre></td></tr></table></figure>
+
+<p><strong>Agnoster 官网:</strong> <a href="https://github.com/agnoster/agnoster-zsh-theme" target="_blank" rel="noopener">https://github.com/agnoster/agnoster-zsh-theme</a></p>
+<ol>
+<li><p>测试字体是否支持</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"\ue0b0 \u00b1 \ue0a0 \u27a6 \u2718 \u26a1 \u2699"</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>路径前缀太长的问题，在 <code>~/.oh-my-zsh/themes</code> 路径下找到 <code>agnoster.zsh-theme</code> 文件，将里面的 <code>build_prompt</code> 下的 <code>prompt_context</code> 字段，注释掉即可。</p>
+</li>
+</ol>
+<h2 id="0x06-oh-my-zsh插件配置"><a href="#0x06-oh-my-zsh插件配置" class="headerlink" title="0x06 oh-my-zsh插件配置"></a>0x06 oh-my-zsh插件配置</h2><p>在 <code>~/.zshrc</code> 文件中配置插件:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plugins&#x3D;(autojump sublime osx zsh-syntax-highlighting git-dw)</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-推荐插件-autojump"><a href="#1-推荐插件-autojump" class="headerlink" title="1. 推荐插件 autojump"></a>1. 推荐插件 autojump</h3><p>j 是 autojump 命令的简写</p>
+<ul>
+<li><code>j</code>: 快速跳转</li>
+<li><code>jo</code>: 快速打开</li>
+</ul>
+<p>ps: 需要安装autojump的mac平台插件配合使用</p>
+<h3 id="2-推荐插件-osx"><a href="#2-推荐插件-osx" class="headerlink" title="2. 推荐插件 osx"></a>2. 推荐插件 osx</h3><ul>
+<li><code>ofd</code>: 用 Finder 打开当前目录</li>
+<li><code>cdf</code>: <code>cd</code> 到当前 Finder 目录</li>
+<li><code>pfd</code>: 打印当前 Finder 路径</li>
+<li><code>pfs</code>: 打印当前 Finder 选择的文件路径</li>
+</ul>
+<h3 id="3-推荐插件git"><a href="#3-推荐插件git" class="headerlink" title="3. 推荐插件git"></a>3. 推荐插件git</h3><ul>
+<li><code>gl</code>: git pull</li>
+<li><code>gs</code>: git status</li>
+<li><code>ga</code>: git add   </li>
+<li><code>gaa</code>: git add –all</li>
+<li><code>gc</code>: git commit</li>
+<li><code>gcm</code>: git commit -m</li>
+<li><code>gp</code>: git push</li>
+<li><code>gf</code>: git fetch</li>
+<li><code>gb</code>: git branch</li>
+<li><code>gba</code>: git branch -a</li>
+<li><code>gbd</code>: git branch -d</li>
+<li><code>gco</code>: git checkout</li>
+<li><code>gcl</code>: git clone –recurse-submodules</li>
+<li><code>gcf</code>: git config –list</li>
+<li><code>gr</code>: git remote</li>
+<li><code>gra</code>: git remote add</li>
+<li><code>grv</code>: git remote -v </li>
+<li><code>grset</code>: git remote set-url</li>
+<li><code>git_current_branch</code>: git_current_branch  </li>
+<li><code>git_current_user_name</code>: user.name  </li>
+<li><code>git_current_user_email</code>: user.email  </li>
+</ul>
+<h3 id="4-推荐插件-sublime"><a href="#4-推荐插件-sublime" class="headerlink" title="4. 推荐插件 sublime"></a>4. 推荐插件 sublime</h3><ul>
+<li><p><code>st</code>: 用 Sublime Text 打开文件</p>
+</li>
+<li><p><code>stt</code>: 用 Sublime Text 打开当前目录</p>
+</li>
+<li><p><code>sst</code>: sudo <code>st</code>，用于编辑系统文件</p>
+</li>
+<li><p><code>find_project</code>: 从当前目录往上(parent directory)查找 sublime, git 工程</p>
+</li>
+<li><p><code>create_project</code>: 创建 sublime 工程</p>
+</li>
+</ul>
+<a id="more"></a>
+
+<h2 id="0x07-自定义插件"><a href="#0x07-自定义插件" class="headerlink" title="0x07 自定义插件"></a>0x07 自定义插件</h2><p>由于 zsh 推荐的插件 <code>git</code> 有一些别名比较难记，所以考虑自定义一个插件 <code>git-dw</code> 。</p>
+<h3 id="1-创建-git-dw-plugin-zsh-文件"><a href="#1-创建-git-dw-plugin-zsh-文件" class="headerlink" title="1. 创建 git-dw.plugin.zsh 文件"></a>1. 创建 <code>git-dw.plugin.zsh</code> 文件</h3><p>在 <code>~/.oh-my-zsh/custom/plugins/</code> 创建 <code>/git-dw/git-dw.plugin.zsh</code> 。</p>
+<h3 id="2-配置别名"><a href="#2-配置别名" class="headerlink" title="2. 配置别名"></a>2. 配置别名</h3><p>编辑 <code>git-dw.plugin.zsh</code> 文件:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Aliases</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"></span><br><span class="line">alias g='git'</span><br><span class="line"></span><br><span class="line">alias ga='git add'</span><br><span class="line">alias gaa='git add --all'</span><br><span class="line"></span><br><span class="line">alias gb='git branch'</span><br><span class="line">alias gba='git branch -a'</span><br><span class="line">alias gbd='git branch -d'</span><br><span class="line">alias gbD='git branch -D'</span><br><span class="line"></span><br><span class="line">alias gc='git commit'</span><br><span class="line">alias gcm='git commit -m'</span><br><span class="line">alias gc!='git commit --amend'</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> gcam=<span class="string">'git commit -a -m'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> gcsm=<span class="string">'git commit -s -m'</span></span></span><br><span class="line"></span><br><span class="line">alias gco='git checkout'</span><br><span class="line">alias gcob='git checkout -b'</span><br><span class="line"></span><br><span class="line">alias gcf='git config --list'</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> gcl=<span class="string">'git clone --recurse-submodules'</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> gclean=<span class="string">'git clean -id'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> gpristine=<span class="string">'git reset --hard &amp;&amp; git clean -dfx'</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">alias gf='git fetch'</span><br><span class="line">alias gfap='git fetch --all --prune'</span><br><span class="line"></span><br><span class="line">alias ggpull='git pull origin "$(git_current_branch)"'</span><br><span class="line">alias ggpush='git push origin "$(git_current_branch)"'</span><br><span class="line"></span><br><span class="line">alias gh='git help'</span><br><span class="line"></span><br><span class="line">alias gl='git pull'</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> glr=<span class="string">'git pull --rebase'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> glrv=<span class="string">'git pull --rebase -v'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> glra=<span class="string">'git pull --rebase --autostash'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> glrav=<span class="string">'git pull --rebase --autostash -v'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> glum=<span class="string">'git pull upstream master'</span></span></span><br><span class="line"></span><br><span class="line">alias gm='git merge'</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> gmom=<span class="string">'git merge origin/master'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> gmt=<span class="string">'git mergetool --no-prompt'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> gmtvim=<span class="string">'git mergetool --no-prompt --tool=vimdiff'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> gmum=<span class="string">'git merge upstream/master'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> gma=<span class="string">'git merge --abort'</span></span></span><br><span class="line"></span><br><span class="line">alias gp='git push'</span><br><span class="line"></span><br><span class="line">alias gr='git remote'</span><br><span class="line">alias grv='git remote -v'</span><br><span class="line">alias gra='git remote add'</span><br><span class="line">alias grmv='git remote rename'</span><br><span class="line">alias grrm='git remote remove'</span><br><span class="line">alias grset='git remote set-url'</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> grb=<span class="string">'git rebase'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> grba=<span class="string">'git rebase --abort'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> grbc=<span class="string">'git rebase --continue'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> grbd=<span class="string">'git rebase develop'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> grbi=<span class="string">'git rebase -i'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> grbm=<span class="string">'git rebase master'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> grbs=<span class="string">'git rebase --skip'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> grev=<span class="string">'git revert'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> grh=<span class="string">'git reset'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> grhh=<span class="string">'git reset --hard'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> groh=<span class="string">'git reset origin/$(git_current_branch) --hard'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> grm=<span class="string">'git rm'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> grmc=<span class="string">'git rm --cached'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> grs=<span class="string">'git restore'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> grss=<span class="string">'git restore --source'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> grt=<span class="string">'cd "$(git rev-parse --show-toplevel || echo .)"'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> gru=<span class="string">'git reset --'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> grup=<span class="string">'git remote update'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> grv=<span class="string">'git remote -v'</span></span></span><br><span class="line"></span><br><span class="line">alias gs='git status'</span><br><span class="line"></span><br><span class="line">alias gst='git stash'</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> gstaa=<span class="string">'git stash apply'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> gstc=<span class="string">'git stash clear'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> gstd=<span class="string">'git stash drop'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> gstl=<span class="string">'git stash list'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> gstp=<span class="string">'git stash pop'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> gsts=<span class="string">'git stash show --text'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> gstall=<span class="string">'git stash --all'</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> gsu=<span class="string">'git submodule update'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> gsw=<span class="string">'git switch'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> gswc=<span class="string">'git switch -c'</span></span></span><br><span class="line"></span><br><span class="line">alias gt='git tag'</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> gts=<span class="string">'git tag -s'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> gtv=<span class="string">'git tag | sort -V'</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-自定义方法"><a href="#3-自定义方法" class="headerlink" title="3. 自定义方法"></a>3. 自定义方法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Pretty <span class="built_in">log</span> messages</span></span><br><span class="line">function _git_log_prettily()&#123;</span><br><span class="line">  if ! [ -z $1 ]; then</span><br><span class="line">    git log --pretty=$1</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line">compdef _git _git_log_prettily=git-log</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-添加-README-md"><a href="#4-添加-README-md" class="headerlink" title="4. 添加 README.md"></a>4. 添加 <code>README.md</code></h3><h3 id="5-插件配置"><a href="#5-插件配置" class="headerlink" title="5. 插件配置"></a>5. 插件配置</h3><p>在 <code>~/.zshrc</code> 文件中应用插件:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plugins=(... git-dw)</span><br></pre></td></tr></table></figure>
+
+<p>现在你重启 shell 就可以看到结果了。</p>
+<h2 id="0x08-配置环境变量"><a href="#0x08-配置环境变量" class="headerlink" title="0x08 配置环境变量"></a>0x08 配置环境变量</h2><p>在 <code>~/.zshrc</code> 文件最顶部添加:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=/Users/**/Library/Android/sdk/platform-tools:$PATH</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog/tags/Android/" rel="tag"># Android</a>
+              <a href="/blog/tags/ZSH/" rel="tag"># ZSH</a>
+              <a href="/blog/tags/iTerm2/" rel="tag"># iTerm2</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/blog/2020/02/14/vim%E5%85%A5%E9%97%A8/" rel="prev" title="Vim 入门">
+      <i class="fa fa-chevron-left"></i> Vim 入门
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/blog/2020/02/10/Homebrew%E5%85%A5%E9%97%A8/" rel="next" title="Homebrew 入门">
+      Homebrew 入门 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-安装-iTerm-2"><span class="nav-text">0x01 安装 iTerm 2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-设置字体"><span class="nav-text">0x02 设置字体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-设置颜色方案"><span class="nav-text">0x03 设置颜色方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-安装-oh-my-zsh"><span class="nav-text">0x04 安装 oh-my-zsh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-Agnoster-主题"><span class="nav-text">0x05 Agnoster 主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-oh-my-zsh插件配置"><span class="nav-text">0x06 oh-my-zsh插件配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-推荐插件-autojump"><span class="nav-text">1. 推荐插件 autojump</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-推荐插件-osx"><span class="nav-text">2. 推荐插件 osx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-推荐插件git"><span class="nav-text">3. 推荐插件git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-推荐插件-sublime"><span class="nav-text">4. 推荐插件 sublime</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-自定义插件"><span class="nav-text">0x07 自定义插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-创建-git-dw-plugin-zsh-文件"><span class="nav-text">1. 创建 git-dw.plugin.zsh 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-配置别名"><span class="nav-text">2. 配置别名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-自定义方法"><span class="nav-text">3. 自定义方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-添加-README-md"><span class="nav-text">4. 添加 README.md</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-插件配置"><span class="nav-text">5. 插件配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x08-配置环境变量"><span class="nav-text">0x08 配置环境变量</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Dench"
+      src="/blog/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Dench</p>
+  <div class="site-description" itemprop="description">Love & Peace</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/blog/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DenchOpen</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/blog/lib/anime.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/blog/js/utils.js"></script>
+
+<script src="/blog/js/motion.js"></script>
+
+
+<script src="/blog/js/schemes/pisces.js"></script>
+
+
+<script src="/blog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
