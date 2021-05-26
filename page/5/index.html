@@ -423,7 +423,7 @@ A   输入欲添加文本   `&lt;ESC&gt;`   在一行后添加文本</code></pre
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-26 01:25:06" itemprop="dateModified" datetime="2021-05-26T01:25:06+08:00">2021-05-26</time>
+                <time title="修改时间：2021-05-27 02:03:13" itemprop="dateModified" datetime="2021-05-27T02:03:13+08:00">2021-05-27</time>
               </span>
 
           
@@ -437,16 +437,16 @@ A   输入欲添加文本   `&lt;ESC&gt;`   在一行后添加文本</code></pre
     <div class="post-body" itemprop="articleBody">
 
       
-          <center>
+          <h1 id="ZSH-amp-iTerm2-的最佳实现"><a href="#ZSH-amp-iTerm2-的最佳实现" class="headerlink" title="ZSH &amp; iTerm2 的最佳实现"></a>ZSH &amp; iTerm2 的最佳实现</h1><center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="/images/1581431679176.jpg" width=80% height=80%>
-    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-block;
-    color: #999;
-    padding: 2px;">最终效果</div>
+    src="https://i.loli.net/2021/05/27/o984GidD5uYRZke.jpg" style="zoom:80%">
+    <div style="color:orange;  border-bottom: 1px solid #d9d9d9;
+    display: inline-block; color: #999; padding: 2px;">最终效果</div>
 </center>
-# ZSH & iTerm2 的最佳实现
+
+
+
 
 <h2 id="0x01-安装-iTerm-2"><a href="#0x01-安装-iTerm-2" class="headerlink" title="0x01 安装 iTerm 2"></a>0x01 安装 iTerm 2</h2><p><strong>iTerm 2 官网:</strong> <a href="https://www.iterm2.com/" target="_blank" rel="noopener">https://www.iterm2.com/</a></p>
 <h2 id="0x02-设置字体"><a href="#0x02-设置字体" class="headerlink" title="0x02 设置字体"></a>0x02 设置字体</h2><p>安装 <code>powerline</code> 字体, 适配 Agnoster 主题</p>
@@ -463,7 +463,7 @@ A   输入欲添加文本   `&lt;ESC&gt;`   在一行后添加文本</code></pre
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> curl</span></span><br><span class="line">sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"</span><br><span class="line"><span class="meta">#</span><span class="bash"> or wget</span></span><br><span class="line">sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"</span><br></pre></td></tr></table></figure>
 
 <p>bash 的环境变量配置文件 <code>~/.bash_profile</code> , 而 zsh 的环境变量配置文件是 <code>~/.zshrc</code>。</p>
-<h2 id="0x05-Agnoster-主题"><a href="#0x05-Agnoster-主题" class="headerlink" title="0x05 Agnoster 主题"></a>0x05 Agnoster 主题</h2><p>oh my zsh 官方为用户提供了上百种主题，在 <code>~/.zshrc</code> 文件中配置主题:</p>
+<h2 id="0x05-agnoster-主题"><a href="#0x05-agnoster-主题" class="headerlink" title="0x05 agnoster 主题"></a>0x05 agnoster 主题</h2><p>oh my zsh 官方为用户提供了上百种主题，在 <code>~/.zshrc</code> 文件中配置主题:</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ZSH_THEME="agnoster"</span><br></pre></td></tr></table></figure>
 
 <p><strong>Agnoster 官网:</strong> <a href="https://github.com/agnoster/agnoster-zsh-theme" target="_blank" rel="noopener">https://github.com/agnoster/agnoster-zsh-theme</a></p>
@@ -489,7 +489,7 @@ A   输入欲添加文本   `&lt;ESC&gt;`   在一行后添加文本</code></pre
 <li><code>pfd</code>: 打印当前 Finder 路径</li>
 <li><code>pfs</code>: 打印当前 Finder 选择的文件路径</li>
 </ul>
-<h3 id="3-推荐插件git"><a href="#3-推荐插件git" class="headerlink" title="3. 推荐插件git"></a>3. 推荐插件git</h3><ul>
+<h3 id="3-推荐插件-git"><a href="#3-推荐插件-git" class="headerlink" title="3. 推荐插件 git"></a>3. 推荐插件 git</h3><ul>
 <li><code>gl</code>: git pull</li>
 <li><code>gs</code>: git status</li>
 <li><code>ga</code>: git add   </li>
@@ -497,20 +497,10 @@ A   输入欲添加文本   `&lt;ESC&gt;`   在一行后添加文本</code></pre
 <li><code>gc</code>: git commit</li>
 <li><code>gcm</code>: git commit -m</li>
 <li><code>gp</code>: git push</li>
-<li><code>gf</code>: git fetch</li>
 <li><code>gb</code>: git branch</li>
 <li><code>gba</code>: git branch -a</li>
 <li><code>gbd</code>: git branch -d</li>
 <li><code>gco</code>: git checkout</li>
-<li><code>gcl</code>: git clone –recurse-submodules</li>
-<li><code>gcf</code>: git config –list</li>
-<li><code>gr</code>: git remote</li>
-<li><code>gra</code>: git remote add</li>
-<li><code>grv</code>: git remote -v </li>
-<li><code>grset</code>: git remote set-url</li>
-<li><code>git_current_branch</code>: git_current_branch  </li>
-<li><code>git_current_user_name</code>: user.name  </li>
-<li><code>git_current_user_email</code>: user.email  </li>
 </ul>
 <h3 id="4-推荐插件-sublime"><a href="#4-推荐插件-sublime" class="headerlink" title="4. 推荐插件 sublime"></a>4. 推荐插件 sublime</h3><ul>
 <li><p><code>st</code>: 用 Sublime Text 打开文件</p>
