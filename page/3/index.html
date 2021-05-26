@@ -190,6 +190,85 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/08/27/Implementation%E5%92%8Capi/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2020/08/27/Implementation%E5%92%8Capi/" class="post-title-link" itemprop="url">implementation compileOnly和api</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-27 08:31:44" itemprop="dateCreated datePublished" datetime="2020-08-27T08:31:44+08:00">2020-08-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-20 05:36:47" itemprop="dateModified" datetime="2020-12-20T05:36:47+08:00">2020-12-20</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="implementation和api"><a href="#implementation和api" class="headerlink" title="implementation和api"></a>implementation和api</h3><p><code>implementation</code>和<code>api</code>是取代之前的compile的，其中<code>api</code>和<code>compile</code>是一样的效果，<code>implementation</code>有所不同，通过<code>implementation</code>依赖的库只能自己库本身访问，举个例子，A依赖B，B依赖C，如果B依赖C是使用的<code>implementation</code>依赖，那么在A中是访问不到C中的方法的，如果需要访问，请使用<code>api</code>依赖</p>
+<h3 id="compile-only"><a href="#compile-only" class="headerlink" title="compile only"></a>compile only</h3><p><code>compile only</code>和<code>provided</code>效果是一样的，只在编译的时候有效， 不参与打包</p>
+<h3 id="runtime-only"><a href="#runtime-only" class="headerlink" title="runtime only"></a>runtime only</h3><p><code>runtimeOnly</code> 和 <code>apk</code>效果一样，只在打包的时候有效，编译不参与</p>
+<h3 id="跟编译环境相关"><a href="#跟编译环境相关" class="headerlink" title="跟编译环境相关"></a>跟编译环境相关</h3><ul>
+<li>test implementation</li>
+</ul>
+<p><code>testImplementation</code>和<code>testCompile</code>效果一样，在单元测试和打包测试apk的时候有效</p>
+<ul>
+<li>debug implementation</li>
+</ul>
+<p><code>debugImplementation</code>和<code>debugCompile</code>效果相同， 在<code>debug</code>模式下有效</p>
+<ul>
+<li>release implementation</li>
+</ul>
+<p><code>releaseImplementation</code>和<code>releaseCompile</code>效果相同，只在<code>release</code>模式和打包release包情况下有效</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/08/23/StatusBarHelper/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -553,85 +632,11 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/08/12/%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0@Java/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2020/08/12/%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0@Java/" class="post-title-link" itemprop="url">常用算法实现 Java版</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-08-12 01:09:31" itemprop="dateCreated datePublished" datetime="2020-08-12T01:09:31+08:00">2020-08-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-27 01:41:45" itemprop="dateModified" datetime="2021-05-27T01:41:45+08:00">2021-05-27</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="常用算法实现-Java版"><a href="#常用算法实现-Java版" class="headerlink" title="常用算法实现 Java版"></a>常用算法实现 Java版</h1><h2 id="一-常用排序算法"><a href="#一-常用排序算法" class="headerlink" title="一. 常用排序算法"></a>一. 常用排序算法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java 的进制数表示</span></span><br><span class="line"><span class="keyword">int</span> a10 = <span class="number">99</span>;</span><br><span class="line"><span class="keyword">int</span> a2 = <span class="number">0b101</span>;</span><br><span class="line"><span class="keyword">int</span> a8 = <span class="number">0143</span>;</span><br><span class="line"><span class="keyword">int</span> a16 = <span class="number">0x63</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="0x01-冒泡排序"><a href="#0x01-冒泡排序" class="headerlink" title="0x01 冒泡排序"></a>0x01 冒泡排序</h3><p>原理<br>比较相邻的元素。如果第一个比第二个大,就交换他们两个。 对每一对相邻元素做同样的工作,从开始第一对到结尾的最后一对。在这一点,最后的元素应该会是最大的数。 针对所有的元素重复以上的步骤,除了最后一个。 持续每次对越来越少的元素重复上面的步骤,直到没有任何一对数字需要比较。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/blog/2020/08/12/%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0@Java/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/blog/">1</a><a class="page-number" href="/blog/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/blog/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/6/">6</a><a class="extend next" rel="next" href="/blog/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/blog/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/blog/">1</a><a class="page-number" href="/blog/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/blog/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/7/">7</a><a class="extend next" rel="next" href="/blog/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -699,7 +704,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -712,7 +717,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/blog/tags/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -758,6 +763,7 @@
   </div>
 
   
+  <script size="300" alpha="0.6" zIndex="-1" src="/blog/lib/canvas-ribbon/canvas-ribbon.js"></script>
   <script src="/blog/lib/anime.min.js"></script>
   <script src="/blog/lib/velocity/velocity.min.js"></script>
   <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
@@ -773,6 +779,10 @@
 <script src="/blog/js/next-boot.js"></script>
 
 
+  <script defer src="/blog/lib/three/three.min.js"></script>
+    <script defer src="/blog/lib/three/three-waves.min.js"></script>
+    <script defer src="/blog/lib/three/canvas_lines.min.js"></script>
+    <script defer src="/blog/lib/three/canvas_sphere.min.js"></script>
 
 
   
