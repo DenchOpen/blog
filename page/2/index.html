@@ -190,6 +190,80 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/06/17/Problems%E4%B8%93%E9%A2%98%E4%B9%8BRecyclerView/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2021/06/17/Problems%E4%B8%93%E9%A2%98%E4%B9%8BRecyclerView/" class="post-title-link" itemprop="url">Problems专题：RecyclerView</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-17 00:00:00" itemprop="dateCreated datePublished" datetime="2021-06-17T00:00:00+08:00">2021-06-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-06-25 23:33:38" itemprop="dateModified" datetime="2021-06-25T23:33:38+08:00">2021-06-25</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Problems专题：RecyclerView"><a href="#Problems专题：RecyclerView" class="headerlink" title="Problems专题：RecyclerView"></a>Problems专题：RecyclerView</h2><h3 id="0x01-Called-attach-on-a-child-which-is-not-detached"><a href="#0x01-Called-attach-on-a-child-which-is-not-detached" class="headerlink" title="0x01 Called attach on a child which is not detached"></a>0x01 Called attach on a child which is not detached</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">java.lang.IllegalArgumentException: Called attach on a child which is not detached: BaseViewHolder&#123;2b241e1 position=12 id=-1, oldPos=-1, pLpos:-1&#125; androidx.recyclerview.widget.RecyclerView&#123;afecb06 VFED..... ......ID 0,0-1080,2055 #7f09236e app:id/recycler_view_xxx&#125;, adapter:com.xxxx.adapter.XxxAdapter@cfc75c7, layout:androidx.recyclerview.widget.LinearLayoutManager@24af7f4, context:com.xxxx.XxxActivity@1ed75e2</span><br><span class="line">	at androidx.recyclerview.widget.RecyclerView$5.attachViewToParent(RecyclerView.java:917)</span><br><span class="line">	at androidx.recyclerview.widget.ChildHelper.attachViewToParent(ChildHelper.java:239)</span><br><span class="line">	at androidx.recyclerview.widget.RecyclerView.addAnimatingView(RecyclerView.java:1438)</span><br><span class="line">	at androidx.recyclerview.widget.RecyclerView.animateDisappearance(RecyclerView.java:4377)</span><br><span class="line">	at androidx.recyclerview.widget.RecyclerView$4.processDisappeared(RecyclerView.java:616)</span><br><span class="line">	at androidx.recyclerview.widget.ViewInfoStore.process(ViewInfoStore.java:242)</span><br><span class="line">	at androidx.recyclerview.widget.RecyclerView.dispatchLayoutStep3(RecyclerView.java:4210)</span><br><span class="line">	at androidx.recyclerview.widget.RecyclerView.dispatchLayout(RecyclerView.java:3864)</span><br><span class="line">	at androidx.recyclerview.widget.RecyclerView.onLayout(RecyclerView.java:4410)</span><br><span class="line">	at android.view.View.layout(View.java:22213)</span><br><span class="line">	at android.view.ViewGroup.layout(ViewGroup.java:6340)</span><br><span class="line">	at android.widget.RelativeLayout.onLayout(RelativeLayout.java:1131)</span><br><span class="line">	at android.view.View.layout(View.java:22213)</span><br><span class="line">	at android.view.ViewGroup.layout(ViewGroup.java:6340)</span><br><span class="line">	at androidx.viewpager.widget.ViewPager.onLayout(ViewPager.java:1775)</span><br><span class="line">	at android.view.View.layout(View.java:22213)</span><br><span class="line">	at android.view.ViewGroup.layout(ViewGroup.java:6340)</span><br><span class="line">	at android.widget.LinearLayout.setChildFrame(LinearLayout.java:1829)</span><br><span class="line">	at android.widget.LinearLayout.layoutVertical(LinearLayout.java:1673)</span><br><span class="line">	at android.widget.LinearLayout.onLayout(LinearLayout.java:1582)</span><br><span class="line">	at android.view.View.layout(View.java:22213)</span><br><span class="line">	at android.view.ViewGroup.layout(ViewGroup.java:6340)</span><br><span class="line">	at android.widget.RelativeLayout.onLayout(RelativeLayout.java:1131)</span><br><span class="line">	at android.view.View.layout(View.java:22213)</span><br><span class="line">	at android.view.ViewGroup.layout(ViewGroup.java:6340)</span><br><span class="line">	at android.widget.FrameLayout.layoutChildren(FrameLayout.java:332)</span><br><span class="line">	at android.widget.FrameLayout.onLayout(FrameLayout.java:270)</span><br><span class="line">	at android.view.View.layout(View.java:22213)</span><br><span class="line">	at android.view.ViewGroup.layout(ViewGroup.java:6340)</span><br><span class="line">	at android.widget.LinearLayout.setChildFrame(LinearLayout.java:1829)</span><br><span class="line">	at android.widget.LinearLayout.layoutVertical(LinearLayout.java:1673)</span><br><span class="line">	at android.widget.LinearLayout.onLayout(LinearLayout.java:1582)</span><br><span class="line">	at android.view.View.layout(View.java:22213)</span><br><span class="line">	at android.view.ViewGroup.layout(ViewGroup.java:6340)</span><br><span class="line">	at android.widget.FrameLayout.layoutChildren(FrameLayout.java:332)</span><br><span class="line">	at android.widget.FrameLayout.onLayout(FrameLayout.java:270)</span><br><span class="line">	at android.view.View.layout(View.java:22213)</span><br><span class="line">	at android.view.ViewGroup.layout(ViewGroup.java:6340)</span><br><span class="line">	at android.widget.LinearLayout.setChildFrame(LinearLayout.java:1829)</span><br><span class="line">	at android.widget.LinearLayout.layoutVertical(LinearLayout.java:1673)</span><br><span class="line">	at android.widget.LinearLayout.onLayout(LinearLayout.java:1582)</span><br><span class="line">	at android.view.View.layout(View.java:22213)</span><br><span class="line">	at android.view.ViewGroup.layout(ViewGroup.java:6340)</span><br><span class="line">	at android.widget.FrameLayout.layoutChildren(FrameLayout.java:332)</span><br><span class="line">	at android.widget.FrameLayout.onLayout(FrameLayout.java:270)</span><br><span class="line">	at com.android.internal.policy.DecorView.onLayout(DecorView.java:905)</span><br><span class="line">	at android.view.View.layout(View.java:22213)</span><br><span class="line">	at android.view.ViewGroup.layout(ViewGroup.java:6340)</span><br><span class="line">	at android.view.ViewRootImpl.performLayout(ViewRootImpl.java:3286)</span><br><span class="line">	at android.view.ViewRootImpl.performTraversals(ViewRootImpl.java:2757)</span><br><span class="line">	at android.view.ViewRootImpl.doTraversal(ViewRootImpl.java:1865)</span><br><span class="line">	at android.view.ViewRootImpl$TraversalRunnable.run(ViewRootImpl.java:7933)</span><br><span class="line">	at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1018)</span><br><span class="line">	at android.view.Choreographer.doCallbacks(Choreographer.java:837)</span><br><span class="line">	at android.view.Choreographer.doFrame(Choreographer.java:767)</span><br><span class="line">	at android.view.Choreographer$FrameDisplayEventReceiver.run(Choreographer.java:1003)</span><br><span class="line">	at android.os.Handler.handleCallback(Handler.java:883)</span><br><span class="line">	at android.os.Handler.dispatchMessage(Handler.java:100)</span><br><span class="line">	at android.os.Looper.loop(Looper.java:230)</span><br><span class="line">	at android.app.ActivityThread.main(ActivityThread.java:7951)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Native Method)</span><br><span class="line">	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:526)</span><br><span class="line">	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1034)</span><br></pre></td></tr></table></figure>
+
+<p><strong>问题分析</strong></p>
+<p>对同一个 position 位置同时进行<code>notifyItemRemoved(position)</code> 和 <code>notifyItemInserted(position)</code> 操作导致。</p>
+<p><strong>解决方案</strong></p>
+<p>避免同时对同一个位置先 notifyItemRemoved 再 notifyItemInserted，使用 notifyItemChanged。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adapter?.notifyItemChanged(position)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="0x02-暂无"><a href="#0x02-暂无" class="headerlink" title="0x02 暂无"></a>0x02 暂无</h3>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/06/17/RecyclerView%E7%9A%84%E5%87%A0%E7%A7%8DDecoration/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -536,72 +610,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/05/19/BottomFragment/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2021/05/19/BottomFragment/" class="post-title-link" itemprop="url">BottomFragment</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-19 02:16:30" itemprop="dateCreated datePublished" datetime="2021-05-19T02:16:30+08:00">2021-05-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-21 23:09:32" itemprop="dateModified" datetime="2021-05-21T23:09:32+08:00">2021-05-21</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="底部弹出控件-Fragment-实现"><a href="#底部弹出控件-Fragment-实现" class="headerlink" title="底部弹出控件 - Fragment 实现"></a>底部弹出控件 - Fragment 实现</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> android.os.Bundle</span><br><span class="line"><span class="keyword">import</span> android.util.Log</span><br><span class="line"><span class="keyword">import</span> android.view.LayoutInflater</span><br><span class="line"><span class="keyword">import</span> android.view.View</span><br><span class="line"><span class="keyword">import</span> android.view.ViewGroup</span><br><span class="line"><span class="keyword">import</span> androidx.fragment.app.Fragment</span><br><span class="line"><span class="keyword">import</span> androidx.fragment.app.FragmentManager</span><br><span class="line"><span class="keyword">import</span> com.dench.baselib.R</span><br><span class="line"><span class="keyword">import</span> com.dench.baselib.databinding.FragmentBottomBinding</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BottomFragment</span> : <span class="type">Fragment</span></span>() &#123;</span><br><span class="line">    <span class="keyword">companion</span> <span class="keyword">object</span> &#123;</span><br><span class="line">        <span class="function"><span class="keyword">fun</span> <span class="title">start</span><span class="params">(fm: <span class="type">FragmentManager</span>, fragment: <span class="type">Fragment</span>)</span></span>: BottomFragment &#123;</span><br><span class="line">            <span class="keyword">val</span> bottomFragment = BottomFragment().apply &#123;</span><br><span class="line">                setFragment(fragment)</span><br><span class="line">            &#125;</span><br><span class="line">            fm.beginTransaction()</span><br><span class="line">                .setCustomAnimations(</span><br><span class="line">                    R.anim.fragment_bottom_enter,</span><br><span class="line">                    <span class="number">0</span>,</span><br><span class="line">                    <span class="number">0</span>,</span><br><span class="line">                    R.anim.fragment_bottom_exit</span><br><span class="line">                )</span><br><span class="line">                .add(android.R.id.content, bottomFragment)</span><br><span class="line">                .addToBackStack(<span class="literal">null</span>)</span><br><span class="line">                .commitAllowingStateLoss()</span><br><span class="line">            <span class="keyword">return</span> bottomFragment</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> fragment: Fragment</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">setFragment</span><span class="params">(fragment: <span class="type">Fragment</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.fragment = fragment</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> binding: FragmentBottomBinding</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> TAG = <span class="string">"BottomFragment"</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreateView</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        inflater: <span class="type">LayoutInflater</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">        container: <span class="type">ViewGroup</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">        savedInstanceState: <span class="type">Bundle</span>?</span></span></span><br><span class="line"><span class="function"><span class="params">    )</span></span>: View? &#123;</span><br><span class="line">        binding = FragmentBottomBinding.inflate(inflater, container, <span class="literal">false</span>)</span><br><span class="line">        <span class="keyword">return</span> binding.root</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onViewCreated</span><span class="params">(view: <span class="type">View</span>, savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onViewCreated(view, savedInstanceState)</span><br><span class="line">        binding.run &#123;</span><br><span class="line">            binding.bottomFragmentRl.setOnClickListener(View.OnClickListener &#123;</span><br><span class="line">                Log.d(TAG, <span class="string">"bottom root view click."</span>)</span><br><span class="line">                dismissSelf()</span><br><span class="line">            &#125;)</span><br><span class="line"></span><br><span class="line">            <span class="comment">/** add fragment */</span></span><br><span class="line">            childFragmentManager.beginTransaction()</span><br><span class="line">                .add(R.id.container, fragment)</span><br><span class="line">                .commitAllowingStateLoss()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">dismissSelf</span><span class="params">()</span></span> &#123;</span><br><span class="line">        parentFragmentManager.popBackStack()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -674,7 +682,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-count">46</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
