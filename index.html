@@ -190,6 +190,143 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/09/26/Android%E4%B8%93%E6%A0%8F-SmartRefreshLayout/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2021/09/26/Android%E4%B8%93%E6%A0%8F-SmartRefreshLayout/" class="post-title-link" itemprop="url">Android专栏-SmartRefreshLayout</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-26 21:16:30" itemprop="dateCreated datePublished" datetime="2021-09-26T21:16:30+08:00">2021-09-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-28 09:10:12" itemprop="dateModified" datetime="2021-09-28T09:10:12+08:00">2021-09-28</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Android专栏-SmartRefreshLayout"><a href="#Android专栏-SmartRefreshLayout" class="headerlink" title="Android专栏-SmartRefreshLayout"></a>Android专栏-SmartRefreshLayout</h2><p><code>SmartRefreshLayout</code> 嵌套 <code>ViewPager2</code> 上拉加载更多，在 <code>finishLoadMore()</code> 方法之后，底部加载 Loading 位置会多出一段空白不消失。</p>
+<p>解决方案：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smartRefreshLayout.setEnableScrollContentWhenLoaded(<span class="literal">false</span>)</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/09/13/Gson%E6%95%B0%E6%8D%AE%E8%A7%A3%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2021/09/13/Gson%E6%95%B0%E6%8D%AE%E8%A7%A3%E6%9E%90/" class="post-title-link" itemprop="url">Gson 数据解析</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-13 20:16:30" itemprop="dateCreated datePublished" datetime="2021-09-13T20:16:30+08:00">2021-09-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-28 09:10:12" itemprop="dateModified" datetime="2021-09-28T09:10:12+08:00">2021-09-28</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Gson-数据解析"><a href="#Gson-数据解析" class="headerlink" title="Gson 数据解析"></a>Gson 数据解析</h2><h3 id="Kotlin-使用Gson-库解析-data-class-对象黄金法则："><a href="#Kotlin-使用Gson-库解析-data-class-对象黄金法则：" class="headerlink" title="Kotlin 使用Gson 库解析 data class 对象黄金法则："></a>Kotlin 使用Gson 库解析 data class 对象黄金法则：</h3><p>1、 String 全部是可空类型 String?</p>
+<p>2、 需要使用默认值，则全部字段都必须给予默认值，以满足kotlin对象有空的构造函数</p>
+<h3 id="手动解析Gson基础字段"><a href="#手动解析Gson基础字段" class="headerlink" title="手动解析Gson基础字段"></a>手动解析Gson基础字段</h3><p>1、msg 可空String解析 <code>jsonReader.peek() == JsonToken.NULL</code></p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.google.gson.Gson</span><br><span class="line"><span class="keyword">import</span> com.google.gson.JsonSyntaxException</span><br><span class="line"><span class="keyword">import</span> com.google.gson.TypeAdapter</span><br><span class="line"><span class="keyword">import</span> com.google.gson.reflect.TypeToken</span><br><span class="line"><span class="keyword">import</span> com.google.gson.stream.JsonReader</span><br><span class="line"><span class="keyword">import</span> com.google.gson.stream.JsonToken</span><br><span class="line"><span class="keyword">import</span> okhttp3.ResponseBody</span><br><span class="line"><span class="keyword">import</span> retrofit2.Converter</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.ParameterizedType</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Type</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ResponseBodyConverter</span></span>(<span class="keyword">val</span> gson: Gson, <span class="keyword">val</span> type: Type) :</span><br><span class="line">    Converter&lt;ResponseBody, BaseResponse&lt;Any&gt;&gt; &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">convert</span><span class="params">(value: <span class="type">ResponseBody</span>)</span></span>: BaseResponse&lt;Any&gt; &#123;</span><br><span class="line">        <span class="keyword">val</span> dataType = GenericsUtils.getParameterUpperBound(</span><br><span class="line">            <span class="number">0</span>,</span><br><span class="line">            type <span class="keyword">as</span> ParameterizedType</span><br><span class="line">        )</span><br><span class="line">        <span class="keyword">val</span> baseResponse = BaseResponse&lt;Any&gt;()</span><br><span class="line">        <span class="keyword">val</span> jsonReader = JsonReader(value.charStream())</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            jsonReader.beginObject()</span><br><span class="line">            <span class="keyword">while</span> (jsonReader.hasNext()) &#123;</span><br><span class="line">                <span class="keyword">val</span> name: String = jsonReader.nextName()</span><br><span class="line">                <span class="keyword">when</span> (name) &#123;</span><br><span class="line">                    <span class="string">"code"</span> -&gt; &#123;</span><br><span class="line">                        baseResponse.code = jsonReader.nextString()</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="string">"msg"</span> -&gt; &#123;</span><br><span class="line">                        <span class="comment">// this works, but do not do this.</span></span><br><span class="line">                        <span class="keyword">if</span> (jsonReader.peek() == JsonToken.NULL) &#123;</span><br><span class="line">                            jsonReader.nextNull()</span><br><span class="line">                            baseResponse.msg = <span class="literal">null</span></span><br><span class="line">                        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                            baseResponse.msg = jsonReader.nextString()</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="string">"data"</span> -&gt; &#123;</span><br><span class="line">                        <span class="keyword">val</span> mapped: TypeAdapter&lt;*&gt;? = gson.getAdapter(TypeToken.<span class="keyword">get</span>(dataType))</span><br><span class="line">                        baseResponse.<span class="keyword">data</span> = mapped?.read(jsonReader)</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span> -&gt; &#123;</span><br><span class="line">                        jsonReader.skipValue()</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (e: IllegalStateException) &#123;</span><br><span class="line">            <span class="keyword">throw</span> JsonSyntaxException(e)</span><br><span class="line">        &#125; <span class="keyword">catch</span> (e: IllegalAccessException) &#123;</span><br><span class="line">            <span class="keyword">throw</span> AssertionError(e)</span><br><span class="line">        &#125;</span><br><span class="line">        jsonReader.endObject()</span><br><span class="line">        <span class="keyword">return</span> baseResponse</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/09/09/%E5%A4%A7%E9%87%8F%E6%96%87%E6%9C%AC%E7%9A%84%E6%B5%8F%E8%A7%88%E8%BF%9B%E5%BA%A6Rate/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -418,7 +555,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-07-02 22:33:44" itemprop="dateModified" datetime="2021-07-02T22:33:44+08:00">2021-07-02</time>
+                <time title="修改时间：2021-09-28 09:10:12" itemprop="dateModified" datetime="2021-09-28T09:10:12+08:00">2021-09-28</time>
               </span>
 
           
@@ -454,173 +591,8 @@
 <p>重启 adb 服务</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> adb <span class="built_in">kill</span>-server</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> adb start-server</span></span><br></pre></td></tr></table></figure>
 
+<h3 id="0x03-真机偶现能安装apk但是Logcat无法查看log"><a href="#0x03-真机偶现能安装apk但是Logcat无法查看log" class="headerlink" title="0x03 真机偶现能安装apk但是Logcat无法查看log"></a>0x03 真机偶现能安装apk但是Logcat无法查看log</h3><p>即使重启Android studio，重启adb服务都无法解决。最后通过重启手机搞定</p>
 
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/06/20/Problems%E4%B8%93%E9%A2%98%E4%B9%8BViewPager2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2021/06/20/Problems%E4%B8%93%E9%A2%98%E4%B9%8BViewPager2/" class="post-title-link" itemprop="url">Problems专题：ViewPager2</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-06-20 00:00:00" itemprop="dateCreated datePublished" datetime="2021-06-20T00:00:00+08:00">2021-06-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-09 22:49:29" itemprop="dateModified" datetime="2021-09-09T22:49:29+08:00">2021-09-09</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="ViewPager2"><a href="#ViewPager2" class="headerlink" title="ViewPager2"></a>ViewPager2</h2><h3 id="0x01-FragmentManager-is-already-executing-transactions"><a href="#0x01-FragmentManager-is-already-executing-transactions" class="headerlink" title="0x01 FragmentManager is already executing transactions"></a>0x01 FragmentManager is already executing transactions</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">java.lang.IllegalStateException: FragmentManager is already executing transactions</span><br><span class="line">	at androidx.fragment.app.FragmentManager.ensureExecReady(FragmentManager.java:1778)</span><br><span class="line">	at androidx.fragment.app.FragmentManager.execSingleAction(FragmentManager.java:1814)</span><br><span class="line">	at androidx.fragment.app.BackStackRecord.commitNow(BackStackRecord.java:297)</span><br><span class="line"></span><br><span class="line">	at androidx.viewpager2.adapter.FragmentStateAdapter.removeFragment(FragmentStateAdapter.java:464)</span><br><span class="line">	at androidx.viewpager2.adapter.FragmentStateAdapter.gcFragments(FragmentStateAdapter.java:228)</span><br><span class="line">	at androidx.viewpager2.adapter.FragmentStateAdapter.restoreState(FragmentStateAdapter.java:569)</span><br><span class="line">	at androidx.viewpager2.widget.ViewPager2.restorePendingState(ViewPager2.java:350)</span><br><span class="line">	at androidx.viewpager2.widget.ViewPager2.dispatchRestoreInstanceState(ViewPager2.java:375)</span><br><span class="line"></span><br><span class="line">	at android.view.ViewGroup.dispatchRestoreInstanceState(ViewGroup.java:3829)</span><br><span class="line">	at android.view.ViewGroup.dispatchRestoreInstanceState(ViewGroup.java:3829)</span><br><span class="line">	at android.view.ViewGroup.dispatchRestoreInstanceState(ViewGroup.java:3829)</span><br><span class="line">	at android.view.ViewGroup.dispatchRestoreInstanceState(ViewGroup.java:3829)</span><br><span class="line">	at android.view.ViewGroup.dispatchRestoreInstanceState(ViewGroup.java:3829)</span><br><span class="line"></span><br><span class="line">	at android.view.View.restoreHierarchyState(View.java:18613)</span><br><span class="line"></span><br><span class="line">	at androidx.fragment.app.Fragment.restoreViewState(Fragment.java:573)</span><br><span class="line">	at androidx.fragment.app.FragmentStateManager.restoreViewState(FragmentStateManager.java:356)</span><br><span class="line">	at androidx.fragment.app.FragmentManager.moveToState(FragmentManager.java:1189)</span><br><span class="line">	at androidx.fragment.app.FragmentManager.moveToState(FragmentManager.java:1356)</span><br><span class="line">	at androidx.fragment.app.FragmentManager.moveFragmentToExpectedState(FragmentManager.java:1434)</span><br><span class="line">	at androidx.fragment.app.FragmentManager.moveToState(FragmentManager.java:1497)</span><br><span class="line">	at androidx.fragment.app.FragmentManager.dispatchStateChange(FragmentManager.java:2625)</span><br><span class="line">	at androidx.fragment.app.FragmentManager.dispatchActivityCreated(FragmentManager.java:2577)</span><br><span class="line"></span><br><span class="line">	at androidx.fragment.app.FragmentController.dispatchActivityCreated(FragmentController.java:247)</span><br><span class="line"></span><br><span class="line">	at androidx.fragment.app.FragmentActivity.onStart(FragmentActivity.java:541)</span><br><span class="line">	at androidx.appcompat.app.AppCompatActivity.onStart(AppCompatActivity.java:210)</span><br><span class="line">	at android.app.Instrumentation.callActivityOnStart(Instrumentation.java:1392)</span><br><span class="line">	at android.app.Activity.performStart(Activity.java:7260)</span><br><span class="line">	at android.app.ActivityThread.handleStartActivity(ActivityThread.java:3009)</span><br><span class="line"></span><br><span class="line">	at android.app.servertransaction.TransactionExecutor.performLifecycleSequence(TransactionExecutor.java:180)</span><br><span class="line">	at android.app.servertransaction.TransactionExecutor.cycleToPath(TransactionExecutor.java:165)</span><br><span class="line">	at android.app.servertransaction.TransactionExecutor.executeLifecycleState(TransactionExecutor.java:142)</span><br><span class="line">	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:70)</span><br><span class="line">	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1840)</span><br><span class="line">	at android.os.Handler.dispatchMessage(Handler.java:106)</span><br><span class="line">	at android.os.Looper.loop(Looper.java:207)</span><br><span class="line">	at android.app.ActivityThread.main(ActivityThread.java:6878)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Native Method)</span><br><span class="line">	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:547)</span><br><span class="line">	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:876)</span><br></pre></td></tr></table></figure>
-
-<p><strong>解决方案</strong></p>
-<p>如果在 Fragment 中使用 ViewPager2，那么 FragmentStateAdapter 应该使用 childFragmentManager。将</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FragmentStateAdapter viewPagerAdapter = <span class="keyword">new</span> FragmentStateAdapter(getActivity().getSupportFragmentManager(), titles);</span><br></pre></td></tr></table></figure>
-
-<p>改为</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FragmentStateAdapter viewPagerAdapter = <span class="keyword">new</span> FragmentStateAdapter(getChildFragmentManager(), titles);</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="0x02-ViewPager2-FragmentStateAdapter的notifyDataSetChanged方法失效"><a href="#0x02-ViewPager2-FragmentStateAdapter的notifyDataSetChanged方法失效" class="headerlink" title="0x02 ViewPager2+FragmentStateAdapter的notifyDataSetChanged方法失效"></a>0x02 ViewPager2+FragmentStateAdapter的notifyDataSetChanged方法失效</h3><p><strong>原因分析</strong>：</p>
-<p>因为 FragmentStateAdapter 会保存所有Fragment实例，当调用 <code>Adapter.notifyDataSetChanged()</code> 方法时，Fragment 并没有走 <code>onCreate</code> 方法。</p>
-<p><strong>解决方案：</strong></p>
-<p>方案一 </p>
-<p>在调用 <code>notifyDataSetChanged</code> 之前，清空 FragmentStateAdapter 的 Fragment 列表。</p>
-<p>方案二</p>
-<p>重写 <code>getItemId()</code> <code>containsItem()</code> 这两个方法，并确保 <code>getItemId()</code> 的值是唯一的。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">VideoPagerAdapter</span>(</span></span><br><span class="line">       fragment: Fragment</span><br><span class="line">   ) : FragmentStateAdapter(fragment) &#123;</span><br><span class="line">       <span class="keyword">private</span> val itemIds = mutableMapOf&lt;Long, Fragment&gt;()</span><br><span class="line">       <span class="keyword">private</span> val data: MutableList&lt;T&gt; = mutableListOf()</span><br><span class="line">       <span class="keyword">private</span> val fragmentManager = fragment.childFragmentManager</span><br><span class="line"></span><br><span class="line">       <span class="function">fun <span class="title">addData</span><span class="params">(list: List&lt;T&gt;, isRefresh: Boolean)</span> </span>&#123;</span><br><span class="line">           Log.d(<span class="string">"xxx"</span>, <span class="string">"addData: list=$list, isRefresh=$isRefresh"</span>)</span><br><span class="line">           <span class="keyword">if</span> (isRefresh) &#123;</span><br><span class="line">               clean()</span><br><span class="line">               data.addAll(list)</span><br><span class="line">               notifyDataSetChanged()</span><br><span class="line">           &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">               val size = data.size</span><br><span class="line">               data.addAll(list)</span><br><span class="line">               notifyItemRangeInserted(size, list.size)</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="function">override fun <span class="title">getItemCount</span><span class="params">()</span>: Int </span>= data.size</span><br><span class="line"></span><br><span class="line">       <span class="function">override fun <span class="title">createFragment</span><span class="params">(position: Int)</span>: Fragment </span>&#123;</span><br><span class="line">           Log.d(<span class="string">"xxx"</span>, <span class="string">"createFragment: position=$position"</span>)</span><br><span class="line">           val itemId = getItemId(position)</span><br><span class="line">           <span class="keyword">if</span> (!itemIds.containsKey(itemId) || itemIds[itemId] !is KuaikanVideoFragment) &#123;</span><br><span class="line">               val fragment = createFragment()</span><br><span class="line">               itemIds[itemId] = fragment</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">return</span> itemIds[itemId] ?: Fragment()</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="function">override fun <span class="title">getItemId</span><span class="params">(position: Int)</span>: Long </span>&#123;</span><br><span class="line">           Log.d(<span class="string">"xxx"</span>, <span class="string">"getItemId: position=$position"</span>)</span><br><span class="line">           val id = data[position].id.toLong()</span><br><span class="line">           <span class="keyword">if</span> (id == <span class="number">0L</span> || position &lt; <span class="number">0</span> || position &gt;= data.size) &#123;</span><br><span class="line">               <span class="keyword">return</span> RecyclerView.NO_ID</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">return</span> id.shl(<span class="number">10</span>) + position</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="function">override fun <span class="title">containsItem</span><span class="params">(itemId: Long)</span>: Boolean </span>&#123;</span><br><span class="line">           Log.d(<span class="string">"xxx"</span>, <span class="string">"containsItem: itemId=$itemId"</span>)</span><br><span class="line">           <span class="keyword">return</span> itemIds.contains(itemId)</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="function">fun <span class="title">getItemData</span><span class="params">(position: Int)</span>: ShortVideoBean? </span>&#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">if</span> (data.size &lt;= position) <span class="keyword">null</span> <span class="keyword">else</span> data[position]</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="function"><span class="keyword">private</span> fun <span class="title">clean</span><span class="params">()</span> </span>&#123;</span><br><span class="line">           Log.d(<span class="string">"xxx"</span>, <span class="string">"clean"</span>)</span><br><span class="line">           val ft = fragmentManager.beginTransaction()</span><br><span class="line">           <span class="keyword">for</span> ((_, value) in itemIds) &#123;</span><br><span class="line">               ft.remove(value)</span><br><span class="line">           &#125;</span><br><span class="line">           ft.commitNowAllowingStateLoss()</span><br><span class="line">           itemIds.clear()</span><br><span class="line">           data.clear()</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="0x03-Design-assumption-violated"><a href="#0x03-Design-assumption-violated" class="headerlink" title="0x03 Design assumption violated"></a>0x03 Design assumption violated</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">java.lang.IllegalStateException: Design assumption violated.</span><br><span class="line">    at androidx.viewpager2.widget.ViewPager2.updateCurrentItem(ViewPager2.java:538)</span><br><span class="line">    at androidx.viewpager2.widget.ViewPager2$4.onAnimationsFinished(ViewPager2.java:518)</span><br><span class="line">    at androidx.recyclerview.widget.RecyclerView$ItemAnimator.isRunning(RecyclerView.java:13244)</span><br><span class="line">    at androidx.viewpager2.widget.ViewPager2.onLayout(ViewPager2.java:515)</span><br><span class="line">    at android.view.View.layout(View.java:15596)</span><br></pre></td></tr></table></figure>
-
-<p><strong>解决方案：</strong></p>
-<p>1 升级 viewpager2</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">implementation <span class="string">'androidx.viewpager2:viewpager2:1.0.0-beta03'</span></span><br></pre></td></tr></table></figure>
-
-<p>2 检查是否重写了 <code>getItemId()</code> <code>containsItem()</code> 这两个方法，<strong>确保 <code>getItemId()</code> 的值是唯一的</strong></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/06/19/Problems%E4%B8%93%E9%A2%98%E4%B9%8BRecyclerView/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2021/06/19/Problems%E4%B8%93%E9%A2%98%E4%B9%8BRecyclerView/" class="post-title-link" itemprop="url">Problems专题：RecyclerView</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-06-19 00:00:00" itemprop="dateCreated datePublished" datetime="2021-06-19T00:00:00+08:00">2021-06-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-09 22:49:22" itemprop="dateModified" datetime="2021-09-09T22:49:22+08:00">2021-09-09</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Problems专题：RecyclerView"><a href="#Problems专题：RecyclerView" class="headerlink" title="Problems专题：RecyclerView"></a>Problems专题：RecyclerView</h2><h3 id="0x01-Called-attach-on-a-child-which-is-not-detached"><a href="#0x01-Called-attach-on-a-child-which-is-not-detached" class="headerlink" title="0x01 Called attach on a child which is not detached"></a>0x01 Called attach on a child which is not detached</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">java.lang.IllegalArgumentException: Called attach on a child which is not detached: BaseViewHolder&#123;2b241e1 position=12 id=-1, oldPos=-1, pLpos:-1&#125; androidx.recyclerview.widget.RecyclerView&#123;afecb06 VFED..... ......ID 0,0-1080,2055 #7f09236e app:id/recycler_view_xxx&#125;, adapter:com.xxxx.adapter.XxxAdapter@cfc75c7, layout:androidx.recyclerview.widget.LinearLayoutManager@24af7f4, context:com.xxxx.XxxActivity@1ed75e2</span><br><span class="line">	at androidx.recyclerview.widget.RecyclerView$5.attachViewToParent(RecyclerView.java:917)</span><br><span class="line">	at androidx.recyclerview.widget.ChildHelper.attachViewToParent(ChildHelper.java:239)</span><br><span class="line">	at androidx.recyclerview.widget.RecyclerView.addAnimatingView(RecyclerView.java:1438)</span><br><span class="line">	at androidx.recyclerview.widget.RecyclerView.animateDisappearance(RecyclerView.java:4377)</span><br><span class="line">	at androidx.recyclerview.widget.RecyclerView$4.processDisappeared(RecyclerView.java:616)</span><br><span class="line">	at androidx.recyclerview.widget.ViewInfoStore.process(ViewInfoStore.java:242)</span><br><span class="line">	at androidx.recyclerview.widget.RecyclerView.dispatchLayoutStep3(RecyclerView.java:4210)</span><br><span class="line">	at androidx.recyclerview.widget.RecyclerView.dispatchLayout(RecyclerView.java:3864)</span><br><span class="line">	at androidx.recyclerview.widget.RecyclerView.onLayout(RecyclerView.java:4410)</span><br><span class="line">	at android.view.View.layout(View.java:22213)</span><br><span class="line">	at android.view.ViewGroup.layout(ViewGroup.java:6340)</span><br><span class="line">	at android.widget.RelativeLayout.onLayout(RelativeLayout.java:1131)</span><br><span class="line">	at android.view.View.layout(View.java:22213)</span><br><span class="line">	at android.view.ViewGroup.layout(ViewGroup.java:6340)</span><br><span class="line">	at androidx.viewpager.widget.ViewPager.onLayout(ViewPager.java:1775)</span><br><span class="line">	at android.view.View.layout(View.java:22213)</span><br><span class="line">	at android.view.ViewGroup.layout(ViewGroup.java:6340)</span><br><span class="line">	at android.widget.LinearLayout.setChildFrame(LinearLayout.java:1829)</span><br><span class="line">	at android.widget.LinearLayout.layoutVertical(LinearLayout.java:1673)</span><br><span class="line">	at android.widget.LinearLayout.onLayout(LinearLayout.java:1582)</span><br><span class="line">	at android.view.View.layout(View.java:22213)</span><br><span class="line">	at android.view.ViewGroup.layout(ViewGroup.java:6340)</span><br><span class="line">	at android.widget.RelativeLayout.onLayout(RelativeLayout.java:1131)</span><br><span class="line">	at android.view.View.layout(View.java:22213)</span><br><span class="line">	at android.view.ViewGroup.layout(ViewGroup.java:6340)</span><br><span class="line">	at android.widget.FrameLayout.layoutChildren(FrameLayout.java:332)</span><br><span class="line">	at android.widget.FrameLayout.onLayout(FrameLayout.java:270)</span><br><span class="line">	at android.view.View.layout(View.java:22213)</span><br><span class="line">	at android.view.ViewGroup.layout(ViewGroup.java:6340)</span><br><span class="line">	at android.widget.LinearLayout.setChildFrame(LinearLayout.java:1829)</span><br><span class="line">	at android.widget.LinearLayout.layoutVertical(LinearLayout.java:1673)</span><br><span class="line">	at android.widget.LinearLayout.onLayout(LinearLayout.java:1582)</span><br><span class="line">	at android.view.View.layout(View.java:22213)</span><br><span class="line">	at android.view.ViewGroup.layout(ViewGroup.java:6340)</span><br><span class="line">	at android.widget.FrameLayout.layoutChildren(FrameLayout.java:332)</span><br><span class="line">	at android.widget.FrameLayout.onLayout(FrameLayout.java:270)</span><br><span class="line">	at android.view.View.layout(View.java:22213)</span><br><span class="line">	at android.view.ViewGroup.layout(ViewGroup.java:6340)</span><br><span class="line">	at android.widget.LinearLayout.setChildFrame(LinearLayout.java:1829)</span><br><span class="line">	at android.widget.LinearLayout.layoutVertical(LinearLayout.java:1673)</span><br><span class="line">	at android.widget.LinearLayout.onLayout(LinearLayout.java:1582)</span><br><span class="line">	at android.view.View.layout(View.java:22213)</span><br><span class="line">	at android.view.ViewGroup.layout(ViewGroup.java:6340)</span><br><span class="line">	at android.widget.FrameLayout.layoutChildren(FrameLayout.java:332)</span><br><span class="line">	at android.widget.FrameLayout.onLayout(FrameLayout.java:270)</span><br><span class="line">	at com.android.internal.policy.DecorView.onLayout(DecorView.java:905)</span><br><span class="line">	at android.view.View.layout(View.java:22213)</span><br><span class="line">	at android.view.ViewGroup.layout(ViewGroup.java:6340)</span><br><span class="line">	at android.view.ViewRootImpl.performLayout(ViewRootImpl.java:3286)</span><br><span class="line">	at android.view.ViewRootImpl.performTraversals(ViewRootImpl.java:2757)</span><br><span class="line">	at android.view.ViewRootImpl.doTraversal(ViewRootImpl.java:1865)</span><br><span class="line">	at android.view.ViewRootImpl$TraversalRunnable.run(ViewRootImpl.java:7933)</span><br><span class="line">	at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1018)</span><br><span class="line">	at android.view.Choreographer.doCallbacks(Choreographer.java:837)</span><br><span class="line">	at android.view.Choreographer.doFrame(Choreographer.java:767)</span><br><span class="line">	at android.view.Choreographer$FrameDisplayEventReceiver.run(Choreographer.java:1003)</span><br><span class="line">	at android.os.Handler.handleCallback(Handler.java:883)</span><br><span class="line">	at android.os.Handler.dispatchMessage(Handler.java:100)</span><br><span class="line">	at android.os.Looper.loop(Looper.java:230)</span><br><span class="line">	at android.app.ActivityThread.main(ActivityThread.java:7951)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Native Method)</span><br><span class="line">	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:526)</span><br><span class="line">	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1034)</span><br></pre></td></tr></table></figure>
-
-<p><strong>问题分析</strong></p>
-<p>对同一个 position 位置同时进行<code>notifyItemRemoved(position)</code> 和 <code>notifyItemInserted(position)</code> 操作导致。</p>
-<p><strong>解决方案</strong></p>
-<p>避免同时对同一个位置先 notifyItemRemoved 再 notifyItemInserted，使用 notifyItemChanged。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adapter?.notifyItemChanged(position)</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="0x02-暂无"><a href="#0x02-暂无" class="headerlink" title="0x02 暂无"></a>0x02 暂无</h3>
       
     </div>
 
@@ -707,7 +679,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-count">53</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -720,7 +692,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/blog/tags/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
