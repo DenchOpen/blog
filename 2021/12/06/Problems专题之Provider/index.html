@@ -48,21 +48,21 @@
   };
 </script>
 
-  <meta name="description" content="BaseQuickAdapterHelper自定义通用的自动加载更多布局12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364import android.view.Viewimport android.view.V">
+  <meta name="description" content="Problems专题：Provider0x01  FileProvider：Failed to find configured root that contains &#x2F;…&#x2F;**.jpeg123456789101112131415161718192021java.lang.IllegalArgumentException: Failed to find configured root that co">
 <meta property="og:type" content="article">
-<meta property="og:title" content="BaseQuickAdapterHelper自定义通用的自动加载更多布局">
-<meta property="og:url" content="https://denchopen.github.io/blog/2021/05/25/AdapterLoadMoreView/index.html">
+<meta property="og:title" content="Problems专题：Provider">
+<meta property="og:url" content="https://denchopen.github.io/blog/2021/12/06/Problems%E4%B8%93%E9%A2%98%E4%B9%8BProvider/index.html">
 <meta property="og:site_name" content="个人小站">
-<meta property="og:description" content="BaseQuickAdapterHelper自定义通用的自动加载更多布局12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364import android.view.Viewimport android.view.V">
+<meta property="og:description" content="Problems专题：Provider0x01  FileProvider：Failed to find configured root that contains &#x2F;…&#x2F;**.jpeg123456789101112131415161718192021java.lang.IllegalArgumentException: Failed to find configured root that co">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-05-25T14:38:52.000Z">
-<meta property="article:modified_time" content="2021-09-09T14:46:52.246Z">
+<meta property="article:published_time" content="2021-12-06T14:22:22.000Z">
+<meta property="article:modified_time" content="2021-12-07T17:31:32.825Z">
 <meta property="article:author" content="Dench">
 <meta property="article:tag" content="Android">
-<meta property="article:tag" content="Kotlin">
+<meta property="article:tag" content="Problems专题">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://denchopen.github.io/blog/2021/05/25/AdapterLoadMoreView/">
+<link rel="canonical" href="https://denchopen.github.io/blog/2021/12/06/Problems%E4%B8%93%E9%A2%98%E4%B9%8BProvider/">
 
 
 <script id="page-configurations">
@@ -74,7 +74,7 @@
   };
 </script>
 
-  <title>BaseQuickAdapterHelper自定义通用的自动加载更多布局 | 个人小站</title>
+  <title>Problems专题：Provider | 个人小站</title>
   
 
 
@@ -191,7 +191,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/05/25/AdapterLoadMoreView/">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/12/06/Problems%E4%B8%93%E9%A2%98%E4%B9%8BProvider/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.png">
@@ -204,7 +204,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          BaseQuickAdapterHelper自定义通用的自动加载更多布局
+          Problems专题：Provider
         </h1>
 
         <div class="post-meta">
@@ -214,14 +214,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-05-25 22:38:52" itemprop="dateCreated datePublished" datetime="2021-05-25T22:38:52+08:00">2021-05-25</time>
+              <time title="创建时间：2021-12-06 22:22:22" itemprop="dateCreated datePublished" datetime="2021-12-06T22:22:22+08:00">2021-12-06</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-09 22:46:52" itemprop="dateModified" datetime="2021-09-09T22:46:52+08:00">2021-09-09</time>
+                <time title="修改时间：2021-12-08 01:31:32" itemprop="dateModified" datetime="2021-12-08T01:31:32+08:00">2021-12-08</time>
               </span>
 
           
@@ -235,7 +235,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="BaseQuickAdapterHelper自定义通用的自动加载更多布局"><a href="#BaseQuickAdapterHelper自定义通用的自动加载更多布局" class="headerlink" title="BaseQuickAdapterHelper自定义通用的自动加载更多布局"></a>BaseQuickAdapterHelper自定义通用的自动加载更多布局</h2><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> android.view.View</span><br><span class="line"><span class="keyword">import</span> android.view.ViewGroup</span><br><span class="line"><span class="keyword">import</span> com.chad.library.adapter.base.loadmore.BaseLoadMoreView</span><br><span class="line"><span class="keyword">import</span> com.chad.library.adapter.base.loadmore.LoadMoreStatus</span><br><span class="line"><span class="keyword">import</span> com.chad.library.adapter.base.util.getItemView</span><br><span class="line"><span class="keyword">import</span> com.chad.library.adapter.base.viewholder.BaseViewHolder</span><br><span class="line"><span class="keyword">import</span> com.rrtv.ui.R</span><br><span class="line"><span class="keyword">import</span> com.rrtv.utils.utils.LogUtils</span><br><span class="line"><span class="keyword">import</span> org.libpag.PAGFile</span><br><span class="line"><span class="keyword">import</span> org.libpag.PAGView</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AdapterLoadMoreView</span> : <span class="type">BaseLoadMoreView</span></span>() &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> pagView: PAGView? = <span class="literal">null</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getRootView</span><span class="params">(parent: <span class="type">ViewGroup</span>)</span></span>: View &#123;</span><br><span class="line">        LogUtils.e(<span class="string">"AdapterLoadMoreView"</span>, <span class="string">"getRootView"</span>)</span><br><span class="line">        <span class="keyword">var</span> rootLayout = parent.getItemView(R.layout.ui_footer_adapter_load_more)</span><br><span class="line">        <span class="keyword">val</span> file =</span><br><span class="line">            PAGFile.Load(parent.context.assets, CommonRefreshFooter.DEFAULT_LOADING_BUBBLE_FILE)</span><br><span class="line">        pagView = rootLayout.findViewById(R.id.loadingView)</span><br><span class="line">        pagView?.file = file</span><br><span class="line">        <span class="keyword">return</span> rootLayout</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getLoadingView</span><span class="params">(holder: <span class="type">BaseViewHolder</span>)</span></span>: View &#123;</span><br><span class="line">        LogUtils.e(<span class="string">"AdapterLoadMoreView"</span>, <span class="string">"getLoadingView"</span>)</span><br><span class="line">        <span class="keyword">return</span> holder.getView(R.id.loadingView)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getLoadComplete</span><span class="params">(holder: <span class="type">BaseViewHolder</span>)</span></span>: View &#123;</span><br><span class="line">        LogUtils.e(<span class="string">"AdapterLoadMoreView"</span>, <span class="string">"getLoadComplete"</span>)</span><br><span class="line">        <span class="keyword">return</span> holder.getView(R.id.fakeView)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getLoadEndView</span><span class="params">(holder: <span class="type">BaseViewHolder</span>)</span></span>: View &#123;</span><br><span class="line">        LogUtils.e(<span class="string">"AdapterLoadMoreView"</span>, <span class="string">"getLoadEndView"</span>)</span><br><span class="line">        <span class="keyword">return</span> holder.getView(R.id.endView)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getLoadFailView</span><span class="params">(holder: <span class="type">BaseViewHolder</span>)</span></span>: View &#123;</span><br><span class="line">        LogUtils.e(<span class="string">"AdapterLoadMoreView"</span>, <span class="string">"getLoadFailView"</span>)</span><br><span class="line">        <span class="keyword">return</span> holder.getView(R.id.fakeView)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">convert</span><span class="params">(holder: <span class="type">BaseViewHolder</span>, position: <span class="type">Int</span>, loadMoreStatus: <span class="type">LoadMoreStatus</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">when</span> (loadMoreStatus) &#123;</span><br><span class="line">            LoadMoreStatus.Complete -&gt; &#123;</span><br><span class="line">                pagView?.stop()</span><br><span class="line">            &#125;</span><br><span class="line">            LoadMoreStatus.Loading -&gt; &#123;</span><br><span class="line">                pagView?.play()</span><br><span class="line">            &#125;</span><br><span class="line">            LoadMoreStatus.Fail -&gt; &#123;</span><br><span class="line">                pagView?.stop()</span><br><span class="line">            &#125;</span><br><span class="line">            LoadMoreStatus.End -&gt; &#123;</span><br><span class="line">                pagView?.stop()</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">super</span>.convert(holder, position, loadMoreStatus)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="Problems专题：Provider"><a href="#Problems专题：Provider" class="headerlink" title="Problems专题：Provider"></a>Problems专题：Provider</h2><h3 id="0x01-FileProvider：Failed-to-find-configured-root-that-contains-…-jpeg"><a href="#0x01-FileProvider：Failed-to-find-configured-root-that-contains-…-jpeg" class="headerlink" title="0x01  FileProvider：Failed to find configured root that contains /…/**.jpeg"></a>0x01  FileProvider：Failed to find configured root that contains /…/**.jpeg</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">java.lang.IllegalArgumentException: Failed to find configured root that contains /storage/emulated/0/DCIM/Camera/**.jpeg</span><br><span class="line">	at androidx.core.content.FileProvider$SimplePathStrategy.getUriForFile(FileProvider.java:800)</span><br><span class="line">	at androidx.core.content.FileProvider.getUriForFile(FileProvider.java:442)</span><br><span class="line">	at com.luck.picture.lib.tools.PictureFileUtils.parUri(PictureFileUtils.java:533)</span><br><span class="line">	at com.luck.picture.lib.PictureBaseActivity.startOpenCameraImage(PictureBaseActivity.java:705)</span><br><span class="line">	at com.luck.picture.lib.PictureSelectorActivity.startCamera(PictureSelectorActivity.java:926)</span><br><span class="line">	at com.luck.picture.lib.PictureSelectorActivity.onTakePhoto(PictureSelectorActivity.java:1473)</span><br><span class="line">	at com.luck.picture.lib.adapter.PictureImageGridAdapter.lambda$onBindViewHolder$0$PictureImageGridAdapter(PictureImageGridAdapter.java:155)</span><br><span class="line">	at com.luck.picture.lib.adapter.-$$Lambda$PictureImageGridAdapter$0EODmJcP4VP0lqmkEhQ1dzLbHi8.onClick(Unknown Source:2)</span><br><span class="line">	at android.view.View.performClick(View.java:6608)</span><br><span class="line">	at android.view.View.performClickInternal(View.java:6585)</span><br><span class="line">	at android.view.View.access$3100(View.java:785)</span><br><span class="line">	at android.view.View$PerformClick.run(View.java:25921)</span><br><span class="line">	at android.os.Handler.handleCallback(Handler.java:873)</span><br><span class="line">	at android.os.Handler.dispatchMessage(Handler.java:99)</span><br><span class="line">	at android.os.Looper.loop(Looper.java:201)</span><br><span class="line">	at android.app.ActivityThread.main(ActivityThread.java:6810)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Native Method)</span><br><span class="line">	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:547)</span><br><span class="line">	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:873)</span><br><span class="line">Back traces end.</span><br></pre></td></tr></table></figure>
+
+<p><strong>问题分析</strong></p>
+<ol>
+<li>FileProvider 路径配置文件被互相覆盖</li>
+<li>FileProvider 路径配置文件id重复，导致覆盖</li>
+</ol>
+<p><strong>解决方案</strong></p>
+
     </div>
 
     
@@ -245,7 +253,7 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/blog/tags/Android/" rel="tag"># Android</a>
-              <a href="/blog/tags/Kotlin/" rel="tag"># Kotlin</a>
+              <a href="/blog/tags/Problems%E4%B8%93%E9%A2%98/" rel="tag"># Problems专题</a>
           </div>
 
         
@@ -254,12 +262,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/blog/2021/05/27/Terminal%E5%92%8CAndroidStudio%E4%BB%A3%E7%90%86%E8%AE%BE%E7%BD%AE/" rel="prev" title="Terminal设置代理">
-      <i class="fa fa-chevron-left"></i> Terminal设置代理
+    <a href="/blog/2021/12/07/Android%E4%B8%93%E6%A0%8F-FileProvider/" rel="prev" title="FileProvider 的使用">
+      <i class="fa fa-chevron-left"></i> FileProvider 的使用
     </a></div>
       <div class="post-nav-item">
-    <a href="/blog/2021/05/24/VolumeDialog/" rel="next" title="VolumeDialog音量控制自定义">
-      VolumeDialog音量控制自定义 <i class="fa fa-chevron-right"></i>
+    <a href="/blog/2021/11/30/Kotlin%E5%8D%95%E4%BE%8B/" rel="next" title="Kotlin单例">
+      Kotlin单例 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -320,7 +328,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#BaseQuickAdapterHelper自定义通用的自动加载更多布局"><span class="nav-text">BaseQuickAdapterHelper自定义通用的自动加载更多布局</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problems专题：Provider"><span class="nav-text">Problems专题：Provider</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0x01-FileProvider：Failed-to-find-configured-root-that-contains-…-jpeg"><span class="nav-text">0x01  FileProvider：Failed to find configured root that contains &#x2F;…&#x2F;**.jpeg</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -336,7 +344,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-count">59</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

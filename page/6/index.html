@@ -190,7 +190,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/08/21/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B/">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/09/23/Android%E4%B8%93%E6%A0%8F-%E9%80%9A%E7%9F%A5%E6%A0%8FNotification/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.png">
@@ -204,7 +204,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/blog/2020/08/21/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B/" class="post-title-link" itemprop="url">多线程编程</a>
+            <a href="/blog/2020/09/23/Android%E4%B8%93%E6%A0%8F-%E9%80%9A%E7%9F%A5%E6%A0%8FNotification/" class="post-title-link" itemprop="url">自定义Notification遇到的坑</a>
         </h1>
 
         <div class="post-meta">
@@ -214,14 +214,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-08-21 05:46:13" itemprop="dateCreated datePublished" datetime="2020-08-21T05:46:13+08:00">2020-08-21</time>
+              <time title="创建时间：2020-09-23 19:15:25" itemprop="dateCreated datePublished" datetime="2020-09-23T19:15:25+08:00">2020-09-23</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-20 05:36:47" itemprop="dateModified" datetime="2020-12-20T05:36:47+08:00">2020-12-20</time>
+                <time title="修改时间：2021-12-08 01:31:32" itemprop="dateModified" datetime="2021-12-08T01:31:32+08:00">2021-12-08</time>
               </span>
 
           
@@ -235,10 +235,169 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="多线程编程"><a href="#多线程编程" class="headerlink" title="多线程编程"></a>多线程编程</h1><h3 id="0x01-生产者和消费者问题"><a href="#0x01-生产者和消费者问题" class="headerlink" title="0x01 生产者和消费者问题"></a>0x01 生产者和消费者问题</h3><h4 id="1-BlockingQueue-阻塞队列实现"><a href="#1-BlockingQueue-阻塞队列实现" class="headerlink" title="1.BlockingQueue 阻塞队列实现"></a>1.BlockingQueue 阻塞队列实现</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 生产者</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Producer</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> BlockingQueue&lt;Integer&gt; queue;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Producer</span><span class="params">(BlockingQueue queue)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.queue = queue;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        queue.put(produce());</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="string">" put a message, total = "</span> + queue.size());</span><br><span class="line">        Thread.sleep(<span class="number">3000</span>);</span><br><span class="line">      &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">produce</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x = (<span class="keyword">int</span>) (Math.random() * <span class="number">10</span>);</span><br><span class="line">    System.out.println(Thread.currentThread().getName() + <span class="string">" put: "</span> + x);</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <p>自定义Notification 实现：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// RemoteViews for notification</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">var</span> rv: RemoteViews? = <span class="literal">null</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">var</span> rvExpanded: RemoteViews? = <span class="literal">null</span></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">customNotification</span><span class="params">(process: <span class="type">Int</span>)</span></span> &#123;</span><br><span class="line">  <span class="comment">// custom RemoteViews</span></span><br><span class="line">  <span class="keyword">if</span> (rv == <span class="literal">null</span>) rv = RemoteViews(packageName, R.layout.notification_small)</span><br><span class="line">  rv?.setTextViewText(R.id.notification_title, <span class="string">"这是一个小标题"</span>)</span><br><span class="line">  <span class="keyword">if</span> (rvExpanded == <span class="literal">null</span>) rvExpanded = RemoteViews(packageName, R.layout.notification_large)</span><br><span class="line">  rvExpanded?.setTextViewText(R.id.large_notification_title, <span class="string">"这是一个大标题，支持很多的内容: <span class="variable">$process</span>%"</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// PendingIntent</span></span><br><span class="line">  <span class="keyword">val</span> intentNotification = Intent(<span class="keyword">this</span>, PlayMusicActivity::<span class="class"><span class="keyword">class</span>.<span class="title">java</span>).<span class="title">apply</span> </span>&#123;</span><br><span class="line">    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">val</span> pendIntent = PendingIntent.getActivity(</span><br><span class="line">    <span class="keyword">this</span>,</span><br><span class="line">    <span class="number">0</span>,</span><br><span class="line">    intentNotification,</span><br><span class="line">    PendingIntent.FLAG_UPDATE_CURRENT</span><br><span class="line">  )</span><br><span class="line"></span><br><span class="line">  <span class="comment">// build notification</span></span><br><span class="line">  <span class="keyword">val</span> customNotification =</span><br><span class="line">  NotificationCompat.Builder(applicationContext, CHANNEL_ID)</span><br><span class="line">  .setSmallIcon(R.drawable.bravo) <span class="comment">// small Icon</span></span><br><span class="line">  .setStyle(NotificationCompat.DecoratedCustomViewStyle()) <span class="comment">// 自定义contentView</span></span><br><span class="line">  .setCustomContentView(rv!!)</span><br><span class="line">  .setContent(rvExpanded!!)</span><br><span class="line">  .setCustomBigContentView(rvExpanded!!)</span><br><span class="line">  .setCustomHeadsUpContentView(rvExpanded!!)</span><br><span class="line">  .setOngoing(<span class="literal">true</span>) <span class="comment">// 一直显示</span></span><br><span class="line">  .setAutoCancel(<span class="literal">false</span>) <span class="comment">// 点击后消失</span></span><br><span class="line">  .setVisibility(NotificationCompat.VISIBILITY_PUBLIC) <span class="comment">// 锁屏显示,需要配合权限设置</span></span><br><span class="line">  .setPriority(NotificationCompat.PRIORITY_HIGH) <span class="comment">// Priority</span></span><br><span class="line">  .setOnlyAlertOnce(<span class="literal">true</span>) <span class="comment">// 声音，震动，仅弹出一次</span></span><br><span class="line">  .setContentIntent(pendIntent)</span><br><span class="line">  .build()</span><br><span class="line">  startForeground(NOTIFICATION_ID, customNotification)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>1.使用 <code>NotificationCompat</code> 兼容各个版本差异性</p>
+<p>2.<code>RemoteViews</code> 布局文件不支持 <code>constraintlayout</code> ，切记</p>
+<p>3.在SDK 26之后必须要绑定Channel，所以通知要先创建Channel</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">checkAndCreateChannel</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">  context: <span class="type">Context</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  channelId: <span class="type">String</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  channelName: <span class="type">String</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  desc: <span class="type">String</span> = channelName</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.O) &#123;</span><br><span class="line">    <span class="keyword">val</span> notificationManager: NotificationManager =</span><br><span class="line">    context.getSystemService(Context.NOTIFICATION_SERVICE) <span class="keyword">as</span> NotificationManager</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="comment">// 查找分组</span></span><br><span class="line">      <span class="keyword">val</span> nc = notificationManager.getNotificationChannel(channelId)</span><br><span class="line">      Log.d(<span class="string">"ChannelHelper"</span>, <span class="string">"<span class="subst">$&#123;nc.id&#125;</span> Notification Channel exist."</span>)</span><br><span class="line">    &#125; <span class="keyword">catch</span> (e: Exception) &#123;</span><br><span class="line">      Log.d(<span class="string">"ChannelHelper"</span>, <span class="string">"empty channel need create."</span>)</span><br><span class="line">      <span class="comment">// 创建分组</span></span><br><span class="line">      <span class="keyword">val</span> mChannel =</span><br><span class="line">      NotificationChannel(</span><br><span class="line">        channelId,</span><br><span class="line">        channelName,</span><br><span class="line">        NotificationManager.IMPORTANCE_HIGH</span><br><span class="line">      ).apply &#123;</span><br><span class="line">        description = desc</span><br><span class="line">        enableLights(<span class="literal">true</span>)</span><br><span class="line">        enableVibration(<span class="literal">true</span>)</span><br><span class="line">      &#125;</span><br><span class="line">      notificationManager.createNotificationChannel(mChannel)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/09/19/Android%E4%B8%93%E6%A0%8F-JsBridge%E5%AE%9E%E7%8E%B0%E6%9C%AC%E5%9C%B0H5%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2020/09/19/Android%E4%B8%93%E6%A0%8F-JsBridge%E5%AE%9E%E7%8E%B0%E6%9C%AC%E5%9C%B0H5%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/" class="post-title-link" itemprop="url">Android-JsBridge实现本地H5混合开发</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-19 12:28:27" itemprop="dateCreated datePublished" datetime="2020-09-19T12:28:27+08:00">2020-09-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-08 01:31:32" itemprop="dateModified" datetime="2021-12-08T01:31:32+08:00">2021-12-08</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Android-JsBridge-混合开发框架"><a href="#Android-JsBridge-混合开发框架" class="headerlink" title="Android JsBridge 混合开发框架"></a>Android JsBridge 混合开发框架</h2><h3 id="0x01-Java-调用-Js"><a href="#0x01-Java-调用-Js" class="headerlink" title="0x01 Java 调用 Js"></a>0x01 Java 调用 Js</h3><p>我们知道，native层调用h5，在WebView中，如果java要调用js的方法，</p>
+<h4 id="0x0101-loadUrl-lt-4-4"><a href="#0x0101-loadUrl-lt-4-4" class="headerlink" title="0x0101 loadUrl &lt;4.4"></a>0x0101 loadUrl &lt;4.4</h4><p>Android4.4以前使用<code>WebView.loadUrl(&quot;javascript:function()&quot;)</code>。</p>
+<h4 id="0x0102-evaluateJavascript-gt-4-4"><a href="#0x0102-evaluateJavascript-gt-4-4" class="headerlink" title="0x0102 evaluateJavascript &gt;4.4"></a>0x0102 evaluateJavascript &gt;4.4</h4><p>Android4.4以后，使用以下方式 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">webView.evaluateJavascript(<span class="string">"javascript:function()"</span>, <span class="keyword">new</span> ValueCallback&lt;String&gt;() &#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceiveValue</span><span class="params">(String value)</span> </span>&#123;</span><br><span class="line">    Toast.makeText(MainActivity.<span class="keyword">this</span>, <span class="string">"onReceiveValue From JS: "</span> + value, Toast.LENGTH_SHORT).show();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="0x02-Js-调用-Java"><a href="#0x02-Js-调用-Java" class="headerlink" title="0x02 Js 调用 Java"></a>0x02 Js 调用 Java</h3><p>h5层如何调native，有以下几种形式</p>
+<h4 id="0x0201-addJavascriptInterface-gt-4-2"><a href="#0x0201-addJavascriptInterface-gt-4-2" class="headerlink" title="0x0201 addJavascriptInterface &gt;4.2"></a>0x0201 addJavascriptInterface &gt;4.2</h4><p>在4.2之前有安全隐患，JS可以动态获取到整个底层的实例信息，漏洞已经在Android 4.2上修复了，即使用@JavascriptInterface注解。</p>
+<h4 id="0x0202-shouldOverrideUrlLoading拦截自定义scheme"><a href="#0x0202-shouldOverrideUrlLoading拦截自定义scheme" class="headerlink" title="0x0202 shouldOverrideUrlLoading拦截自定义scheme"></a>0x0202 shouldOverrideUrlLoading拦截自定义scheme</h4><h4 id="0x0203-onJsAlert-onJsConfirm-onJsPrompt"><a href="#0x0203-onJsAlert-onJsConfirm-onJsPrompt" class="headerlink" title="0x0203 onJsAlert,onJsConfirm,onJsPrompt"></a>0x0203 onJsAlert,onJsConfirm,onJsPrompt</h4><p>WebChromeClient对象中有三个方法，分别是onJsAlert,onJsConfirm,onJsPrompt，当js调用window对象的alert，confirm，prompt，WebChromeClient对象中的三个方法对应的就会被触发，进行拦截处理。</p>
+<p>推荐使用onJsPrompt，使用频次最少，支持返回值。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onJsPrompt</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">  view: <span class="type">WebView</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">  url: <span class="type">String</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">  message: <span class="type">String</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">  defaultValue: <span class="type">String</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">  result: <span class="type">JsPromptResult</span>?</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">  <span class="keyword">val</span> msg = handleMessage(message)</span><br><span class="line">  result?.confirm(<span class="string">"Java 处理之后的 Json 数据：<span class="variable">$msg</span>"</span>)</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="0x0204-onConsoleMessage"><a href="#0x0204-onConsoleMessage" class="headerlink" title="0x0204 onConsoleMessage"></a>0x0204 onConsoleMessage</h4><p>这是Android提供给Js调试在Native代码里面打印日志信息的API，同时这也成了其中一种Js与Native代码通信的方法。在Js代码中调用console.log(‘xxx’)方法。</p>
+<h3 id="0x03-自定义通信协议"><a href="#0x03-自定义通信协议" class="headerlink" title="0x03 自定义通信协议"></a>0x03 自定义通信协议</h3><p><code>jsbridge://className:callbackId/methodName?json</code></p>
+<p>假设我们需要调用native层的Logger类的log方法，参数是msg，执行完成后js层要有一个回调，那么地址就如下</p>
+<p><code>jsbridge://Logger:callbackId/log?{&quot;msg&quot;:&quot;message from js.&quot;}</code></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/09/04/RecyclerView%E5%AE%9E%E7%8E%B0%E7%80%91%E5%B8%83%E6%B5%81%E4%BB%A5%E5%8F%8A%E7%BB%86%E8%8A%82%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2020/09/04/RecyclerView%E5%AE%9E%E7%8E%B0%E7%80%91%E5%B8%83%E6%B5%81%E4%BB%A5%E5%8F%8A%E7%BB%86%E8%8A%82%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">RecyclerView实现瀑布流以及细节问题</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-04 11:36:57" itemprop="dateCreated datePublished" datetime="2020-09-04T11:36:57+08:00">2020-09-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-09 22:24:58" itemprop="dateModified" datetime="2021-09-09T22:24:58+08:00">2021-09-09</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="RecyclerView实现瀑布流以及细节问题"><a href="#RecyclerView实现瀑布流以及细节问题" class="headerlink" title="RecyclerView实现瀑布流以及细节问题"></a>RecyclerView实现瀑布流以及细节问题</h2><p>1）使用 StaggeredGridLayoutManager</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> layoutManager = StaggeredGridLayoutManager(<span class="number">2</span>, RecyclerView.VERTICAL)</span><br><span class="line">layoutManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE<span class="comment">// 禁止左右交换</span></span><br><span class="line">recyclerView.layoutManager = layoutManager</span><br><span class="line"><span class="comment">// decoration</span></span><br><span class="line">recyclerView.addItemDecoration(StaggeredDividerItemDecoration(<span class="number">16</span>, <span class="literal">true</span>))</span><br><span class="line"><span class="comment">// adapter</span></span><br><span class="line">mAdapter = PjListVPAdapter()</span><br><span class="line">recyclerView.adapter = mAdapter</span><br><span class="line"><span class="comment">// animator</span></span><br><span class="line">recyclerView.itemAnimator = DefaultItemAnimator()</span><br></pre></td></tr></table></figure>
+
+<p>2）如果需要Item之间的间隔，就需要自定义 ItemDecoration</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 瀑布流ItemDecoration</span></span><br><span class="line"><span class="comment"> * 必须配合RecyclerView的StaggeredGridLayoutManager一起使用</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Dench</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@data</span> 2020-09-04</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StaggeredDividerItemDecoration</span></span>(</span><br><span class="line">  space: <span class="built_in">Int</span>, <span class="comment">// 间隔 pix</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">val</span> includeEdge: <span class="built_in">Boolean</span> = <span class="literal">false</span> <span class="comment">// 是否显示边距</span></span><br><span class="line">) : ItemDecoration() &#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">val</span> space = TypedValue.applyDimension(</span><br><span class="line">    TypedValue.COMPLEX_UNIT_DIP,</span><br><span class="line">    space.toFloat(),</span><br><span class="line">    Resources.getSystem().displayMetrics</span><br><span class="line">  ).toInt()</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getItemOffsets</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    outRect: <span class="type">Rect</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">    view: <span class="type">View</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">    parent: <span class="type">RecyclerView</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">    state: <span class="type">RecyclerView</span>.<span class="type">State</span></span></span></span><br><span class="line"><span class="function"><span class="params">  )</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> lp = view.layoutParams <span class="keyword">as</span> StaggeredGridLayoutManager.LayoutParams</span><br><span class="line">    <span class="keyword">val</span> lm = parent.layoutManager <span class="keyword">as</span> StaggeredGridLayoutManager</span><br><span class="line">    <span class="keyword">val</span> spanIndex: <span class="built_in">Int</span> = lp.spanIndex</span><br><span class="line">    <span class="keyword">val</span> spanCount: <span class="built_in">Int</span> = lm.spanCount</span><br><span class="line">    <span class="keyword">if</span> (includeEdge) &#123;</span><br><span class="line">      outRect.left = space * (spanCount - spanIndex) / spanCount</span><br><span class="line">      outRect.right = space * (spanIndex + <span class="number">1</span>) / spanCount</span><br><span class="line">      outRect.top = space</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      outRect.left = space * spanIndex / spanCount</span><br><span class="line">      outRect.right = space * (spanCount - spanIndex - <span class="number">1</span>) / spanCount</span><br><span class="line">      outRect.bottom = space</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/blog/2020/08/21/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B/#more" rel="contents">
+              <a class="btn" href="/blog/2020/09/04/RecyclerView%E5%AE%9E%E7%8E%B0%E7%80%91%E5%B8%83%E6%B5%81%E4%BB%A5%E5%8F%8A%E7%BB%86%E8%8A%82%E9%97%AE%E9%A2%98/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -262,7 +421,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/08/20/%E9%93%BE%E8%A1%A8%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/08/27/Arouter%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.png">
@@ -276,7 +435,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/blog/2020/08/20/%E9%93%BE%E8%A1%A8%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">链表常见问题</a>
+            <a href="/blog/2020/08/27/Arouter%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" class="post-title-link" itemprop="url">ARouter源码解析</a>
         </h1>
 
         <div class="post-meta">
@@ -286,7 +445,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-08-20 04:17:23" itemprop="dateCreated datePublished" datetime="2020-08-20T04:17:23+08:00">2020-08-20</time>
+              <time title="创建时间：2020-08-27 17:54:38" itemprop="dateCreated datePublished" datetime="2020-08-27T17:54:38+08:00">2020-08-27</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -307,13 +466,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="链表常见问题"><a href="#链表常见问题" class="headerlink" title="链表常见问题"></a>链表常见问题</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 单链表数据结构</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> val;</span><br><span class="line">  Node next;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.val = val;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h2 id="ARouter源码解析"><a href="#ARouter源码解析" class="headerlink" title="ARouter源码解析"></a>ARouter源码解析</h2><h3 id="0x01-init"><a href="#0x01-init" class="headerlink" title="0x01 init ()"></a>0x01 init ()</h3><p>ARouter 的入口，初始化SDK <code>ARouter.init(mApplication);</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(Application application)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!hasInit) &#123; <span class="comment">// 避免重复初始化</span></span><br><span class="line">    logger = _ARouter.logger; <span class="comment">// 日志初始化</span></span><br><span class="line">    _ARouter.logger.info(Consts.TAG, <span class="string">"ARouter init start."</span>);</span><br><span class="line">    hasInit = _ARouter.init(application); <span class="comment">// 正式初始化</span></span><br><span class="line">    <span class="keyword">if</span> (hasInit) &#123; <span class="comment">// 初始化之后</span></span><br><span class="line">      _ARouter.afterInit(); <span class="comment">// 管理拦截器的服务 InterceptorService 初始化</span></span><br><span class="line">    &#125;</span><br><span class="line">    _ARouter.logger.info(Consts.TAG, <span class="string">"ARouter init over."</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="0x01-链表翻转"><a href="#0x01-链表翻转" class="headerlink" title="0x01 链表翻转"></a>0x01 链表翻转</h3><p>题目描述：</p>
-<p>这道算法题，说直白点就是：如何让后一个节点指向前一个节点。</p>
+<p><code>_ARouter.init()</code>：</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/blog/2020/08/20/%E9%93%BE%E8%A1%A8%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/#more" rel="contents">
+              <a class="btn" href="/blog/2020/08/27/Arouter%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -337,7 +496,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/08/13/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8BJMM/">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/08/27/Implementation%E5%92%8Capi/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.png">
@@ -351,7 +510,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/blog/2020/08/13/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8BJMM/" class="post-title-link" itemprop="url">Java内存模型JMM</a>
+            <a href="/blog/2020/08/27/Implementation%E5%92%8Capi/" class="post-title-link" itemprop="url">implementation compileOnly和api</a>
         </h1>
 
         <div class="post-meta">
@@ -361,7 +520,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-08-13 02:44:46" itemprop="dateCreated datePublished" datetime="2020-08-13T02:44:46+08:00">2020-08-13</time>
+              <time title="创建时间：2020-08-27 08:31:44" itemprop="dateCreated datePublished" datetime="2020-08-27T08:31:44+08:00">2020-08-27</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -382,16 +541,22 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Java内存模型"><a href="#Java内存模型" class="headerlink" title="Java内存模型"></a>Java内存模型</h1><p>java内存模型(Java Memory Model，JMM)是java虚拟机规范定义的。</p>
-<h3 id="0x01-主内存与工作内存"><a href="#0x01-主内存与工作内存" class="headerlink" title="0x01.主内存与工作内存"></a>0x01.主内存与工作内存</h3><p>java内存模型规定了所有的变量都存储在住内存。每条线程还有自己的工作内存，线程的工作内存中保存了被该线程使用到的主内存中的变量的拷贝。线程对变量的所有操作都必须在工作内存中进行，而不能直接读写主内存中的变量。不同线程之间也无法直接访问对方工作内存中的变量，线程间变量传递均需要通过主内存来完成。当多个线程操作的变量涉及到同一个主内存区域，将可能导致各自的工作线程数据不一致，这样就导致变量同步回主内存的时候可能冲突导致数据丢失。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/blog/2020/08/13/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8BJMM/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <h3 id="implementation和api"><a href="#implementation和api" class="headerlink" title="implementation和api"></a>implementation和api</h3><p><code>implementation</code>和<code>api</code>是取代之前的compile的，其中<code>api</code>和<code>compile</code>是一样的效果，<code>implementation</code>有所不同，通过<code>implementation</code>依赖的库只能自己库本身访问，举个例子，A依赖B，B依赖C，如果B依赖C是使用的<code>implementation</code>依赖，那么在A中是访问不到C中的方法的，如果需要访问，请使用<code>api</code>依赖</p>
+<h3 id="compile-only"><a href="#compile-only" class="headerlink" title="compile only"></a>compile only</h3><p><code>compile only</code>和<code>provided</code>效果是一样的，只在编译的时候有效， 不参与打包</p>
+<h3 id="runtime-only"><a href="#runtime-only" class="headerlink" title="runtime only"></a>runtime only</h3><p><code>runtimeOnly</code> 和 <code>apk</code>效果一样，只在打包的时候有效，编译不参与</p>
+<h3 id="跟编译环境相关"><a href="#跟编译环境相关" class="headerlink" title="跟编译环境相关"></a>跟编译环境相关</h3><ul>
+<li>test implementation</li>
+</ul>
+<p><code>testImplementation</code>和<code>testCompile</code>效果一样，在单元测试和打包测试apk的时候有效</p>
+<ul>
+<li>debug implementation</li>
+</ul>
+<p><code>debugImplementation</code>和<code>debugCompile</code>效果相同， 在<code>debug</code>模式下有效</p>
+<ul>
+<li>release implementation</li>
+</ul>
+<p><code>releaseImplementation</code>和<code>releaseCompile</code>效果相同，只在<code>release</code>模式和打包release包情况下有效</p>
+
       
     </div>
 
@@ -410,7 +575,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/08/13/KMP%E7%AE%97%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/08/23/StatusBarHelper/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.png">
@@ -424,7 +589,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/blog/2020/08/13/KMP%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">KMP算法</a>
+            <a href="/blog/2020/08/23/StatusBarHelper/" class="post-title-link" itemprop="url">StatusBarHelper</a>
         </h1>
 
         <div class="post-meta">
@@ -434,7 +599,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-08-13 01:09:31" itemprop="dateCreated datePublished" datetime="2020-08-13T01:09:31+08:00">2020-08-13</time>
+              <time title="创建时间：2020-08-23 17:29:00" itemprop="dateCreated datePublished" datetime="2020-08-23T17:29:00+08:00">2020-08-23</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -455,159 +620,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="KMP-算法"><a href="#KMP-算法" class="headerlink" title="KMP 算法"></a>KMP 算法</h3><p>谈到字符串问题，不得不提的就是 KMP 算法，它是用来解决字符串查找的问题，可以在一个字符串（S）中查找一个子串（W）出现的位置。KMP 算法把字符匹配的时间复杂度缩小到 O(m+n) ,而空间复杂度也只有O(m)。因为“暴力搜索”的方法会反复回溯主串，导致效率低下，而KMP算法可以利用已经部分匹配这个有效信息，保持主串上的指针不回溯，通过修改子串的指针，让模式串尽量地移动到有效的位置。</p>
-<p>问题：</p>
-<p>有一个文本串S，和一个模式串P，现在要查找P在S中的位置</p>
-<h3 id="0x01-暴力算法"><a href="#0x01-暴力算法" class="headerlink" title="0x01 暴力算法"></a>0x01 暴力算法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 暴力查找法：不一致的时候直接把i 移动到 i+1 的位置继续比较</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">search</span><span class="params">(String s, String p)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> sLen = s.length();</span><br><span class="line">  <span class="keyword">int</span> pLen = p.length();</span><br><span class="line">  <span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> (i &lt; sLen &amp;&amp; j &lt; pLen) &#123;</span><br><span class="line">    <span class="keyword">if</span> (s.charAt(i) == p.charAt(j)) &#123;</span><br><span class="line">      <span class="comment">// 字符相同，则继续匹配下一个字符</span></span><br><span class="line">      i++;</span><br><span class="line">      j++;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">//  i，j 复位</span></span><br><span class="line">      i = i - j + <span class="number">1</span>;</span><br><span class="line">      j = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (j == pLen) <span class="keyword">return</span> i - j;</span><br><span class="line">  <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h1 id="StatusBarHelper"><a href="#StatusBarHelper" class="headerlink" title="StatusBarHelper"></a>StatusBarHelper</h1><h3 id="StatusBar-工具类"><a href="#StatusBar-工具类" class="headerlink" title="StatusBar 工具类"></a>StatusBar 工具类</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">object</span> StatusBarHelper &#123;</span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 内容显示在状态栏下面（LAYOUT_FULLSCREEN） &gt; 6.0</span></span><br><span class="line"><span class="comment">     * true:白底黑字,false:黑底白字</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">fitSystemBar</span><span class="params">(activity: <span class="type">Activity</span>, light: <span class="type">Boolean</span> = <span class="literal">true</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (Build.VERSION.SDK_INT &lt; Build.VERSION_CODES.M) <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">val</span> window = activity.window</span><br><span class="line">    <span class="keyword">val</span> decorView = window.decorView</span><br><span class="line">    <span class="keyword">var</span> visibility = decorView.systemUiVisibility</span><br><span class="line">    visibility = visibility or</span><br><span class="line">    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or</span><br><span class="line">    View.SYSTEM_UI_FLAG_LAYOUT_STABLE</span><br><span class="line">    visibility = <span class="keyword">if</span> (light) &#123;</span><br><span class="line">      visibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      visibility and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()</span><br><span class="line">    &#125;</span><br><span class="line">    decorView.systemUiVisibility = visibility</span><br><span class="line"></span><br><span class="line">    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)</span><br><span class="line">    window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)</span><br><span class="line">    window.statusBarColor = Color.TRANSPARENT</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 调整状态栏文字、图标颜色 &gt; 6.0</span></span><br><span class="line"><span class="comment">     * true:白底黑字,false:黑底白字</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">lightStatusBar</span><span class="params">(activity: <span class="type">Activity</span>, light: <span class="type">Boolean</span> = <span class="literal">true</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (Build.VERSION.SDK_INT &lt; Build.VERSION_CODES.M) <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">var</span> window: Window = activity.window</span><br><span class="line">    <span class="keyword">var</span> visibility = window.decorView.systemUiVisibility</span><br><span class="line">    visibility = <span class="keyword">if</span> (light) &#123;</span><br><span class="line">      visibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      visibility and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()</span><br><span class="line">    &#125;</span><br><span class="line">    window.decorView.systemUiVisibility = visibility</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 获取状态栏高度</span></span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">getStatusBarHeight</span><span class="params">(activity: <span class="type">Activity</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> result: <span class="built_in">Int</span> = <span class="number">0</span></span><br><span class="line">    <span class="keyword">var</span> resId = activity.resources.getIdentifier(<span class="string">"status_bar_height"</span>, <span class="string">"dimen"</span>, <span class="string">"android"</span>)</span><br><span class="line">    <span class="keyword">if</span> (resId &gt; <span class="number">0</span>) result = activity.resources.getDimensionPixelOffset(resId)</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/blog/2020/08/13/KMP%E7%AE%97%E6%B3%95/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/08/12/%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0@Java/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2020/08/12/%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0@Java/" class="post-title-link" itemprop="url">常用算法实现 Java版</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-08-12 01:09:31" itemprop="dateCreated datePublished" datetime="2020-08-12T01:09:31+08:00">2020-08-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-27 01:41:45" itemprop="dateModified" datetime="2021-05-27T01:41:45+08:00">2021-05-27</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="常用算法实现-Java版"><a href="#常用算法实现-Java版" class="headerlink" title="常用算法实现 Java版"></a>常用算法实现 Java版</h1><h2 id="一-常用排序算法"><a href="#一-常用排序算法" class="headerlink" title="一. 常用排序算法"></a>一. 常用排序算法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java 的进制数表示</span></span><br><span class="line"><span class="keyword">int</span> a10 = <span class="number">99</span>;</span><br><span class="line"><span class="keyword">int</span> a2 = <span class="number">0b101</span>;</span><br><span class="line"><span class="keyword">int</span> a8 = <span class="number">0143</span>;</span><br><span class="line"><span class="keyword">int</span> a16 = <span class="number">0x63</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="0x01-冒泡排序"><a href="#0x01-冒泡排序" class="headerlink" title="0x01 冒泡排序"></a>0x01 冒泡排序</h3><p>原理<br>比较相邻的元素。如果第一个比第二个大,就交换他们两个。 对每一对相邻元素做同样的工作,从开始第一对到结尾的最后一对。在这一点,最后的元素应该会是最大的数。 针对所有的元素重复以上的步骤,除了最后一个。 持续每次对越来越少的元素重复上面的步骤,直到没有任何一对数字需要比较。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/blog/2020/08/12/%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0@Java/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/08/06/%E7%AE%80%E5%8D%95Socket%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%9E%E7%8E%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2020/08/06/%E7%AE%80%E5%8D%95Socket%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%9E%E7%8E%B0/" class="post-title-link" itemprop="url">简单Socket服务器实现</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-08-06 00:55:29" itemprop="dateCreated datePublished" datetime="2020-08-06T00:55:29+08:00">2020-08-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-20 05:36:47" itemprop="dateModified" datetime="2020-12-20T05:36:47+08:00">2020-12-20</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="简单Socket服务器实现"><a href="#简单Socket服务器实现" class="headerlink" title="简单Socket服务器实现"></a>简单Socket服务器实现</h2><p>服务端</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/blog/2020/08/06/%E7%AE%80%E5%8D%95Socket%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%9E%E7%8E%B0/#more" rel="contents">
+              <a class="btn" href="/blog/2020/08/23/StatusBarHelper/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -631,7 +647,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/blog/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/9/">9</a><a class="extend next" rel="next" href="/blog/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/blog/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/blog/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/10/">10</a><a class="extend next" rel="next" href="/blog/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -699,7 +715,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-count">59</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
