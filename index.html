@@ -190,6 +190,71 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2022/01/07/%E5%B7%A5%E5%85%B7%E7%B1%BB-SettingsHelper/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2022/01/07/%E5%B7%A5%E5%85%B7%E7%B1%BB-SettingsHelper/" class="post-title-link" itemprop="url">SettingsHelper</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-01-07 17:29:00" itemprop="dateCreated datePublished" datetime="2022-01-07T17:29:00+08:00">2022-01-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-10 23:39:32" itemprop="dateModified" datetime="2022-01-10T23:39:32+08:00">2022-01-10</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="SettingsHelper"><a href="#SettingsHelper" class="headerlink" title="SettingsHelper"></a>SettingsHelper</h1><h3 id="SettingsHelper-自启动设置"><a href="#SettingsHelper-自启动设置" class="headerlink" title="SettingsHelper 自启动设置"></a>SettingsHelper 自启动设置</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> android.content.ComponentName</span><br><span class="line"><span class="keyword">import</span> android.content.Context</span><br><span class="line"><span class="keyword">import</span> android.content.Intent</span><br><span class="line"><span class="keyword">import</span> android.net.Uri</span><br><span class="line"><span class="keyword">import</span> android.os.Build</span><br><span class="line"><span class="keyword">import</span> android.provider.Settings</span><br><span class="line"><span class="keyword">import</span> android.util.Log</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 跳转自启动页面</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">object</span> SettingsHelper &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> hashMap = mutableMapOf&lt;String, List&lt;String&gt;&gt;().apply &#123;</span><br><span class="line">        put(</span><br><span class="line">            <span class="string">"Xiaomi"</span>, listOf(</span><br><span class="line">                <span class="string">"com.miui.securitycenter/com.miui.permcenter.autostart.AutoStartManagementActivity"</span>,</span><br><span class="line">                <span class="string">"com.miui.securitycenter"</span></span><br><span class="line">            )</span><br><span class="line">        )</span><br><span class="line">        put(</span><br><span class="line">            <span class="string">"samsung"</span>, listOf(</span><br><span class="line">                <span class="string">"com.samsung.android.sm_cn/com.samsung.android.sm.ui.ram.AutoRunActivity"</span>,</span><br><span class="line">                <span class="string">"com.samsung.android.sm_cn/com.samsung.android.sm.ui.appmanagement.AppManagementActivity"</span>,</span><br><span class="line">                <span class="string">"com.samsung.android.sm_cn/com.samsung.android.sm.ui.cstyleboard.SmartManagerDashBoardActivity"</span>,</span><br><span class="line">                <span class="string">"com.samsung.android.sm_cn/.ui.ram.RamActivity"</span>,</span><br><span class="line">                <span class="string">"com.samsung.android.sm_cn/.app.dashboard.SmartManagerDashBoardActivity"</span>,</span><br><span class="line">                <span class="string">"com.samsung.android.sm/com.samsung.android.sm.ui.ram.AutoRunActivity"</span>,</span><br><span class="line">                <span class="string">"com.samsung.android.sm/com.samsung.android.sm.ui.appmanagement.AppManagementActivity"</span>,</span><br><span class="line">                <span class="string">"com.samsung.android.sm/com.samsung.android.sm.ui.cstyleboard.SmartManagerDashBoardActivity"</span>,</span><br><span class="line">                <span class="string">"com.samsung.android.sm/.ui.ram.RamActivity"</span>,</span><br><span class="line">                <span class="string">"com.samsung.android.sm/.app.dashboard.SmartManagerDashBoardActivity"</span>,</span><br><span class="line">                <span class="string">"com.samsung.android.lool/com.samsung.android.sm.ui.battery.BatteryActivity"</span>,</span><br><span class="line">                <span class="string">"com.samsung.android.sm_cn"</span>,</span><br><span class="line">                <span class="string">"com.samsung.android.sm"</span></span><br><span class="line">            )</span><br><span class="line">        )</span><br><span class="line">        put(</span><br><span class="line">            <span class="string">"HUAWEI"</span>, listOf(</span><br><span class="line">                <span class="string">"com.huawei.systemmanager/.startupmgr.ui.StartupNormalAppListActivity"</span>,</span><br><span class="line">                <span class="string">"com.huawei.systemmanager/.appcontrol.activity.StartupAppControlActivity"</span>,</span><br><span class="line">                <span class="string">"com.huawei.systemmanager/.optimize.process.ProtectActivity"</span>,</span><br><span class="line">                <span class="string">"com.huawei.systemmanager/.optimize.bootstart.BootStartActivity"</span>,</span><br><span class="line">                <span class="string">"com.huawei.systemmanager"</span></span><br><span class="line">            )</span><br><span class="line">        )</span><br><span class="line">        put(</span><br><span class="line">            <span class="string">"vivo"</span>, listOf(</span><br><span class="line">                <span class="string">"com.iqoo.secure/.ui.phoneoptimize.BgStartUpManager"</span>,</span><br><span class="line">                <span class="string">"com.iqoo.secure/.safeguard.PurviewTabActivity"</span>,</span><br><span class="line">                <span class="string">"com.vivo.permissionmanager/.activity.BgStartUpManagerActivity"</span>,  <span class="comment">//                    "com.iqoo.secure/.ui.phoneoptimize.AddWhiteListActivity", //这是白名单, 不是自启动</span></span><br><span class="line">                <span class="string">"com.iqoo.secure"</span>,</span><br><span class="line">                <span class="string">"com.vivo.permissionmanager"</span></span><br><span class="line">            )</span><br><span class="line">        )</span><br><span class="line">        put(</span><br><span class="line">            <span class="string">"Meizu"</span>, listOf(</span><br><span class="line">                <span class="string">"com.meizu.safe/.permission.SmartBGActivity"</span>,</span><br><span class="line">                <span class="string">"com.meizu.safe/.permission.PermissionMainActivity"</span>,</span><br><span class="line">                <span class="string">"com.meizu.safe"</span></span><br><span class="line">            )</span><br><span class="line">        )</span><br><span class="line">        put(</span><br><span class="line">            <span class="string">"OPPO"</span>, listOf(</span><br><span class="line">                <span class="string">"com.coloros.safecenter/.startupapp.StartupAppListActivity"</span>,</span><br><span class="line">                <span class="string">"com.coloros.safecenter/.permission.startup.StartupAppListActivity"</span>,</span><br><span class="line">                <span class="string">"com.oppo.safe/.permission.startup.StartupAppListActivity"</span>,</span><br><span class="line">                <span class="string">"com.coloros.oppoguardelf/com.coloros.powermanager.fuelgaue.PowerUsageModelActivity"</span>,</span><br><span class="line">                <span class="string">"com.coloros.safecenter/com.coloros.privacypermissionsentry.PermissionTopActivity"</span>,</span><br><span class="line">                <span class="string">"com.coloros.safecenter"</span>,</span><br><span class="line">                <span class="string">"com.oppo.safe"</span>,</span><br><span class="line">                <span class="string">"com.coloros.oppoguardelf"</span></span><br><span class="line">            )</span><br><span class="line">        )</span><br><span class="line">        put(</span><br><span class="line">            <span class="string">"oneplus"</span>, listOf(</span><br><span class="line">                <span class="string">"com.oneplus.security/.chainlaunch.view.ChainLaunchAppListActivity"</span>,</span><br><span class="line">                <span class="string">"com.oneplus.security"</span></span><br><span class="line">            )</span><br><span class="line">        )</span><br><span class="line">        put(</span><br><span class="line">            <span class="string">"letv"</span>, listOf(</span><br><span class="line">                <span class="string">"com.letv.android.letvsafe/.AutobootManageActivity"</span>,</span><br><span class="line">                <span class="string">"com.letv.android.letvsafe/.BackgroundAppManageActivity"</span>,</span><br><span class="line">                <span class="string">"com.letv.android.letvsafe"</span></span><br><span class="line">            )</span><br><span class="line">        )</span><br><span class="line">        put(</span><br><span class="line">            <span class="string">"zte"</span>, listOf(</span><br><span class="line">                <span class="string">"com.zte.heartyservice/.autorun.AppAutoRunManager"</span>,</span><br><span class="line">                <span class="string">"com.zte.heartyservice"</span></span><br><span class="line">            )</span><br><span class="line">        )</span><br><span class="line">        <span class="comment">//金立</span></span><br><span class="line">        put(</span><br><span class="line">            <span class="string">"F"</span>, listOf(</span><br><span class="line">                <span class="string">"com.gionee.softmanager/.MainActivity"</span>,</span><br><span class="line">                <span class="string">"com.gionee.softmanager"</span></span><br><span class="line">            )</span><br><span class="line">        )</span><br><span class="line">        <span class="comment">//以下为未确定(厂商名也不确定)</span></span><br><span class="line">        put(</span><br><span class="line">            <span class="string">"smartisanos"</span>, listOf(</span><br><span class="line">                <span class="string">"com.smartisanos.security/.invokeHistory.InvokeHistoryActivity"</span>,</span><br><span class="line">                <span class="string">"com.smartisanos.security"</span></span><br><span class="line">            )</span><br><span class="line">        )</span><br><span class="line">        <span class="comment">//360</span></span><br><span class="line">        put(</span><br><span class="line">            <span class="string">"360"</span>, listOf(</span><br><span class="line">                <span class="string">"com.yulong.android.coolsafe/.ui.activity.autorun.AutoRunListActivity"</span>,</span><br><span class="line">                <span class="string">"com.yulong.android.coolsafe"</span></span><br><span class="line">            )</span><br><span class="line">        )</span><br><span class="line">        <span class="comment">//360</span></span><br><span class="line">        put(</span><br><span class="line">            <span class="string">"ulong"</span>, listOf(</span><br><span class="line">                <span class="string">"com.yulong.android.coolsafe/.ui.activity.autorun.AutoRunListActivity"</span>,</span><br><span class="line">                <span class="string">"com.yulong.android.coolsafe"</span></span><br><span class="line">            )</span><br><span class="line">        )</span><br><span class="line">        <span class="comment">//酷派</span></span><br><span class="line">        put(</span><br><span class="line">            <span class="string">"coolpad"</span> <span class="comment">/*厂商名称不确定是否正确*/</span>, listOf(</span><br><span class="line">                <span class="string">"com.yulong.android.security/com.yulong.android.seccenter.tabbarmain"</span>,</span><br><span class="line">                <span class="string">"com.yulong.android.security"</span></span><br><span class="line">            )</span><br><span class="line">        )</span><br><span class="line">        <span class="comment">//联想</span></span><br><span class="line">        put(</span><br><span class="line">            <span class="string">"lenovo"</span> <span class="comment">/*厂商名称不确定是否正确*/</span>, listOf(</span><br><span class="line">                <span class="string">"com.lenovo.security/.purebackground.PureBackgroundActivity"</span>,</span><br><span class="line">                <span class="string">"com.lenovo.security"</span></span><br><span class="line">            )</span><br><span class="line">        )</span><br><span class="line">        put(</span><br><span class="line">            <span class="string">"htc"</span> <span class="comment">/*厂商名称不确定是否正确*/</span>, listOf(</span><br><span class="line">                <span class="string">"com.htc.pitroad/.landingpage.activity.LandingPageActivity"</span>,</span><br><span class="line">                <span class="string">"com.htc.pitroad"</span></span><br><span class="line">            )</span><br><span class="line">        )</span><br><span class="line">        <span class="comment">//华硕</span></span><br><span class="line">        put(</span><br><span class="line">            <span class="string">"asus"</span> <span class="comment">/*厂商名称不确定是否正确*/</span>, listOf(</span><br><span class="line">                <span class="string">"com.asus.mobilemanager/.MainActivity"</span>,</span><br><span class="line">                <span class="string">"com.asus.mobilemanager"</span></span><br><span class="line">            )</span><br><span class="line">        )</span><br><span class="line">        <span class="comment">//酷派</span></span><br><span class="line">        put(</span><br><span class="line">            <span class="string">"YuLong"</span>, listOf(</span><br><span class="line">                <span class="string">"com.yulong.android.softmanager/.SpeedupActivity"</span>,</span><br><span class="line">                <span class="string">"com.yulong.android.security/com.yulong.android.seccenter.tabbarmain"</span>,</span><br><span class="line">                <span class="string">"com.yulong.android.security"</span></span><br><span class="line">            )</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">startAutoBootSetting</span><span class="params">(context: <span class="type">Context</span>?)</span></span> &#123;</span><br><span class="line">        Log.e(<span class="string">"SettingsHelper"</span>, <span class="string">"当前手机型号为："</span> + Build.MANUFACTURER)</span><br><span class="line">        <span class="keyword">var</span> result = <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">        run <span class="symbol">start0@</span>&#123;</span><br><span class="line">            <span class="keyword">for</span> ((manufacturer, componentNameList) <span class="keyword">in</span> hashMap) &#123;</span><br><span class="line">                <span class="keyword">if</span> (Build.MANUFACTURER.equals(manufacturer, ignoreCase = <span class="literal">true</span>)) &#123;</span><br><span class="line">                    <span class="keyword">for</span> (actName <span class="keyword">in</span> componentNameList) &#123;</span><br><span class="line">                        <span class="keyword">try</span> &#123;</span><br><span class="line">                            <span class="keyword">var</span> intent: Intent?</span><br><span class="line">                            <span class="keyword">if</span> (actName.contains(<span class="string">"/"</span>)) &#123;</span><br><span class="line">                                intent = Intent()</span><br><span class="line">                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)</span><br><span class="line">                                intent.component = ComponentName.unflattenFromString(actName)</span><br><span class="line">                            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                                <span class="comment">//所以我是直接跳转到对应的安全管家/安全中心</span></span><br><span class="line">                                intent = context?.packageManager?.getLaunchIntentForPackage(actName)</span><br><span class="line">                            &#125;</span><br><span class="line">                            intent?.let &#123;</span><br><span class="line">                                context?.startActivity(intent)</span><br><span class="line">                                result = <span class="literal">true</span></span><br><span class="line">                                <span class="keyword">return</span><span class="symbol">@start0</span></span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125; <span class="keyword">catch</span> (e: Exception) &#123;</span><br><span class="line">                            e.printStackTrace()</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!result) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">// 跳转到app详情设置</span></span><br><span class="line">                <span class="keyword">val</span> intent = Intent()</span><br><span class="line">                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK</span><br><span class="line">                intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS</span><br><span class="line">                intent.<span class="keyword">data</span> = Uri.fromParts(<span class="string">"package"</span>, context?.packageName, <span class="literal">null</span>)</span><br><span class="line">                context?.startActivity(intent)</span><br><span class="line">            &#125; <span class="keyword">catch</span> (e: Exception) &#123;</span><br><span class="line">                e.printStackTrace()</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2022/01/04/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B8%83%E5%B1%80-SpannableString%E4%B9%8B%E5%B1%85%E4%B8%AD%E6%98%BE%E7%A4%BAImageSpan/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -648,84 +713,11 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/11/23/Android%E4%B8%93%E6%A0%8F-apk%E7%AD%BE%E5%90%8D/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2021/11/23/Android%E4%B8%93%E6%A0%8F-apk%E7%AD%BE%E5%90%8D/" class="post-title-link" itemprop="url">Apk签名</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-11-23 19:15:25" itemprop="dateCreated datePublished" datetime="2021-11-23T19:15:25+08:00">2021-11-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-08 01:31:32" itemprop="dateModified" datetime="2021-12-08T01:31:32+08:00">2021-12-08</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Apk签名"><a href="#Apk签名" class="headerlink" title="Apk签名"></a>Apk签名</h2><h3 id="0x01-生成签名文件"><a href="#0x01-生成签名文件" class="headerlink" title="0x01 生成签名文件"></a>0x01 生成签名文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -genkey -alias **** -keypass **** -keyalg RSA -keysize 1024 -validity 3650 -keystore D:\****.jks -dest D:\****.jks -storetype pkcs12 -storepass ****</span><br></pre></td></tr></table></figure>
-
-<h3 id="0x02-查看签名文件md5"><a href="#0x02-查看签名文件md5" class="headerlink" title="0x02 查看签名文件md5"></a>0x02 查看签名文件md5</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -v -list -keystore ****.jks -storepass ****</span><br></pre></td></tr></table></figure>
-
-<p>如果还是看不到md5值，在 AndroidStudio 中执行gradlew命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gradlew signingReport</span><br></pre></td></tr></table></figure>
-
-
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/10/">10</a><a class="extend next" rel="next" href="/blog/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/11/">11</a><a class="extend next" rel="next" href="/blog/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -793,7 +785,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-count">61</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

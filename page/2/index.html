@@ -190,6 +190,79 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/11/23/Android%E4%B8%93%E6%A0%8F-apk%E7%AD%BE%E5%90%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2021/11/23/Android%E4%B8%93%E6%A0%8F-apk%E7%AD%BE%E5%90%8D/" class="post-title-link" itemprop="url">Apk签名</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-11-23 19:15:25" itemprop="dateCreated datePublished" datetime="2021-11-23T19:15:25+08:00">2021-11-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-08 01:31:32" itemprop="dateModified" datetime="2021-12-08T01:31:32+08:00">2021-12-08</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Apk签名"><a href="#Apk签名" class="headerlink" title="Apk签名"></a>Apk签名</h2><h3 id="0x01-生成签名文件"><a href="#0x01-生成签名文件" class="headerlink" title="0x01 生成签名文件"></a>0x01 生成签名文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -genkey -alias **** -keypass **** -keyalg RSA -keysize 1024 -validity 3650 -keystore D:\****.jks -dest D:\****.jks -storetype pkcs12 -storepass ****</span><br></pre></td></tr></table></figure>
+
+<h3 id="0x02-查看签名文件md5"><a href="#0x02-查看签名文件md5" class="headerlink" title="0x02 查看签名文件md5"></a>0x02 查看签名文件md5</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -v -list -keystore ****.jks -storepass ****</span><br></pre></td></tr></table></figure>
+
+<p>如果还是看不到md5值，在 AndroidStudio 中执行gradlew命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gradlew signingReport</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/11/19/Android%E4%B8%93%E6%A0%8F-JavaCrash%E9%BB%98%E8%AE%A4%E5%A4%84%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -535,76 +608,11 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/08/23/RecyclerViewHelper/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2021/08/23/RecyclerViewHelper/" class="post-title-link" itemprop="url">RecyclerViewHelper</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-08-23 21:29:00" itemprop="dateCreated datePublished" datetime="2021-08-23T21:29:00+08:00">2021-08-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-09 22:23:10" itemprop="dateModified" datetime="2021-09-09T22:23:10+08:00">2021-09-09</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="RecyclerViewHelper"><a href="#RecyclerViewHelper" class="headerlink" title="RecyclerViewHelper"></a>RecyclerViewHelper</h1><p>提供了注册加载更多，和判断是否不足一屏等工具方法</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> androidx.recyclerview.widget.GridLayoutManager</span><br><span class="line"><span class="keyword">import</span> androidx.recyclerview.widget.LinearLayoutManager</span><br><span class="line"><span class="keyword">import</span> androidx.recyclerview.widget.RecyclerView</span><br><span class="line"><span class="keyword">import</span> androidx.recyclerview.widget.StaggeredGridLayoutManager</span><br><span class="line"></span><br><span class="line"><span class="keyword">object</span> RecyclerViewHelper &#123;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * RecyclerView 注册加载更多监听</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="meta">@JvmStatic</span></span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">addOnScrollListener</span><span class="params">(recyclerView: <span class="type">RecyclerView</span>, loadMore: () -&gt; <span class="type">Unit</span>)</span></span> &#123;</span><br><span class="line">    recyclerView.addOnScrollListener(<span class="keyword">object</span> : RecyclerView.OnScrollListener() &#123;</span><br><span class="line">      <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onScrollStateChanged</span><span class="params">(recyclerView: <span class="type">RecyclerView</span>, newState: <span class="type">Int</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onScrollStateChanged(recyclerView, newState)</span><br><span class="line">        <span class="keyword">if</span> (newState == RecyclerView.SCROLL_STATE_IDLE) &#123;</span><br><span class="line">          <span class="keyword">val</span> layoutManager = recyclerView.layoutManager</span><br><span class="line">          <span class="keyword">if</span> (layoutManager <span class="keyword">is</span> LinearLayoutManager) &#123;</span><br><span class="line">            <span class="keyword">val</span> lastPosition = layoutManager.findLastCompletelyVisibleItemPosition()</span><br><span class="line">            <span class="keyword">val</span> count = layoutManager.itemCount</span><br><span class="line">            <span class="keyword">if</span> (lastPosition &gt;= count - <span class="number">2</span>) &#123;</span><br><span class="line">              loadMore()</span><br><span class="line">              <span class="keyword">return</span><span class="symbol">@onScrollStateChanged</span></span><br><span class="line">            &#125;</span><br><span class="line">          &#125; <span class="keyword">else</span> <span class="keyword">if</span> (layoutManager <span class="keyword">is</span> StaggeredGridLayoutManager) &#123;</span><br><span class="line">            <span class="keyword">val</span> spanCount = layoutManager.spanCount</span><br><span class="line">            <span class="keyword">val</span> count = layoutManager.itemCount</span><br><span class="line">            <span class="keyword">val</span> result = IntArray(spanCount)</span><br><span class="line">            layoutManager.findLastCompletelyVisibleItemPositions(result)</span><br><span class="line">            <span class="keyword">for</span> (it <span class="keyword">in</span> result) &#123;</span><br><span class="line">              <span class="keyword">if</span> (it &gt;= count - spanCount - <span class="number">1</span>) &#123;</span><br><span class="line">                loadMore()</span><br><span class="line">                <span class="keyword">return</span><span class="symbol">@onScrollStateChanged</span></span><br><span class="line">              &#125;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125; <span class="keyword">else</span> <span class="keyword">if</span> (layoutManager <span class="keyword">is</span> GridLayoutManager) &#123;</span><br><span class="line">            <span class="keyword">val</span> spanCount = layoutManager.spanCount</span><br><span class="line">            <span class="keyword">val</span> count = layoutManager.itemCount</span><br><span class="line">            <span class="keyword">val</span> lastPosition = layoutManager.findLastCompletelyVisibleItemPosition()</span><br><span class="line">            <span class="keyword">if</span> (lastPosition &gt;= count - spanCount - <span class="number">1</span>) &#123;</span><br><span class="line">              loadMore()</span><br><span class="line">              <span class="keyword">return</span><span class="symbol">@onScrollStateChanged</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 判断是否一屏显示</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * 错误或者空了返回 false</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">  <span class="meta">@JvmStatic</span></span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">isOneScreen</span><span class="params">(recyclerView: <span class="type">RecyclerView</span>?)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">    recyclerView?.let &#123;</span><br><span class="line">      <span class="keyword">val</span> layoutManager = recyclerView.layoutManager</span><br><span class="line">      <span class="keyword">if</span> (layoutManager <span class="keyword">is</span> LinearLayoutManager) &#123;</span><br><span class="line">        <span class="comment">// include GridLayoutManager</span></span><br><span class="line">        <span class="keyword">val</span> count = layoutManager.itemCount</span><br><span class="line">        <span class="keyword">return</span> count &gt; <span class="number">0</span> &amp;&amp;</span><br><span class="line">        layoutManager.findFirstCompletelyVisibleItemPosition() == <span class="number">0</span> &amp;&amp;</span><br><span class="line">        layoutManager.findLastCompletelyVisibleItemPosition() == count - <span class="number">1</span></span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (layoutManager <span class="keyword">is</span> StaggeredGridLayoutManager) &#123;</span><br><span class="line">        <span class="keyword">val</span> spanCount = layoutManager.spanCount</span><br><span class="line">        <span class="keyword">val</span> count = layoutManager.itemCount</span><br><span class="line">        <span class="keyword">val</span> last = IntArray(spanCount)</span><br><span class="line">        <span class="keyword">val</span> first = IntArray(spanCount)</span><br><span class="line">        layoutManager.findLastCompletelyVisibleItemPositions(last)</span><br><span class="line">        layoutManager.findFirstCompletelyVisibleItemPositions(first)</span><br><span class="line">        <span class="keyword">return</span> count &gt; <span class="number">0</span> &amp;&amp; first.min() == <span class="number">0</span> &amp;&amp; last.max() == count - <span class="number">1</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> IntArray.<span class="title">min</span><span class="params">()</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.isNotEmpty()) &#123;</span><br><span class="line">      <span class="keyword">var</span> result = <span class="keyword">this</span>[<span class="number">0</span>]</span><br><span class="line">      <span class="keyword">this</span>.forEach &#123;</span><br><span class="line">        <span class="keyword">if</span> (result &gt; it) result = it</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> result</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> IntArray.<span class="title">max</span><span class="params">()</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.isNotEmpty()) &#123;</span><br><span class="line">      <span class="keyword">var</span> result = <span class="keyword">this</span>[<span class="number">0</span>]</span><br><span class="line">      <span class="keyword">this</span>.forEach &#123;</span><br><span class="line">        <span class="keyword">if</span> (result &lt; it) result = it</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> result</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/blog/">1</a><span class="page-number current">2</span><a class="page-number" href="/blog/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/10/">10</a><a class="extend next" rel="next" href="/blog/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/blog/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/blog/">1</a><span class="page-number current">2</span><a class="page-number" href="/blog/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/11/">11</a><a class="extend next" rel="next" href="/blog/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -672,7 +680,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-count">61</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

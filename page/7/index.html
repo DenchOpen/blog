@@ -190,7 +190,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/08/23/StatusBarHelper/">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/08/27/Implementation%E5%92%8Capi/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.png">
@@ -204,7 +204,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/blog/2020/08/23/StatusBarHelper/" class="post-title-link" itemprop="url">StatusBarHelper</a>
+            <a href="/blog/2020/08/27/Implementation%E5%92%8Capi/" class="post-title-link" itemprop="url">implementation compileOnly和api</a>
         </h1>
 
         <div class="post-meta">
@@ -214,7 +214,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-08-23 17:29:00" itemprop="dateCreated datePublished" datetime="2020-08-23T17:29:00+08:00">2020-08-23</time>
+              <time title="创建时间：2020-08-27 08:31:44" itemprop="dateCreated datePublished" datetime="2020-08-27T08:31:44+08:00">2020-08-27</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -235,10 +235,89 @@
     <div class="post-body" itemprop="articleBody">
 
       
+          <h3 id="implementation和api"><a href="#implementation和api" class="headerlink" title="implementation和api"></a>implementation和api</h3><p><code>implementation</code>和<code>api</code>是取代之前的compile的，其中<code>api</code>和<code>compile</code>是一样的效果，<code>implementation</code>有所不同，通过<code>implementation</code>依赖的库只能自己库本身访问，举个例子，A依赖B，B依赖C，如果B依赖C是使用的<code>implementation</code>依赖，那么在A中是访问不到C中的方法的，如果需要访问，请使用<code>api</code>依赖</p>
+<h3 id="compile-only"><a href="#compile-only" class="headerlink" title="compile only"></a>compile only</h3><p><code>compile only</code>和<code>provided</code>效果是一样的，只在编译的时候有效， 不参与打包</p>
+<h3 id="runtime-only"><a href="#runtime-only" class="headerlink" title="runtime only"></a>runtime only</h3><p><code>runtimeOnly</code> 和 <code>apk</code>效果一样，只在打包的时候有效，编译不参与</p>
+<h3 id="跟编译环境相关"><a href="#跟编译环境相关" class="headerlink" title="跟编译环境相关"></a>跟编译环境相关</h3><ul>
+<li>test implementation</li>
+</ul>
+<p><code>testImplementation</code>和<code>testCompile</code>效果一样，在单元测试和打包测试apk的时候有效</p>
+<ul>
+<li>debug implementation</li>
+</ul>
+<p><code>debugImplementation</code>和<code>debugCompile</code>效果相同， 在<code>debug</code>模式下有效</p>
+<ul>
+<li>release implementation</li>
+</ul>
+<p><code>releaseImplementation</code>和<code>releaseCompile</code>效果相同，只在<code>release</code>模式和打包release包情况下有效</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/08/23/%E5%B7%A5%E5%85%B7%E7%B1%BB-StatusBarHelper/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2020/08/23/%E5%B7%A5%E5%85%B7%E7%B1%BB-StatusBarHelper/" class="post-title-link" itemprop="url">StatusBarHelper</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-23 17:29:00" itemprop="dateCreated datePublished" datetime="2020-08-23T17:29:00+08:00">2020-08-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-10 23:39:32" itemprop="dateModified" datetime="2022-01-10T23:39:32+08:00">2022-01-10</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
           <h1 id="StatusBarHelper"><a href="#StatusBarHelper" class="headerlink" title="StatusBarHelper"></a>StatusBarHelper</h1><h3 id="StatusBar-工具类"><a href="#StatusBar-工具类" class="headerlink" title="StatusBar 工具类"></a>StatusBar 工具类</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">object</span> StatusBarHelper &#123;</span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 内容显示在状态栏下面（LAYOUT_FULLSCREEN） &gt; 6.0</span></span><br><span class="line"><span class="comment">     * true:白底黑字,false:黑底白字</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">fitSystemBar</span><span class="params">(activity: <span class="type">Activity</span>, light: <span class="type">Boolean</span> = <span class="literal">true</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (Build.VERSION.SDK_INT &lt; Build.VERSION_CODES.M) <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">val</span> window = activity.window</span><br><span class="line">    <span class="keyword">val</span> decorView = window.decorView</span><br><span class="line">    <span class="keyword">var</span> visibility = decorView.systemUiVisibility</span><br><span class="line">    visibility = visibility or</span><br><span class="line">    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or</span><br><span class="line">    View.SYSTEM_UI_FLAG_LAYOUT_STABLE</span><br><span class="line">    visibility = <span class="keyword">if</span> (light) &#123;</span><br><span class="line">      visibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      visibility and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()</span><br><span class="line">    &#125;</span><br><span class="line">    decorView.systemUiVisibility = visibility</span><br><span class="line"></span><br><span class="line">    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)</span><br><span class="line">    window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)</span><br><span class="line">    window.statusBarColor = Color.TRANSPARENT</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 调整状态栏文字、图标颜色 &gt; 6.0</span></span><br><span class="line"><span class="comment">     * true:白底黑字,false:黑底白字</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">lightStatusBar</span><span class="params">(activity: <span class="type">Activity</span>, light: <span class="type">Boolean</span> = <span class="literal">true</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (Build.VERSION.SDK_INT &lt; Build.VERSION_CODES.M) <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">var</span> window: Window = activity.window</span><br><span class="line">    <span class="keyword">var</span> visibility = window.decorView.systemUiVisibility</span><br><span class="line">    visibility = <span class="keyword">if</span> (light) &#123;</span><br><span class="line">      visibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      visibility and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()</span><br><span class="line">    &#125;</span><br><span class="line">    window.decorView.systemUiVisibility = visibility</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 获取状态栏高度</span></span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">getStatusBarHeight</span><span class="params">(activity: <span class="type">Activity</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> result: <span class="built_in">Int</span> = <span class="number">0</span></span><br><span class="line">    <span class="keyword">var</span> resId = activity.resources.getIdentifier(<span class="string">"status_bar_height"</span>, <span class="string">"dimen"</span>, <span class="string">"android"</span>)</span><br><span class="line">    <span class="keyword">if</span> (resId &gt; <span class="number">0</span>) result = activity.resources.getDimensionPixelOffset(resId)</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/blog/2020/08/23/StatusBarHelper/#more" rel="contents">
+              <a class="btn" href="/blog/2020/08/23/%E5%B7%A5%E5%85%B7%E7%B1%BB-StatusBarHelper/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -553,85 +632,11 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/08/12/%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0@Java/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2020/08/12/%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0@Java/" class="post-title-link" itemprop="url">常用算法实现 Java版</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-08-12 01:09:31" itemprop="dateCreated datePublished" datetime="2020-08-12T01:09:31+08:00">2020-08-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-27 01:41:45" itemprop="dateModified" datetime="2021-05-27T01:41:45+08:00">2021-05-27</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="常用算法实现-Java版"><a href="#常用算法实现-Java版" class="headerlink" title="常用算法实现 Java版"></a>常用算法实现 Java版</h1><h2 id="一-常用排序算法"><a href="#一-常用排序算法" class="headerlink" title="一. 常用排序算法"></a>一. 常用排序算法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java 的进制数表示</span></span><br><span class="line"><span class="keyword">int</span> a10 = <span class="number">99</span>;</span><br><span class="line"><span class="keyword">int</span> a2 = <span class="number">0b101</span>;</span><br><span class="line"><span class="keyword">int</span> a8 = <span class="number">0143</span>;</span><br><span class="line"><span class="keyword">int</span> a16 = <span class="number">0x63</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="0x01-冒泡排序"><a href="#0x01-冒泡排序" class="headerlink" title="0x01 冒泡排序"></a>0x01 冒泡排序</h3><p>原理<br>比较相邻的元素。如果第一个比第二个大,就交换他们两个。 对每一对相邻元素做同样的工作,从开始第一对到结尾的最后一对。在这一点,最后的元素应该会是最大的数。 针对所有的元素重复以上的步骤,除了最后一个。 持续每次对越来越少的元素重复上面的步骤,直到没有任何一对数字需要比较。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/blog/2020/08/12/%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0@Java/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/blog/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/10/">10</a><a class="extend next" rel="next" href="/blog/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/blog/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/blog/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/11/">11</a><a class="extend next" rel="next" href="/blog/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -699,7 +704,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-count">61</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
