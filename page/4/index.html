@@ -190,6 +190,94 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/06/18/Problems%E4%B8%93%E9%A2%98%E4%B9%8BParcel/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2021/06/18/Problems%E4%B8%93%E9%A2%98%E4%B9%8BParcel/" class="post-title-link" itemprop="url">Problems专题：Parcel</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-18 08:00:00" itemprop="dateCreated datePublished" datetime="2021-06-18T08:00:00+08:00">2021-06-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-07-02 22:33:44" itemprop="dateModified" datetime="2021-07-02T22:33:44+08:00">2021-07-02</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Problems专题：Parcel"><a href="#Problems专题：Parcel" class="headerlink" title="Problems专题：Parcel"></a>Problems专题：Parcel</h2><h3 id="0x01-Unmarshalling-unknown-type"><a href="#0x01-Unmarshalling-unknown-type" class="headerlink" title="0x01 Unmarshalling unknown type"></a>0x01 Unmarshalling unknown type</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">Thread Name: &#39;main&#39; </span><br><span class="line">java.lang.RuntimeException: Parcel android.os.Parcel@bbfcc04: Unmarshalling unknown type code 2131296928 at offset 1088</span><br><span class="line">	at android.os.Parcel.readValue(Parcel.java:2750)</span><br><span class="line">	at android.os.Parcel.readSparseArrayInternal(Parcel.java:3126)</span><br><span class="line">	at android.os.Parcel.readSparseArray(Parcel.java:2354)</span><br><span class="line">	at android.os.Parcel.readValue(Parcel.java:2728)</span><br><span class="line">	at android.os.Parcel.readArrayMapInternal(Parcel.java:3045)</span><br><span class="line">	at android.os.BaseBundle.initializeFromParcelLocked(BaseBundle.java:288)</span><br><span class="line">	at android.os.BaseBundle.unparcel(BaseBundle.java:232)</span><br><span class="line">	at android.os.Bundle.getSparseParcelableArray(Bundle.java:1010)</span><br><span class="line">	at com.android.internal.policy.PhoneWindow.restoreHierarchyState(PhoneWindow.java:2133)</span><br><span class="line">	at android.app.Activity.onRestoreInstanceState(Activity.java:1173)</span><br><span class="line">	at android.app.Activity.performRestoreInstanceState(Activity.java:1128)</span><br><span class="line">	at android.app.Instrumentation.callActivityOnRestoreInstanceState(Instrumentation.java:1318)</span><br><span class="line">	at android.app.ActivityThread.handleStartActivity(ActivityThread.java:3025)</span><br><span class="line">	at android.app.servertransaction.TransactionExecutor.performLifecycleSequence(TransactionExecutor.java:180)</span><br><span class="line">	at android.app.servertransaction.TransactionExecutor.cycleToPath(TransactionExecutor.java:165)</span><br><span class="line">	at android.app.servertransaction.TransactionExecutor.executeLifecycleState(TransactionExecutor.java:142)</span><br><span class="line">	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:70)</span><br><span class="line">	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1840)</span><br><span class="line">	at android.os.Handler.dispatchMessage(Handler.java:106)</span><br><span class="line">	at android.os.Looper.loop(Looper.java:207)</span><br><span class="line">	at android.app.ActivityThread.main(ActivityThread.java:6878)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Native Method)</span><br><span class="line">	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:547)</span><br><span class="line">	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:876)</span><br></pre></td></tr></table></figure>
+
+<p><strong>问题分析</strong></p>
+<p>情况1 Parcelable 对象为空，反序列化异常</p>
+<p>情况2 Parcelable 序列化和反序列化的字段和顺序没有完全对应</p>
+<p>情况3 自定义View的数据保存与恢复</p>
+<p><strong>解决方案</strong></p>
+<p>情况1 Parcelable 对象在序列化和反序列化增加 null 值判断</p>
+<p>情况2 Parcelable 对象 read 和 write 字段的类型和顺序保持一直</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Account</span> <span class="keyword">implements</span> <span class="title">Parcelable</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Account</span><span class="params">(Parcel in)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = in.readString();</span><br><span class="line">        <span class="keyword">this</span>.type = in.readInt();</span><br><span class="line">        <span class="keyword">if</span> (TextUtils.isEmpty(name)) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> android.os.BadParcelableException(<span class="string">"the name must not be empty: "</span> + name);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        <span class="keyword">this</span>.accessId = in.readString();</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">describeContents</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writeToParcel</span><span class="params">(Parcel dest, <span class="keyword">int</span> flags)</span> </span>&#123;</span><br><span class="line">        dest.writeString(name);</span><br><span class="line">        dest.writeInt(type);</span><br><span class="line">        dest.writeString(accessId);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>情况3 自定义View的数据保存与恢复</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onSaveInstanceState</span><span class="params">()</span></span>: Parcelable? &#123;</span><br><span class="line">    Log.d(<span class="string">"NavigationBar"</span>, <span class="string">"onSaveInstanceState: selectedId=<span class="subst">$&#123;mSelectedId&#125;</span>"</span>)</span><br><span class="line">    <span class="keyword">return</span> SavedState(<span class="keyword">super</span>.onSaveInstanceState(), mSelectedId)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onRestoreInstanceState</span><span class="params">(state: <span class="type">Parcelable</span>?)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (state <span class="keyword">is</span> SavedState) &#123;</span><br><span class="line">        <span class="keyword">val</span> id = state.selectedId</span><br><span class="line">        Log.d(<span class="string">"NavigationBar"</span>, <span class="string">"onRestoreInstanceState: selectedId=<span class="subst">$&#123;state.selectedId&#125;</span>"</span>)</span><br><span class="line">        <span class="keyword">super</span>.onRestoreInstanceState(state.superState)</span><br><span class="line">        select(id)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">super</span>.onRestoreInstanceState(state)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">internal</span> <span class="class"><span class="keyword">class</span> <span class="title">SavedState</span> : <span class="type">BaseSavedState &#123;</span></span></span><br><span class="line">    <span class="keyword">var</span> selectedId: <span class="built_in">Int</span> = View.NO_ID</span><br><span class="line"></span><br><span class="line">    <span class="keyword">constructor</span>(source: Parcel) : <span class="keyword">super</span>(source) &#123;</span><br><span class="line">        selectedId = source.readInt()</span><br><span class="line">        Log.d(<span class="string">"NavigationBar"</span>, <span class="string">"readFromParcel: selectedId=<span class="variable">$selectedId</span>"</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">constructor</span>(superState: Parcelable?, selectedId: <span class="built_in">Int</span>) : <span class="keyword">super</span>(superState) &#123;</span><br><span class="line">        <span class="keyword">this</span>.selectedId = selectedId</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">writeToParcel</span><span class="params">(parcel: <span class="type">Parcel</span>, flags: <span class="type">Int</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.writeToParcel(parcel, flags)</span><br><span class="line">        parcel.writeInt(selectedId)</span><br><span class="line">        Log.d(<span class="string">"NavigationBar"</span>, <span class="string">"writeToParcel: selectedId=<span class="variable">$selectedId</span>"</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">describeContents</span><span class="params">()</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">companion</span> <span class="keyword">object</span> CREATOR : Parcelable.Creator&lt;SavedState&gt; &#123;</span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">createFromParcel</span><span class="params">(parcel: <span class="type">Parcel</span>)</span></span>: SavedState &#123;</span><br><span class="line">            <span class="keyword">return</span> SavedState(parcel)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">newArray</span><span class="params">(size: <span class="type">Int</span>)</span></span>: Array&lt;SavedState?&gt; &#123;</span><br><span class="line">            <span class="keyword">return</span> arrayOfNulls(size)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="0x02-android-os-TransactionTooLargeException"><a href="#0x02-android-os-TransactionTooLargeException" class="headerlink" title="0x02 android.os.TransactionTooLargeException"></a>0x02 android.os.TransactionTooLargeException</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">java.lang.RuntimeException: android.os.TransactionTooLargeException: data parcel size 542688 bytes</span><br><span class="line">	at android.app.servertransaction.PendingTransactionActions$StopInfo.run(PendingTransactionActions.java:160)</span><br><span class="line">	at android.os.Handler.handleCallback(Handler.java:873)</span><br><span class="line">	at android.os.Handler.dispatchMessage(Handler.java:99)</span><br><span class="line">	at android.os.Looper.loop(Looper.java:207)</span><br><span class="line">	at android.app.ActivityThread.main(ActivityThread.java:6878)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Native Method)</span><br><span class="line">	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:547)</span><br><span class="line">	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:876)</span><br><span class="line">Caused by: android.os.TransactionTooLargeException: data parcel size 542688 bytes</span><br><span class="line">	at android.os.BinderProxy.transactNative(Native Method)</span><br><span class="line">	at android.os.BinderProxy.transact(BinderProxy.java:479)</span><br><span class="line">	at android.app.IActivityManager$Stub$Proxy.activityStopped(IActivityManager.java:3941)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Native Method)</span><br><span class="line">	at com.taobao.monitor.impl.common.c.invoke(ActivityManagerHook.java:89)</span><br><span class="line">	at java.lang.reflect.Proxy.invoke(Proxy.java:1006)</span><br><span class="line">	at $Proxy2.activityStopped(Unknown Source)</span><br><span class="line">	at android.app.servertransaction.PendingTransactionActions$StopInfo.run(PendingTransactionActions.java:144)</span><br><span class="line">	... 7 more</span><br><span class="line">android.os.TransactionTooLargeException: data parcel size 542688 bytes</span><br><span class="line">	at android.os.BinderProxy.transactNative(Native Method)</span><br><span class="line">	at android.os.BinderProxy.transact(BinderProxy.java:479)</span><br><span class="line">	at android.app.IActivityManager$Stub$Proxy.activityStopped(IActivityManager.java:3941)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Native Method)</span><br><span class="line">	at com.taobao.monitor.impl.common.c.invoke(ActivityManagerHook.java:89)</span><br><span class="line">	at java.lang.reflect.Proxy.invoke(Proxy.java:1006)</span><br><span class="line">	at $Proxy2.activityStopped(Unknown Source)</span><br><span class="line">	at android.app.servertransaction.PendingTransactionActions$StopInfo.run(PendingTransactionActions.java:144)</span><br><span class="line">	at android.os.Handler.handleCallback(Handler.java:873)</span><br><span class="line">	at android.os.Handler.dispatchMessage(Handler.java:99)</span><br><span class="line">	at android.os.Looper.loop(Looper.java:207)</span><br><span class="line">	at android.app.ActivityThread.main(ActivityThread.java:6878)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Native Method)</span><br><span class="line">	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:547)</span><br><span class="line">	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:876)</span><br></pre></td></tr></table></figure>
+
+<p><strong>问题分析</strong></p>
+<p>1 Intent 传递的数据过大。</p>
+<p>2 onSaveInstance 保存的数据过大。</p>
+<p><strong>解决方案</strong></p>
+<p>尽可能的使用少量的数据。</p>
+<p>大数据考虑持久化和其他传递形式。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/06/18/%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -611,88 +699,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/05/30/%E5%93%B2%E5%AD%A6%E5%90%AF%E8%92%99/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2021/05/30/%E5%93%B2%E5%AD%A6%E5%90%AF%E8%92%99/" class="post-title-link" itemprop="url">哲学启蒙</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-05-30 12:39:32 / 修改时间：16:27:23" itemprop="dateCreated datePublished" datetime="2021-05-30T12:39:32+08:00">2021-05-30</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><strong>人们的烦恼，基本是源于读书太少，而想得太多。</strong></p>
-<p>读哲学，不只是去吸收大家们的思想，而是在读的同时不要忘记思考。</p>
-<p>哲学也许给不了人成功，也不一定会带来富有，但至少获得了自由。</p>
-<h3 id="大问题"><a href="#大问题" class="headerlink" title="大问题"></a>大问题</h3><p>作者: [美国] 罗伯特·C. 所罗门</p>
-<h3 id="哲学的故事"><a href="#哲学的故事" class="headerlink" title="哲学的故事"></a>哲学的故事</h3><p>作者：威尔·杜兰特</p>
-<blockquote>
-<p>用讲故事的方法，介绍了主要哲学家的生平及其观点，从苏格拉底、柏拉图、亚里士多德到叔本华、尼采再到柏格森，罗素、杜威等。在阐述每位哲学家思想的同时，生动地介绍了他们生活的时代背景、生活境遇和情感经历。</p>
-</blockquote>
-<h3 id="苏菲的世界"><a href="#苏菲的世界" class="headerlink" title="苏菲的世界"></a>苏菲的世界</h3><p>作者：乔斯坦·贾德</p>
-<blockquote>
-<p>14岁的少女苏菲不断接到一些极不寻常的来信，世界像谜团一般在她眼底展开，她在一位神秘导师的指引下，运用少女天生的悟性与后天知识，企图解开这些谜团，然而。事实真相远比她所想的更怪异、更离奇……</p>
-</blockquote>
-<h3 id="西方哲学简史"><a href="#西方哲学简史" class="headerlink" title="西方哲学简史"></a>西方哲学简史</h3><p>作者：伯特兰·罗素</p>
-<blockquote>
-<p>记述了从西方哲学萌芽的古希腊哲学一直到二十世纪早期期西方哲学的发展历程。</p>
-<p>《西方哲学简史》是在罗素的代表作《西方哲学史》的基础上，保留原著架构，并对一些繁复的逻辑论证进行通俗化的基础上编译而成，使其更加适合普通读者阅读。</p>
-</blockquote>
-<h3 id="禅与摩托车维修艺术"><a href="#禅与摩托车维修艺术" class="headerlink" title="禅与摩托车维修艺术"></a>禅与摩托车维修艺术</h3><p>作者：罗伯特·M.波西格</p>
-<blockquote>
-<p>1968年，他与长子克里斯一起骑着摩托车从双子城出发，在中西部旷野、落基山区和西海岸从事心灵探险。他之所以开始这场横跨美国大陆的万里长旅，是希望从狭窄而受限的自我解脱。一路经过复杂经验与反省思考，他终于找到生理上的、精神上的完整与清净。</p>
-</blockquote>
-<p>霍金高评：</p>
-<h3 id="时间简史"><a href="#时间简史" class="headerlink" title="时间简史"></a>时间简史</h3><p>霍金</p>
-<h3 id="你的第一本哲学书"><a href="#你的第一本哲学书" class="headerlink" title="你的第一本哲学书"></a>你的第一本哲学书</h3><p>作者：托马斯·内格尔</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -765,7 +771,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">62</span>
+          <span class="site-state-item-count">63</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
