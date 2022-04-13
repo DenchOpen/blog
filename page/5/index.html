@@ -190,6 +190,71 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/06/08/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B8%83%E5%B1%80-FixedEndLinearLayout/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2021/06/08/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B8%83%E5%B1%80-FixedEndLinearLayout/" class="post-title-link" itemprop="url">自定义布局：西部世界 第一季</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-08 21:03:13" itemprop="dateCreated datePublished" datetime="2021-06-08T21:03:13+08:00">2021-06-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-04 19:32:40" itemprop="dateModified" datetime="2022-01-04T19:32:40+08:00">2022-01-04</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="自定义布局：西部世界-第一季"><a href="#自定义布局：西部世界-第一季" class="headerlink" title="自定义布局：西部世界 第一季"></a>自定义布局：西部世界 第一季</h3><p>这个自定义布局要求显示为 <code>系列名称... + 第一季</code> ，后面的季内容显示完全，紧贴系列名称显示，系列名称在布局不允许的时候可以部分显示。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 系列名称... + 第一季 </span></span><br><span class="line"><span class="comment"> * 后面的季内容显示完全，紧贴系列名称显示，系列名称在布局不允许的时候可以部分显示</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FixedEndLinearLayout</span> <span class="meta">@JvmOverloads</span> <span class="keyword">constructor</span></span>(</span><br><span class="line">    context: Context, attrs: AttributeSet? = <span class="literal">null</span>, defStyleAttr: <span class="built_in">Int</span> = <span class="number">0</span></span><br><span class="line">) : LinearLayout(context, attrs, defStyleAttr) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onMeasure</span><span class="params">(widthMeasureSpec: <span class="type">Int</span>, heightMeasureSpec: <span class="type">Int</span>)</span></span> &#123;</span><br><span class="line">        <span class="comment">//获取父布局测量size和model</span></span><br><span class="line">        <span class="keyword">val</span> widthSize = MeasureSpec.getSize(widthMeasureSpec)</span><br><span class="line">        <span class="keyword">val</span> widthMode = MeasureSpec.getMode(widthMeasureSpec)</span><br><span class="line">        <span class="keyword">val</span> heightSize = MeasureSpec.getSize(heightMeasureSpec)</span><br><span class="line">        <span class="keyword">val</span> heightMode = MeasureSpec.getMode(heightMeasureSpec)</span><br><span class="line">        <span class="keyword">if</span> (childCount != <span class="number">2</span>) <span class="keyword">throw</span> RuntimeException(<span class="string">"FixedEndLinearLayout must have 2 children."</span>)</span><br><span class="line">        <span class="keyword">val</span> wrapChild = getChildAt(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">val</span> fixedChild = getChildAt(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment">//测量</span></span><br><span class="line">        measureChild(fixedChild, widthMeasureSpec, heightMeasureSpec)</span><br><span class="line">        <span class="keyword">val</span> fixedParams = fixedChild.layoutParams <span class="keyword">as</span> MarginLayoutParams</span><br><span class="line"></span><br><span class="line">        <span class="keyword">val</span> fixedChildWidth =</span><br><span class="line">            fixedChild.measuredWidth + fixedParams.leftMargin + fixedParams.rightMargin</span><br><span class="line">        <span class="keyword">val</span> fixedChildHeight =</span><br><span class="line">            fixedChild.measuredHeight + fixedParams.topMargin + fixedParams.bottomMargin</span><br><span class="line"></span><br><span class="line">        <span class="keyword">val</span> wrapChildWidthSpec = ViewGroup.getChildMeasureSpec(</span><br><span class="line">            widthMeasureSpec,</span><br><span class="line">            paddingLeft + paddingRight + fixedChildWidth, wrapChild.layoutParams.width</span><br><span class="line">        )</span><br><span class="line">        <span class="keyword">val</span> wrapChildHeightSpec = ViewGroup.getChildMeasureSpec(</span><br><span class="line">            heightMeasureSpec, paddingTop + paddingBottom, wrapChild.layoutParams.height</span><br><span class="line">        )</span><br><span class="line">        wrapChild.measure(wrapChildWidthSpec, wrapChildHeightSpec)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">val</span> wrapParams = wrapChild.layoutParams <span class="keyword">as</span> MarginLayoutParams</span><br><span class="line"></span><br><span class="line">        <span class="keyword">val</span> wrapChildWidth =</span><br><span class="line">            wrapChild.measuredWidth + wrapParams.leftMargin + wrapParams.rightMargin</span><br><span class="line">        <span class="keyword">val</span> wrapChildHeight =</span><br><span class="line">            wrapChild.measuredHeight + wrapParams.topMargin + wrapParams.bottomMargin</span><br><span class="line"></span><br><span class="line">        <span class="keyword">val</span> width = wrapChildWidth + fixedChildWidth</span><br><span class="line">        <span class="keyword">val</span> height = fixedChildHeight.coerceAtLeast(wrapChildHeight)</span><br><span class="line"></span><br><span class="line">        start0 = paddingLeft + wrapParams.leftMargin</span><br><span class="line">        start1 = paddingLeft + wrapChildWidth + fixedParams.leftMargin</span><br><span class="line"></span><br><span class="line">        setMeasuredDimension(</span><br><span class="line">            <span class="keyword">if</span> (widthMode == MeasureSpec.EXACTLY) widthSize <span class="keyword">else</span> width + paddingLeft + paddingRight,</span><br><span class="line">            <span class="keyword">if</span> (heightMode == MeasureSpec.EXACTLY) heightSize <span class="keyword">else</span> height + paddingTop + paddingBottom</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> start0 = <span class="number">0</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> start1 = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onLayout</span><span class="params">(changed: <span class="type">Boolean</span>, l: <span class="type">Int</span>, t: <span class="type">Int</span>, r: <span class="type">Int</span>, b: <span class="type">Int</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">val</span> wrapChild = getChildAt(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">val</span> fixedChild = getChildAt(<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">val</span> y0 = (measuredHeight - wrapChild.measuredHeight) / <span class="number">2</span></span><br><span class="line">        <span class="keyword">val</span> y1 = (measuredHeight - fixedChild.measuredHeight) / <span class="number">2</span></span><br><span class="line">        wrapChild.layout(</span><br><span class="line">            start0,</span><br><span class="line">            y0,</span><br><span class="line">            start0 + wrapChild.measuredWidth,</span><br><span class="line">            y0 + wrapChild.measuredHeight</span><br><span class="line">        )</span><br><span class="line">        fixedChild.layout(</span><br><span class="line">            start1,</span><br><span class="line">            y1,</span><br><span class="line">            start1 + fixedChild.measuredWidth,</span><br><span class="line">            y1 + fixedChild.measuredHeight</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/05/30/%E5%93%B2%E5%AD%A6%E5%90%AF%E8%92%99/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -550,72 +615,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/05/19/BottomFragment/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2021/05/19/BottomFragment/" class="post-title-link" itemprop="url">BottomFragment</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-19 02:16:30" itemprop="dateCreated datePublished" datetime="2021-05-19T02:16:30+08:00">2021-05-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-21 23:09:32" itemprop="dateModified" datetime="2021-05-21T23:09:32+08:00">2021-05-21</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="底部弹出控件-Fragment-实现"><a href="#底部弹出控件-Fragment-实现" class="headerlink" title="底部弹出控件 - Fragment 实现"></a>底部弹出控件 - Fragment 实现</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> android.os.Bundle</span><br><span class="line"><span class="keyword">import</span> android.util.Log</span><br><span class="line"><span class="keyword">import</span> android.view.LayoutInflater</span><br><span class="line"><span class="keyword">import</span> android.view.View</span><br><span class="line"><span class="keyword">import</span> android.view.ViewGroup</span><br><span class="line"><span class="keyword">import</span> androidx.fragment.app.Fragment</span><br><span class="line"><span class="keyword">import</span> androidx.fragment.app.FragmentManager</span><br><span class="line"><span class="keyword">import</span> com.dench.baselib.R</span><br><span class="line"><span class="keyword">import</span> com.dench.baselib.databinding.FragmentBottomBinding</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BottomFragment</span> : <span class="type">Fragment</span></span>() &#123;</span><br><span class="line">    <span class="keyword">companion</span> <span class="keyword">object</span> &#123;</span><br><span class="line">        <span class="function"><span class="keyword">fun</span> <span class="title">start</span><span class="params">(fm: <span class="type">FragmentManager</span>, fragment: <span class="type">Fragment</span>)</span></span>: BottomFragment &#123;</span><br><span class="line">            <span class="keyword">val</span> bottomFragment = BottomFragment().apply &#123;</span><br><span class="line">                setFragment(fragment)</span><br><span class="line">            &#125;</span><br><span class="line">            fm.beginTransaction()</span><br><span class="line">                .setCustomAnimations(</span><br><span class="line">                    R.anim.fragment_bottom_enter,</span><br><span class="line">                    <span class="number">0</span>,</span><br><span class="line">                    <span class="number">0</span>,</span><br><span class="line">                    R.anim.fragment_bottom_exit</span><br><span class="line">                )</span><br><span class="line">                .add(android.R.id.content, bottomFragment)</span><br><span class="line">                .addToBackStack(<span class="literal">null</span>)</span><br><span class="line">                .commitAllowingStateLoss()</span><br><span class="line">            <span class="keyword">return</span> bottomFragment</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> fragment: Fragment</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">setFragment</span><span class="params">(fragment: <span class="type">Fragment</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.fragment = fragment</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> binding: FragmentBottomBinding</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> TAG = <span class="string">"BottomFragment"</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreateView</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        inflater: <span class="type">LayoutInflater</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">        container: <span class="type">ViewGroup</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">        savedInstanceState: <span class="type">Bundle</span>?</span></span></span><br><span class="line"><span class="function"><span class="params">    )</span></span>: View? &#123;</span><br><span class="line">        binding = FragmentBottomBinding.inflate(inflater, container, <span class="literal">false</span>)</span><br><span class="line">        <span class="keyword">return</span> binding.root</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onViewCreated</span><span class="params">(view: <span class="type">View</span>, savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onViewCreated(view, savedInstanceState)</span><br><span class="line">        binding.run &#123;</span><br><span class="line">            binding.bottomFragmentRl.setOnClickListener(View.OnClickListener &#123;</span><br><span class="line">                Log.d(TAG, <span class="string">"bottom root view click."</span>)</span><br><span class="line">                dismissSelf()</span><br><span class="line">            &#125;)</span><br><span class="line"></span><br><span class="line">            <span class="comment">/** add fragment */</span></span><br><span class="line">            childFragmentManager.beginTransaction()</span><br><span class="line">                .add(R.id.container, fragment)</span><br><span class="line">                .commitAllowingStateLoss()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">dismissSelf</span><span class="params">()</span></span> &#123;</span><br><span class="line">        parentFragmentManager.popBackStack()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -688,7 +687,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">63</span>
+          <span class="site-state-item-count">64</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

@@ -190,6 +190,92 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/06/19/Problems%E4%B8%93%E9%A2%98%E4%B9%8BRecyclerView/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2021/06/19/Problems%E4%B8%93%E9%A2%98%E4%B9%8BRecyclerView/" class="post-title-link" itemprop="url">Problems专题：RecyclerView</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-19 00:00:00" itemprop="dateCreated datePublished" datetime="2021-06-19T00:00:00+08:00">2021-06-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-08 01:31:32" itemprop="dateModified" datetime="2021-12-08T01:31:32+08:00">2021-12-08</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Problems专题：RecyclerView"><a href="#Problems专题：RecyclerView" class="headerlink" title="Problems专题：RecyclerView"></a>Problems专题：RecyclerView</h2><h3 id="0x01-Called-attach-on-a-child-which-is-not-detached"><a href="#0x01-Called-attach-on-a-child-which-is-not-detached" class="headerlink" title="0x01 Called attach on a child which is not detached"></a>0x01 Called attach on a child which is not detached</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">java.lang.IllegalArgumentException: Called attach on a child which is not detached: BaseViewHolder&#123;2b241e1 position=12 id=-1, oldPos=-1, pLpos:-1&#125; androidx.recyclerview.widget.RecyclerView&#123;afecb06 VFED..... ......ID 0,0-1080,2055 #7f09236e app:id/recycler_view_xxx&#125;, adapter:com.xxxx.adapter.XxxAdapter@cfc75c7, layout:androidx.recyclerview.widget.LinearLayoutManager@24af7f4, context:com.xxxx.XxxActivity@1ed75e2</span><br><span class="line">	at androidx.recyclerview.widget.RecyclerView$5.attachViewToParent(RecyclerView.java:917)</span><br><span class="line">	at androidx.recyclerview.widget.ChildHelper.attachViewToParent(ChildHelper.java:239)</span><br><span class="line">	at androidx.recyclerview.widget.RecyclerView.addAnimatingView(RecyclerView.java:1438)</span><br><span class="line">	at androidx.recyclerview.widget.RecyclerView.animateDisappearance(RecyclerView.java:4377)</span><br><span class="line">	at androidx.recyclerview.widget.RecyclerView$4.processDisappeared(RecyclerView.java:616)</span><br><span class="line">	at androidx.recyclerview.widget.ViewInfoStore.process(ViewInfoStore.java:242)</span><br><span class="line">	at androidx.recyclerview.widget.RecyclerView.dispatchLayoutStep3(RecyclerView.java:4210)</span><br><span class="line">	at androidx.recyclerview.widget.RecyclerView.dispatchLayout(RecyclerView.java:3864)</span><br><span class="line">	at androidx.recyclerview.widget.RecyclerView.onLayout(RecyclerView.java:4410)</span><br><span class="line">	at android.view.View.layout(View.java:22213)</span><br><span class="line">	at android.view.ViewGroup.layout(ViewGroup.java:6340)</span><br><span class="line">	at android.widget.RelativeLayout.onLayout(RelativeLayout.java:1131)</span><br><span class="line">	at android.view.View.layout(View.java:22213)</span><br><span class="line">	at android.view.ViewGroup.layout(ViewGroup.java:6340)</span><br><span class="line">	at androidx.viewpager.widget.ViewPager.onLayout(ViewPager.java:1775)</span><br><span class="line">	at android.view.View.layout(View.java:22213)</span><br><span class="line">	at android.view.ViewGroup.layout(ViewGroup.java:6340)</span><br><span class="line">	at android.widget.LinearLayout.setChildFrame(LinearLayout.java:1829)</span><br><span class="line">	at android.widget.LinearLayout.layoutVertical(LinearLayout.java:1673)</span><br><span class="line">	at android.widget.LinearLayout.onLayout(LinearLayout.java:1582)</span><br><span class="line">	at android.view.View.layout(View.java:22213)</span><br><span class="line">	at android.view.ViewGroup.layout(ViewGroup.java:6340)</span><br><span class="line">	at android.widget.RelativeLayout.onLayout(RelativeLayout.java:1131)</span><br><span class="line">	at android.view.View.layout(View.java:22213)</span><br><span class="line">	at android.view.ViewGroup.layout(ViewGroup.java:6340)</span><br><span class="line">	at android.widget.FrameLayout.layoutChildren(FrameLayout.java:332)</span><br><span class="line">	at android.widget.FrameLayout.onLayout(FrameLayout.java:270)</span><br><span class="line">	at android.view.View.layout(View.java:22213)</span><br><span class="line">	at android.view.ViewGroup.layout(ViewGroup.java:6340)</span><br><span class="line">	at android.widget.LinearLayout.setChildFrame(LinearLayout.java:1829)</span><br><span class="line">	at android.widget.LinearLayout.layoutVertical(LinearLayout.java:1673)</span><br><span class="line">	at android.widget.LinearLayout.onLayout(LinearLayout.java:1582)</span><br><span class="line">	at android.view.View.layout(View.java:22213)</span><br><span class="line">	at android.view.ViewGroup.layout(ViewGroup.java:6340)</span><br><span class="line">	at android.widget.FrameLayout.layoutChildren(FrameLayout.java:332)</span><br><span class="line">	at android.widget.FrameLayout.onLayout(FrameLayout.java:270)</span><br><span class="line">	at android.view.View.layout(View.java:22213)</span><br><span class="line">	at android.view.ViewGroup.layout(ViewGroup.java:6340)</span><br><span class="line">	at android.widget.LinearLayout.setChildFrame(LinearLayout.java:1829)</span><br><span class="line">	at android.widget.LinearLayout.layoutVertical(LinearLayout.java:1673)</span><br><span class="line">	at android.widget.LinearLayout.onLayout(LinearLayout.java:1582)</span><br><span class="line">	at android.view.View.layout(View.java:22213)</span><br><span class="line">	at android.view.ViewGroup.layout(ViewGroup.java:6340)</span><br><span class="line">	at android.widget.FrameLayout.layoutChildren(FrameLayout.java:332)</span><br><span class="line">	at android.widget.FrameLayout.onLayout(FrameLayout.java:270)</span><br><span class="line">	at com.android.internal.policy.DecorView.onLayout(DecorView.java:905)</span><br><span class="line">	at android.view.View.layout(View.java:22213)</span><br><span class="line">	at android.view.ViewGroup.layout(ViewGroup.java:6340)</span><br><span class="line">	at android.view.ViewRootImpl.performLayout(ViewRootImpl.java:3286)</span><br><span class="line">	at android.view.ViewRootImpl.performTraversals(ViewRootImpl.java:2757)</span><br><span class="line">	at android.view.ViewRootImpl.doTraversal(ViewRootImpl.java:1865)</span><br><span class="line">	at android.view.ViewRootImpl$TraversalRunnable.run(ViewRootImpl.java:7933)</span><br><span class="line">	at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1018)</span><br><span class="line">	at android.view.Choreographer.doCallbacks(Choreographer.java:837)</span><br><span class="line">	at android.view.Choreographer.doFrame(Choreographer.java:767)</span><br><span class="line">	at android.view.Choreographer$FrameDisplayEventReceiver.run(Choreographer.java:1003)</span><br><span class="line">	at android.os.Handler.handleCallback(Handler.java:883)</span><br><span class="line">	at android.os.Handler.dispatchMessage(Handler.java:100)</span><br><span class="line">	at android.os.Looper.loop(Looper.java:230)</span><br><span class="line">	at android.app.ActivityThread.main(ActivityThread.java:7951)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Native Method)</span><br><span class="line">	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:526)</span><br><span class="line">	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1034)</span><br></pre></td></tr></table></figure>
+
+<p><strong>问题分析</strong></p>
+<p>对同一个 position 位置同时进行<code>notifyItemRemoved(position)</code> 和 <code>notifyItemInserted(position)</code> 操作导致。</p>
+<p><strong>解决方案</strong></p>
+<p>避免同时对同一个位置先 notifyItemRemoved 再 notifyItemInserted，使用 notifyItemChanged。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adapter?.notifyItemChanged(position)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="0x02-RecyclerView设置最大高度、宽度"><a href="#0x02-RecyclerView设置最大高度、宽度" class="headerlink" title="0x02 RecyclerView设置最大高度、宽度"></a>0x02 RecyclerView设置最大高度、宽度</h3><p>当RecyclerView属性设置为<code>wrap_content</code>+<code>maxHeight</code>时，maxHeight没有效果。</p>
+<p><strong>问题分析</strong></p>
+<p>当RecyclerView的<code>LayoutManager#isAutoMeasureEnabled()</code>返回true时，RecyclerView高度取决于children view的布局高度，并非取决于RecyclerView自身的测量高度。</p>
+<p><strong>解决方案</strong></p>
+<p>因此，我们只需要重写LayoutManager的<code>public void setMeasuredDimension(Rect childrenBounds, int wSpec, int hSpec)</code>方法即可为RecyclerView设置最大宽高。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">recyclerView.layoutManager = <span class="keyword">object</span> : LinearLayoutManager(context, RecyclerView.VERTICAL, <span class="literal">false</span>) &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">setMeasuredDimension</span><span class="params">(childrenBounds: <span class="type">Rect</span>?, wSpec: <span class="type">Int</span>, hSpec: <span class="type">Int</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">val</span> height = View.MeasureSpec.getSize(hSpec)</span><br><span class="line">        <span class="keyword">val</span> maxHeight = getScreenHeight() * <span class="number">4</span> / <span class="number">5</span></span><br><span class="line">        <span class="keyword">val</span> realHeight = height.coerceAtMost(maxHeight)</span><br><span class="line">        <span class="keyword">val</span> realHeightSpec = View.MeasureSpec.makeMeasureSpec(realHeight, AT_MOST)</span><br><span class="line">        <span class="keyword">super</span>.setMeasuredDimension(childrenBounds, wSpec, realHeightSpec)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>作者：猫爸iYao<br>链接：<a href="https://www.jianshu.com/p/0dec79ff70df" target="_blank" rel="noopener">https://www.jianshu.com/p/0dec79ff70df</a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/06/18/Problems%E4%B8%93%E9%A2%98%E4%B9%8BParcel/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -634,71 +720,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/06/08/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B8%83%E5%B1%80-FixedEndLinearLayout/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2021/06/08/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B8%83%E5%B1%80-FixedEndLinearLayout/" class="post-title-link" itemprop="url">自定义布局：西部世界 第一季</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-06-08 21:03:13" itemprop="dateCreated datePublished" datetime="2021-06-08T21:03:13+08:00">2021-06-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-04 19:32:40" itemprop="dateModified" datetime="2022-01-04T19:32:40+08:00">2022-01-04</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="自定义布局：西部世界-第一季"><a href="#自定义布局：西部世界-第一季" class="headerlink" title="自定义布局：西部世界 第一季"></a>自定义布局：西部世界 第一季</h3><p>这个自定义布局要求显示为 <code>系列名称... + 第一季</code> ，后面的季内容显示完全，紧贴系列名称显示，系列名称在布局不允许的时候可以部分显示。</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 系列名称... + 第一季 </span></span><br><span class="line"><span class="comment"> * 后面的季内容显示完全，紧贴系列名称显示，系列名称在布局不允许的时候可以部分显示</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FixedEndLinearLayout</span> <span class="meta">@JvmOverloads</span> <span class="keyword">constructor</span></span>(</span><br><span class="line">    context: Context, attrs: AttributeSet? = <span class="literal">null</span>, defStyleAttr: <span class="built_in">Int</span> = <span class="number">0</span></span><br><span class="line">) : LinearLayout(context, attrs, defStyleAttr) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onMeasure</span><span class="params">(widthMeasureSpec: <span class="type">Int</span>, heightMeasureSpec: <span class="type">Int</span>)</span></span> &#123;</span><br><span class="line">        <span class="comment">//获取父布局测量size和model</span></span><br><span class="line">        <span class="keyword">val</span> widthSize = MeasureSpec.getSize(widthMeasureSpec)</span><br><span class="line">        <span class="keyword">val</span> widthMode = MeasureSpec.getMode(widthMeasureSpec)</span><br><span class="line">        <span class="keyword">val</span> heightSize = MeasureSpec.getSize(heightMeasureSpec)</span><br><span class="line">        <span class="keyword">val</span> heightMode = MeasureSpec.getMode(heightMeasureSpec)</span><br><span class="line">        <span class="keyword">if</span> (childCount != <span class="number">2</span>) <span class="keyword">throw</span> RuntimeException(<span class="string">"FixedEndLinearLayout must have 2 children."</span>)</span><br><span class="line">        <span class="keyword">val</span> wrapChild = getChildAt(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">val</span> fixedChild = getChildAt(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment">//测量</span></span><br><span class="line">        measureChild(fixedChild, widthMeasureSpec, heightMeasureSpec)</span><br><span class="line">        <span class="keyword">val</span> fixedParams = fixedChild.layoutParams <span class="keyword">as</span> MarginLayoutParams</span><br><span class="line"></span><br><span class="line">        <span class="keyword">val</span> fixedChildWidth =</span><br><span class="line">            fixedChild.measuredWidth + fixedParams.leftMargin + fixedParams.rightMargin</span><br><span class="line">        <span class="keyword">val</span> fixedChildHeight =</span><br><span class="line">            fixedChild.measuredHeight + fixedParams.topMargin + fixedParams.bottomMargin</span><br><span class="line"></span><br><span class="line">        <span class="keyword">val</span> wrapChildWidthSpec = ViewGroup.getChildMeasureSpec(</span><br><span class="line">            widthMeasureSpec,</span><br><span class="line">            paddingLeft + paddingRight + fixedChildWidth, wrapChild.layoutParams.width</span><br><span class="line">        )</span><br><span class="line">        <span class="keyword">val</span> wrapChildHeightSpec = ViewGroup.getChildMeasureSpec(</span><br><span class="line">            heightMeasureSpec, paddingTop + paddingBottom, wrapChild.layoutParams.height</span><br><span class="line">        )</span><br><span class="line">        wrapChild.measure(wrapChildWidthSpec, wrapChildHeightSpec)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">val</span> wrapParams = wrapChild.layoutParams <span class="keyword">as</span> MarginLayoutParams</span><br><span class="line"></span><br><span class="line">        <span class="keyword">val</span> wrapChildWidth =</span><br><span class="line">            wrapChild.measuredWidth + wrapParams.leftMargin + wrapParams.rightMargin</span><br><span class="line">        <span class="keyword">val</span> wrapChildHeight =</span><br><span class="line">            wrapChild.measuredHeight + wrapParams.topMargin + wrapParams.bottomMargin</span><br><span class="line"></span><br><span class="line">        <span class="keyword">val</span> width = wrapChildWidth + fixedChildWidth</span><br><span class="line">        <span class="keyword">val</span> height = fixedChildHeight.coerceAtLeast(wrapChildHeight)</span><br><span class="line"></span><br><span class="line">        start0 = paddingLeft + wrapParams.leftMargin</span><br><span class="line">        start1 = paddingLeft + wrapChildWidth + fixedParams.leftMargin</span><br><span class="line"></span><br><span class="line">        setMeasuredDimension(</span><br><span class="line">            <span class="keyword">if</span> (widthMode == MeasureSpec.EXACTLY) widthSize <span class="keyword">else</span> width + paddingLeft + paddingRight,</span><br><span class="line">            <span class="keyword">if</span> (heightMode == MeasureSpec.EXACTLY) heightSize <span class="keyword">else</span> height + paddingTop + paddingBottom</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> start0 = <span class="number">0</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> start1 = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onLayout</span><span class="params">(changed: <span class="type">Boolean</span>, l: <span class="type">Int</span>, t: <span class="type">Int</span>, r: <span class="type">Int</span>, b: <span class="type">Int</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">val</span> wrapChild = getChildAt(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">val</span> fixedChild = getChildAt(<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">val</span> y0 = (measuredHeight - wrapChild.measuredHeight) / <span class="number">2</span></span><br><span class="line">        <span class="keyword">val</span> y1 = (measuredHeight - fixedChild.measuredHeight) / <span class="number">2</span></span><br><span class="line">        wrapChild.layout(</span><br><span class="line">            start0,</span><br><span class="line">            y0,</span><br><span class="line">            start0 + wrapChild.measuredWidth,</span><br><span class="line">            y0 + wrapChild.measuredHeight</span><br><span class="line">        )</span><br><span class="line">        fixedChild.layout(</span><br><span class="line">            start1,</span><br><span class="line">            y1,</span><br><span class="line">            start1 + fixedChild.measuredWidth,</span><br><span class="line">            y1 + fixedChild.measuredHeight</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -771,7 +792,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">63</span>
+          <span class="site-state-item-count">64</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
