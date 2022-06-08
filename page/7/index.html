@@ -190,6 +190,80 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/09/23/Android%E4%B8%93%E6%A0%8F-%E9%80%9A%E7%9F%A5%E6%A0%8FNotification/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2020/09/23/Android%E4%B8%93%E6%A0%8F-%E9%80%9A%E7%9F%A5%E6%A0%8FNotification/" class="post-title-link" itemprop="url">自定义Notification遇到的坑</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-23 19:15:25" itemprop="dateCreated datePublished" datetime="2020-09-23T19:15:25+08:00">2020-09-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-08 01:31:32" itemprop="dateModified" datetime="2021-12-08T01:31:32+08:00">2021-12-08</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>自定义Notification 实现：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// RemoteViews for notification</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">var</span> rv: RemoteViews? = <span class="literal">null</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">var</span> rvExpanded: RemoteViews? = <span class="literal">null</span></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">customNotification</span><span class="params">(process: <span class="type">Int</span>)</span></span> &#123;</span><br><span class="line">  <span class="comment">// custom RemoteViews</span></span><br><span class="line">  <span class="keyword">if</span> (rv == <span class="literal">null</span>) rv = RemoteViews(packageName, R.layout.notification_small)</span><br><span class="line">  rv?.setTextViewText(R.id.notification_title, <span class="string">"这是一个小标题"</span>)</span><br><span class="line">  <span class="keyword">if</span> (rvExpanded == <span class="literal">null</span>) rvExpanded = RemoteViews(packageName, R.layout.notification_large)</span><br><span class="line">  rvExpanded?.setTextViewText(R.id.large_notification_title, <span class="string">"这是一个大标题，支持很多的内容: <span class="variable">$process</span>%"</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// PendingIntent</span></span><br><span class="line">  <span class="keyword">val</span> intentNotification = Intent(<span class="keyword">this</span>, PlayMusicActivity::<span class="class"><span class="keyword">class</span>.<span class="title">java</span>).<span class="title">apply</span> </span>&#123;</span><br><span class="line">    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">val</span> pendIntent = PendingIntent.getActivity(</span><br><span class="line">    <span class="keyword">this</span>,</span><br><span class="line">    <span class="number">0</span>,</span><br><span class="line">    intentNotification,</span><br><span class="line">    PendingIntent.FLAG_UPDATE_CURRENT</span><br><span class="line">  )</span><br><span class="line"></span><br><span class="line">  <span class="comment">// build notification</span></span><br><span class="line">  <span class="keyword">val</span> customNotification =</span><br><span class="line">  NotificationCompat.Builder(applicationContext, CHANNEL_ID)</span><br><span class="line">  .setSmallIcon(R.drawable.bravo) <span class="comment">// small Icon</span></span><br><span class="line">  .setStyle(NotificationCompat.DecoratedCustomViewStyle()) <span class="comment">// 自定义contentView</span></span><br><span class="line">  .setCustomContentView(rv!!)</span><br><span class="line">  .setContent(rvExpanded!!)</span><br><span class="line">  .setCustomBigContentView(rvExpanded!!)</span><br><span class="line">  .setCustomHeadsUpContentView(rvExpanded!!)</span><br><span class="line">  .setOngoing(<span class="literal">true</span>) <span class="comment">// 一直显示</span></span><br><span class="line">  .setAutoCancel(<span class="literal">false</span>) <span class="comment">// 点击后消失</span></span><br><span class="line">  .setVisibility(NotificationCompat.VISIBILITY_PUBLIC) <span class="comment">// 锁屏显示,需要配合权限设置</span></span><br><span class="line">  .setPriority(NotificationCompat.PRIORITY_HIGH) <span class="comment">// Priority</span></span><br><span class="line">  .setOnlyAlertOnce(<span class="literal">true</span>) <span class="comment">// 声音，震动，仅弹出一次</span></span><br><span class="line">  .setContentIntent(pendIntent)</span><br><span class="line">  .build()</span><br><span class="line">  startForeground(NOTIFICATION_ID, customNotification)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>1.使用 <code>NotificationCompat</code> 兼容各个版本差异性</p>
+<p>2.<code>RemoteViews</code> 布局文件不支持 <code>constraintlayout</code> ，切记</p>
+<p>3.在SDK 26之后必须要绑定Channel，所以通知要先创建Channel</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">checkAndCreateChannel</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">  context: <span class="type">Context</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  channelId: <span class="type">String</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  channelName: <span class="type">String</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  desc: <span class="type">String</span> = channelName</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.O) &#123;</span><br><span class="line">    <span class="keyword">val</span> notificationManager: NotificationManager =</span><br><span class="line">    context.getSystemService(Context.NOTIFICATION_SERVICE) <span class="keyword">as</span> NotificationManager</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="comment">// 查找分组</span></span><br><span class="line">      <span class="keyword">val</span> nc = notificationManager.getNotificationChannel(channelId)</span><br><span class="line">      Log.d(<span class="string">"ChannelHelper"</span>, <span class="string">"<span class="subst">$&#123;nc.id&#125;</span> Notification Channel exist."</span>)</span><br><span class="line">    &#125; <span class="keyword">catch</span> (e: Exception) &#123;</span><br><span class="line">      Log.d(<span class="string">"ChannelHelper"</span>, <span class="string">"empty channel need create."</span>)</span><br><span class="line">      <span class="comment">// 创建分组</span></span><br><span class="line">      <span class="keyword">val</span> mChannel =</span><br><span class="line">      NotificationChannel(</span><br><span class="line">        channelId,</span><br><span class="line">        channelName,</span><br><span class="line">        NotificationManager.IMPORTANCE_HIGH</span><br><span class="line">      ).apply &#123;</span><br><span class="line">        description = desc</span><br><span class="line">        enableLights(<span class="literal">true</span>)</span><br><span class="line">        enableVibration(<span class="literal">true</span>)</span><br><span class="line">      &#125;</span><br><span class="line">      notificationManager.createNotificationChannel(mChannel)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/09/19/Android%E4%B8%93%E6%A0%8F-JsBridge%E5%AE%9E%E7%8E%B0%E6%9C%AC%E5%9C%B0H5%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -569,78 +643,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/08/21/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2020/08/21/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B/" class="post-title-link" itemprop="url">多线程编程</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-08-21 05:46:13" itemprop="dateCreated datePublished" datetime="2020-08-21T05:46:13+08:00">2020-08-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-20 05:36:47" itemprop="dateModified" datetime="2020-12-20T05:36:47+08:00">2020-12-20</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="多线程编程"><a href="#多线程编程" class="headerlink" title="多线程编程"></a>多线程编程</h1><h3 id="0x01-生产者和消费者问题"><a href="#0x01-生产者和消费者问题" class="headerlink" title="0x01 生产者和消费者问题"></a>0x01 生产者和消费者问题</h3><h4 id="1-BlockingQueue-阻塞队列实现"><a href="#1-BlockingQueue-阻塞队列实现" class="headerlink" title="1.BlockingQueue 阻塞队列实现"></a>1.BlockingQueue 阻塞队列实现</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 生产者</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Producer</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> BlockingQueue&lt;Integer&gt; queue;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Producer</span><span class="params">(BlockingQueue queue)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.queue = queue;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        queue.put(produce());</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="string">" put a message, total = "</span> + queue.size());</span><br><span class="line">        Thread.sleep(<span class="number">3000</span>);</span><br><span class="line">      &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">produce</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x = (<span class="keyword">int</span>) (Math.random() * <span class="number">10</span>);</span><br><span class="line">    System.out.println(Thread.currentThread().getName() + <span class="string">" put: "</span> + x);</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/blog/2020/08/21/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -713,7 +715,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-count">65</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -726,7 +728,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/blog/tags/">
           
-        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
