@@ -190,6 +190,82 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/05/24/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8E%A7%E4%BB%B6-VolumeDialog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2021/05/24/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8E%A7%E4%BB%B6-VolumeDialog/" class="post-title-link" itemprop="url">VolumeDialog音量控制自定义</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-05-24 23:38:52" itemprop="dateCreated datePublished" datetime="2021-05-24T23:38:52+08:00">2021-05-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-08 01:31:32" itemprop="dateModified" datetime="2021-12-08T01:31:32+08:00">2021-12-08</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="VolumeDialog音量控制自定义"><a href="#VolumeDialog音量控制自定义" class="headerlink" title="VolumeDialog音量控制自定义"></a>VolumeDialog音量控制自定义</h3><p>1 使用自定义 AlertDialog 实现</p>
+<p>2 <code>window?.setFlags</code> 设置 dialog 的样式</p>
+<p>3 <code>window?.attributes</code> 设置 dialog 的位置</p>
+<p>4 返回键监听，兼容机型需要使用 setOnKeyListener</p>
+<p>5 按一次音量键回调多次的问题，<code>KeyEvent.action</code> 事件分 KeyEvent.ACTION_UP 和 KeyEvent.ACTION_DOWN</p>
+<p>6 音量加减需要获取系统音量 max 值来手动控制，不同手机 max 值域不同</p>
+<p>示例代码如下：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> android.app.Activity</span><br><span class="line"><span class="keyword">import</span> android.content.Context</span><br><span class="line"><span class="keyword">import</span> android.content.res.Resources</span><br><span class="line"><span class="keyword">import</span> android.media.AudioManager</span><br><span class="line"><span class="keyword">import</span> android.os.Bundle</span><br><span class="line"><span class="keyword">import</span> android.os.Handler</span><br><span class="line"><span class="keyword">import</span> android.os.Looper</span><br><span class="line"><span class="keyword">import</span> android.util.Log</span><br><span class="line"><span class="keyword">import</span> android.util.TypedValue</span><br><span class="line"><span class="keyword">import</span> android.view.Gravity</span><br><span class="line"><span class="keyword">import</span> android.view.KeyEvent</span><br><span class="line"><span class="keyword">import</span> android.view.WindowManager</span><br><span class="line"><span class="keyword">import</span> android.widget.ProgressBar</span><br><span class="line"><span class="keyword">import</span> androidx.appcompat.app.AlertDialog</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 声音调整控件</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">VolumeDialog</span></span>(activity: Activity) : AlertDialog(activity, R.style.VolumeDialog) &#123;</span><br><span class="line">    <span class="keyword">companion</span> <span class="keyword">object</span> &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">const</span> <span class="keyword">val</span> TAG = <span class="string">"VolumeDialog"</span></span><br><span class="line"></span><br><span class="line">        <span class="meta">@JvmStatic</span></span><br><span class="line">        <span class="function"><span class="keyword">fun</span> <span class="title">show</span><span class="params">(activity: <span class="type">Activity</span>)</span></span> &#123;</span><br><span class="line">            activity.let &#123;</span><br><span class="line">                <span class="keyword">if</span> (activity.isFinishing) <span class="keyword">return</span></span><br><span class="line">                VolumeDialog(activity).show()</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> volumeAudioManager = context.getSystemService(Context.AUDIO_SERVICE) <span class="keyword">as</span> AudioManager</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> volume = volumeAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC)</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> maxVolume = volumeAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> step = (maxVolume / <span class="number">10</span>).coerceAtLeast(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> delayMillis = <span class="number">1500L</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.dialog_volume_progress)</span><br><span class="line"></span><br><span class="line">        <span class="comment">//实现Dialog区域外部事件可以传给Activity</span></span><br><span class="line">        <span class="comment">// FLAG_NOT_TOUCH_MODAL作用：即使该window可获得焦点情况下，仍把该window之外的任何event发送到该window之后的其他window</span></span><br><span class="line">        window?.setFlags(</span><br><span class="line">            WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,</span><br><span class="line">            WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        <span class="comment">// FLAG_WATCH_OUTSIDE_TOUCH作用：如果点击事件发生在window之外，就会收到一个特殊的MotionEvent，为ACTION_OUTSIDE</span></span><br><span class="line">        window?.setFlags(</span><br><span class="line">            WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,</span><br><span class="line">            WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 顶部显示</span></span><br><span class="line">        <span class="comment">//        window?.setGravity(Gravity.TOP)</span></span><br><span class="line">        <span class="keyword">val</span> attrs = window?.attributes</span><br><span class="line">        attrs?.apply &#123;</span><br><span class="line">            gravity = Gravity.TOP</span><br><span class="line">            height = WindowManager.LayoutParams.WRAP_CONTENT</span><br><span class="line">            width = WindowManager.LayoutParams.MATCH_PARENT</span><br><span class="line">            y = TypedValue.applyDimension(</span><br><span class="line">                TypedValue.COMPLEX_UNIT_DIP,</span><br><span class="line">                <span class="number">35f</span>,</span><br><span class="line">                Resources.getSystem().displayMetrics</span><br><span class="line">            ).toInt()</span><br><span class="line">        &#125;</span><br><span class="line">        Log.d(TAG, <span class="string">"onCreate() called with: attrs = <span class="variable">$attrs</span>"</span>)</span><br><span class="line">        window?.attributes = attrs</span><br><span class="line">        <span class="comment">// 按空白处不能取消</span></span><br><span class="line">        setCanceledOnTouchOutside(<span class="literal">false</span>)</span><br><span class="line">        <span class="comment">// 初始化界面控件</span></span><br><span class="line">        initView()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> volumeProgressView: VolumeProgressView? = <span class="literal">null</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> progressBar: ProgressBar? = <span class="literal">null</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> _handler = Handler(Looper.getMainLooper())</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> r = Runnable &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            dismiss()</span><br><span class="line">        &#125; <span class="keyword">catch</span> (e: Exception) &#123;</span><br><span class="line">            <span class="comment">// sometimes happens windows token error.</span></span><br><span class="line">            e.printStackTrace()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">dismiss</span><span class="params">()</span></span> &#123;</span><br><span class="line">        _handler.removeCallbacks(r)</span><br><span class="line">        <span class="keyword">super</span>.dismiss()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">initView</span><span class="params">()</span></span> &#123;</span><br><span class="line">        Log.d(TAG, <span class="string">"initView: "</span>)</span><br><span class="line">        volumeProgressView = findViewById(R.id.vpv_volume)</span><br><span class="line">        progressBar = findViewById(R.id.pb_volume)</span><br><span class="line"></span><br><span class="line">        refreshProgress(volume * <span class="number">1f</span> / maxVolume)</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 解决不同机型版本兼容问题，onKeyDown 可能被拦截</span></span><br><span class="line">        setOnKeyListener &#123; _, keyCode, event -&gt;</span><br><span class="line">          Log.d(TAG, <span class="string">"setOnKeyListener: keyCode = <span class="variable">$keyCode</span>, event = <span class="variable">$event</span>"</span>)</span><br><span class="line">          <span class="keyword">if</span> (keyCode == KeyEvent.KEYCODE_VOLUME_UP || keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) &#123;</span><br><span class="line">              handleKeyEvent(keyCode, event)</span><br><span class="line">              <span class="literal">true</span></span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">              <span class="literal">false</span></span><br><span class="line">          &#125;</span><br><span class="line">         &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">refreshProgress</span><span class="params">(volumePercent: <span class="type">Float</span>)</span></span> &#123;</span><br><span class="line">        _handler.removeCallbacks(r)</span><br><span class="line">        volumeProgressView?.setProgress(volumePercent)</span><br><span class="line">        progressBar?.progress = (volumePercent * <span class="number">1000</span>).toInt()</span><br><span class="line">        _handler.postDelayed(r, delayMillis)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">handleKeyEvent</span><span class="params">(keyCode: <span class="type">Int</span>, event: <span class="type">KeyEvent</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        Log.d(TAG, <span class="string">"handleKeyEvent: volume = <span class="variable">$volume</span>, maxVolume = <span class="variable">$maxVolume</span>, step = <span class="variable">$step</span>"</span>)</span><br><span class="line">        <span class="keyword">if</span> ((keyCode != KeyEvent.KEYCODE_VOLUME_UP &amp;&amp; keyCode != KeyEvent.KEYCODE_VOLUME_DOWN) || event.action != KeyEvent.ACTION_DOWN) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        volume = <span class="keyword">if</span> (keyCode == KeyEvent.KEYCODE_VOLUME_UP) &#123; <span class="comment">// up</span></span><br><span class="line">            <span class="keyword">if</span> (volume == maxVolume) <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">            maxVolume.coerceAtMost(volume + step)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; <span class="comment">// down</span></span><br><span class="line">            <span class="keyword">if</span> (volume == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">            <span class="number">0</span>.coerceAtLeast(volume - step)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">val</span> volumePercent = volume * <span class="number">1f</span> / maxVolume</span><br><span class="line">        refreshProgress(volumePercent)</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 变更声音</span></span><br><span class="line">        volumeAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, <span class="number">0</span>)</span><br><span class="line">        Log.d(TAG, <span class="string">"handleKeyEvent: AudioManager set volume = <span class="variable">$volume</span> done."</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回事件，仅拦截音量控制事件</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onKeyDown</span><span class="params">(keyCode: <span class="type">Int</span>, event: <span class="type">KeyEvent</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        Log.d(TAG, <span class="string">"onKeyDown() called with: keyCode = <span class="variable">$keyCode</span>, event = <span class="variable">$event</span>"</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">if</span> (keyCode == KeyEvent.KEYCODE_VOLUME_UP || keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) &#123;</span><br><span class="line">            handleKeyEvent(keyCode, event)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">super</span>.onKeyDown(keyCode, event)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>自定义Dialog的Style</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"VolumeDialog"</span> <span class="attr">parent</span>=<span class="string">"android:style/Theme.Dialog"</span>&gt;</span></span><br><span class="line"><span class="xml">    <span class="comment">&lt;!--背景颜色及和透明程度--&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowBackground"</span>&gt;</span>@android:color/transparent<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="comment">&lt;!--是否去除标题 --&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowNoTitle"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="comment">&lt;!--是否去除边框--&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowFrame"</span>&gt;</span>@null<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="comment">&lt;!--是否浮现在activity之上--&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowIsFloating"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="comment">&lt;!--是否模糊--&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:backgroundDimEnabled"</span>&gt;</span>false<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/05/21/MessageCenter/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -691,104 +767,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/09/26/DataBinding%E8%B8%A9%E5%9D%91%E6%8C%87%E5%8D%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2020/09/26/DataBinding%E8%B8%A9%E5%9D%91%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">DataBinding踩坑指南</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-09-26 01:11:31" itemprop="dateCreated datePublished" datetime="2020-09-26T01:11:31+08:00">2020-09-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-20 05:36:47" itemprop="dateModified" datetime="2020-12-20T05:36:47+08:00">2020-12-20</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="0x01-ViewBinding"><a href="#0x01-ViewBinding" class="headerlink" title="0x01 ViewBinding"></a>0x01 ViewBinding</h3><p>1.使用 View Binding 先要在Module 的 <code>build.gradle</code> 文件注册</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    ...</span><br><span class="line">    buildFeatures &#123;</span><br><span class="line">        viewBinding <span class="keyword">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>2.会根据布局文件，编译之后自动生成对应的Binding class，可以在Activity 和 Fragment 直接调用 inflate 使用</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">var</span> _binding: ResultProfileBinding? = <span class="literal">null</span></span><br><span class="line"><span class="comment">// This property is only valid between onCreateView and</span></span><br><span class="line"><span class="comment">// onDestroyView.</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> binding <span class="keyword">get</span>() = _binding!!</span><br><span class="line"></span><br><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreateView</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">  inflater: <span class="type">LayoutInflater</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  container: <span class="type">ViewGroup</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">  savedInstanceState: <span class="type">Bundle</span>?</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>: View? &#123;</span><br><span class="line">  _binding = ResultProfileBinding.inflate(inflater, container, <span class="literal">false</span>)</span><br><span class="line">  <span class="keyword">val</span> view = binding.root</span><br><span class="line">  <span class="keyword">return</span> view</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onDestroyView</span><span class="params">()</span></span> &#123;</span><br><span class="line">  <span class="keyword">super</span>.onDestroyView()</span><br><span class="line">  _binding = <span class="literal">null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="0x02-DataBinding"><a href="#0x02-DataBinding" class="headerlink" title="0x02 DataBinding"></a>0x02 DataBinding</h3><p>1.在 <code>build.gradle</code> 文件中开启lib</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    ...</span><br><span class="line">    buildFeatures &#123;</span><br><span class="line">        dataBinding <span class="keyword">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>2.布局文件start with a root tag of <code>layout</code> followed by a <code>data</code> element </p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">layout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">xmlns:app</span>=<span class="string">"http://schemas.android.com/apk/res-auto"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">data</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">variable</span></span></span><br><span class="line"><span class="tag">            <span class="attr">name</span>=<span class="string">"viewmodel"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">type</span>=<span class="string">"com.myapp.data.ViewModel"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">data</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ConstraintLayout...</span> /&gt;</span> <span class="comment">&lt;!-- UI layout's root element --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">layout</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>3.在Activity中使用</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">  <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> binding: ActivityMainBinding = ActivityMainBinding.inflate(getLayoutInflater())</span><br><span class="line">	<span class="comment">// or</span></span><br><span class="line">  <span class="keyword">val</span> binding: ActivityMainBinding = DataBindingUtil.setContentView(</span><br><span class="line">    <span class="keyword">this</span>, R.layout.activity_main)</span><br><span class="line"></span><br><span class="line">  binding.user = User(<span class="string">"Test"</span>, <span class="string">"User"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在 <code>Fragment</code>, <code>ListView</code>, or <code>RecyclerView</code> adapter, you may prefer to use the <a href="https://developer.android.google.cn/reference/androidx/databinding/DataBindingUtil#inflate" target="_blank" rel="noopener"><code>inflate()</code></a></p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> listItemBinding = ListItemBinding.inflate(layoutInflater, viewGroup, <span class="literal">false</span>)</span><br><span class="line"><span class="comment">// or</span></span><br><span class="line"><span class="keyword">val</span> listItemBinding = DataBindingUtil.inflate(layoutInflater, R.layout.list_item, viewGroup, <span class="literal">false</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="0x03-view-binding-和-data-binding-比较"><a href="#0x03-view-binding-和-data-binding-比较" class="headerlink" title="0x03 view binding 和 data binding 比较"></a>0x03 view binding 和 data binding 比较</h3><p>View binding and <a href="https://developer.android.google.cn/topic/libraries/data-binding" target="_blank" rel="noopener">data binding</a> both generate binding classes that you can use to reference views directly. However, view binding is intended to handle simpler use cases and provides the following benefits over data binding:</p>
-<ul>
-<li><strong>Faster compilation:</strong> View binding requires no annotation processing, so compile times are faster.</li>
-<li><strong>Ease of use:</strong> View binding does not require specially-tagged XML layout files, so it is faster to adopt in your apps. Once you enable view binding in a module, it applies to all of that module’s layouts automatically.</li>
-</ul>
-<p>Conversely, view binding has the following limitations compared to data binding:</p>
-<ul>
-<li>View binding doesn’t support <a href="https://developer.android.google.cn/topic/libraries/data-binding/expressions" target="_blank" rel="noopener">layout variables or layout expressions</a>, so it can’t be used to declare dynamic UI content straight from XML layout files.</li>
-<li>View binding doesn’t support <a href="https://developer.android.google.cn/topic/libraries/data-binding/two-way" target="_blank" rel="noopener">two-way data binding</a>.</li>
-</ul>
-<p>Because of these considerations, it is best in some cases to <strong>use both view binding and data binding</strong> in a project. You can use data binding in layouts that require advanced features and use view binding in layouts that do not.</p>
-<h3 id="0x04-遇到的坑"><a href="#0x04-遇到的坑" class="headerlink" title="0x04 遇到的坑"></a>0x04 遇到的坑</h3><ul>
-<li><include> 等标签，如果使用databinding ，子布局xml的 root tag 依旧需要layout 标签嵌套 data 标签。否者编译报错，找不到对应的属性</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -861,7 +839,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-count">66</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -874,7 +852,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/blog/tags/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

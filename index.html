@@ -190,6 +190,83 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2022/06/20/Windows%E4%B8%8A%E9%85%8D%E7%BD%AESSH/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2022/06/20/Windows%E4%B8%8A%E9%85%8D%E7%BD%AESSH/" class="post-title-link" itemprop="url">Windows 上配置 Git SSH</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-06-20 20:29:05 / 修改时间：17:54:38" itemprop="dateCreated datePublished" datetime="2022-06-20T20:29:05+08:00">2022-06-20</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Windows-上配置-Git-SSH"><a href="#Windows-上配置-Git-SSH" class="headerlink" title="Windows 上配置 Git SSH"></a>Windows 上配置 Git SSH</h1><p><a href="https://support.atlassian.com/bitbucket-cloud/docs/set-up-an-ssh-key/" target="_blank" rel="noopener">https://support.atlassian.com/bitbucket-cloud/docs/set-up-an-ssh-key/</a></p>
+<h2 id="0x01-Set-up-SSH-for-Git-on-Windows"><a href="#0x01-Set-up-SSH-for-Git-on-Windows" class="headerlink" title="0x01 Set up SSH for Git on Windows"></a>0x01 Set up SSH for Git on Windows</h2><p>Use this section to create a default identity and SSH key when you’re using Git on Windows. By default, the system adds keys for all identities to the <code>/Users/&lt;username&gt;/</code>.ssh directory.</p>
+<h3 id="Step-1-Set-up-your-default-identity"><a href="#Step-1-Set-up-your-default-identity" class="headerlink" title="Step 1. Set up your default identity"></a>Step 1. Set up your default identity</h3><p>From the command line, enter ssh-keygen.</p>
+<p><code>ssh-keygen -t rsa -b 4096 -C &quot;email&quot;</code></p>
+<p>List the contents of <code>.ssh</code> to view the key files.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> dir .ssh </span></span><br><span class="line">id_rsa  id_rsa.pub</span><br></pre></td></tr></table></figure>
+
+<h3 id="Step-2-Add-the-key-to-the-ssh-agent"><a href="#Step-2-Add-the-key-to-the-ssh-agent" class="headerlink" title="Step 2. Add the key to the ssh-agent"></a>Step 2. Add the key to the ssh-agent</h3><p>If you don’t want to type your password each time you use the key, you’ll need to add it to the ssh-agent.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">eval</span> $(ssh-agent) </span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ssh-add ~/.ssh/id_rsa</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2022/06/20/sPI1qNbuOTevgar.png" alt="20220620153539"></p>
+<h3 id="Step-3-Add-the-public-key-to-your-Account-settings"><a href="#Step-3-Add-the-public-key-to-your-Account-settings" class="headerlink" title="Step 3. Add the public key to your Account settings"></a>Step 3. Add the public key to your Account settings</h3><p>Open your <code>.ssh/id_rsa.pub</code> file and copy its contents.</p>
+<p>From Bitbucket, Paste the copied public key into the SSH Key field. Click Save.</p>
+<p>Return to the command line and verify your configuration and username by entering the following command:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ssh -T git@bitbucket.org</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="0x02-Working-with-non-default-SSH-key-pair-paths"><a href="#0x02-Working-with-non-default-SSH-key-pair-paths" class="headerlink" title="0x02 Working with non-default SSH key pair paths"></a>0x02 Working with non-default SSH key pair paths</h2><p>If you used a non-default file path for your GitLab SSH key pair,<br>you must configure your SSH client to find your GitLab SSH private key<br>for connections to your GitLab server (perhaps gitlab.com).</p>
+<p>For OpenSSH clients this is configured in the <code>~/.ssh/config</code> file.<br>Below are two example host configurations using their own key:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> GitLab.com server</span></span><br><span class="line">Host gitlab.com</span><br><span class="line">RSAAuthentication yes</span><br><span class="line">IdentityFile ~/.ssh/config/private-key-filename-01</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Private GitLab server</span></span><br><span class="line">Host gitlab.company.com</span><br><span class="line">RSAAuthentication yes</span><br><span class="line">IdentityFile ~/.ssh/config/private-key-filename</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2022/06/08/Android%E4%B8%93%E6%A0%8F-JsBridge%E5%BC%80%E6%BA%90%E5%BA%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -515,70 +592,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2022/01/04/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B8%83%E5%B1%80-SpannableString%E4%B9%8B%E5%B1%85%E4%B8%AD%E6%98%BE%E7%A4%BAImageSpan/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2022/01/04/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B8%83%E5%B1%80-SpannableString%E4%B9%8B%E5%B1%85%E4%B8%AD%E6%98%BE%E7%A4%BAImageSpan/" class="post-title-link" itemprop="url">SpannableString 之居中显示 ImageSpan</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-01-04 21:03:13 / 修改时间：19:32:40" itemprop="dateCreated datePublished" datetime="2022-01-04T21:03:13+08:00">2022-01-04</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="自定义布局：SpannableString-之居中显示-ImageSpan"><a href="#自定义布局：SpannableString-之居中显示-ImageSpan" class="headerlink" title="自定义布局：SpannableString 之居中显示 ImageSpan"></a>自定义布局：SpannableString 之居中显示 ImageSpan</h3><img src="https://s2.loli.net/2022/01/04/8rhcKDBaWQvA74V.png" alt="image-20220104185114603" style="zoom:50%;" />
-
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CenteredImageSpan</span></span>(context: Context, drawableRes: <span class="built_in">Int</span>) : ImageSpan(context, drawableRes) &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">draw</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        canvas: <span class="type">Canvas</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">        text: <span class="type">CharSequence</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">        start: <span class="type">Int</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">        end: <span class="type">Int</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">        x: <span class="type">Float</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">        top: <span class="type">Int</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">        y: <span class="type">Int</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">        bottom: <span class="type">Int</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">        paint: <span class="type">Paint</span></span></span></span><br><span class="line"><span class="function"><span class="params">    )</span></span> &#123;</span><br><span class="line">        <span class="comment">// image to draw</span></span><br><span class="line">        <span class="keyword">val</span> b = drawable</span><br><span class="line">        <span class="comment">// font metrics of text to be replaced</span></span><br><span class="line">        <span class="keyword">val</span> fm = paint.fontMetricsInt</span><br><span class="line">        <span class="keyword">var</span> transY = ((y + fm.descent + y + fm.ascent) / <span class="number">2</span> - b.bounds.bottom / <span class="number">2</span>)</span><br><span class="line">        <span class="comment">// to check the last line.(当 image 在单独一行显示时可能会存在这个问题）</span></span><br><span class="line">        <span class="keyword">if</span> (transY &gt; bottom - b.bounds.bottom) transY = bottom - b.bounds.bottom</span><br><span class="line">        canvas.save()</span><br><span class="line">        canvas.translate(x, transY.toFloat())</span><br><span class="line">        b.draw(canvas)</span><br><span class="line">        canvas.restore()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> spanStr = SpannableStringBuilder()</span><br><span class="line">spanStr.append(<span class="string">"# "</span>)</span><br><span class="line">spanStr.append(title)</span><br><span class="line"><span class="keyword">val</span> imageSpan = CenteredImageSpan(<span class="keyword">this</span>, R.mipmap.ic_topic_detail_jinghao_black)</span><br><span class="line">spanStr.setSpan(imageSpan, <span class="number">0</span>, <span class="number">1</span>, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)</span><br><span class="line"><span class="comment">// corner</span></span><br><span class="line">spanStr.append(<span class="string">" #"</span>)</span><br><span class="line"><span class="keyword">val</span> len = spanStr.length</span><br><span class="line"><span class="keyword">val</span> cornerSpan = CenteredImageSpan(<span class="keyword">this</span>,  R.mipmap.ic_topic_detail_remen)</span><br><span class="line">spanStr.setSpan(cornerSpan, len - <span class="number">1</span>, len, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)</span><br><span class="line">binding.ctTalkDetailInfo.talkNameTv.text = spanStr</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -651,7 +664,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-count">66</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -664,7 +677,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/blog/tags/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
