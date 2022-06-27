@@ -190,6 +190,165 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/11/25/Android%E4%B8%93%E6%A0%8F-adb/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2021/11/25/Android%E4%B8%93%E6%A0%8F-adb/" class="post-title-link" itemprop="url">ADB</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-11-25 19:15:25" itemprop="dateCreated datePublished" datetime="2021-11-25T19:15:25+08:00">2021-11-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-24 00:48:20" itemprop="dateModified" datetime="2022-01-24T00:48:20+08:00">2022-01-24</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="ADB"><a href="#ADB" class="headerlink" title="ADB"></a>ADB</h2><h3 id="0x01-adb-shell"><a href="#0x01-adb-shell" class="headerlink" title="0x01 adb shell"></a>0x01 adb shell</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> adb shell </span></span><br><span class="line"><span class="meta">$</span><span class="bash"> adb devices <span class="comment"># List of devices attached.</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> adb start-server</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> adb <span class="built_in">kill</span>-server</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="0x02-adb-命令管理设备"><a href="#0x02-adb-命令管理设备" class="headerlink" title="0x02 adb 命令管理设备"></a>0x02 adb 命令管理设备</h3><table>
+<thead>
+<tr>
+<th align="left">命令</th>
+<th align="left">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">adb get-state</td>
+<td align="left">判断设备状态</td>
+</tr>
+<tr>
+<td align="left">adb devices</td>
+<td align="left">显示连接到计算机的设备</td>
+</tr>
+<tr>
+<td align="left">adb get-serialno</td>
+<td align="left">获取设备的序列号</td>
+</tr>
+<tr>
+<td align="left">adb reboot</td>
+<td align="left">重启设备</td>
+</tr>
+<tr>
+<td align="left">adb reboot bootloader</td>
+<td align="left">重启设备进入fastboot模式</td>
+</tr>
+<tr>
+<td align="left">adb reboot recovery</td>
+<td align="left">重启设备进入recovery模式</td>
+</tr>
+<tr>
+<td align="left">adb [-d|-e|-s <serialNumber> ] <command></td>
+<td align="left">发送命令到指定设备</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left">命令</th>
+<th align="left">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">adb kill-server</td>
+<td align="left">终止 adb 服务进程</td>
+</tr>
+<tr>
+<td align="left">adb start-server</td>
+<td align="left">重启 adb 服务进程</td>
+</tr>
+<tr>
+<td align="left">adb root</td>
+<td align="left">以 root 权限重启 adb 服务</td>
+</tr>
+</tbody></table>
+<h3 id="0x02-查看手机cpu"><a href="#0x02-查看手机cpu" class="headerlink" title="0x02 查看手机cpu"></a>0x02 查看手机cpu</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> adb shell getprop ro.product.cpu.abi</span></span><br></pre></td></tr></table></figure>
+
+<p>查看cpu全部信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> adb shell</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> cat /proc/cupinfo</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="0x03-查看设备信息"><a href="#0x03-查看设备信息" class="headerlink" title="0x03 查看设备信息"></a>0x03 查看设备信息</h3><table>
+<thead>
+<tr>
+<th align="left">命令</th>
+<th align="left">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">adb shell cat /sys/class/net/wlan0/address</td>
+<td align="left">获取 wifi mac 地址</td>
+</tr>
+<tr>
+<td align="left">adb shell cat /proc/cpuinfo</td>
+<td align="left">获取 cpu 信息</td>
+</tr>
+<tr>
+<td align="left">adb shell cat /system/build.prop</td>
+<td align="left">获取设备编译属性(手机属性和手机配置信息)（需要系统权限）</td>
+</tr>
+<tr>
+<td align="left">adb shell cat /data/misc/wifi/*.conf</td>
+<td align="left">获取 wifi 配置信息（需要系统权限）</td>
+</tr>
+</tbody></table>
+<h3 id="0x04-adb配合grep命令"><a href="#0x04-adb配合grep命令" class="headerlink" title="0x04 adb配合grep命令"></a>0x04 adb配合grep命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># getprop手机属性中包含product关键字</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> adb shell getprop |grep product </span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 根据某个关键字查找包 </span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> pm list packages |grep tencent</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 查看包安装位置  </span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> pm list packages -f</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="0x05-查找手机屏幕当前显示的包名和Activity名称"><a href="#0x05-查找手机屏幕当前显示的包名和Activity名称" class="headerlink" title="0x05 查找手机屏幕当前显示的包名和Activity名称"></a>0x05 查找手机屏幕当前显示的包名和Activity名称</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> adb shell dumpsys window w |findstr \/ |findstr name=</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/11/23/Android%E4%B8%93%E6%A0%8F-apk%E7%AD%BE%E5%90%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -551,69 +710,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/09/09/RecyclerView%E7%9A%84item%E5%B5%8C%E5%A5%97ScrollView/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2021/09/09/RecyclerView%E7%9A%84item%E5%B5%8C%E5%A5%97ScrollView/" class="post-title-link" itemprop="url">RecyclerView的item嵌套ScrollView</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-09-09 22:07:24 / 修改时间：23:26:46" itemprop="dateCreated datePublished" datetime="2021-09-09T22:07:24+08:00">2021-09-09</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="RecyclerView-Item-嵌套-ScrollView"><a href="#RecyclerView-Item-嵌套-ScrollView" class="headerlink" title="RecyclerView Item 嵌套 ScrollView"></a>RecyclerView Item 嵌套 ScrollView</h3><p>RecyclerView Item 嵌套 ScrollView 产生 Touch 事件冲突，通过自定义ScrollView来拦截和处理事件</p>
-<img  src="https://i.loli.net/2021/09/08/K13ZtWROu4FEfhz.png" alt="image-20210908211849925" style="zoom: 25%;"/>
-
-
-<p>自定义 <code>ItemScrollView</code> 代码如下</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> android.content.Context</span><br><span class="line"><span class="keyword">import</span> android.util.AttributeSet</span><br><span class="line"><span class="keyword">import</span> android.view.MotionEvent</span><br><span class="line"><span class="keyword">import</span> android.widget.ScrollView</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ItemScrollView</span> <span class="meta">@JvmOverloads</span> <span class="keyword">constructor</span></span>(</span><br><span class="line">    context: Context,</span><br><span class="line">    attrs: AttributeSet? = <span class="literal">null</span>,</span><br><span class="line">    defStyleAttr: <span class="built_in">Int</span> = <span class="number">0</span></span><br><span class="line">) : ScrollView(context, attrs, defStyleAttr) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onInterceptTouchEvent</span><span class="params">(ev: <span class="type">MotionEvent</span>?)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        parent.requestDisallowInterceptTouchEvent(<span class="literal">true</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.onInterceptTouchEvent(ev)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> lastY: <span class="built_in">Float</span> = <span class="number">0f</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onTouchEvent</span><span class="params">(ev: <span class="type">MotionEvent</span>?)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        <span class="keyword">when</span> (ev?.action) &#123;</span><br><span class="line">            MotionEvent.ACTION_DOWN -&gt; &#123;</span><br><span class="line">                lastY = ev.y</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            MotionEvent.ACTION_MOVE -&gt; &#123;</span><br><span class="line">                <span class="keyword">val</span> currentY = ev.y</span><br><span class="line">                <span class="keyword">this</span>.scrollBy(<span class="number">0</span>, (lastY - currentY).toInt())</span><br><span class="line">                lastY = currentY</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            MotionEvent.ACTION_UP -&gt; &#123;</span><br><span class="line">                lastY = <span class="number">0f</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> canScroll()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">canScroll</span><span class="params">()</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        <span class="keyword">val</span> child = getChildAt(<span class="number">0</span>)</span><br><span class="line">        child?.let &#123;</span><br><span class="line">            <span class="keyword">return</span> height &lt; child.height</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -686,7 +782,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-count">68</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -699,7 +795,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/blog/tags/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
