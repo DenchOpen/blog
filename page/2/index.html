@@ -190,6 +190,131 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2022/06/08/Android%E4%B8%93%E6%A0%8F-JsBridge%E5%BC%80%E6%BA%90%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2022/06/08/Android%E4%B8%93%E6%A0%8F-JsBridge%E5%BC%80%E6%BA%90%E5%BA%93/" class="post-title-link" itemprop="url">JsBridge 开源库</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-06-08 20:37:18 / 修改时间：23:53:52" itemprop="dateCreated datePublished" datetime="2022-06-08T20:37:18+08:00">2022-06-08</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="JsBridge-开源库"><a href="#JsBridge-开源库" class="headerlink" title="JsBridge 开源库"></a>JsBridge 开源库</h2><p>项目地址：<a href="https://github.com/lzyzsd/JsBridge" target="_blank" rel="noopener">https://github.com/lzyzsd/JsBridge</a><br>使用参考：<a href="https://www.jianshu.com/p/7aea03838f19" target="_blank" rel="noopener">https://www.jianshu.com/p/7aea03838f19</a></p>
+<h3 id="0x00-从H5界面，跳转Native登录，登录之后重新加载H5页面出现JsBridge注入失败-code-2-message-net-ERR-NAME-NOT-RESOLVED"><a href="#0x00-从H5界面，跳转Native登录，登录之后重新加载H5页面出现JsBridge注入失败-code-2-message-net-ERR-NAME-NOT-RESOLVED" class="headerlink" title="0x00 从H5界面，跳转Native登录，登录之后重新加载H5页面出现JsBridge注入失败[code=-2,message=net::ERR_NAME_NOT_RESOLVED]"></a>0x00 从H5界面，跳转Native登录，登录之后重新加载H5页面出现JsBridge注入失败[code=-2,message=net::ERR_NAME_NOT_RESOLVED]</h3><p>解决方案：<br>App层销毁当前的WebView，重新加载一个新的WebView去loadUrl。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// js-bridge register error</span></span><br><span class="line"><span class="comment">// 回调 onReceivedError(WebView view, WebResourceRequest request, WebResourceError error)</span></span><br><span class="line"><span class="comment">// [code=-2,message=net::ERR_NAME_NOT_RESOLVED]</span></span><br><span class="line"><span class="comment">// so you have to destroy webView and rebuild one.</span></span><br><span class="line"><span class="keyword">private</span> void reloadWebView() &#123;</span><br><span class="line">    <span class="keyword">if</span> (mWebView != <span class="literal">null</span>) &#123;</span><br><span class="line">        mWebView.destroy();</span><br><span class="line">        mWebView = <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    initView();</span><br><span class="line">    initWebView();</span><br><span class="line">    webView.loadUrl(url);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2022/04/13/%E6%89%93%E5%BC%80%E6%89%8B%E6%9C%BA%E8%87%AA%E5%B8%A6%E7%9A%84%E5%BA%94%E7%94%A8%E5%95%86%E5%BA%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2022/04/13/%E6%89%93%E5%BC%80%E6%89%8B%E6%9C%BA%E8%87%AA%E5%B8%A6%E7%9A%84%E5%BA%94%E7%94%A8%E5%95%86%E5%BA%97/" class="post-title-link" itemprop="url">打开手机自带的应用商店</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-04-13 15:13:46 / 修改时间：15:22:14" itemprop="dateCreated datePublished" datetime="2022-04-13T15:13:46+08:00">2022-04-13</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>需求背景：<br>因为各种原因，需要打开手机自带的应用商店</p>
+<p>核心代码</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.content.Context</span><br><span class="line"><span class="keyword">import</span> android.content.Intent</span><br><span class="line"><span class="keyword">import</span> android.net.Uri</span><br><span class="line"></span><br><span class="line"><span class="keyword">object</span> MarketUtils &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> XIAOMI_MARKET = <span class="string">"com.xiaomi.market"</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> HUAWEI_MARKET = <span class="string">"com.huawei.appmarket"</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> OPPO_MARKET = <span class="string">"com.oppo.market"</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> OPPO_MARKET2 = <span class="string">"com.heytap.market"</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> VIVO_MARKET = <span class="string">"com.bbk.appstore"</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> MEIZU_MARKET = <span class="string">"com.meizu.mstore"</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> YYB_MARKET = <span class="string">"com.tencent.android.qqdownloader"</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">startTargetMarket</span><span class="params">(context: <span class="type">Context</span>, deepLink: <span class="type">String</span>, packageName: <span class="type">String</span>)</span></span> &#123;</span><br><span class="line">        <span class="comment">//"deeplink": "market://details?id=com.taobao.taobao&amp;..."</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">val</span> uri = Uri.parse(deepLink)</span><br><span class="line">            <span class="keyword">val</span> intent = Intent(Intent.ACTION_VIEW, uri)</span><br><span class="line">            intent.setPackage(packageName)</span><br><span class="line">            context.startActivity(intent)</span><br><span class="line">        &#125; <span class="keyword">catch</span> (e: Exception) &#123;</span><br><span class="line">            e.printStackTrace()</span><br><span class="line">            <span class="keyword">val</span> uri = Uri.parse(deepLink)</span><br><span class="line">            <span class="keyword">val</span> intent = Intent(Intent.ACTION_VIEW, uri)</span><br><span class="line">            context.startActivity(intent)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 跳转到腾讯应用宝</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">startTencentMarket</span><span class="params">(context: <span class="type">Context</span>, deepLink: <span class="type">String</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">val</span> uri: Uri = Uri.parse(deepLink) <span class="comment">// "market://details?id=com.taobao.taobao&amp;..."</span></span><br><span class="line">        <span class="keyword">val</span> intent = Intent(Intent.ACTION_VIEW, uri)</span><br><span class="line">        intent.setClassName(</span><br><span class="line">            <span class="string">"com.tencent.android.qqdownloader"</span>,</span><br><span class="line">            <span class="string">"com.tencent.pangu.link.LinkProxyActivity"</span></span><br><span class="line">        )</span><br><span class="line">        context.startActivity(intent)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试代码：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">initView</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// </span></span><br><span class="line">    <span class="keyword">val</span> deepLink =</span><br><span class="line">        <span class="string">"market://details?id=com.taobao.taobao&amp;ref=&amp;caller=com.zhongduomei.rrmj.society&amp;token=OWNjY2YyNGNiYzYwYTNkMCMxNjQ5NjQ2NTA0OTA5IzEjY29tLnRhb2Jhby50YW9iYW8jS29iZS8yNEAwZjY1NGI3ZGZlZWJlZWI2NTk3MTkyNWE4ZDFhZTc1Zg==&amp;style=1&amp;m=adapi_2049933&amp;tk_con=eyJ0cmFja0lkIjoiN2VkOGI0ZWM2YjAwN2FmNjkzZDc0ODJkYTBlNzgyMDMiLCJkZXZpY2VJZCI6Ijg2Mzg5NDAzMjE1ODg3NyIsImFwcElkIjoiMjMzNCIsInZlcnNpb25JZCI6IjAiLCJlbnRlcklkIjoiMTQiLCJwYWdlSWQiOiIxMDAwMDEiLCJhYiI6IjFfMF85IiwiYWRJZCI6IjQwNzA2ODY5OCIsInQiOiIxNjQ5NjQ2NTA0OTA3IiwidiI6InYxIn0%3D&amp;tk_ref=%7B%22adId%22%3A%22407068698%22%2C%22trackId%22%3A%227ed8b4ec6b007af693d7482da0e78203%22%7D"</span></span><br><span class="line">    xiaomi_market.setOnClickListener &#123;</span><br><span class="line">        MarketUtils.startTargetMarket(<span class="keyword">this</span>, deepLink, MarketUtils.XIAOMI_MARKET)</span><br><span class="line">    &#125;</span><br><span class="line">    huawei_market.setOnClickListener &#123;</span><br><span class="line">        MarketUtils.startTargetMarket(<span class="keyword">this</span>, deepLink, MarketUtils.HUAWEI_MARKET)</span><br><span class="line">    &#125;</span><br><span class="line">    oppo_market.setOnClickListener &#123;</span><br><span class="line">        <span class="keyword">if</span> (android.os.Build.VERSION.SDK_INT &gt;= <span class="number">28</span>) &#123;</span><br><span class="line">            MarketUtils.startTargetMarket(<span class="keyword">this</span>, deepLink, MarketUtils.OPPO_MARKET2)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            MarketUtils.startTargetMarket(<span class="keyword">this</span>, deepLink, MarketUtils.OPPO_MARKET)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    vivo_market.setOnClickListener &#123;</span><br><span class="line">        MarketUtils.startTargetMarket(<span class="keyword">this</span>, deepLink, MarketUtils.VIVO_MARKET)</span><br><span class="line">    &#125;</span><br><span class="line">    meizu_market.setOnClickListener &#123;</span><br><span class="line">        MarketUtils.startTargetMarket(<span class="keyword">this</span>, deepLink, MarketUtils.MEIZU_MARKET)</span><br><span class="line">    &#125;</span><br><span class="line">    yyb_market.setOnClickListener &#123;</span><br><span class="line">        MarketUtils.startTargetMarket(<span class="keyword">this</span>, deepLink, MarketUtils.YYB_MARKET)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2022/03/09/%E8%87%AA%E5%AE%9A%E4%B9%89TextView%E5%AE%9E%E7%8E%B0%E5%A4%9A%E4%B8%AA%E6%96%87%E6%A1%88%E5%88%87%E6%8D%A2%E7%82%AB%E9%85%B7%E5%8A%A8%E7%94%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -454,164 +579,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/12/07/Android%E4%B8%93%E6%A0%8F-FileProvider/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2021/12/07/Android%E4%B8%93%E6%A0%8F-FileProvider/" class="post-title-link" itemprop="url">FileProvider 的使用</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-12-07 19:15:25" itemprop="dateCreated datePublished" datetime="2021-12-07T19:15:25+08:00">2021-12-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-08 01:35:48" itemprop="dateModified" datetime="2021-12-08T01:35:48+08:00">2021-12-08</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="FileProvider-的使用"><a href="#FileProvider-的使用" class="headerlink" title="FileProvider 的使用"></a>FileProvider 的使用</h2><p>Dev Doc</p>
-<p><a href="https://developer.android.google.cn/reference/androidx/core/content/FileProvider" target="_blank" rel="noopener">https://developer.android.google.cn/reference/androidx/core/content/FileProvider</a></p>
-<h3 id="0x01-定义一个FileProvider"><a href="#0x01-定义一个FileProvider" class="headerlink" title="0x01 定义一个FileProvider"></a>0x01 定义一个FileProvider</h3><p>在 androidx 包提供的 FileProvider 提供了 生成文件Uri 的功能。</p>
-<p>在 manifest 文件中，声明一个 provider</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">manifest</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="tag">&lt;<span class="name">application</span>&gt;</span></span><br><span class="line">        ...</span><br><span class="line">        <span class="tag">&lt;<span class="name">provider</span></span></span><br><span class="line"><span class="tag">                  <span class="attr">android:name</span>=<span class="string">"androidx.core.content.FileProvider"</span></span></span><br><span class="line"><span class="tag">                  <span class="attr">android:authorities</span>=<span class="string">"$&#123;applicationId&#125;.fileprovider"</span></span></span><br><span class="line"><span class="tag">                  <span class="attr">android:exported</span>=<span class="string">"false"</span></span></span><br><span class="line"><span class="tag">                  <span class="attr">android:grantUriPermissions</span>=<span class="string">"true"</span></span></span><br><span class="line"><span class="tag">                  <span class="attr">tools:replace</span>=<span class="string">"android:authorities"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">meta-data</span></span></span><br><span class="line"><span class="tag">                       <span class="attr">android:name</span>=<span class="string">"android.support.FILE_PROVIDER_PATHS"</span></span></span><br><span class="line"><span class="tag">                       <span class="attr">android:resource</span>=<span class="string">"@xml/file_paths"</span></span></span><br><span class="line"><span class="tag">                       <span class="attr">tools:replace</span>=<span class="string">"android:resource"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">provider</span>&gt;</span></span><br><span class="line">        ...</span><br><span class="line">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="0x02-可用文件路径配置"><a href="#0x02-可用文件路径配置" class="headerlink" title="0x02 可用文件路径配置"></a>0x02 可用文件路径配置</h3><p>在 res/xml/file_paths.xml 下配置可用的文件路径，FileProvider 只能生成配置了的文件Uri。每个你想要生成Uri的文件路径都需要在 paths 下面定义。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">paths</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">files-path</span> <span class="attr">name</span>=<span class="string">"my_images"</span> <span class="attr">path</span>=<span class="string">"images/"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">cache-path</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">path</span>=<span class="string">"path"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">external-path</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">path</span>=<span class="string">"path"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">external-files-path</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">path</span>=<span class="string">"path"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">external-cache-path</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">path</span>=<span class="string">"path"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">external-media-path</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">path</span>=<span class="string">"path"</span> /&gt;</span></span><br><span class="line">    ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">paths</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="0x03-生成一个Uri"><a href="#0x03-生成一个Uri" class="headerlink" title="0x03 生成一个Uri"></a>0x03 生成一个Uri</h3><p>和其他 app 共享一个文件，你需要生成一个Uri。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">File imagePath = <span class="keyword">new</span> File(Context.getFilesDir(), <span class="string">"my_images"</span>);</span><br><span class="line">File newFile = <span class="keyword">new</span> File(imagePath, <span class="string">"default_image.jpg"</span>);</span><br><span class="line"></span><br><span class="line">Uri uriForFile;</span><br><span class="line"><span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.N) &#123;</span><br><span class="line">    uriForFile = FileProvider.getUriForFile(mContext, mContext.getPackageName() + <span class="string">".fileprovider"</span>, newFile);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    uriForFile = Uri.parse(<span class="string">"file://"</span> + newFile.toString());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>getUriForFile()</code> 返回一个 content URI <code>content://com.mydomain.fileprovider/my_images/default_image.jpg</code>.</p>
-<h3 id="0x04-授予权限"><a href="#0x04-授予权限" class="headerlink" title="0x04 授予权限"></a>0x04 授予权限</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">shareContentIntent.setClipData(ClipData.newRawUri(<span class="string">""</span>, contentUri));</span><br><span class="line">shareContentIntent.addFlags(</span><br><span class="line">         Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);</span><br></pre></td></tr></table></figure>
-
-<ol>
-<li>Put the content URI in an <code>Intent</code> by calling <code>setData()</code>.</li>
-<li>Call the method <code>Intent.setFlags()</code> with either <code>Intent.FLAG_GRANT_READ_URI_PERMISSION</code> or <code>Intent.FLAG_GRANT_WRITE_URI_PERMISSION</code> or both.</li>
-<li>Send the <code>Intent</code> to another app. Most often, you do this by calling <code>setResult()</code>.</li>
-</ol>
-<h3 id="0x05-提供Uri给其他app"><a href="#0x05-提供Uri给其他app" class="headerlink" title="0x05 提供Uri给其他app"></a>0x05 提供Uri给其他app</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用uri</span></span><br><span class="line">Intent i = <span class="keyword">new</span> Intent(Intent.ACTION_VIEW);</span><br><span class="line">i.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);</span><br><span class="line">i.setDataAndType(uriForFile, <span class="string">"application/vnd.android.package-archive"</span>);</span><br><span class="line">mContext.startActivity(i);</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/12/06/Problems%E4%B8%93%E9%A2%98%E4%B9%8BProvider/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2021/12/06/Problems%E4%B8%93%E9%A2%98%E4%B9%8BProvider/" class="post-title-link" itemprop="url">Problems专题：Provider</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-12-06 22:22:22" itemprop="dateCreated datePublished" datetime="2021-12-06T22:22:22+08:00">2021-12-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-08 01:31:32" itemprop="dateModified" datetime="2021-12-08T01:31:32+08:00">2021-12-08</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Problems专题：Provider"><a href="#Problems专题：Provider" class="headerlink" title="Problems专题：Provider"></a>Problems专题：Provider</h2><h3 id="0x01-FileProvider：Failed-to-find-configured-root-that-contains-…-jpeg"><a href="#0x01-FileProvider：Failed-to-find-configured-root-that-contains-…-jpeg" class="headerlink" title="0x01  FileProvider：Failed to find configured root that contains /…/**.jpeg"></a>0x01  FileProvider：Failed to find configured root that contains /…/**.jpeg</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">java.lang.IllegalArgumentException: Failed to find configured root that contains /storage/emulated/0/DCIM/Camera/**.jpeg</span><br><span class="line">	at androidx.core.content.FileProvider$SimplePathStrategy.getUriForFile(FileProvider.java:800)</span><br><span class="line">	at androidx.core.content.FileProvider.getUriForFile(FileProvider.java:442)</span><br><span class="line">	at com.luck.picture.lib.tools.PictureFileUtils.parUri(PictureFileUtils.java:533)</span><br><span class="line">	at com.luck.picture.lib.PictureBaseActivity.startOpenCameraImage(PictureBaseActivity.java:705)</span><br><span class="line">	at com.luck.picture.lib.PictureSelectorActivity.startCamera(PictureSelectorActivity.java:926)</span><br><span class="line">	at com.luck.picture.lib.PictureSelectorActivity.onTakePhoto(PictureSelectorActivity.java:1473)</span><br><span class="line">	at com.luck.picture.lib.adapter.PictureImageGridAdapter.lambda$onBindViewHolder$0$PictureImageGridAdapter(PictureImageGridAdapter.java:155)</span><br><span class="line">	at com.luck.picture.lib.adapter.-$$Lambda$PictureImageGridAdapter$0EODmJcP4VP0lqmkEhQ1dzLbHi8.onClick(Unknown Source:2)</span><br><span class="line">	at android.view.View.performClick(View.java:6608)</span><br><span class="line">	at android.view.View.performClickInternal(View.java:6585)</span><br><span class="line">	at android.view.View.access$3100(View.java:785)</span><br><span class="line">	at android.view.View$PerformClick.run(View.java:25921)</span><br><span class="line">	at android.os.Handler.handleCallback(Handler.java:873)</span><br><span class="line">	at android.os.Handler.dispatchMessage(Handler.java:99)</span><br><span class="line">	at android.os.Looper.loop(Looper.java:201)</span><br><span class="line">	at android.app.ActivityThread.main(ActivityThread.java:6810)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Native Method)</span><br><span class="line">	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:547)</span><br><span class="line">	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:873)</span><br><span class="line">Back traces end.</span><br></pre></td></tr></table></figure>
-
-<p><strong>问题分析</strong></p>
-<ol>
-<li>FileProvider 路径配置文件被互相覆盖</li>
-<li>FileProvider 路径配置文件id重复，导致覆盖</li>
-</ol>
-<p><strong>解决方案</strong></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -684,7 +651,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">69</span>
+          <span class="site-state-item-count">71</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -697,7 +664,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/blog/tags/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

@@ -190,6 +190,164 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/12/07/Android%E4%B8%93%E6%A0%8F-FileProvider/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2021/12/07/Android%E4%B8%93%E6%A0%8F-FileProvider/" class="post-title-link" itemprop="url">FileProvider 的使用</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-12-07 19:15:25" itemprop="dateCreated datePublished" datetime="2021-12-07T19:15:25+08:00">2021-12-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-08 01:35:48" itemprop="dateModified" datetime="2021-12-08T01:35:48+08:00">2021-12-08</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="FileProvider-的使用"><a href="#FileProvider-的使用" class="headerlink" title="FileProvider 的使用"></a>FileProvider 的使用</h2><p>Dev Doc</p>
+<p><a href="https://developer.android.google.cn/reference/androidx/core/content/FileProvider" target="_blank" rel="noopener">https://developer.android.google.cn/reference/androidx/core/content/FileProvider</a></p>
+<h3 id="0x01-定义一个FileProvider"><a href="#0x01-定义一个FileProvider" class="headerlink" title="0x01 定义一个FileProvider"></a>0x01 定义一个FileProvider</h3><p>在 androidx 包提供的 FileProvider 提供了 生成文件Uri 的功能。</p>
+<p>在 manifest 文件中，声明一个 provider</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">manifest</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="tag">&lt;<span class="name">application</span>&gt;</span></span><br><span class="line">        ...</span><br><span class="line">        <span class="tag">&lt;<span class="name">provider</span></span></span><br><span class="line"><span class="tag">                  <span class="attr">android:name</span>=<span class="string">"androidx.core.content.FileProvider"</span></span></span><br><span class="line"><span class="tag">                  <span class="attr">android:authorities</span>=<span class="string">"$&#123;applicationId&#125;.fileprovider"</span></span></span><br><span class="line"><span class="tag">                  <span class="attr">android:exported</span>=<span class="string">"false"</span></span></span><br><span class="line"><span class="tag">                  <span class="attr">android:grantUriPermissions</span>=<span class="string">"true"</span></span></span><br><span class="line"><span class="tag">                  <span class="attr">tools:replace</span>=<span class="string">"android:authorities"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">meta-data</span></span></span><br><span class="line"><span class="tag">                       <span class="attr">android:name</span>=<span class="string">"android.support.FILE_PROVIDER_PATHS"</span></span></span><br><span class="line"><span class="tag">                       <span class="attr">android:resource</span>=<span class="string">"@xml/file_paths"</span></span></span><br><span class="line"><span class="tag">                       <span class="attr">tools:replace</span>=<span class="string">"android:resource"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">provider</span>&gt;</span></span><br><span class="line">        ...</span><br><span class="line">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="0x02-可用文件路径配置"><a href="#0x02-可用文件路径配置" class="headerlink" title="0x02 可用文件路径配置"></a>0x02 可用文件路径配置</h3><p>在 res/xml/file_paths.xml 下配置可用的文件路径，FileProvider 只能生成配置了的文件Uri。每个你想要生成Uri的文件路径都需要在 paths 下面定义。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">paths</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">files-path</span> <span class="attr">name</span>=<span class="string">"my_images"</span> <span class="attr">path</span>=<span class="string">"images/"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">cache-path</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">path</span>=<span class="string">"path"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">external-path</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">path</span>=<span class="string">"path"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">external-files-path</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">path</span>=<span class="string">"path"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">external-cache-path</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">path</span>=<span class="string">"path"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">external-media-path</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">path</span>=<span class="string">"path"</span> /&gt;</span></span><br><span class="line">    ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">paths</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="0x03-生成一个Uri"><a href="#0x03-生成一个Uri" class="headerlink" title="0x03 生成一个Uri"></a>0x03 生成一个Uri</h3><p>和其他 app 共享一个文件，你需要生成一个Uri。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">File imagePath = <span class="keyword">new</span> File(Context.getFilesDir(), <span class="string">"my_images"</span>);</span><br><span class="line">File newFile = <span class="keyword">new</span> File(imagePath, <span class="string">"default_image.jpg"</span>);</span><br><span class="line"></span><br><span class="line">Uri uriForFile;</span><br><span class="line"><span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.N) &#123;</span><br><span class="line">    uriForFile = FileProvider.getUriForFile(mContext, mContext.getPackageName() + <span class="string">".fileprovider"</span>, newFile);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    uriForFile = Uri.parse(<span class="string">"file://"</span> + newFile.toString());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>getUriForFile()</code> 返回一个 content URI <code>content://com.mydomain.fileprovider/my_images/default_image.jpg</code>.</p>
+<h3 id="0x04-授予权限"><a href="#0x04-授予权限" class="headerlink" title="0x04 授予权限"></a>0x04 授予权限</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">shareContentIntent.setClipData(ClipData.newRawUri(<span class="string">""</span>, contentUri));</span><br><span class="line">shareContentIntent.addFlags(</span><br><span class="line">         Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>Put the content URI in an <code>Intent</code> by calling <code>setData()</code>.</li>
+<li>Call the method <code>Intent.setFlags()</code> with either <code>Intent.FLAG_GRANT_READ_URI_PERMISSION</code> or <code>Intent.FLAG_GRANT_WRITE_URI_PERMISSION</code> or both.</li>
+<li>Send the <code>Intent</code> to another app. Most often, you do this by calling <code>setResult()</code>.</li>
+</ol>
+<h3 id="0x05-提供Uri给其他app"><a href="#0x05-提供Uri给其他app" class="headerlink" title="0x05 提供Uri给其他app"></a>0x05 提供Uri给其他app</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用uri</span></span><br><span class="line">Intent i = <span class="keyword">new</span> Intent(Intent.ACTION_VIEW);</span><br><span class="line">i.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);</span><br><span class="line">i.setDataAndType(uriForFile, <span class="string">"application/vnd.android.package-archive"</span>);</span><br><span class="line">mContext.startActivity(i);</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/12/06/Problems%E4%B8%93%E9%A2%98%E4%B9%8BProvider/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2021/12/06/Problems%E4%B8%93%E9%A2%98%E4%B9%8BProvider/" class="post-title-link" itemprop="url">Problems专题：Provider</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-12-06 22:22:22" itemprop="dateCreated datePublished" datetime="2021-12-06T22:22:22+08:00">2021-12-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-08 01:31:32" itemprop="dateModified" datetime="2021-12-08T01:31:32+08:00">2021-12-08</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Problems专题：Provider"><a href="#Problems专题：Provider" class="headerlink" title="Problems专题：Provider"></a>Problems专题：Provider</h2><h3 id="0x01-FileProvider：Failed-to-find-configured-root-that-contains-…-jpeg"><a href="#0x01-FileProvider：Failed-to-find-configured-root-that-contains-…-jpeg" class="headerlink" title="0x01  FileProvider：Failed to find configured root that contains /…/**.jpeg"></a>0x01  FileProvider：Failed to find configured root that contains /…/**.jpeg</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">java.lang.IllegalArgumentException: Failed to find configured root that contains /storage/emulated/0/DCIM/Camera/**.jpeg</span><br><span class="line">	at androidx.core.content.FileProvider$SimplePathStrategy.getUriForFile(FileProvider.java:800)</span><br><span class="line">	at androidx.core.content.FileProvider.getUriForFile(FileProvider.java:442)</span><br><span class="line">	at com.luck.picture.lib.tools.PictureFileUtils.parUri(PictureFileUtils.java:533)</span><br><span class="line">	at com.luck.picture.lib.PictureBaseActivity.startOpenCameraImage(PictureBaseActivity.java:705)</span><br><span class="line">	at com.luck.picture.lib.PictureSelectorActivity.startCamera(PictureSelectorActivity.java:926)</span><br><span class="line">	at com.luck.picture.lib.PictureSelectorActivity.onTakePhoto(PictureSelectorActivity.java:1473)</span><br><span class="line">	at com.luck.picture.lib.adapter.PictureImageGridAdapter.lambda$onBindViewHolder$0$PictureImageGridAdapter(PictureImageGridAdapter.java:155)</span><br><span class="line">	at com.luck.picture.lib.adapter.-$$Lambda$PictureImageGridAdapter$0EODmJcP4VP0lqmkEhQ1dzLbHi8.onClick(Unknown Source:2)</span><br><span class="line">	at android.view.View.performClick(View.java:6608)</span><br><span class="line">	at android.view.View.performClickInternal(View.java:6585)</span><br><span class="line">	at android.view.View.access$3100(View.java:785)</span><br><span class="line">	at android.view.View$PerformClick.run(View.java:25921)</span><br><span class="line">	at android.os.Handler.handleCallback(Handler.java:873)</span><br><span class="line">	at android.os.Handler.dispatchMessage(Handler.java:99)</span><br><span class="line">	at android.os.Looper.loop(Looper.java:201)</span><br><span class="line">	at android.app.ActivityThread.main(ActivityThread.java:6810)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Native Method)</span><br><span class="line">	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:547)</span><br><span class="line">	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:873)</span><br><span class="line">Back traces end.</span><br></pre></td></tr></table></figure>
+
+<p><strong>问题分析</strong></p>
+<ol>
+<li>FileProvider 路径配置文件被互相覆盖</li>
+<li>FileProvider 路径配置文件id重复，导致覆盖</li>
+</ol>
+<p><strong>解决方案</strong></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/11/30/Kotlin%E5%8D%95%E4%BE%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -581,144 +739,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/09/26/Android%E4%B8%93%E6%A0%8F-SmartRefreshLayout/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2021/09/26/Android%E4%B8%93%E6%A0%8F-SmartRefreshLayout/" class="post-title-link" itemprop="url">Android专栏-SmartRefreshLayout</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-09-26 21:16:30" itemprop="dateCreated datePublished" datetime="2021-09-26T21:16:30+08:00">2021-09-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-08 01:31:32" itemprop="dateModified" datetime="2021-12-08T01:31:32+08:00">2021-12-08</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Android专栏-SmartRefreshLayout"><a href="#Android专栏-SmartRefreshLayout" class="headerlink" title="Android专栏-SmartRefreshLayout"></a>Android专栏-SmartRefreshLayout</h2><h3 id="0x01-加载结束之后底部多出一段空白位置"><a href="#0x01-加载结束之后底部多出一段空白位置" class="headerlink" title="0x01 加载结束之后底部多出一段空白位置"></a>0x01 加载结束之后底部多出一段空白位置</h3><p><code>SmartRefreshLayout</code> 嵌套 <code>ViewPager2</code> 上拉加载更多，在 <code>finishLoadMore()</code> 方法之后，底部加载 Loading 位置会多出一段空白不消失。</p>
-<p><strong>解决方案：</strong></p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smartRefreshLayout.setEnableScrollContentWhenLoaded(<span class="literal">false</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="0x02-下拉刷新-PAG动画"><a href="#0x02-下拉刷新-PAG动画" class="headerlink" title="0x02 下拉刷新+PAG动画"></a>0x02 下拉刷新+PAG动画</h3><p>自定义下拉刷新头部，使用 PAGView 做动画，可以在 <code>onMoving(boolean b, float v, int i, int i1, int i2)</code> 方法中设置  <code>pagView.setProgress(v);</code> 添加手势动画。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> android.content.Context;</span><br><span class="line"><span class="keyword">import</span> android.util.AttributeSet;</span><br><span class="line"><span class="keyword">import</span> android.view.LayoutInflater;</span><br><span class="line"><span class="keyword">import</span> android.view.View;</span><br><span class="line"><span class="keyword">import</span> android.view.ViewGroup;</span><br><span class="line"><span class="keyword">import</span> android.widget.ImageView;</span><br><span class="line"><span class="keyword">import</span> android.widget.RelativeLayout;</span><br><span class="line"><span class="keyword">import</span> android.widget.TextView;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> androidx.annotation.ColorInt;</span><br><span class="line"><span class="keyword">import</span> androidx.annotation.NonNull;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.scwang.smartrefresh.layout.api.RefreshHeader;</span><br><span class="line"><span class="keyword">import</span> com.scwang.smartrefresh.layout.api.RefreshKernel;</span><br><span class="line"><span class="keyword">import</span> com.scwang.smartrefresh.layout.api.RefreshLayout;</span><br><span class="line"><span class="keyword">import</span> com.scwang.smartrefresh.layout.constant.RefreshState;</span><br><span class="line"><span class="keyword">import</span> com.scwang.smartrefresh.layout.constant.SpinnerStyle;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.libpag.PAGFile;</span><br><span class="line"><span class="keyword">import</span> org.libpag.PAGView;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CommonRefreshHeader</span> <span class="keyword">extends</span> <span class="title">RelativeLayout</span> <span class="keyword">implements</span> <span class="title">RefreshHeader</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String DEFAULT_LOADING_FILE = <span class="string">"load_bubble.pag"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> View mView;</span><br><span class="line">    <span class="keyword">protected</span> ImageView sdv_background;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mFinishDuration = <span class="number">300</span>;</span><br><span class="line">    <span class="keyword">private</span> ViewGroup rootLayout;</span><br><span class="line">    <span class="keyword">private</span> PAGView pagView;</span><br><span class="line">    <span class="keyword">private</span> TextView toastTv;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CommonRefreshHeader</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(context);</span><br><span class="line">        initView(context);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CommonRefreshHeader</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(context, attrs);</span><br><span class="line">        initView(context);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CommonRefreshHeader</span><span class="params">(Context context, AttributeSet attrs, <span class="keyword">int</span> defStyleAttr)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(context, attrs, defStyleAttr);</span><br><span class="line">        initView(context);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getLayoutId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> R.layout.layout_refresh_head;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">initView</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">        mView = LayoutInflater.from(context).inflate(getLayoutId(), <span class="keyword">this</span>);</span><br><span class="line">        toastTv = mView.findViewById(R.id.tv_toast);</span><br><span class="line">        rootLayout = mView.findViewById(R.id.rootLayout);</span><br><span class="line">        sdv_background = mView.findViewById(R.id.sdv_background);</span><br><span class="line">        PAGFile file = PAGFile.Load(context.getAssets(), DEFAULT_LOADING_FILE);</span><br><span class="line">        pagView = <span class="keyword">new</span> PAGView(getContext());</span><br><span class="line">        LayoutParams params = <span class="keyword">new</span> LayoutParams(UiUtils.dip2px(<span class="number">39</span>), UiUtils.dip2px(<span class="number">39</span>));</span><br><span class="line">        params.addRule(RelativeLayout.CENTER_IN_PARENT);</span><br><span class="line">        pagView.setLayoutParams(params);</span><br><span class="line">        pagView.setFile(file);</span><br><span class="line">        pagView.setRepeatCount(<span class="number">0</span>);</span><br><span class="line">        rootLayout.addView(pagView);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMarginTop</span><span class="params">(<span class="keyword">int</span> marginTop)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (mView == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">        ViewGroup root = mView.findViewById(R.id.rootLayout);</span><br><span class="line">        <span class="keyword">if</span> (root != <span class="keyword">null</span> &amp;&amp; root.getLayoutParams() <span class="keyword">instanceof</span> MarginLayoutParams) &#123;</span><br><span class="line">            MarginLayoutParams params = (MarginLayoutParams) root.getLayoutParams();</span><br><span class="line">            params.topMargin = marginTop;</span><br><span class="line">            root.setLayoutParams(params);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@NonNull</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> View <span class="title">getView</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> mView;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> SpinnerStyle <span class="title">getSpinnerStyle</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> SpinnerStyle.Translate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPrimaryColors</span><span class="params">(@ColorInt <span class="keyword">int</span>... colors)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onInitialized</span><span class="params">(@NonNull RefreshKernel kernel, <span class="keyword">int</span> height, <span class="keyword">int</span> maxDragHeight)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onMoving</span><span class="params">(<span class="keyword">boolean</span> b, <span class="keyword">float</span> v, <span class="keyword">int</span> i, <span class="keyword">int</span> i1, <span class="keyword">int</span> i2)</span> </span>&#123;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 【仅限框架内调用】手指拖动下拉（会连续多次调用，添加isDragging并取代之前的onPulling、onReleasing）</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> isDragging true 手指正在拖动 false 回弹动画</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> percent 下拉的百分比 值 = offset/footerHeight (0 - percent - (footerHeight+maxDragHeight) / footerHeight )</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> offset 下拉的像素偏移量  0 - offset - (footerHeight+maxDragHeight)</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> height 高度 HeaderHeight or FooterHeight (offset 可以超过 height 此时 percent 大于 1)</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> maxDragHeight 最大拖动高度 offset 可以超过 height 参数 但是不会超过 maxDragHeight</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">if</span> (pagView != <span class="keyword">null</span> &amp;&amp; !pagView.isPlaying()) &#123;</span><br><span class="line">            pagView.setProgress(v);</span><br><span class="line">            pagView.flush();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReleased</span><span class="params">(@NonNull RefreshLayout refreshLayout, <span class="keyword">int</span> i, <span class="keyword">int</span> i1)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onHorizontalDrag</span><span class="params">(<span class="keyword">float</span> percentX, <span class="keyword">int</span> offsetX, <span class="keyword">int</span> offsetMax)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onStartAnimator</span><span class="params">(RefreshLayout layout, <span class="keyword">int</span> height, <span class="keyword">int</span> extendHeight)</span> </span>&#123;</span><br><span class="line">        LogUtils.e(<span class="string">"RefreshHeader"</span>, <span class="string">"onStartAnimator"</span>);</span><br><span class="line">        <span class="keyword">if</span> (pagView != <span class="keyword">null</span>) pagView.play();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">onFinish</span><span class="params">(RefreshLayout layout, <span class="keyword">boolean</span> success)</span> </span>&#123;</span><br><span class="line">        LogUtils.e(<span class="string">"RefreshHeader"</span>, <span class="string">"onFinish"</span>);</span><br><span class="line">        <span class="keyword">if</span> (pagView != <span class="keyword">null</span>) pagView.stop();</span><br><span class="line">        <span class="keyword">return</span> mFinishDuration;<span class="comment">//延迟500毫秒之后再弹回</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSupportHorizontalDrag</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onStateChanged</span><span class="params">(RefreshLayout refreshLayout, RefreshState oldState, RefreshState newState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (newState) &#123;</span><br><span class="line">            <span class="keyword">case</span> None:</span><br><span class="line">            <span class="keyword">case</span> PullDownToRefresh:</span><br><span class="line">            <span class="keyword">case</span> Refreshing:</span><br><span class="line">                <span class="keyword">if</span> (pagView != <span class="keyword">null</span>) pagView.setVisibility(VISIBLE);</span><br><span class="line">                <span class="keyword">if</span> (toastTv != <span class="keyword">null</span>) toastTv.setVisibility(GONE);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> ReleaseToRefresh:</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> RefreshFinish:</span><br><span class="line">                <span class="keyword">if</span> (pagView != <span class="keyword">null</span>) pagView.setVisibility(GONE);</span><br><span class="line">                <span class="keyword">if</span> (toastTv != <span class="keyword">null</span>) toastTv.setVisibility(VISIBLE);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setToastText</span><span class="params">(String str)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (StringUtils.isEmpty(str)) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span> (toastTv != <span class="keyword">null</span>) &#123;</span><br><span class="line">            toastTv.setText(str);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setFinishDuration</span><span class="params">(<span class="keyword">int</span> finishDuration)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.mFinishDuration = finishDuration;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/09/13/Gson%E6%95%B0%E6%8D%AE%E8%A7%A3%E6%9E%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2021/09/13/Gson%E6%95%B0%E6%8D%AE%E8%A7%A3%E6%9E%90/" class="post-title-link" itemprop="url">Gson 数据解析</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-09-13 20:16:30" itemprop="dateCreated datePublished" datetime="2021-09-13T20:16:30+08:00">2021-09-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-08 01:31:32" itemprop="dateModified" datetime="2021-12-08T01:31:32+08:00">2021-12-08</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Gson-数据解析"><a href="#Gson-数据解析" class="headerlink" title="Gson 数据解析"></a>Gson 数据解析</h2><h3 id="0x01-Kotlin-Gson-解析-data-class-两条黄金法则："><a href="#0x01-Kotlin-Gson-解析-data-class-两条黄金法则：" class="headerlink" title="0x01 Kotlin Gson 解析 data class 两条黄金法则："></a>0x01 Kotlin Gson 解析 data class 两条黄金法则：</h3><h4 id="1、-String-必须是可空类型-String"><a href="#1、-String-必须是可空类型-String" class="headerlink" title="1、 String 必须是可空类型 String?"></a>1、 String 必须是可空类型 String?</h4><h4 id="2、-需要使用默认值，则全部字段都必须给予默认值，以满足kotlin对象有空的构造函数"><a href="#2、-需要使用默认值，则全部字段都必须给予默认值，以满足kotlin对象有空的构造函数" class="headerlink" title="2、 需要使用默认值，则全部字段都必须给予默认值，以满足kotlin对象有空的构造函数"></a>2、 需要使用默认值，则全部字段都必须给予默认值，以满足kotlin对象有空的构造函数</h4><h3 id="0x02-手动解析Gson基础字段"><a href="#0x02-手动解析Gson基础字段" class="headerlink" title="0x02 手动解析Gson基础字段"></a>0x02 手动解析Gson基础字段</h3><p>1、msg 可空String解析 <code>jsonReader.peek() == JsonToken.NULL</code></p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.google.gson.Gson</span><br><span class="line"><span class="keyword">import</span> com.google.gson.JsonSyntaxException</span><br><span class="line"><span class="keyword">import</span> com.google.gson.TypeAdapter</span><br><span class="line"><span class="keyword">import</span> com.google.gson.reflect.TypeToken</span><br><span class="line"><span class="keyword">import</span> com.google.gson.stream.JsonReader</span><br><span class="line"><span class="keyword">import</span> com.google.gson.stream.JsonToken</span><br><span class="line"><span class="keyword">import</span> okhttp3.ResponseBody</span><br><span class="line"><span class="keyword">import</span> retrofit2.Converter</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.ParameterizedType</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Type</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ResponseBodyConverter</span></span>(<span class="keyword">val</span> gson: Gson, <span class="keyword">val</span> type: Type) :</span><br><span class="line">    Converter&lt;ResponseBody, BaseResponse&lt;Any&gt;&gt; &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">convert</span><span class="params">(value: <span class="type">ResponseBody</span>)</span></span>: BaseResponse&lt;Any&gt; &#123;</span><br><span class="line">        <span class="keyword">val</span> dataType = GenericsUtils.getParameterUpperBound(</span><br><span class="line">            <span class="number">0</span>,</span><br><span class="line">            type <span class="keyword">as</span> ParameterizedType</span><br><span class="line">        )</span><br><span class="line">        <span class="keyword">val</span> baseResponse = BaseResponse&lt;Any&gt;()</span><br><span class="line">        <span class="keyword">val</span> jsonReader = JsonReader(value.charStream())</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            jsonReader.beginObject()</span><br><span class="line">            <span class="keyword">while</span> (jsonReader.hasNext()) &#123;</span><br><span class="line">                <span class="keyword">val</span> name: String = jsonReader.nextName()</span><br><span class="line">                <span class="keyword">when</span> (name) &#123;</span><br><span class="line">                    <span class="string">"code"</span> -&gt; &#123;</span><br><span class="line">                        baseResponse.code = jsonReader.nextString()</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="string">"msg"</span> -&gt; &#123;</span><br><span class="line">                        <span class="comment">// this works, but do not do this.</span></span><br><span class="line">                        <span class="keyword">if</span> (jsonReader.peek() == JsonToken.NULL) &#123;</span><br><span class="line">                            jsonReader.nextNull()</span><br><span class="line">                            baseResponse.msg = <span class="literal">null</span></span><br><span class="line">                        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                            baseResponse.msg = jsonReader.nextString()</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="string">"data"</span> -&gt; &#123;</span><br><span class="line">                        <span class="keyword">val</span> mapped: TypeAdapter&lt;*&gt;? = gson.getAdapter(TypeToken.<span class="keyword">get</span>(dataType))</span><br><span class="line">                        baseResponse.<span class="keyword">data</span> = mapped?.read(jsonReader)</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span> -&gt; &#123;</span><br><span class="line">                        jsonReader.skipValue()</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (e: IllegalStateException) &#123;</span><br><span class="line">            <span class="keyword">throw</span> JsonSyntaxException(e)</span><br><span class="line">        &#125; <span class="keyword">catch</span> (e: IllegalAccessException) &#123;</span><br><span class="line">            <span class="keyword">throw</span> AssertionError(e)</span><br><span class="line">        &#125;</span><br><span class="line">        jsonReader.endObject()</span><br><span class="line">        <span class="keyword">return</span> baseResponse</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -791,7 +811,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">69</span>
+          <span class="site-state-item-count">71</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -804,7 +824,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/blog/tags/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
