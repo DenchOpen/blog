@@ -190,6 +190,78 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/08/23/%E5%B7%A5%E5%85%B7%E7%B1%BB-StatusBarHelper/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2020/08/23/%E5%B7%A5%E5%85%B7%E7%B1%BB-StatusBarHelper/" class="post-title-link" itemprop="url">StatusBarHelper</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-23 17:29:00" itemprop="dateCreated datePublished" datetime="2020-08-23T17:29:00+08:00">2020-08-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-10 23:39:32" itemprop="dateModified" datetime="2022-01-10T23:39:32+08:00">2022-01-10</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="StatusBarHelper"><a href="#StatusBarHelper" class="headerlink" title="StatusBarHelper"></a>StatusBarHelper</h1><h3 id="StatusBar-工具类"><a href="#StatusBar-工具类" class="headerlink" title="StatusBar 工具类"></a>StatusBar 工具类</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">object</span> StatusBarHelper &#123;</span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 内容显示在状态栏下面（LAYOUT_FULLSCREEN） &gt; 6.0</span></span><br><span class="line"><span class="comment">     * true:白底黑字,false:黑底白字</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">fitSystemBar</span><span class="params">(activity: <span class="type">Activity</span>, light: <span class="type">Boolean</span> = <span class="literal">true</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (Build.VERSION.SDK_INT &lt; Build.VERSION_CODES.M) <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">val</span> window = activity.window</span><br><span class="line">    <span class="keyword">val</span> decorView = window.decorView</span><br><span class="line">    <span class="keyword">var</span> visibility = decorView.systemUiVisibility</span><br><span class="line">    visibility = visibility or</span><br><span class="line">    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or</span><br><span class="line">    View.SYSTEM_UI_FLAG_LAYOUT_STABLE</span><br><span class="line">    visibility = <span class="keyword">if</span> (light) &#123;</span><br><span class="line">      visibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      visibility and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()</span><br><span class="line">    &#125;</span><br><span class="line">    decorView.systemUiVisibility = visibility</span><br><span class="line"></span><br><span class="line">    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)</span><br><span class="line">    window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)</span><br><span class="line">    window.statusBarColor = Color.TRANSPARENT</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 调整状态栏文字、图标颜色 &gt; 6.0</span></span><br><span class="line"><span class="comment">     * true:白底黑字,false:黑底白字</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">lightStatusBar</span><span class="params">(activity: <span class="type">Activity</span>, light: <span class="type">Boolean</span> = <span class="literal">true</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (Build.VERSION.SDK_INT &lt; Build.VERSION_CODES.M) <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">var</span> window: Window = activity.window</span><br><span class="line">    <span class="keyword">var</span> visibility = window.decorView.systemUiVisibility</span><br><span class="line">    visibility = <span class="keyword">if</span> (light) &#123;</span><br><span class="line">      visibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      visibility and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()</span><br><span class="line">    &#125;</span><br><span class="line">    window.decorView.systemUiVisibility = visibility</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 获取状态栏高度</span></span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">getStatusBarHeight</span><span class="params">(activity: <span class="type">Activity</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> result: <span class="built_in">Int</span> = <span class="number">0</span></span><br><span class="line">    <span class="keyword">var</span> resId = activity.resources.getIdentifier(<span class="string">"status_bar_height"</span>, <span class="string">"dimen"</span>, <span class="string">"android"</span>)</span><br><span class="line">    <span class="keyword">if</span> (resId &gt; <span class="number">0</span>) result = activity.resources.getDimensionPixelOffset(resId)</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/blog/2020/08/23/%E5%B7%A5%E5%85%B7%E7%B1%BB-StatusBarHelper/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/08/21/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -555,78 +627,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/08/06/%E7%AE%80%E5%8D%95Socket%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%9E%E7%8E%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2020/08/06/%E7%AE%80%E5%8D%95Socket%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%9E%E7%8E%B0/" class="post-title-link" itemprop="url">简单Socket服务器实现</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-08-06 00:55:29" itemprop="dateCreated datePublished" datetime="2020-08-06T00:55:29+08:00">2020-08-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-20 05:36:47" itemprop="dateModified" datetime="2020-12-20T05:36:47+08:00">2020-12-20</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="简单Socket服务器实现"><a href="#简单Socket服务器实现" class="headerlink" title="简单Socket服务器实现"></a>简单Socket服务器实现</h2><p>服务端</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/blog/2020/08/06/%E7%AE%80%E5%8D%95Socket%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%9E%E7%8E%B0/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -699,7 +699,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">71</span>
+          <span class="site-state-item-count">72</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

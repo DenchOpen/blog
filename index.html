@@ -190,6 +190,105 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2022/09/08/Android%E4%BB%8E%E7%8E%B0%E6%9C%89%E7%9A%84%E9%A1%B9%E7%9B%AE%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%9A%AE%E5%BA%94%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2022/09/08/Android%E4%BB%8E%E7%8E%B0%E6%9C%89%E7%9A%84%E9%A1%B9%E7%9B%AE%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%9A%AE%E5%BA%94%E7%94%A8/" class="post-title-link" itemprop="url">Android从现有的项目创建一个皮应用</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-09-08 21:09:31" itemprop="dateCreated datePublished" datetime="2022-09-08T21:09:31+08:00">2022-09-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-09-18 02:22:23" itemprop="dateModified" datetime="2022-09-18T02:22:23+08:00">2022-09-18</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Android从现有的项目创建一个皮应用"><a href="#Android从现有的项目创建一个皮应用" class="headerlink" title="Android从现有的项目创建一个皮应用"></a>Android从现有的项目创建一个皮应用</h2><h3 id="0x01-Copy一个新项目"><a href="#0x01-Copy一个新项目" class="headerlink" title="0x01 Copy一个新项目"></a>0x01 Copy一个新项目</h3><ol>
+<li>clean原项目，然后直接Copy原项目所有文件，等待完成</li>
+<li>根据新项目重命名新文件夹名称</li>
+<li>删除原项目的 <code>.idea</code> <code>.git</code> <code>.gitlab</code> 等文件夹，<code>.gradle</code> 可以不删</li>
+<li>用编辑器打开 <code>settings.gradle</code>，修改项目名称 <code>rootProject.name = &quot;xxx&quot;</code></li>
+</ol>
+<h3 id="0x02-重命名项目包名"><a href="#0x02-重命名项目包名" class="headerlink" title="0x02 重命名项目包名"></a>0x02 重命名项目包名</h3><p>这一步是要将包名从 <code>com.sample1.android</code> 重命名为 <code>com.sample2.android</code></p>
+<ol>
+<li>用AndroidStudio打开新项目，去掉 <code>Compat Middle Packages</code> 前面的勾</li>
+<li>选择项目的 <code>sample1</code> 包名，<code>F6</code>重命名</li>
+<li>一定选择 <code>Rename Package</code></li>
+<li>等待完成，项目大时间就比较长</li>
+<li>修改 <code>.aidl</code> 文件的包名路径和import的路径</li>
+<li>修改根目录下的 <code>build.gradle</code> 的 <code>applicationId &quot;com.sample2.android&quot;</code>，并 <code>sync</code></li>
+</ol>
+<p>ps: 不清楚为啥Kotlin的扩展函数还需要重新手动导入</p>
+<h3 id="0x03-推到代码库"><a href="#0x03-推到代码库" class="headerlink" title="0x03 推到代码库"></a>0x03 推到代码库</h3><p>到上面这一步，不出意外的话已经可以编译成功并且跑起来了。编译成功之后可以先推送本地项目到代码库。</p>
+<p>远程代码库新建项目，获取新项目git地址，然后执行下面操作。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> existing_folder</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git init</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git remote add origin git://github.com/schacon/grit.git</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git add .</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git commit</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git push -u origin master</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="0x04-后续"><a href="#0x04-后续" class="headerlink" title="0x04 后续"></a>0x04 后续</h3><p>下面就是修改名称，URL，替换功能啥的。</p>
+<ul>
+<li>Logo、名称、资源文件替换</li>
+<li>H5协议替换</li>
+<li>域名修改</li>
+<li>第三方账号切换</li>
+</ul>
+<h3 id="0x05-审核相关"><a href="#0x05-审核相关" class="headerlink" title="0x05 审核相关"></a>0x05 审核相关</h3><p>现在应用市场对新应用的审核非常严格。为了过审，可能需要做很多相关的工作</p>
+<ul>
+<li>混淆，或者改文件名</li>
+<li>资源混淆，或者资源改名</li>
+<li>增加新功能</li>
+<li>修改UI界面样式</li>
+<li>做审核版功能</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2022/08/15/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8E%A7%E4%BB%B6-RoundImageView/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -555,83 +654,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2022/06/20/Windows%E4%B8%8A%E9%85%8D%E7%BD%AESSH/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2022/06/20/Windows%E4%B8%8A%E9%85%8D%E7%BD%AESSH/" class="post-title-link" itemprop="url">Windows 上配置 Git SSH</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-06-20 20:29:05 / 修改时间：17:54:38" itemprop="dateCreated datePublished" datetime="2022-06-20T20:29:05+08:00">2022-06-20</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Windows-上配置-Git-SSH"><a href="#Windows-上配置-Git-SSH" class="headerlink" title="Windows 上配置 Git SSH"></a>Windows 上配置 Git SSH</h1><p><a href="https://support.atlassian.com/bitbucket-cloud/docs/set-up-an-ssh-key/" target="_blank" rel="noopener">https://support.atlassian.com/bitbucket-cloud/docs/set-up-an-ssh-key/</a></p>
-<h2 id="0x01-Set-up-SSH-for-Git-on-Windows"><a href="#0x01-Set-up-SSH-for-Git-on-Windows" class="headerlink" title="0x01 Set up SSH for Git on Windows"></a>0x01 Set up SSH for Git on Windows</h2><p>Use this section to create a default identity and SSH key when you’re using Git on Windows. By default, the system adds keys for all identities to the <code>/Users/&lt;username&gt;/</code>.ssh directory.</p>
-<h3 id="Step-1-Set-up-your-default-identity"><a href="#Step-1-Set-up-your-default-identity" class="headerlink" title="Step 1. Set up your default identity"></a>Step 1. Set up your default identity</h3><p>From the command line, enter ssh-keygen.</p>
-<p><code>ssh-keygen -t rsa -b 4096 -C &quot;email&quot;</code></p>
-<p>List the contents of <code>.ssh</code> to view the key files.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> dir .ssh </span></span><br><span class="line">id_rsa  id_rsa.pub</span><br></pre></td></tr></table></figure>
-
-<h3 id="Step-2-Add-the-key-to-the-ssh-agent"><a href="#Step-2-Add-the-key-to-the-ssh-agent" class="headerlink" title="Step 2. Add the key to the ssh-agent"></a>Step 2. Add the key to the ssh-agent</h3><p>If you don’t want to type your password each time you use the key, you’ll need to add it to the ssh-agent.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">eval</span> $(ssh-agent) </span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ssh-add ~/.ssh/id_rsa</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://s2.loli.net/2022/06/20/sPI1qNbuOTevgar.png" alt="20220620153539"></p>
-<h3 id="Step-3-Add-the-public-key-to-your-Account-settings"><a href="#Step-3-Add-the-public-key-to-your-Account-settings" class="headerlink" title="Step 3. Add the public key to your Account settings"></a>Step 3. Add the public key to your Account settings</h3><p>Open your <code>.ssh/id_rsa.pub</code> file and copy its contents.</p>
-<p>From Bitbucket, Paste the copied public key into the SSH Key field. Click Save.</p>
-<p>Return to the command line and verify your configuration and username by entering the following command:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ssh -T git@bitbucket.org</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="0x02-Working-with-non-default-SSH-key-pair-paths"><a href="#0x02-Working-with-non-default-SSH-key-pair-paths" class="headerlink" title="0x02 Working with non-default SSH key pair paths"></a>0x02 Working with non-default SSH key pair paths</h2><p>If you used a non-default file path for your GitLab SSH key pair,<br>you must configure your SSH client to find your GitLab SSH private key<br>for connections to your GitLab server (perhaps gitlab.com).</p>
-<p>For OpenSSH clients this is configured in the <code>~/.ssh/config</code> file.<br>Below are two example host configurations using their own key:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> GitLab.com server</span></span><br><span class="line">Host gitlab.com</span><br><span class="line">RSAAuthentication yes</span><br><span class="line">IdentityFile ~/.ssh/config/private-key-filename-01</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Private GitLab server</span></span><br><span class="line">Host gitlab.company.com</span><br><span class="line">RSAAuthentication yes</span><br><span class="line">IdentityFile ~/.ssh/config/private-key-filename</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -704,7 +726,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">71</span>
+          <span class="site-state-item-count">72</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
