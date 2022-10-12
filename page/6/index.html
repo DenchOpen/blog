@@ -190,6 +190,169 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/06/17/RecyclerView%E7%9A%84item%E5%B5%8C%E5%A5%97ScrollView/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2021/06/17/RecyclerView%E7%9A%84item%E5%B5%8C%E5%A5%97ScrollView/" class="post-title-link" itemprop="url">RecyclerView Item 嵌套 ScrollView</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-17 01:08:08" itemprop="dateCreated datePublished" datetime="2021-06-17T01:08:08+08:00">2021-06-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-10-12 22:26:06" itemprop="dateModified" datetime="2022-10-12T22:26:06+08:00">2022-10-12</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="RecyclerView-Item-嵌套-ScrollView"><a href="#RecyclerView-Item-嵌套-ScrollView" class="headerlink" title="RecyclerView Item 嵌套 ScrollView"></a>RecyclerView Item 嵌套 ScrollView</h3><p>RecyclerView Item 嵌套 ScrollView 产生 Touch 事件冲突，通过自定义ScrollView来拦截和处理事件</p>
+<img  src="https://i.loli.net/2021/09/08/K13ZtWROu4FEfhz.png" alt="image-20210908211849925" style="zoom: 25%;"/>
+
+
+<p>自定义 <code>ItemScrollView</code> 代码如下</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> android.content.Context</span><br><span class="line"><span class="keyword">import</span> android.util.AttributeSet</span><br><span class="line"><span class="keyword">import</span> android.view.MotionEvent</span><br><span class="line"><span class="keyword">import</span> android.widget.ScrollView</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ItemScrollView</span> <span class="meta">@JvmOverloads</span> <span class="keyword">constructor</span></span>(</span><br><span class="line">    context: Context,</span><br><span class="line">    attrs: AttributeSet? = <span class="literal">null</span>,</span><br><span class="line">    defStyleAttr: <span class="built_in">Int</span> = <span class="number">0</span></span><br><span class="line">) : ScrollView(context, attrs, defStyleAttr) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onInterceptTouchEvent</span><span class="params">(ev: <span class="type">MotionEvent</span>?)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        parent.requestDisallowInterceptTouchEvent(<span class="literal">true</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.onInterceptTouchEvent(ev)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> lastY: <span class="built_in">Float</span> = <span class="number">0f</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onTouchEvent</span><span class="params">(ev: <span class="type">MotionEvent</span>?)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        <span class="keyword">when</span> (ev?.action) &#123;</span><br><span class="line">            MotionEvent.ACTION_DOWN -&gt; &#123;</span><br><span class="line">                lastY = ev.y</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            MotionEvent.ACTION_MOVE -&gt; &#123;</span><br><span class="line">                <span class="keyword">val</span> currentY = ev.y</span><br><span class="line">                <span class="keyword">this</span>.scrollBy(<span class="number">0</span>, (lastY - currentY).toInt())</span><br><span class="line">                lastY = currentY</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            MotionEvent.ACTION_UP -&gt; &#123;</span><br><span class="line">                lastY = <span class="number">0f</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> canScroll()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">canScroll</span><span class="params">()</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        <span class="keyword">val</span> child = getChildAt(<span class="number">0</span>)</span><br><span class="line">        child?.let &#123;</span><br><span class="line">            <span class="keyword">return</span> height &lt; child.height</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/06/17/PowerShell%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2021/06/17/PowerShell%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/" class="post-title-link" itemprop="url">PowerShell最佳实践</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-17 00:00:00" itemprop="dateCreated datePublished" datetime="2021-06-17T00:00:00+08:00">2021-06-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-10-12 22:26:06" itemprop="dateModified" datetime="2022-10-12T22:26:06+08:00">2022-10-12</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="PowerShell最佳实践"><a href="#PowerShell最佳实践" class="headerlink" title="PowerShell最佳实践"></a>PowerShell最佳实践</h2><p>Windows 10 系统自带 PowerShell，美化教程</p>
+<img src="https://i.loli.net/2021/09/09/Fj3SGzMRUIvuy95.png" alt="image-20210909150114264" style="zoom: 75%;" />
+
+
+<h3 id="0x01-安装Fluent-Terminal"><a href="#0x01-安装Fluent-Terminal" class="headerlink" title="0x01 安装Fluent Terminal"></a>0x01 安装Fluent Terminal</h3><p>在Windows 应用商店安装，或者Github</p>
+<h3 id="0x02-安装powershell模块"><a href="#0x02-安装powershell模块" class="headerlink" title="0x02 安装powershell模块"></a>0x02 安装powershell模块</h3><p>1、安装posh-git、oh-my-posh和Get-ChildItemColor(美化ls命令)：</p>
+<p>在powershell管理员模式下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> Install-Module posh-git -Scope CurrentUser</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> Install-Module oh-my-posh -Scope CurrentUser</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> Install-Module DirColors</span></span><br></pre></td></tr></table></figure>
+
+<p>2、设置修改powershell的配置文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="keyword">if</span> (!(Test-Path -Path <span class="variable">$PROFILE</span> )) &#123; New-Item -Type File -Path <span class="variable">$PROFILE</span> -Force &#125;</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> notepad <span class="variable">$PROFILE</span></span></span><br></pre></td></tr></table></figure>
+
+<p>输入内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Import-Module DirColors</span><br><span class="line">Import-Module posh-git</span><br><span class="line">Import-Module oh-my-posh</span><br><span class="line">Set-PoshPrompt -Theme PowerLine</span><br></pre></td></tr></table></figure>
+
+<p>其中主题名可以在下面的路径里找到,可以自行切换主题。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files\WindowsPowerShell\Modules\oh-my-posh\3.163.0\themes</span><br></pre></td></tr></table></figure>
+
+<h3 id="0x03-安装Powerline字体"><a href="#0x03-安装Powerline字体" class="headerlink" title="0x03 安装Powerline字体"></a>0x03 安装Powerline字体</h3><p>在Fluent Terminal设置 powerline 字体和字体大小。</p>
+<h3 id="0x04-文件管理器命令"><a href="#0x04-文件管理器命令" class="headerlink" title="0x04 文件管理器命令"></a>0x04 文件管理器命令</h3><p>在文件夹中打开：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> I 在文件夹中打开</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> explorer (gl)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> II 在文件夹中打开</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> start .</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> III 在文件夹中打开</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ii .</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 打开当前根目录</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ii /</span></span><br></pre></td></tr></table></figure>
+
+<p>在当前文件夹打开PowerShell：</p>
+<p>空白处 Shift + 鼠标右键，在弹出的菜单中选择PowerShell.</p>
+<h3 id="0x05-VS-Code-命令"><a href="#0x05-VS-Code-命令" class="headerlink" title="0x05 VS Code 命令"></a>0x05 VS Code 命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> code .</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/06/17/Problems%E4%B8%93%E9%A2%98%E4%B9%8BDialog/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -306,10 +469,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-06-17 00:00:00 / 修改时间：22:46:43" itemprop="dateCreated datePublished" datetime="2021-06-17T00:00:00+08:00">2021-06-17</time>
+              <time title="创建时间：2021-06-17 00:00:00" itemprop="dateCreated datePublished" datetime="2021-06-17T00:00:00+08:00">2021-06-17</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-10-12 22:26:06" itemprop="dateModified" datetime="2022-10-12T22:26:06+08:00">2022-10-12</time>
+              </span>
 
           
 
@@ -431,10 +600,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-05-30 12:39:32 / 修改时间：16:27:23" itemprop="dateCreated datePublished" datetime="2021-05-30T12:39:32+08:00">2021-05-30</time>
+              <time title="创建时间：2021-05-30 12:39:32" itemprop="dateCreated datePublished" datetime="2021-05-30T12:39:32+08:00">2021-05-30</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-10-12 22:26:06" itemprop="dateModified" datetime="2022-10-12T22:26:06+08:00">2022-10-12</time>
+              </span>
 
           
 
@@ -447,7 +622,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><strong>人们的烦恼，基本是源于读书太少，而想得太多。</strong></p>
+          <h1 id="哲学启蒙"><a href="#哲学启蒙" class="headerlink" title="哲学启蒙"></a>哲学启蒙</h1><p><strong>人们的烦恼，基本是源于读书太少，而想得太多。</strong></p>
 <p>读哲学，不只是去吸收大家们的思想，而是在读的同时不要忘记思考。</p>
 <p>哲学也许给不了人成功，也不一定会带来富有，但至少获得了自由。</p>
 <h3 id="大问题"><a href="#大问题" class="headerlink" title="大问题"></a>大问题</h3><p>作者: [美国] 罗伯特·C. 所罗门</p>
@@ -486,154 +661,11 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/05/27/Terminal%E5%92%8CAndroidStudio%E4%BB%A3%E7%90%86%E8%AE%BE%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2021/05/27/Terminal%E5%92%8CAndroidStudio%E4%BB%A3%E7%90%86%E8%AE%BE%E7%BD%AE/" class="post-title-link" itemprop="url">Terminal设置代理</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-27 02:40:48" itemprop="dateCreated datePublished" datetime="2021-05-27T02:40:48+08:00">2021-05-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-02 23:53:14" itemprop="dateModified" datetime="2021-06-02T23:53:14+08:00">2021-06-02</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="0x01-Terminal代理设置"><a href="#0x01-Terminal代理设置" class="headerlink" title="0x01 Terminal代理设置"></a>0x01 Terminal代理设置</h3><p>给 mac 的 terminal 设置代理</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ vim ~&#x2F;.zshrc</span><br><span class="line"># proxy</span><br><span class="line">export http_proxy&#x3D;http:&#x2F;&#x2F;127.0.0.1:8001</span><br><span class="line">export https_proxy&#x3D;$http_proxy</span><br><span class="line">$ source ~&#x2F;.zshrc</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="0x02-AndroidStudio代理设置"><a href="#0x02-AndroidStudio代理设置" class="headerlink" title="0x02 AndroidStudio代理设置"></a>0x02 AndroidStudio代理设置</h3><p>Android Studio 的代理设置</p>
-<p><code>Perference --&gt;  Appearance &amp; Behavior --&gt; System Settings --&gt; Http Proxy</code></p>
-<p>SOCKS代理<br>通常可以下载SDK，但是gradle同步时，经常出现卡死或是失败的情况，则需要在工程目录下的<code>gradle.properties</code>进行以下相关配置</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">org.gradle.jvmargs=-DsocksProxyHost=<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span> -DsocksProxyPort=<span class="number">1080</span> </span><br><span class="line">systemProp.socks.proxyHost=<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span> </span><br><span class="line">systemProp.socks.proxyPort=<span class="number">1080</span></span><br></pre></td></tr></table></figure>
-
-<p>HTTP代理<br>当然也可以在工程目录下的<code>gradle.properties</code>进行相关配置</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">systemProp.https.proxyPort=<span class="number">1080</span> </span><br><span class="line">systemProp.http.proxyHost=<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span> </span><br><span class="line">systemProp.https.proxyHost=<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span> </span><br><span class="line">systemProp.http.proxyPort=<span class="number">1080</span></span><br></pre></td></tr></table></figure>
-
-<p>对于整个项目的 HTTP 代理设置，请在 <code>gradle/gradle.properties</code> 文件中设置代理设置</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># Project-wide Gradle settings.</span><br><span class="line">...</span><br><span class="line">systemProp.http.proxyHost=proxy.company.com</span><br><span class="line">systemProp.http.proxyPort=<span class="number">443</span></span><br><span class="line">systemProp.http.proxyUser=username</span><br><span class="line">systemProp.http.proxyPassword=password</span><br><span class="line">systemProp.http.auth.ntlm.domain=domain</span><br><span class="line"></span><br><span class="line">systemProp.https.proxyHost=proxy.company.com</span><br><span class="line">systemProp.https.proxyPort=<span class="number">443</span></span><br><span class="line">systemProp.https.proxyUser=username</span><br><span class="line">systemProp.https.proxyPassword=password</span><br><span class="line">systemProp.https.auth.ntlm.domain=domain</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/05/25/Android%E4%B8%93%E6%A0%8F-BaseQuickAdapterHelper/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2021/05/25/Android%E4%B8%93%E6%A0%8F-BaseQuickAdapterHelper/" class="post-title-link" itemprop="url">Android专栏-BaseQuickAdapterHelper</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-25 22:38:52" itemprop="dateCreated datePublished" datetime="2021-05-25T22:38:52+08:00">2021-05-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-08 01:31:32" itemprop="dateModified" datetime="2021-12-08T01:31:32+08:00">2021-12-08</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Android专栏-BaseQuickAdapterHelper"><a href="#Android专栏-BaseQuickAdapterHelper" class="headerlink" title="Android专栏-BaseQuickAdapterHelper"></a>Android专栏-BaseQuickAdapterHelper</h2><h3 id="0x01-自动加载更多-LoadingFooterView"><a href="#0x01-自动加载更多-LoadingFooterView" class="headerlink" title="0x01 自动加载更多-LoadingFooterView"></a>0x01 自动加载更多-LoadingFooterView</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> android.view.View</span><br><span class="line"><span class="keyword">import</span> android.view.ViewGroup</span><br><span class="line"><span class="keyword">import</span> com.chad.library.adapter.base.loadmore.BaseLoadMoreView</span><br><span class="line"><span class="keyword">import</span> com.chad.library.adapter.base.loadmore.LoadMoreStatus</span><br><span class="line"><span class="keyword">import</span> com.chad.library.adapter.base.util.getItemView</span><br><span class="line"><span class="keyword">import</span> com.chad.library.adapter.base.viewholder.BaseViewHolder</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LoadingFooterView</span> : <span class="type">BaseLoadMoreView</span></span>() &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> loadingView: LoadingPagView? = <span class="literal">null</span></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getRootView</span><span class="params">(parent: <span class="type">ViewGroup</span>)</span></span>: View &#123;</span><br><span class="line">        <span class="keyword">val</span> rootView = parent.getItemView(R.layout.ui_footer_adapter_load_more)</span><br><span class="line">        loadingView = rootView.findViewById(R.id.loadingView)</span><br><span class="line">        <span class="keyword">return</span> rootView</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getLoadingView</span><span class="params">(holder: <span class="type">BaseViewHolder</span>)</span></span>: View &#123;</span><br><span class="line">        <span class="keyword">return</span> holder.getView(R.id.loadingView)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getLoadComplete</span><span class="params">(holder: <span class="type">BaseViewHolder</span>)</span></span>: View &#123;</span><br><span class="line">        <span class="keyword">return</span> holder.getView(R.id.fakeView)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getLoadEndView</span><span class="params">(holder: <span class="type">BaseViewHolder</span>)</span></span>: View &#123;</span><br><span class="line">        <span class="keyword">return</span> holder.getView(R.id.endView)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getLoadFailView</span><span class="params">(holder: <span class="type">BaseViewHolder</span>)</span></span>: View &#123;</span><br><span class="line">        <span class="keyword">return</span> holder.getView(R.id.fakeView)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">convert</span><span class="params">(holder: <span class="type">BaseViewHolder</span>, position: <span class="type">Int</span>, loadMoreStatus: <span class="type">LoadMoreStatus</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.convert(holder, position, loadMoreStatus)</span><br><span class="line">        <span class="keyword">when</span> (loadMoreStatus) &#123;</span><br><span class="line">            LoadMoreStatus.Complete -&gt; &#123;</span><br><span class="line">                loadingView?.stopPlay()</span><br><span class="line">            &#125;</span><br><span class="line">            LoadMoreStatus.Loading -&gt; &#123;</span><br><span class="line">                loadingView?.startPlay()</span><br><span class="line">            &#125;</span><br><span class="line">            LoadMoreStatus.Fail -&gt; &#123;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">            LoadMoreStatus.End -&gt; &#123;</span><br><span class="line">                loadingView?.stopPlay()</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/blog/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/12/">12</a><a class="extend next" rel="next" href="/blog/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/blog/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/blog/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/13/">13</a><a class="extend next" rel="next" href="/blog/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -701,20 +733,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-count">75</span>
           <span class="site-state-item-name">日志</span>
         </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/blog/categories/">
-          
-        <span class="site-state-item-count">11</span>
-        <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/blog/tags/">
           
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
