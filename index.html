@@ -190,6 +190,77 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2022/12/01/Android%E9%A6%96%E9%A1%B5%E7%81%B0%E8%89%B2%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2022/12/01/Android%E9%A6%96%E9%A1%B5%E7%81%B0%E8%89%B2%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88/" class="post-title-link" itemprop="url">Android首页灰色实现方案</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-12-01 20:16:25 / 修改时间：21:20:03" itemprop="dateCreated datePublished" datetime="2022-12-01T20:16:25+08:00">2022-12-01</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Activity设置灰色"><a href="#Activity设置灰色" class="headerlink" title="Activity设置灰色"></a>Activity设置灰色</h3><p>使用<code>ColorMatrix</code>设置灰度</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">setGrayPaint</span><span class="params">(view: <span class="type">View</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> paint = Paint()</span><br><span class="line">    <span class="keyword">val</span> cm = ColorMatrix()</span><br><span class="line">    cm.setSaturation(<span class="number">0f</span>)</span><br><span class="line">    paint.colorFilter = ColorMatrixColorFilter(cm)</span><br><span class="line">    view.setLayerType(View.LAYER_TYPE_HARDWARE, paint)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>给首页Activity的decorView设置灰度Paint</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">    </span><br><span class="line">    setContentView(...)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 需要在 setContentView 之后</span></span><br><span class="line">    setGrayPaint(window.decorView)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="需要特殊处理的控件"><a href="#需要特殊处理的控件" class="headerlink" title="需要特殊处理的控件"></a>需要特殊处理的控件</h3><ul>
+<li>弹框</li>
+<li>WebView</li>
+<li>SurfaceView</li>
+</ul>
+<p>这些控件由于不是跟activity公用一个window，需要各自单独处理灰度Paint。调用 <code>setGrayPaint(view)</code> 即可。</p>
+<h3 id="相关资源"><a href="#相关资源" class="headerlink" title="相关资源"></a>相关资源</h3><p><a href="https://juejin.cn/post/7041773908915126285" target="_blank" rel="noopener">Android实现设置灰白模式效果</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2022/11/26/Android%E4%B8%93%E6%A0%8F-%E5%BE%AE%E4%BF%A1AndResGuard%E8%B5%84%E6%BA%90%E6%B7%B7%E6%B7%86%E5%B7%A5%E5%85%B7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -215,7 +286,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-11-26 19:16:25 / 修改时间：15:26:32" itemprop="dateCreated datePublished" datetime="2022-11-26T19:16:25+08:00">2022-11-26</time>
+              <time title="创建时间：2022-11-26 19:16:25 / 修改时间：18:11:50" itemprop="dateCreated datePublished" datetime="2022-11-26T19:16:25+08:00">2022-11-26</time>
             </span>
 
           
@@ -311,7 +382,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-10-13 00:46:14" itemprop="dateModified" datetime="2022-10-13T00:46:14+08:00">2022-10-13</time>
+                <time title="修改时间：2022-11-26 18:11:50" itemprop="dateModified" datetime="2022-11-26T18:11:50+08:00">2022-11-26</time>
               </span>
 
           
@@ -390,7 +461,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-10-13 00:46:14" itemprop="dateModified" datetime="2022-10-13T00:46:14+08:00">2022-10-13</time>
+                <time title="修改时间：2022-11-26 18:11:50" itemprop="dateModified" datetime="2022-11-26T18:11:50+08:00">2022-11-26</time>
               </span>
 
           
@@ -484,7 +555,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-10-14 23:45:35" itemprop="dateModified" datetime="2022-10-14T23:45:35+08:00">2022-10-14</time>
+                <time title="修改时间：2022-11-26 18:11:50" itemprop="dateModified" datetime="2022-11-26T18:11:50+08:00">2022-11-26</time>
               </span>
 
           
@@ -586,7 +657,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-10-13 00:46:14" itemprop="dateModified" datetime="2022-10-13T00:46:14+08:00">2022-10-13</time>
+                <time title="修改时间：2022-11-26 18:11:50" itemprop="dateModified" datetime="2022-11-26T18:11:50+08:00">2022-11-26</time>
               </span>
 
           
@@ -608,110 +679,6 @@
 
 <p>使用示例</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">com.xx.ui.widget.RoundImageView</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:id</span>=<span class="string">"@+id/image_view"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">"120dp"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">"60dp"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:scaleType</span>=<span class="string">"centerCrop"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">app:riv_radius</span>=<span class="string">"8dp"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2022/08/15/Gradle%E7%9A%84%E9%85%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2022/08/15/Gradle%E7%9A%84%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">Gradle的配置</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-08-15 19:16:31" itemprop="dateCreated datePublished" datetime="2022-08-15T19:16:31+08:00">2022-08-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-10-13 00:46:14" itemprop="dateModified" datetime="2022-10-13T00:46:14+08:00">2022-10-13</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Gradle的配置"><a href="#Gradle的配置" class="headerlink" title="Gradle的配置"></a>Gradle的配置</h2><p><a href="https://www.cnblogs.com/baiqiantao/p/6890674.html" target="_blank" rel="noopener">原文地址：https://www.cnblogs.com/baiqiantao/p/6890674.html</a></p>
-<p><a href="https://docs.gradle.org/current/userguide/installation.html" target="_blank" rel="noopener">Installing Gradle: https://docs.gradle.org/current/userguide/installation.html</a></p>
-<ul>
-<li>gradlew 和 gradlew.bat：封装 gradle 的脚本，目的是为了更方便的使用 gradle</li>
-<li>环境变量 <code>GRADLE_HOME</code>：仅仅是为了可以在任意目录中执行 gradle 命令，没有特殊的意义</li>
-<li>环境变量 <code>GRADLE_USER_HOME</code>：控制在命令行中执行 gradlew 命令时，gradle 下载的目录</li>
-<li>IDEA 的 <code>Gradle user home</code>：控制在 IDEA 点击按钮执行各项 Task 等功能时，gradle 下载的目录</li>
-<li>IDEA 的 <code>User from gradle</code>：控制在 IDEA 点击按钮执行各项 Task 等功能时，使用的 gradle 的版本</li>
-</ul>
-<h3 id="环境变量-GRADLE-HOME"><a href="#环境变量-GRADLE-HOME" class="headerlink" title="环境变量 GRADLE_HOME"></a>环境变量 GRADLE_HOME</h3><p>设置环境变量 GRADLE_HOME 的目的，仅仅是为了方便在 Path 中指定 gradle 的位置。<br>GRADLE_HOME：<a href="file:///D:/_dev/gradle/GRADLE_HOME/gradle-6.7/">D:_dev\gradle_GRADLE_HOME\gradle-6.7</a><br>Path：<a href="file:///D:/_dev/gradle/GRADLE_HOME/gradle-6.7/bin/">%GRADLE_HOME%\bin</a><br>将 gradle 添加到 Path 的目的是为了，可以在任意目录中执行 gradle 命令。<br>实际上，完全没必要设置环境变量 GRADLE_HOME，Do we really need GRADLE_HOME?</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gradle -v           <span class="comment"># 查看版本</span></span><br><span class="line">gradle --<span class="built_in">help</span>       <span class="comment"># 查看命令使用帮助</span></span><br><span class="line"></span><br><span class="line">λ <span class="built_in">where</span> gradle      <span class="comment"># 查看 gradle 命令位置</span></span><br><span class="line">D:\_dev\gradle\GRADLE_HOME\gradle-6.7\bin\gradle</span><br><span class="line">D:\_dev\gradle\GRADLE_HOME\gradle-6.7\bin\gradle.bat</span><br></pre></td></tr></table></figure>
-
-<h3 id="gradlew-是干嘛的"><a href="#gradlew-是干嘛的" class="headerlink" title="gradlew 是干嘛的"></a>gradlew 是干嘛的</h3><p>其实 <code>gradlew</code> 只是一个 gradle 的封装(wrapper)，gradlew = gradle wrapper，因为在项目根目录有 <code>gradlew</code> 和 <code>gradlew.bat</code> 这两个可执行文件，所以 <strong>能且仅能</strong> 在项目根目录中执行 <code>gradlew</code> 命令。</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">D:\_dev\_code\<span class="keyword">as</span>\Test&gt; gradlew -v       # 查看版本</span><br><span class="line">D:\_dev\_code\<span class="keyword">as</span>\Test&gt; gradlew --help   # 查看命令使用帮助</span><br><span class="line"></span><br><span class="line">D:\_dev\_code\<span class="keyword">as</span>\Test&gt; <span class="keyword">where</span> gradlew    # 查看 gradlew 命令位置</span><br><span class="line">D:\_dev\_code\<span class="keyword">as</span>\Test\gradlew</span><br><span class="line">D:\_dev\_code\<span class="keyword">as</span>\Test\gradlew.bat</span><br></pre></td></tr></table></figure>
-
-<p>这两个文件头部的注释也说明了他们的作用：</p>
-<ul>
-<li>gradlew：Gradle start up script for UN*X</li>
-<li>gradlew.bat：Gradle startup script for Windows</li>
-</ul>
-<p>之所以添加这个 <code>gradlew</code> 脚本，是为了：</p>
-<p>统一项目所使用的 gradle 版本，避免不同开发人员使用不同的 gradle 版本导致的兼容性问题<br>可以把 <code>gradle-wrapper.properties</code> 里面的下载 gradle 的地址切换到公司的公共空间上，以加快下载速度</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">distributionUrl=https\:<span class="comment">//services.gradle.org/distributions/gradle-6.5-all.zip</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="环境变量-GRADLE-USER-HOME"><a href="#环境变量-GRADLE-USER-HOME" class="headerlink" title="环境变量 GRADLE_USER_HOME"></a>环境变量 GRADLE_USER_HOME</h3><p>设置环境变量 <code>GRADLE_USER_HOME</code> 的目的，是为了自定义下载 <code>gradle</code> 时的本地存储路径。<br>在命令行中执行 <code>gradlew</code> 命令(注意不是 gradle 命令)时，会将对应版本的 <code>gradle</code> 下载到此目录中。<br>下载 gradle 时，下载地址及版本由项目中的 /gradle/wrapper/gradle-wrapper.properties 决定。</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#Mon Nov 16 00:55:48 CST 2020</span><br><span class="line">distributionBase=GRADLE_USER_HOME</span><br><span class="line">distributionPath=wrapper/dists</span><br><span class="line">zipStoreBase=GRADLE_USER_HOME</span><br><span class="line">zipStorePath=wrapper/dists</span><br><span class="line">distributionUrl=https\:<span class="comment">//services.gradle.org/distributions/gradle-6.5-all.zip</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="IDEA-的-Gradle-user-home"><a href="#IDEA-的-Gradle-user-home" class="headerlink" title="IDEA 的 Gradle user home"></a>IDEA 的 Gradle user home</h3><p>在 IDEA 的 <code>File | Settings | Build, Execution, Deployment | Build Tools | Gradle</code> 中，有一个 <code>Gradle user home</code> 的配置，其作用和环境变量 <code>GRADLE_USER_HOME</code> 类似，只不过该配置只是给 IDEA 使用的。譬如点击 gradle 窗口的各种 Task 按钮执行各项 Task 功能时。</p>
-<p>注意：仅 IDEA 中的各种图形化操作会使用此配置，在 IDEA 的 Terminal 中执行 gradlew 命令时，使用的依旧是环境变量 <code>GRADLE_USER_HOME</code>。</p>
-<h3 id="IDEA-的-User-from-gradle"><a href="#IDEA-的-User-from-gradle" class="headerlink" title="IDEA 的 User from gradle"></a>IDEA 的 User from gradle</h3><p>在 IDEA 的 <code>File | Settings | Build, Execution, Deployment | Build Tools | Gradle</code> 中，有一个 <code>User from gradle</code> 的配置，它也是仅提供给 IDEA 使用的(对 gradlew 无效)。</p>
-<p>其作用是，指定当前工程中 IDEA 所使用的 gradle 版本：</p>
-<p>当勾选 <code>gradle-wrapper.properties</code> 时，使用 <code>gradle-wrapper.properties</code> 中指定的 gradle 版本。<br>为了防止和在 Terminal 中执行 gradlew 命令时使用的 gradle 版本不同，建议勾选此配置(也是默认配置)。<br>当勾选 Specified location 时，使用指定目录下的 gradle 版本。<br>如果 gradle 下载很慢，就可以勾选此配置，以便使用指定本地下载好的 gradle 版本。</p>
-<blockquote>
-<p>不管在 IDEA 中怎么配置，在 Terminal 中执行 gradlew 命令时，所使用的 gradle 版本都是由 <code>gradle-wrapper.properties</code> 决定的，并且下载路径也都是由环境变量 <code>GRADLE_USER_HOME</code> 决定的。</p>
-</blockquote>
-<h2 id="Gradle-依赖的-JDK-配置"><a href="#Gradle-依赖的-JDK-配置" class="headerlink" title="Gradle 依赖的 JDK 配置"></a>Gradle 依赖的 JDK 配置</h2><p>这里的 JDK 指的是执行 Gradle 命令依赖的 JDK，并非 AndroidStudio 工程依赖的 JDK。</p>
-<p>通过 <code>File | Settings | Build, Execution, Deployment | Build Tools | Gradle</code> 设置的 JDK，是在运行 IDEA 图形化按钮时使用的。<br>通过 <code>gradle.properties</code> 设置的 JDK，是在 Terminal 中执行 gradlew 命令时使用的。</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">org.gradle.java.home=C\:<span class="regexp">/_dev/</span>Android<span class="regexp">/Android Studio/</span>jre</span><br></pre></td></tr></table></figure>
-
-<p>注意：AGP 从 7.0.0-alpha02 版本起，需要使用 Java 11</p>
 
       
     </div>
@@ -799,7 +766,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-count">77</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
