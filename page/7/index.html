@@ -190,6 +190,72 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/06/17/RecyclerView%E7%9A%84%E5%87%A0%E7%A7%8DDecoration/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2021/06/17/RecyclerView%E7%9A%84%E5%87%A0%E7%A7%8DDecoration/" class="post-title-link" itemprop="url">RecyclerView的几种Decoration</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-17 00:00:00" itemprop="dateCreated datePublished" datetime="2021-06-17T00:00:00+08:00">2021-06-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-26 18:11:50" itemprop="dateModified" datetime="2022-11-26T18:11:50+08:00">2022-11-26</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="RecyclerView的几种Decoration"><a href="#RecyclerView的几种Decoration" class="headerlink" title="RecyclerView的几种Decoration"></a>RecyclerView的几种Decoration</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> android.content.res.Resources</span><br><span class="line"><span class="keyword">import</span> android.graphics.Rect</span><br><span class="line"><span class="keyword">import</span> android.util.TypedValue</span><br><span class="line"><span class="keyword">import</span> android.view.View</span><br><span class="line"><span class="keyword">import</span> androidx.recyclerview.widget.RecyclerView</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SimplePaddingDecoration</span></span>(</span><br><span class="line">    spaceDp: <span class="built_in">Int</span>,</span><br><span class="line">    <span class="keyword">val</span> orientation: <span class="built_in">Int</span> = RecyclerView.VERTICAL</span><br><span class="line">) : RecyclerView.ItemDecoration() &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> dividerHeight: <span class="built_in">Int</span> = TypedValue.applyDimension(</span><br><span class="line">        TypedValue.COMPLEX_UNIT_DIP,</span><br><span class="line">        spaceDp.toFloat(),</span><br><span class="line">        Resources.getSystem().displayMetrics</span><br><span class="line">    ).toInt()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getItemOffsets</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        outRect: <span class="type">Rect</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">        view: <span class="type">View</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">        parent: <span class="type">RecyclerView</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">        state: <span class="type">RecyclerView</span>.<span class="type">State</span></span></span></span><br><span class="line"><span class="function"><span class="params">    )</span></span> &#123;</span><br><span class="line">        <span class="keyword">val</span> position = (view.layoutParams <span class="keyword">as</span> RecyclerView.LayoutParams).viewLayoutPosition</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (orientation == RecyclerView.VERTICAL) &#123;</span><br><span class="line">            <span class="comment">// 竖直</span></span><br><span class="line">            <span class="keyword">if</span> (position + <span class="number">1</span> != parent.adapter?.itemCount) &#123;</span><br><span class="line">                outRect.<span class="keyword">set</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, dividerHeight)</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                outRect.<span class="keyword">set</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 水平</span></span><br><span class="line">            <span class="keyword">if</span> (position + <span class="number">1</span> != parent.adapter?.itemCount) &#123;</span><br><span class="line">                outRect.<span class="keyword">set</span>(<span class="number">0</span>, <span class="number">0</span>, dividerHeight, <span class="number">0</span>)</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                outRect.<span class="keyword">set</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/06/08/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B8%83%E5%B1%80-FixedEndLinearLayout/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -558,75 +624,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/05/21/MessageCenter/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2021/05/21/MessageCenter/" class="post-title-link" itemprop="url">观察者模式Kotlin泛型实现消息中心</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-21 22:57:15" itemprop="dateCreated datePublished" datetime="2021-05-21T22:57:15+08:00">2021-05-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-26 18:11:50" itemprop="dateModified" datetime="2022-11-26T18:11:50+08:00">2022-11-26</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>观察者模式 + Kotlin 泛型实现的简易版消息中心</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MessageCenter</span>&lt;<span class="type">T</span>&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">companion</span> <span class="keyword">object</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> centers = mutableMapOf&lt;String, Any&gt;()</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="type">&lt;T&gt;</span> <span class="title">getInstance</span><span class="params">(clazz: <span class="type">Class</span>&lt;<span class="type">T</span>&gt;)</span></span>: MessageCenter&lt;T&gt; &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">if</span> (centers[clazz.simpleName] != <span class="literal">null</span>) &#123;</span><br><span class="line">        centers[clazz.simpleName] <span class="keyword">as</span> MessageCenter&lt;T&gt;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">val</span> messageCenter = MessageCenter&lt;T&gt;()</span><br><span class="line">        centers[clazz.simpleName] = messageCenter</span><br><span class="line">        messageCenter</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">register</span><span class="params">(observer: <span class="type">Observer</span>&lt;<span class="type">T</span>&gt;)</span></span> &#123;</span><br><span class="line">    observers.add(observer)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">unregister</span><span class="params">(observer: <span class="type">Observer</span>&lt;<span class="type">T</span>&gt;)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (observers.contains(observer)) &#123;</span><br><span class="line">      observers.remove(observer)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">post</span><span class="params">(t: <span class="type">T</span>)</span></span> &#123;</span><br><span class="line">    observers.forEach &#123;</span><br><span class="line">      it.receive(t)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">var</span> observers = mutableListOf&lt;Observer&lt;T&gt;&gt;()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Observer</span>&lt;<span class="type">T</span>&gt; </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">receive</span><span class="params">(t: <span class="type">T</span>)</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">  <span class="keyword">val</span> ob = <span class="keyword">object</span> : Observer&lt;String&gt; &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">receive</span><span class="params">(t: <span class="type">String</span>)</span></span> &#123;</span><br><span class="line">      println(<span class="string">"result is: <span class="variable">$t</span>"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  MessageCenter.getInstance(String::<span class="class"><span class="keyword">class</span>.<span class="title">java</span>).<span class="title">register</span></span>(ob)</span><br><span class="line">  MessageCenter.getInstance(String::<span class="class"><span class="keyword">class</span>.<span class="title">java</span>).<span class="title">post</span></span>(<span class="string">"txt post."</span>)</span><br><span class="line">  MessageCenter.getInstance(String::<span class="class"><span class="keyword">class</span>.<span class="title">java</span>).<span class="title">unregister</span></span>(ob)</span><br><span class="line"></span><br><span class="line">  MessageCenter.getInstance(<span class="built_in">Int</span>::<span class="class"><span class="keyword">class</span>.<span class="title">java</span>).<span class="title">post</span></span>(<span class="number">123</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -699,7 +696,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">77</span>
+          <span class="site-state-item-count">78</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -731,7 +728,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

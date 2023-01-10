@@ -190,6 +190,78 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2022/08/15/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8E%A7%E4%BB%B6-RoundImageView/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2022/08/15/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8E%A7%E4%BB%B6-RoundImageView/" class="post-title-link" itemprop="url">RoundImageView圆角控件</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-08-15 23:38:52" itemprop="dateCreated datePublished" datetime="2022-08-15T23:38:52+08:00">2022-08-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-26 18:11:50" itemprop="dateModified" datetime="2022-11-26T18:11:50+08:00">2022-11-26</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="RoundImageView圆角控件"><a href="#RoundImageView圆角控件" class="headerlink" title="RoundImageView圆角控件"></a>RoundImageView圆角控件</h2><p>示例代码如下：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> android.content.Context;</span><br><span class="line"><span class="keyword">import</span> android.content.res.TypedArray;</span><br><span class="line"><span class="keyword">import</span> android.graphics.Canvas;</span><br><span class="line"><span class="keyword">import</span> android.graphics.Path;</span><br><span class="line"><span class="keyword">import</span> android.graphics.RectF;</span><br><span class="line"><span class="keyword">import</span> android.util.AttributeSet;</span><br><span class="line"><span class="keyword">import</span> android.util.Log;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> androidx.<span class="keyword">annotation</span>.Nullable;</span><br><span class="line"><span class="keyword">import</span> androidx.appcompat.widget.AppCompatImageView;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RoundImageView</span> <span class="title">extends</span> <span class="title">AppCompatImageView</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> static <span class="keyword">final</span> String TAG = <span class="string">"RoundImageView"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> int radius = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> RoundImageView(Context context) &#123;</span><br><span class="line">        <span class="keyword">this</span>(context, <span class="literal">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> RoundImageView(Context context, <span class="meta">@Nullable</span> AttributeSet attrs) &#123;</span><br><span class="line">        <span class="keyword">this</span>(context, attrs, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> RoundImageView(Context context, <span class="meta">@Nullable</span> AttributeSet attrs, int defStyleAttr) &#123;</span><br><span class="line">        <span class="keyword">super</span>(context, attrs, defStyleAttr);</span><br><span class="line">        setup(context, attrs, defStyleAttr);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> void setup(Context context, AttributeSet attrs, int defStyleAttr) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.RoundImageView);</span><br><span class="line">            radius = a.getDimensionPixelSize(R.styleable.RoundImageView_riv_radius, <span class="number">0</span>);</span><br><span class="line">            Log.d(TAG, <span class="string">"RoundImageView: radius="</span> + radius);</span><br><span class="line">            a.recycle();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> void setRadius(int radius) &#123;</span><br><span class="line">        <span class="keyword">this</span>.radius = radius;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> void onDraw(Canvas canvas) &#123;</span><br><span class="line">        <span class="keyword">if</span> (radius &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            Path path = new Path();</span><br><span class="line">            path.addRoundRect(new RectF(<span class="number">0</span>, <span class="number">0</span>, getWidth(), getHeight()), radius, radius, Path.Direction.CW);</span><br><span class="line">            canvas.clipPath(path);<span class="comment">//设置可显示的区域，canvas四个角会被剪裁掉</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">super</span>.onDraw(canvas);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 <code>attrs.xml</code> 文件中定义控件的圆角dp值属性:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">declare-styleable</span> <span class="attr">name</span>=<span class="string">"RoundImageView"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"riv_radius"</span> <span class="attr">format</span>=<span class="string">"dimension"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">declare-styleable</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>使用示例</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">com.xx.ui.widget.RoundImageView</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:id</span>=<span class="string">"@+id/image_view"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">"120dp"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">"60dp"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:scaleType</span>=<span class="string">"centerCrop"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">app:riv_radius</span>=<span class="string">"8dp"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2022/08/15/Gradle%E7%9A%84%E9%85%8D%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -578,73 +650,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2022/06/08/Android%E4%B8%93%E6%A0%8F-JsBridge%E5%BC%80%E6%BA%90%E5%BA%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2022/06/08/Android%E4%B8%93%E6%A0%8F-JsBridge%E5%BC%80%E6%BA%90%E5%BA%93/" class="post-title-link" itemprop="url">JsBridge 开源库</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-06-08 20:37:18" itemprop="dateCreated datePublished" datetime="2022-06-08T20:37:18+08:00">2022-06-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-26 18:11:50" itemprop="dateModified" datetime="2022-11-26T18:11:50+08:00">2022-11-26</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="JsBridge-开源库"><a href="#JsBridge-开源库" class="headerlink" title="JsBridge 开源库"></a>JsBridge 开源库</h2><p>项目地址：<a href="https://github.com/lzyzsd/JsBridge" target="_blank" rel="noopener">https://github.com/lzyzsd/JsBridge</a><br>使用参考：<a href="https://www.jianshu.com/p/7aea03838f19" target="_blank" rel="noopener">https://www.jianshu.com/p/7aea03838f19</a></p>
-<h3 id="0x00-从H5界面，跳转Native登录，登录之后重新加载H5页面出现JsBridge注入失败-code-2-message-net-ERR-NAME-NOT-RESOLVED"><a href="#0x00-从H5界面，跳转Native登录，登录之后重新加载H5页面出现JsBridge注入失败-code-2-message-net-ERR-NAME-NOT-RESOLVED" class="headerlink" title="0x00 从H5界面，跳转Native登录，登录之后重新加载H5页面出现JsBridge注入失败[code=-2,message=net::ERR_NAME_NOT_RESOLVED]"></a>0x00 从H5界面，跳转Native登录，登录之后重新加载H5页面出现JsBridge注入失败[code=-2,message=net::ERR_NAME_NOT_RESOLVED]</h3><p>解决方案：<br>App层销毁当前的WebView，重新加载一个新的WebView去loadUrl。</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// js-bridge register error</span></span><br><span class="line"><span class="comment">// 回调 onReceivedError(WebView view, WebResourceRequest request, WebResourceError error)</span></span><br><span class="line"><span class="comment">// [code=-2,message=net::ERR_NAME_NOT_RESOLVED]</span></span><br><span class="line"><span class="comment">// so you have to destroy webView and rebuild one.</span></span><br><span class="line"><span class="keyword">private</span> void reloadWebView() &#123;</span><br><span class="line">    <span class="keyword">if</span> (mWebView != <span class="literal">null</span>) &#123;</span><br><span class="line">        mWebView.destroy();</span><br><span class="line">        mWebView = <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    initView();</span><br><span class="line">    initWebView();</span><br><span class="line">    webView.loadUrl(url);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -717,7 +722,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">77</span>
+          <span class="site-state-item-count">78</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -749,7 +754,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
