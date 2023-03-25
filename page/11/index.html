@@ -190,6 +190,190 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/08/20/%E7%AE%97%E6%B3%95-%E9%93%BE%E8%A1%A8%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2020/08/20/%E7%AE%97%E6%B3%95-%E9%93%BE%E8%A1%A8%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">链表常见问题</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-20 04:17:23" itemprop="dateCreated datePublished" datetime="2020-08-20T04:17:23+08:00">2020-08-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-26 18:11:50" itemprop="dateModified" datetime="2022-11-26T18:11:50+08:00">2022-11-26</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="链表常见问题"><a href="#链表常见问题" class="headerlink" title="链表常见问题"></a>链表常见问题</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 单链表数据结构</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> val;</span><br><span class="line">  Node next;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.val = val;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="0x01-链表翻转"><a href="#0x01-链表翻转" class="headerlink" title="0x01 链表翻转"></a>0x01 链表翻转</h3><p>题目描述：</p>
+<p>这道算法题，说直白点就是：如何让后一个节点指向前一个节点。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.翻转链表</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">reverse</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">  Node res = <span class="keyword">null</span>;</span><br><span class="line">  <span class="keyword">while</span> (head != <span class="keyword">null</span>) &#123;</span><br><span class="line">    Node h = head.next;</span><br><span class="line">    head.next = res;</span><br><span class="line">    res = head;</span><br><span class="line">    head = h;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="0x02-两数相加"><a href="#0x02-两数相加" class="headerlink" title="0x02 两数相加"></a>0x02 两数相加</h3><p>题目描述：</p>
+<p>Leetcode:给定两个非空链表来表示两个非负整数。位数按照逆序方式存储，它们的每个节点只存储单个数字。将两数相加返回一个新的链表。</p>
+<p>你可以假设除了数字 0 之外，这两个数字都不会以零开头。</p>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：(2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)</span><br><span class="line">输出：7 -&gt; 0 -&gt; 8</span><br><span class="line">原因：342 + 465 &#x3D; 807</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 2.链表相加</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">plus</span><span class="params">(Node l1, Node l2)</span> </span>&#123;</span><br><span class="line">  Node dummyHead = <span class="keyword">new</span> Node(<span class="number">0</span>);</span><br><span class="line">  Node l3 = dummyHead;</span><br><span class="line">  <span class="keyword">int</span> carry = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> (l1 != <span class="keyword">null</span> || l2 != <span class="keyword">null</span> || carry &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">int</span> val = carry;</span><br><span class="line">    val = (l1 != <span class="keyword">null</span> ? val + l1.val : val);</span><br><span class="line">    val = (l2 != <span class="keyword">null</span> ? val + l2.val : val);</span><br><span class="line">    Node t = <span class="keyword">new</span> Node(val &gt; <span class="number">9</span> ? val - <span class="number">10</span> : val);</span><br><span class="line">    l3.next = t;</span><br><span class="line">    carry = val &gt; <span class="number">9</span> ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">    l1 = l1 != <span class="keyword">null</span> ? l1.next : <span class="keyword">null</span>;</span><br><span class="line">    l2 = l2 != <span class="keyword">null</span> ? l2.next : <span class="keyword">null</span>;</span><br><span class="line">    l3 = t;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> dummyHead.next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="0x03-链表中倒数第k个节点"><a href="#0x03-链表中倒数第k个节点" class="headerlink" title="0x03 链表中倒数第k个节点"></a>0x03 链表中倒数第k个节点</h3><p>题目描述：</p>
+<p>输入一个链表，输出该链表中倒数第k个结点。</p>
+<p>问题分析：</p>
+<p>链表中倒数第k个节点也就是正数第(L-K+1)个节点。</p>
+<p>首先两个节点/指针，一个节点 node1 先开始跑，指针 node1 跑到 k-1 个节点后，另一个节点 node2 开始跑，当 node1 跑到最后时，node2 所指的节点就是倒数第k个节点也就是正数第(L-K+1)个节点。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 3.链表中倒数第k个节点</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">findKFromEnd</span><span class="params">(Node head, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">  Node node1 = head, node2 = head;</span><br><span class="line">  <span class="keyword">int</span> len = <span class="number">0</span>, index = k; <span class="comment">// 链表长度</span></span><br><span class="line">  <span class="keyword">while</span> (node1 != <span class="keyword">null</span>) &#123;</span><br><span class="line">    len++;</span><br><span class="line">    node1 = node1.next;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 从 len = k -1 的位置开始,执行 K 次，</span></span><br><span class="line">    <span class="keyword">if</span> (index &gt; <span class="number">0</span>) &#123;</span><br><span class="line">      index--;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      node2 = node2.next;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (len == <span class="number">0</span> || len &lt; k) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">  <span class="keyword">return</span> node2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="0x04-删除链表的倒数第N个节点"><a href="#0x04-删除链表的倒数第N个节点" class="headerlink" title="0x04 删除链表的倒数第N个节点"></a>0x04 删除链表的倒数第N个节点</h3><p>题目描述：</p>
+<p>给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。</p>
+<p>问题分析:</p>
+<ul>
+<li>两次遍历法</li>
+</ul>
+<p>首先我们将添加一个 哑结点(dummyHead)作为辅助，该结点位于列表头部。哑结点用来简化某些极端情况，例如列表中只含有一个结点，或需要删除列表的头部。在第一次遍历中，我们找出列表的长度 L。然后设置一个指向哑结点的指针，并移动它遍历列表，直至它到达第 (L - n) 个结点那里。我们把第 (L - n)个结点的 next 指针重新链接至第 (L - n + 2)个结点，完成这个算法。</p>
+<ul>
+<li>一次遍历法：</li>
+</ul>
+<p><strong>链表中倒数第N个节点也就是正数第(L-N+1)个节点。</strong> 定义两个节点 node1、node2;node1 节点先跑，node1节点 跑到第 n+1 个节点的时候,node2 节点开始跑.当node1 节点跑到最后一个节点时，node2 节点所在的位置就是第 （L-n ） 个节点（L代表总链表长度，也就是倒数第 n+1 个节点）。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 4.删除链表的倒数第N个节点</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">deleteKFromEnd</span><span class="params">(Node head, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">  Node dummyHead = <span class="keyword">new</span> Node(<span class="number">0</span>);</span><br><span class="line">  dummyHead.next = head;</span><br><span class="line">  <span class="keyword">int</span> len = <span class="number">0</span>, index = k;</span><br><span class="line">  Node p1 = head, p2 = dummyHead;</span><br><span class="line">  <span class="keyword">while</span> (p1 != <span class="keyword">null</span>) &#123;</span><br><span class="line">    len++;</span><br><span class="line">    p1 = p1.next;</span><br><span class="line">    <span class="keyword">if</span> (index &gt; <span class="number">0</span>) &#123;</span><br><span class="line">      index--;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      p2 = p2.next;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (len &gt;= k &amp;&amp; k &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    p2.next = p2.next.next;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> dummyHead.next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="0x05-合并两个有序的链表"><a href="#0x05-合并两个有序的链表" class="headerlink" title="0x05 合并两个有序的链表"></a>0x05 合并两个有序的链表</h3><p>题目描述：</p>
+<p>输入两个单调递增的链表，输出两个链表合成后的链表，需要合成后的链表单调递增。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 5.合并两个排序的链表</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">merge</span><span class="params">(Node head1, Node head2)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (head1 == <span class="keyword">null</span>) <span class="keyword">return</span> head2;</span><br><span class="line">  <span class="keyword">if</span> (head2 == <span class="keyword">null</span>) <span class="keyword">return</span> head1;</span><br><span class="line">  Node t = <span class="keyword">null</span>;</span><br><span class="line">  <span class="keyword">if</span> (head1.val &lt; head2.val) &#123;</span><br><span class="line">    t = head1;</span><br><span class="line">    t.next = merge(head1.next, head2);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    t = head2;</span><br><span class="line">    t.next = merge(head1, head2.next);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> t;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/08/13/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8BJMM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2020/08/13/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8BJMM/" class="post-title-link" itemprop="url">Java内存模型JMM</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-13 02:44:46" itemprop="dateCreated datePublished" datetime="2020-08-13T02:44:46+08:00">2020-08-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-26 18:11:50" itemprop="dateModified" datetime="2022-11-26T18:11:50+08:00">2022-11-26</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Java内存模型"><a href="#Java内存模型" class="headerlink" title="Java内存模型"></a>Java内存模型</h1><p>java内存模型(Java Memory Model，JMM)是java虚拟机规范定义的。</p>
+<h3 id="0x01-主内存与工作内存"><a href="#0x01-主内存与工作内存" class="headerlink" title="0x01.主内存与工作内存"></a>0x01.主内存与工作内存</h3><p>java内存模型规定了所有的变量都存储在住内存。每条线程还有自己的工作内存，线程的工作内存中保存了被该线程使用到的主内存中的变量的拷贝。线程对变量的所有操作都必须在工作内存中进行，而不能直接读写主内存中的变量。不同线程之间也无法直接访问对方工作内存中的变量，线程间变量传递均需要通过主内存来完成。当多个线程操作的变量涉及到同一个主内存区域，将可能导致各自的工作线程数据不一致，这样就导致变量同步回主内存的时候可能冲突导致数据丢失。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/blog/2020/08/13/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8BJMM/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/08/13/%E7%AE%97%E6%B3%95-KMP%E7%AE%97%E6%B3%95Java%E7%89%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -484,151 +668,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/03/14/Vim%E7%BC%96%E7%A8%8B%E5%AE%9E%E8%B7%B5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2020/03/14/Vim%E7%BC%96%E7%A8%8B%E5%AE%9E%E8%B7%B5/" class="post-title-link" itemprop="url">Vim 编程实践</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-14 00:31:11" itemprop="dateCreated datePublished" datetime="2020-03-14T00:31:11+08:00">2020-03-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-26 18:11:50" itemprop="dateModified" datetime="2022-11-26T18:11:50+08:00">2022-11-26</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="1-基础设置"><a href="#1-基础设置" class="headerlink" title="1. 基础设置"></a>1. 基础设置</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">"显示行</span><br><span class="line">set nu</span><br><span class="line"></span><br><span class="line">" 设置屏幕滚动时在光标上下方保留5行预览代码</span><br><span class="line">set so=5</span><br><span class="line"></span><br><span class="line">" 设置debug为 zd</span><br><span class="line">nnoremap zd :action Debug&lt;CR&gt;</span><br><span class="line"></span><br><span class="line">" 设置run 为 zr</span><br><span class="line">nnoremap zr :action Run&lt;CR&gt;</span><br><span class="line"></span><br><span class="line">" 插入模式下 jk 映射 Esc</span><br><span class="line">inoremap jk &lt;Esc&gt;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/blog/2020/03/14/Vim%E7%BC%96%E7%A8%8B%E5%AE%9E%E8%B7%B5/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2020/02/28/%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%89%93%E5%8C%85apk/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2020/02/28/%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%89%93%E5%8C%85apk/" class="post-title-link" itemprop="url">命令行打包APK</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-02-28 09:35:45" itemprop="dateCreated datePublished" datetime="2020-02-28T09:35:45+08:00">2020-02-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-26 18:11:50" itemprop="dateModified" datetime="2022-11-26T18:11:50+08:00">2022-11-26</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="命令行打包APK"><a href="#命令行打包APK" class="headerlink" title="命令行打包APK"></a>命令行打包APK</h2><h3 id="1-mac-os-gradlew-打包-apk"><a href="#1-mac-os-gradlew-打包-apk" class="headerlink" title="1. mac os gradlew 打包 apk"></a>1. mac os gradlew 打包 apk</h3><p>进入 <code>.../android</code> 执行 <code>./gradlew assembleRelease</code> ，mac os 执行当前路径的脚本需要添加 <code>./</code>。</p>
-<h3 id="2-常用命令"><a href="#2-常用命令" class="headerlink" title="2. 常用命令"></a>2. 常用命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">./gradlew clean  #clean项目</span><br><span class="line"> </span><br><span class="line">./gradlew build  #构建项目</span><br><span class="line"> </span><br><span class="line">./gradlew assembleDebug or ./gradlew aD #编译并打Debug包</span><br><span class="line"> </span><br><span class="line">./gradlew assembleRelease or ./gradlew aR #编译并打Release的包</span><br><span class="line"> </span><br><span class="line">./gradlew installRelease or ./gradlew iR #Release模式打包并安装</span><br><span class="line"> </span><br><span class="line">./gradlew installDebug or ./gradlew iD #Debug模式打包并安装</span><br><span class="line"> </span><br><span class="line">./gradlew uninstallRelease or ./gradlew uR #卸载Release模式包</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/blog/2020/02/28/%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%89%93%E5%8C%85apk/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -701,7 +740,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-count">82</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

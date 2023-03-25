@@ -190,6 +190,167 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2022/12/01/Android%E9%A6%96%E9%A1%B5%E7%81%B0%E8%89%B2%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2022/12/01/Android%E9%A6%96%E9%A1%B5%E7%81%B0%E8%89%B2%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88/" class="post-title-link" itemprop="url">Android首页灰色实现方案</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-12-01 20:16:25 / 修改时间：21:20:03" itemprop="dateCreated datePublished" datetime="2022-12-01T20:16:25+08:00">2022-12-01</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Activity设置灰色"><a href="#Activity设置灰色" class="headerlink" title="Activity设置灰色"></a>Activity设置灰色</h3><p>使用<code>ColorMatrix</code>设置灰度</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">setGrayPaint</span><span class="params">(view: <span class="type">View</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> paint = Paint()</span><br><span class="line">    <span class="keyword">val</span> cm = ColorMatrix()</span><br><span class="line">    cm.setSaturation(<span class="number">0f</span>)</span><br><span class="line">    paint.colorFilter = ColorMatrixColorFilter(cm)</span><br><span class="line">    view.setLayerType(View.LAYER_TYPE_HARDWARE, paint)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>给首页Activity的decorView设置灰度Paint</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">    </span><br><span class="line">    setContentView(...)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 需要在 setContentView 之后</span></span><br><span class="line">    setGrayPaint(window.decorView)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="需要特殊处理的控件"><a href="#需要特殊处理的控件" class="headerlink" title="需要特殊处理的控件"></a>需要特殊处理的控件</h3><ul>
+<li>弹框</li>
+<li>WebView</li>
+<li>SurfaceView</li>
+</ul>
+<p>这些控件由于不是跟activity公用一个window，需要各自单独处理灰度Paint。调用 <code>setGrayPaint(view)</code> 即可。</p>
+<h3 id="相关资源"><a href="#相关资源" class="headerlink" title="相关资源"></a>相关资源</h3><p><a href="https://juejin.cn/post/7041773908915126285" target="_blank" rel="noopener">Android实现设置灰白模式效果</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2022/11/26/Android%E4%B8%93%E6%A0%8F-%E5%BE%AE%E4%BF%A1AndResGuard%E8%B5%84%E6%BA%90%E6%B7%B7%E6%B7%86%E5%B7%A5%E5%85%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2022/11/26/Android%E4%B8%93%E6%A0%8F-%E5%BE%AE%E4%BF%A1AndResGuard%E8%B5%84%E6%BA%90%E6%B7%B7%E6%B7%86%E5%B7%A5%E5%85%B7/" class="post-title-link" itemprop="url">微信AndResGuard资源混淆工具</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-11-26 19:16:25 / 修改时间：18:11:50" itemprop="dateCreated datePublished" datetime="2022-11-26T19:16:25+08:00">2022-11-26</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="微信AndResGuard资源混淆工具"><a href="#微信AndResGuard资源混淆工具" class="headerlink" title="微信AndResGuard资源混淆工具"></a>微信AndResGuard资源混淆工具</h2><p>AndResGuard是一个帮助你缩小APK大小的工具，他的原理类似Java Proguard，但是只针对资源。他会将原本冗长的资源路径变短，例如将res/drawable/wechat变为r/d/a。</p>
+<p>AndResGuard不涉及编译过程，只需输入一个apk(无论签名与否，debug版，release版均可，在处理过程中会直接将原签名删除)，可得到一个实现资源混淆后的apk(若在配置文件中输入签名信息，可自动重签名并对齐，得到可直接发布的apk)以及对应资源ID的mapping文件。</p>
+<h3 id="原理介绍"><a href="#原理介绍" class="headerlink" title="原理介绍"></a>原理介绍</h3><p>根据Android的编译流程，所有资源ID已经被编译成32位int值。这说明我们并不需要去修改xml与java，因为在编译过程已经被R.java所替换，我们直接修改<code>resources.arsc</code>的二进制数据，不改变打包流程，只要在生成resources.arsc之后修改它，同时重命名资源文件。</p>
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><ul>
+<li>缩小APK体积</li>
+<li>保护res资源文件的可读性</li>
+<li>皮应用中减少跟主应用代码的重复率</li>
+</ul>
+<h3 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h3><p>项目根目录下build.gradle中，添加插件的依赖：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">buildscript &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        jcenter()</span><br><span class="line">        google()</span><br><span class="line">    &#125;</span><br><span class="line">    dependencies &#123;</span><br><span class="line">        classpath <span class="string">'com.tencent.mm:AndResGuard-gradle-plugin:1.2.21'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>app模块下的build.gradle中添加相关配置</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">apply plugin: <span class="string">'AndResGuard'</span></span><br><span class="line"></span><br><span class="line">andResGuard &#123;</span><br><span class="line">    <span class="comment">// mappingFile = file("./resource_mapping.txt")</span></span><br><span class="line">    mappingFile = <span class="literal">null</span></span><br><span class="line">    use7zip = <span class="literal">true</span></span><br><span class="line">    useSign = <span class="literal">true</span></span><br><span class="line">    <span class="comment">// 打开这个开关，会keep住所有资源的原始路径，只混淆资源的名字</span></span><br><span class="line">    keepRoot = <span class="literal">false</span></span><br><span class="line">    <span class="comment">// 设置这个值，会把arsc name列混淆成相同的名字，减少string常量池的大小</span></span><br><span class="line">    fixedResName = <span class="string">"arg"</span></span><br><span class="line">    <span class="comment">// 打开这个开关会合并所有哈希值相同的资源，但请不要过度依赖这个功能去除去冗余资源</span></span><br><span class="line">    mergeDuplicatedRes = <span class="literal">true</span></span><br><span class="line">    whiteList = [</span><br><span class="line">        <span class="comment">// for your icon</span></span><br><span class="line">        <span class="string">"R.drawable.icon"</span>,</span><br><span class="line">        <span class="comment">// for fabric</span></span><br><span class="line">        <span class="string">"R.string.com.crashlytics.*"</span>,</span><br><span class="line">        <span class="comment">// for google-services</span></span><br><span class="line">        <span class="string">"R.string.google_app_id"</span>,</span><br><span class="line">        <span class="string">"R.string.gcm_defaultSenderId"</span>,</span><br><span class="line">        <span class="string">"R.string.default_web_client_id"</span>,</span><br><span class="line">        <span class="string">"R.string.ga_trackingId"</span>,</span><br><span class="line">        <span class="string">"R.string.firebase_database_url"</span>,</span><br><span class="line">        <span class="string">"R.string.google_api_key"</span>,</span><br><span class="line">        <span class="string">"R.string.google_crash_reporting_api_key"</span></span><br><span class="line">    ]</span><br><span class="line">    compressFilePattern = [</span><br><span class="line">        <span class="string">"*.png"</span>,</span><br><span class="line">        <span class="string">"*.jpg"</span>,</span><br><span class="line">        <span class="string">"*.jpeg"</span>,</span><br><span class="line">        <span class="string">"*.gif"</span>,</span><br><span class="line">    ]</span><br><span class="line">    sevenzip &#123;</span><br><span class="line">         artifact = <span class="string">'com.tencent.mm:SevenZip:1.2.21'</span></span><br><span class="line">         <span class="comment">//path = "/usr/local/bin/7za"</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 可选： 如果不设置则会默认覆盖assemble输出的apk</span></span><br><span class="line"><span class="comment">    **/</span></span><br><span class="line">    <span class="comment">// finalApkBackupPath = "$&#123;project.rootDir&#125;/final.apk"</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 可选: 指定v1签名时生成jar文件的摘要算法</span></span><br><span class="line"><span class="comment">    * 默认值为“SHA-1”</span></span><br><span class="line"><span class="comment">    **/</span></span><br><span class="line">    <span class="comment">// digestalg = "SHA-256"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="如何启动"><a href="#如何启动" class="headerlink" title="如何启动"></a>如何启动</h3><p>使用Android Studio的同学可以再 andresguard 下找到相关的构建任务; 命令行可直接运行./gradlew resguard[BuildType | Flavor]， 这里的任务命令规则和assemble一致。</p>
+<h3 id="配置7Zip"><a href="#配置7Zip" class="headerlink" title="配置7Zip"></a>配置7Zip</h3><p>在设置sevenzip时, 你只需设置artifact或path. 支持同时设置,总以path的值为优先.</p>
+<h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><p>如果没有配置finalApkBackupPath，最终结果会覆盖assemble[BuildType | Flavor]的输出APK。如果配置则输出至finalApkBackupPath配置路径。</p>
+<h3 id="一些需要注意的问题"><a href="#一些需要注意的问题" class="headerlink" title="一些需要注意的问题"></a>一些需要注意的问题</h3><ul>
+<li>如果不是对APK size有极致的需求，请不要把resources.arsc添加进compressFilePattern.</li>
+<li>对于发布于Google Play的APP，建议不要使用7Zip压缩，因为这个会导致Google Play的优化Patch算法失效.</li>
+<li>compress参数对混淆效果的影响<br>若指定compess 参数.png、.gif以及*.jpg，resources.arsc会大大减少安装包体积。若要支持2.2，resources.arsc需保证压缩前小于1M。</li>
+<li>操作系统对7z的影响<br>实验证明，linux与mac的7z效果更好</li>
+<li>keepmapping方式对增量包大小的影响<br>影响并不大，但使用keepmapping方式有利于保持所有版本混淆的一致性</li>
+<li>渠道包的问题(<strong>建议通过修改zip摘要的方式生产渠道包</strong>)<br>在出渠道包的时候，解压重压缩会破坏7zip的效果，通过repackage命令可用7zip重压缩。</li>
+<li>通过getIdentifier方式获得资源，需要放置白名单中。</li>
+<li>部分手机桌面快捷图标的实现有问题，务必将程序桌面icon加入白名单</li>
+<li>第三方SDK的资源加入白名单。可以在<code>white_list.md</code><a href="https://github.com/shwenzhang/AndResGuard/blob/master/doc/white_list.md" target="_blank" rel="noopener">https://github.com/shwenzhang/AndResGuard/blob/master/doc/white_list.md</a>查看更多sdk的白名单配置</li>
+<li>Glide加载本地资源需要加入白名单。</li>
+</ul>
+<h3 id="相关资源"><a href="#相关资源" class="headerlink" title="相关资源"></a>相关资源</h3><p>使用说明：<a href="https://github.com/shwenzhang/AndResGuard/blob/master/README.zh-cn.md" target="_blank" rel="noopener">https://github.com/shwenzhang/AndResGuard/blob/master/README.zh-cn.md</a></p>
+<p>原理介绍：<a href="https://mp.weixin.qq.com/s?__biz=MzAwNDY1ODY2OQ==&mid=208135658&idx=1&sn=ac9bd6b4927e9e82f9fa14e396183a8f#rd" target="_blank" rel="noopener">https://mp.weixin.qq.com/s?__biz=MzAwNDY1ODY2OQ==&amp;mid=208135658&amp;idx=1&amp;sn=ac9bd6b4927e9e82f9fa14e396183a8f#rd</a></p>
+<p><code>white_list.md</code>：<a href="https://github.com/shwenzhang/AndResGuard/blob/master/doc/white_list.md" target="_blank" rel="noopener">https://github.com/shwenzhang/AndResGuard/blob/master/doc/white_list.md</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2022/10/12/%E7%AE%97%E6%B3%95-%E9%93%BE%E8%A1%A8Java%E7%89%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -533,183 +694,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2022/08/15/Gradle%E7%9A%84%E9%85%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2022/08/15/Gradle%E7%9A%84%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">Gradle的配置</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-08-15 19:16:31" itemprop="dateCreated datePublished" datetime="2022-08-15T19:16:31+08:00">2022-08-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-26 18:11:50" itemprop="dateModified" datetime="2022-11-26T18:11:50+08:00">2022-11-26</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Gradle的配置"><a href="#Gradle的配置" class="headerlink" title="Gradle的配置"></a>Gradle的配置</h2><p><a href="https://www.cnblogs.com/baiqiantao/p/6890674.html" target="_blank" rel="noopener">原文地址：https://www.cnblogs.com/baiqiantao/p/6890674.html</a></p>
-<p><a href="https://docs.gradle.org/current/userguide/installation.html" target="_blank" rel="noopener">Installing Gradle: https://docs.gradle.org/current/userguide/installation.html</a></p>
-<ul>
-<li>gradlew 和 gradlew.bat：封装 gradle 的脚本，目的是为了更方便的使用 gradle</li>
-<li>环境变量 <code>GRADLE_HOME</code>：仅仅是为了可以在任意目录中执行 gradle 命令，没有特殊的意义</li>
-<li>环境变量 <code>GRADLE_USER_HOME</code>：控制在命令行中执行 gradlew 命令时，gradle 下载的目录</li>
-<li>IDEA 的 <code>Gradle user home</code>：控制在 IDEA 点击按钮执行各项 Task 等功能时，gradle 下载的目录</li>
-<li>IDEA 的 <code>User from gradle</code>：控制在 IDEA 点击按钮执行各项 Task 等功能时，使用的 gradle 的版本</li>
-</ul>
-<h3 id="环境变量-GRADLE-HOME"><a href="#环境变量-GRADLE-HOME" class="headerlink" title="环境变量 GRADLE_HOME"></a>环境变量 GRADLE_HOME</h3><p>设置环境变量 GRADLE_HOME 的目的，仅仅是为了方便在 Path 中指定 gradle 的位置。<br>GRADLE_HOME：<a href="file:///D:/_dev/gradle/GRADLE_HOME/gradle-6.7/">D:_dev\gradle_GRADLE_HOME\gradle-6.7</a><br>Path：<a href="file:///D:/_dev/gradle/GRADLE_HOME/gradle-6.7/bin/">%GRADLE_HOME%\bin</a><br>将 gradle 添加到 Path 的目的是为了，可以在任意目录中执行 gradle 命令。<br>实际上，完全没必要设置环境变量 GRADLE_HOME，Do we really need GRADLE_HOME?</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gradle -v           <span class="comment"># 查看版本</span></span><br><span class="line">gradle --<span class="built_in">help</span>       <span class="comment"># 查看命令使用帮助</span></span><br><span class="line"></span><br><span class="line">λ <span class="built_in">where</span> gradle      <span class="comment"># 查看 gradle 命令位置</span></span><br><span class="line">D:\_dev\gradle\GRADLE_HOME\gradle-6.7\bin\gradle</span><br><span class="line">D:\_dev\gradle\GRADLE_HOME\gradle-6.7\bin\gradle.bat</span><br></pre></td></tr></table></figure>
-
-<h3 id="gradlew-是干嘛的"><a href="#gradlew-是干嘛的" class="headerlink" title="gradlew 是干嘛的"></a>gradlew 是干嘛的</h3><p>其实 <code>gradlew</code> 只是一个 gradle 的封装(wrapper)，gradlew = gradle wrapper，因为在项目根目录有 <code>gradlew</code> 和 <code>gradlew.bat</code> 这两个可执行文件，所以 <strong>能且仅能</strong> 在项目根目录中执行 <code>gradlew</code> 命令。</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">D:\_dev\_code\<span class="keyword">as</span>\Test&gt; gradlew -v       # 查看版本</span><br><span class="line">D:\_dev\_code\<span class="keyword">as</span>\Test&gt; gradlew --help   # 查看命令使用帮助</span><br><span class="line"></span><br><span class="line">D:\_dev\_code\<span class="keyword">as</span>\Test&gt; <span class="keyword">where</span> gradlew    # 查看 gradlew 命令位置</span><br><span class="line">D:\_dev\_code\<span class="keyword">as</span>\Test\gradlew</span><br><span class="line">D:\_dev\_code\<span class="keyword">as</span>\Test\gradlew.bat</span><br></pre></td></tr></table></figure>
-
-<p>这两个文件头部的注释也说明了他们的作用：</p>
-<ul>
-<li>gradlew：Gradle start up script for UN*X</li>
-<li>gradlew.bat：Gradle startup script for Windows</li>
-</ul>
-<p>之所以添加这个 <code>gradlew</code> 脚本，是为了：</p>
-<p>统一项目所使用的 gradle 版本，避免不同开发人员使用不同的 gradle 版本导致的兼容性问题<br>可以把 <code>gradle-wrapper.properties</code> 里面的下载 gradle 的地址切换到公司的公共空间上，以加快下载速度</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">distributionUrl=https\:<span class="comment">//services.gradle.org/distributions/gradle-6.5-all.zip</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="环境变量-GRADLE-USER-HOME"><a href="#环境变量-GRADLE-USER-HOME" class="headerlink" title="环境变量 GRADLE_USER_HOME"></a>环境变量 GRADLE_USER_HOME</h3><p>设置环境变量 <code>GRADLE_USER_HOME</code> 的目的，是为了自定义下载 <code>gradle</code> 时的本地存储路径。<br>在命令行中执行 <code>gradlew</code> 命令(注意不是 gradle 命令)时，会将对应版本的 <code>gradle</code> 下载到此目录中。<br>下载 gradle 时，下载地址及版本由项目中的 /gradle/wrapper/gradle-wrapper.properties 决定。</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#Mon Nov 16 00:55:48 CST 2020</span><br><span class="line">distributionBase=GRADLE_USER_HOME</span><br><span class="line">distributionPath=wrapper/dists</span><br><span class="line">zipStoreBase=GRADLE_USER_HOME</span><br><span class="line">zipStorePath=wrapper/dists</span><br><span class="line">distributionUrl=https\:<span class="comment">//services.gradle.org/distributions/gradle-6.5-all.zip</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="IDEA-的-Gradle-user-home"><a href="#IDEA-的-Gradle-user-home" class="headerlink" title="IDEA 的 Gradle user home"></a>IDEA 的 Gradle user home</h3><p>在 IDEA 的 <code>File | Settings | Build, Execution, Deployment | Build Tools | Gradle</code> 中，有一个 <code>Gradle user home</code> 的配置，其作用和环境变量 <code>GRADLE_USER_HOME</code> 类似，只不过该配置只是给 IDEA 使用的。譬如点击 gradle 窗口的各种 Task 按钮执行各项 Task 功能时。</p>
-<p>注意：仅 IDEA 中的各种图形化操作会使用此配置，在 IDEA 的 Terminal 中执行 gradlew 命令时，使用的依旧是环境变量 <code>GRADLE_USER_HOME</code>。</p>
-<h3 id="IDEA-的-User-from-gradle"><a href="#IDEA-的-User-from-gradle" class="headerlink" title="IDEA 的 User from gradle"></a>IDEA 的 User from gradle</h3><p>在 IDEA 的 <code>File | Settings | Build, Execution, Deployment | Build Tools | Gradle</code> 中，有一个 <code>User from gradle</code> 的配置，它也是仅提供给 IDEA 使用的(对 gradlew 无效)。</p>
-<p>其作用是，指定当前工程中 IDEA 所使用的 gradle 版本：</p>
-<p>当勾选 <code>gradle-wrapper.properties</code> 时，使用 <code>gradle-wrapper.properties</code> 中指定的 gradle 版本。<br>为了防止和在 Terminal 中执行 gradlew 命令时使用的 gradle 版本不同，建议勾选此配置(也是默认配置)。<br>当勾选 Specified location 时，使用指定目录下的 gradle 版本。<br>如果 gradle 下载很慢，就可以勾选此配置，以便使用指定本地下载好的 gradle 版本。</p>
-<blockquote>
-<p>不管在 IDEA 中怎么配置，在 Terminal 中执行 gradlew 命令时，所使用的 gradle 版本都是由 <code>gradle-wrapper.properties</code> 决定的，并且下载路径也都是由环境变量 <code>GRADLE_USER_HOME</code> 决定的。</p>
-</blockquote>
-<h2 id="Gradle-依赖的-JDK-配置"><a href="#Gradle-依赖的-JDK-配置" class="headerlink" title="Gradle 依赖的 JDK 配置"></a>Gradle 依赖的 JDK 配置</h2><p>这里的 JDK 指的是执行 Gradle 命令依赖的 JDK，并非 AndroidStudio 工程依赖的 JDK。</p>
-<p>通过 <code>File | Settings | Build, Execution, Deployment | Build Tools | Gradle</code> 设置的 JDK，是在运行 IDEA 图形化按钮时使用的。<br>通过 <code>gradle.properties</code> 设置的 JDK，是在 Terminal 中执行 gradlew 命令时使用的。</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">org.gradle.java.home=C\:<span class="regexp">/_dev/</span>Android<span class="regexp">/Android Studio/</span>jre</span><br></pre></td></tr></table></figure>
-
-<p>注意：AGP 从 7.0.0-alpha02 版本起，需要使用 Java 11</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2022/06/29/%E7%94%A8Android%E8%87%AA%E5%B8%A6%E6%B5%8F%E8%A7%88%E5%99%A8%E6%89%93%E5%BC%80%E7%BD%91%E9%A1%B5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2022/06/29/%E7%94%A8Android%E8%87%AA%E5%B8%A6%E6%B5%8F%E8%A7%88%E5%99%A8%E6%89%93%E5%BC%80%E7%BD%91%E9%A1%B5/" class="post-title-link" itemprop="url">用Android自带浏览器打开网页</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-06-29 21:13:46" itemprop="dateCreated datePublished" datetime="2022-06-29T21:13:46+08:00">2022-06-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-26 18:11:50" itemprop="dateModified" datetime="2022-11-26T18:11:50+08:00">2022-11-26</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="启动android默认浏览器"><a href="#启动android默认浏览器" class="headerlink" title="启动android默认浏览器"></a>启动android默认浏览器</h2><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> intent = Intent()</span><br><span class="line">intent.<span class="keyword">data</span> = Uri.parse(url)</span><br><span class="line">intent.action = Intent.ACTION_VIEW</span><br><span class="line">intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK</span><br><span class="line">context.startActivity(intent)</span><br></pre></td></tr></table></figure>
-
-<h2 id="启动指定浏览器打开（不推荐）"><a href="#启动指定浏览器打开（不推荐）" class="headerlink" title="启动指定浏览器打开（不推荐）"></a>启动指定浏览器打开（不推荐）</h2><p><strong>警告：爱加密加固之后的包，会把这个异常给吃掉，导致无法跳转，也无反应。</strong></p>
-<p>这种方式需要处理手机中不存在指定浏览器的情况</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">val</span> intent = Intent()</span><br><span class="line">    intent.<span class="keyword">data</span> = Uri.parse(targetUrl)</span><br><span class="line">    intent.action = Intent.ACTION_VIEW</span><br><span class="line">    intent.setClassName(</span><br><span class="line">        <span class="string">"com.android.browser"</span>,</span><br><span class="line">        <span class="string">"com.android.browser.BrowserActivity"</span></span><br><span class="line">    ) </span><br><span class="line">    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK</span><br><span class="line">    context.startActivity(intent)</span><br><span class="line">&#125; <span class="keyword">catch</span> (e: Exception) &#123;</span><br><span class="line">    e.printStackTrace()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// android.content.ActivityNotFoundException: Unable to find explicit activity class &#123;com.android.browser/com.android.browser.BrowserActivity&#125;; have you declared this activity in your AndroidManifest.xml?</span></span><br><span class="line">    <span class="keyword">val</span> intent = Intent()</span><br><span class="line">    intent.<span class="keyword">data</span> = Uri.parse(url)</span><br><span class="line">    intent.action = Intent.ACTION_VIEW</span><br><span class="line">    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK</span><br><span class="line">    context.startActivity(intent)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>由于华为鸿蒙系统已经没有Android默认的浏览器，所以此处必须要有异常处理，或者提前处理手机中不存在指定浏览器的情况。</p>
-<p>市场上常用浏览器的包名和类名@20220630</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">华为:</span> <span class="string">"com.huawei.browser/com.huawei.browser.BrowserMainActivity"</span></span><br><span class="line"><span class="attr">Vivo:</span> <span class="string">"com.vivo.browser/com.vivo.browser.MainActivity"</span></span><br><span class="line"><span class="string">小米:</span> <span class="string">"name=com.android.browser/com.android.browser.BrowserActivity"</span></span><br><span class="line"><span class="string">uc浏览器:</span> <span class="string">"com.uc.browser"</span><span class="string">,</span> <span class="string">"com.uc.browser.ActivityUpdate"</span></span><br><span class="line"><span class="attr">opera:</span> <span class="string">"com.opera.mini.android"</span><span class="string">,</span> <span class="string">"com.opera.mini.android.Browser"</span></span><br><span class="line"><span class="string">qq浏览器:</span> <span class="string">"com.tencent.mtt"</span><span class="string">,</span> <span class="string">"com.tencent.mtt.MainActivity"</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -782,7 +766,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-count">82</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

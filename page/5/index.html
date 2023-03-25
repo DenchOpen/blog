@@ -190,6 +190,162 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/12/06/Problems%E4%B8%93%E9%A2%98%E4%B9%8BProvider/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2021/12/06/Problems%E4%B8%93%E9%A2%98%E4%B9%8BProvider/" class="post-title-link" itemprop="url">Problems专题：Provider</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-12-06 22:22:22" itemprop="dateCreated datePublished" datetime="2021-12-06T22:22:22+08:00">2021-12-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-26 18:11:50" itemprop="dateModified" datetime="2022-11-26T18:11:50+08:00">2022-11-26</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Problems专题：Provider"><a href="#Problems专题：Provider" class="headerlink" title="Problems专题：Provider"></a>Problems专题：Provider</h2><h3 id="0x01-FileProvider：Failed-to-find-configured-root-that-contains-…-jpeg"><a href="#0x01-FileProvider：Failed-to-find-configured-root-that-contains-…-jpeg" class="headerlink" title="0x01  FileProvider：Failed to find configured root that contains /…/**.jpeg"></a>0x01  FileProvider：Failed to find configured root that contains /…/**.jpeg</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">java.lang.IllegalArgumentException: Failed to find configured root that contains /storage/emulated/0/DCIM/Camera/**.jpeg</span><br><span class="line">	at androidx.core.content.FileProvider$SimplePathStrategy.getUriForFile(FileProvider.java:800)</span><br><span class="line">	at androidx.core.content.FileProvider.getUriForFile(FileProvider.java:442)</span><br><span class="line">	at com.luck.picture.lib.tools.PictureFileUtils.parUri(PictureFileUtils.java:533)</span><br><span class="line">	at com.luck.picture.lib.PictureBaseActivity.startOpenCameraImage(PictureBaseActivity.java:705)</span><br><span class="line">	at com.luck.picture.lib.PictureSelectorActivity.startCamera(PictureSelectorActivity.java:926)</span><br><span class="line">	at com.luck.picture.lib.PictureSelectorActivity.onTakePhoto(PictureSelectorActivity.java:1473)</span><br><span class="line">	at com.luck.picture.lib.adapter.PictureImageGridAdapter.lambda$onBindViewHolder$0$PictureImageGridAdapter(PictureImageGridAdapter.java:155)</span><br><span class="line">	at com.luck.picture.lib.adapter.-$$Lambda$PictureImageGridAdapter$0EODmJcP4VP0lqmkEhQ1dzLbHi8.onClick(Unknown Source:2)</span><br><span class="line">	at android.view.View.performClick(View.java:6608)</span><br><span class="line">	at android.view.View.performClickInternal(View.java:6585)</span><br><span class="line">	at android.view.View.access$3100(View.java:785)</span><br><span class="line">	at android.view.View$PerformClick.run(View.java:25921)</span><br><span class="line">	at android.os.Handler.handleCallback(Handler.java:873)</span><br><span class="line">	at android.os.Handler.dispatchMessage(Handler.java:99)</span><br><span class="line">	at android.os.Looper.loop(Looper.java:201)</span><br><span class="line">	at android.app.ActivityThread.main(ActivityThread.java:6810)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Native Method)</span><br><span class="line">	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:547)</span><br><span class="line">	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:873)</span><br><span class="line">Back traces end.</span><br></pre></td></tr></table></figure>
+
+<p><strong>问题分析</strong></p>
+<ol>
+<li>FileProvider 路径配置文件被互相覆盖</li>
+<li>FileProvider 路径配置文件id重复，导致覆盖</li>
+</ol>
+<p><strong>解决方案</strong></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/11/30/Kotlin%E5%8D%95%E4%BE%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2021/11/30/Kotlin%E5%8D%95%E4%BE%8B/" class="post-title-link" itemprop="url">Kotlin单例</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-11-30 22:16:30" itemprop="dateCreated datePublished" datetime="2021-11-30T22:16:30+08:00">2021-11-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-26 18:11:50" itemprop="dateModified" datetime="2022-11-26T18:11:50+08:00">2022-11-26</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Kotlin单例"><a href="#Kotlin单例" class="headerlink" title="Kotlin单例"></a>Kotlin单例</h3><p>下面介绍一下kotlin 线程安全的几种单例写法。</p>
+<h3 id="0x01-饿汉模式"><a href="#0x01-饿汉模式" class="headerlink" title="0x01 饿汉模式"></a>0x01 饿汉模式</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Kotlin实现</span></span><br><span class="line"><span class="keyword">object</span> Singleton &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 反编译Kotlin实现的Java代码</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton INSTANCE;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">static</span> &#123;</span><br><span class="line">      Singleton var0 = <span class="keyword">new</span> Singleton();</span><br><span class="line">      INSTANCE = var0;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="0x02-双重校验锁式"><a href="#0x02-双重校验锁式" class="headerlink" title="0x02 双重校验锁式"></a>0x02 双重校验锁式</h3><p>双重校验锁式（Double Check)</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Kotlin实现</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> <span class="keyword">private</span> <span class="keyword">constructor</span></span>() &#123;</span><br><span class="line">    <span class="keyword">companion</span> <span class="keyword">object</span> &#123;</span><br><span class="line">        <span class="meta">@Volatile</span></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">var</span> instance: Singleton? = <span class="literal">null</span></span><br><span class="line"></span><br><span class="line">        <span class="meta">@JvmStatic</span></span><br><span class="line">        <span class="function"><span class="keyword">fun</span> <span class="title">getInstance</span><span class="params">()</span></span>: Singleton &#123;</span><br><span class="line">            <span class="keyword">if</span> (instance == <span class="literal">null</span>) &#123;</span><br><span class="line">                synchronized(Singleton::<span class="class"><span class="keyword">class</span>.<span class="title">java</span>) </span>&#123;</span><br><span class="line">                    <span class="keyword">if</span> (instance == <span class="literal">null</span>) &#123;</span><br><span class="line">                        instance = Singleton()</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> instance!!</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 反编译Kotlin实现的Java代码</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> Singleton instance;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton.Companion Companion = <span class="keyword">new</span> Singleton.Companion((DefaultConstructorMarker)<span class="keyword">null</span>);</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// $FF: synthetic method</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">Singleton</span><span class="params">(DefaultConstructorMarker $constructor_marker)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>();</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@JvmStatic</span></span><br><span class="line">   <span class="meta">@NotNull</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> Companion.getInstance();</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Companion</span> </span>&#123;</span><br><span class="line">      <span class="meta">@JvmStatic</span></span><br><span class="line">      <span class="meta">@NotNull</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">         <span class="keyword">if</span> (Singleton.instance == <span class="keyword">null</span>) &#123;</span><br><span class="line">            Class var1 = Singleton<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">            <span class="keyword">boolean</span> var2 = <span class="keyword">false</span>;</span><br><span class="line">            <span class="keyword">boolean</span> var3 = <span class="keyword">false</span>;</span><br><span class="line">            <span class="keyword">synchronized</span>(var1) &#123;</span><br><span class="line">               <span class="keyword">int</span> var4 = <span class="keyword">false</span>;</span><br><span class="line">               <span class="keyword">if</span> (Singleton.instance == <span class="keyword">null</span>) &#123;</span><br><span class="line">                  Singleton.instance = <span class="keyword">new</span> Singleton((DefaultConstructorMarker)<span class="keyword">null</span>);</span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">               Unit var6 = Unit.INSTANCE;</span><br><span class="line">            &#125;</span><br><span class="line">         &#125;</span><br><span class="line"></span><br><span class="line">         Singleton var10000 = Singleton.instance;</span><br><span class="line">         <span class="keyword">if</span> (var10000 == <span class="keyword">null</span>) &#123;</span><br><span class="line">            Intrinsics.throwNpe();</span><br><span class="line">         &#125;</span><br><span class="line"></span><br><span class="line">         <span class="keyword">return</span> var10000;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">private</span> <span class="title">Companion</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// $FF: synthetic method</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="title">Companion</span><span class="params">(DefaultConstructorMarker $constructor_marker)</span> </span>&#123;</span><br><span class="line">         <span class="keyword">this</span>();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="0x03-静态内部类"><a href="#0x03-静态内部类" class="headerlink" title="0x03 静态内部类"></a>0x03 静态内部类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Java实现</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonDemo</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonHolder</span></span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> SingletonDemo instance=<span class="keyword">new</span> SingletonDemo();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SingletonDemo</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Singleton has loaded"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SingletonDemo <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> SingletonHolder.instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Kotlin实现</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> <span class="keyword">private</span> <span class="keyword">constructor</span></span>() &#123;</span><br><span class="line">    <span class="keyword">companion</span> <span class="keyword">object</span> &#123;</span><br><span class="line">        <span class="meta">@JvmStatic</span></span><br><span class="line">        <span class="function"><span class="keyword">fun</span> <span class="title">getInstance</span><span class="params">()</span></span> = SingletonHolder.instance</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">object</span> SingletonHolder &#123;</span><br><span class="line">        <span class="meta">@JvmStatic</span></span><br><span class="line">        <span class="keyword">val</span> instance: Singleton = Singleton()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 反编译Kotlin实现的Java代码</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton.Companion Companion = <span class="keyword">new</span> Singleton.Companion((DefaultConstructorMarker)<span class="keyword">null</span>);</span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="meta">@JvmStatic</span></span><br><span class="line">   <span class="meta">@NotNull</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> Companion.getInstance();</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonHolder</span> </span>&#123;</span><br><span class="line">      <span class="meta">@NotNull</span></span><br><span class="line">      <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton instance;</span><br><span class="line">      <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton.SingletonHolder INSTANCE;</span><br><span class="line">      <span class="meta">@NotNull</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">         <span class="keyword">return</span> instance;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">static</span> &#123;</span><br><span class="line">         Singleton.SingletonHolder var0 = <span class="keyword">new</span> Singleton.SingletonHolder();</span><br><span class="line">         INSTANCE = var0;</span><br><span class="line">         instance = <span class="keyword">new</span> Singleton((DefaultConstructorMarker)<span class="keyword">null</span>);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Companion</span> </span>&#123;</span><br><span class="line">      <span class="meta">@JvmStatic</span></span><br><span class="line">      <span class="meta">@NotNull</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">         <span class="keyword">return</span> Singleton.SingletonHolder.getInstance();</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="function"><span class="keyword">private</span> <span class="title">Companion</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/11/25/Android%E4%B8%93%E6%A0%8F-adb/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -568,148 +724,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/09/13/Gson%E6%95%B0%E6%8D%AE%E8%A7%A3%E6%9E%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2021/09/13/Gson%E6%95%B0%E6%8D%AE%E8%A7%A3%E6%9E%90/" class="post-title-link" itemprop="url">Gson 数据解析</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-09-13 20:16:30" itemprop="dateCreated datePublished" datetime="2021-09-13T20:16:30+08:00">2021-09-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-26 18:11:50" itemprop="dateModified" datetime="2022-11-26T18:11:50+08:00">2022-11-26</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Gson-数据解析"><a href="#Gson-数据解析" class="headerlink" title="Gson 数据解析"></a>Gson 数据解析</h2><h3 id="0x01-Kotlin-Gson-解析-data-class-两条黄金法则："><a href="#0x01-Kotlin-Gson-解析-data-class-两条黄金法则：" class="headerlink" title="0x01 Kotlin Gson 解析 data class 两条黄金法则："></a>0x01 Kotlin Gson 解析 data class 两条黄金法则：</h3><h4 id="1、-String-必须是可空类型-String"><a href="#1、-String-必须是可空类型-String" class="headerlink" title="1、 String 必须是可空类型 String?"></a>1、 String 必须是可空类型 String?</h4><h4 id="2、-需要使用默认值，则全部字段都必须给予默认值，以满足kotlin对象有空的构造函数"><a href="#2、-需要使用默认值，则全部字段都必须给予默认值，以满足kotlin对象有空的构造函数" class="headerlink" title="2、 需要使用默认值，则全部字段都必须给予默认值，以满足kotlin对象有空的构造函数"></a>2、 需要使用默认值，则全部字段都必须给予默认值，以满足kotlin对象有空的构造函数</h4><h3 id="0x02-手动解析Gson基础字段"><a href="#0x02-手动解析Gson基础字段" class="headerlink" title="0x02 手动解析Gson基础字段"></a>0x02 手动解析Gson基础字段</h3><p>1、msg 可空String解析 <code>jsonReader.peek() == JsonToken.NULL</code></p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.google.gson.Gson</span><br><span class="line"><span class="keyword">import</span> com.google.gson.JsonSyntaxException</span><br><span class="line"><span class="keyword">import</span> com.google.gson.TypeAdapter</span><br><span class="line"><span class="keyword">import</span> com.google.gson.reflect.TypeToken</span><br><span class="line"><span class="keyword">import</span> com.google.gson.stream.JsonReader</span><br><span class="line"><span class="keyword">import</span> com.google.gson.stream.JsonToken</span><br><span class="line"><span class="keyword">import</span> okhttp3.ResponseBody</span><br><span class="line"><span class="keyword">import</span> retrofit2.Converter</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.ParameterizedType</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Type</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ResponseBodyConverter</span></span>(<span class="keyword">val</span> gson: Gson, <span class="keyword">val</span> type: Type) :</span><br><span class="line">    Converter&lt;ResponseBody, BaseResponse&lt;Any&gt;&gt; &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">convert</span><span class="params">(value: <span class="type">ResponseBody</span>)</span></span>: BaseResponse&lt;Any&gt; &#123;</span><br><span class="line">        <span class="keyword">val</span> dataType = GenericsUtils.getParameterUpperBound(</span><br><span class="line">            <span class="number">0</span>,</span><br><span class="line">            type <span class="keyword">as</span> ParameterizedType</span><br><span class="line">        )</span><br><span class="line">        <span class="keyword">val</span> baseResponse = BaseResponse&lt;Any&gt;()</span><br><span class="line">        <span class="keyword">val</span> jsonReader = JsonReader(value.charStream())</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            jsonReader.beginObject()</span><br><span class="line">            <span class="keyword">while</span> (jsonReader.hasNext()) &#123;</span><br><span class="line">                <span class="keyword">val</span> name: String = jsonReader.nextName()</span><br><span class="line">                <span class="keyword">when</span> (name) &#123;</span><br><span class="line">                    <span class="string">"code"</span> -&gt; &#123;</span><br><span class="line">                        baseResponse.code = jsonReader.nextString()</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="string">"msg"</span> -&gt; &#123;</span><br><span class="line">                        <span class="comment">// this works, but do not do this.</span></span><br><span class="line">                        <span class="keyword">if</span> (jsonReader.peek() == JsonToken.NULL) &#123;</span><br><span class="line">                            jsonReader.nextNull()</span><br><span class="line">                            baseResponse.msg = <span class="literal">null</span></span><br><span class="line">                        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                            baseResponse.msg = jsonReader.nextString()</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="string">"data"</span> -&gt; &#123;</span><br><span class="line">                        <span class="keyword">val</span> mapped: TypeAdapter&lt;*&gt;? = gson.getAdapter(TypeToken.<span class="keyword">get</span>(dataType))</span><br><span class="line">                        baseResponse.<span class="keyword">data</span> = mapped?.read(jsonReader)</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span> -&gt; &#123;</span><br><span class="line">                        jsonReader.skipValue()</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (e: IllegalStateException) &#123;</span><br><span class="line">            <span class="keyword">throw</span> JsonSyntaxException(e)</span><br><span class="line">        &#125; <span class="keyword">catch</span> (e: IllegalAccessException) &#123;</span><br><span class="line">            <span class="keyword">throw</span> AssertionError(e)</span><br><span class="line">        &#125;</span><br><span class="line">        jsonReader.endObject()</span><br><span class="line">        <span class="keyword">return</span> baseResponse</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/09/09/%E5%A4%A7%E9%87%8F%E6%96%87%E6%9C%AC%E7%9A%84%E6%B5%8F%E8%A7%88%E8%BF%9B%E5%BA%A6%E5%92%8C%E6%B5%8F%E8%A7%88%E6%97%B6%E9%95%BF%E7%BB%9F%E8%AE%A1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2021/09/09/%E5%A4%A7%E9%87%8F%E6%96%87%E6%9C%AC%E7%9A%84%E6%B5%8F%E8%A7%88%E8%BF%9B%E5%BA%A6%E5%92%8C%E6%B5%8F%E8%A7%88%E6%97%B6%E9%95%BF%E7%BB%9F%E8%AE%A1/" class="post-title-link" itemprop="url">大量文本的浏览进度和浏览时长统计</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-09-09 22:57:15" itemprop="dateCreated datePublished" datetime="2021-09-09T22:57:15+08:00">2021-09-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-26 18:11:50" itemprop="dateModified" datetime="2022-11-26T18:11:50+08:00">2022-11-26</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="大量文本的浏览进度和浏览时长统计"><a href="#大量文本的浏览进度和浏览时长统计" class="headerlink" title="大量文本的浏览进度和浏览时长统计"></a>大量文本的浏览进度和浏览时长统计</h2><p>埋点需求，Android App 需要在onResume 和 onPause 方法中计算浏览的时长，同时上报浏览的进度。</p>
-<p>浏览进度Rate具体的计算方式的具体过程：</p>
-<p>1、在滚动屏幕过程中，通过 <code>textContent?.viewTreeObserver?.addOnScrollChangedListener</code> 来记录屏幕滚动的位置</p>
-<p>2、在滚动监听里通过<code>textContent?.getLocationOnScreen(location)</code>获取在屏幕的具体位置，同时，</p>
-<p>计算出<code>visibleHeight = screenHeight - location[1]</code> 当前文本的可见高度</p>
-<p>3、当可见高度超过目标的高度，则认为已经全部浏览，<code>rate = 100%</code> ，同时移除滚动监听<code>textContent?.viewTreeObserver?.removeOnScrollChangedListener(mScrollChangeListener)</code></p>
-<p>核心代码如下：</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">var</span> totalHeight: <span class="built_in">Int</span> = <span class="number">0</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">var</span> visibleHeight: <span class="built_in">Int</span> = <span class="number">0</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">var</span> screenHeight = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">getViewRate</span><span class="params">()</span></span>: String? =</span><br><span class="line"><span class="keyword">if</span> (totalHeight &lt;= <span class="number">0</span> || visibleHeight &lt; <span class="number">0</span>) <span class="literal">null</span></span><br><span class="line"><span class="keyword">else</span> <span class="string">"<span class="subst">$&#123;(visibleHeight * <span class="number">100</span> / totalHeight)&#125;</span>%"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">bindViewTreeObserver</span><span class="params">()</span></span> &#123;</span><br><span class="line">    cleanCache()</span><br><span class="line">    contentTv.post &#123;</span><br><span class="line">        totalHeight = contentTv.height</span><br><span class="line">        screenHeight = ScreenUtils.getScreenHeight(context)</span><br><span class="line">        contentVisibleRate()</span><br><span class="line">    &#125;</span><br><span class="line">    contentTv.viewTreeObserver.addOnScrollChangedListener(mScrollChangeListener)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">cleanCache</span><span class="params">()</span></span> &#123;</span><br><span class="line">    totalHeight = <span class="number">0</span></span><br><span class="line">    screenHeight = <span class="number">0</span></span><br><span class="line">    visibleHeight = <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> mScrollChangeListener = ViewTreeObserver.OnScrollChangedListener &#123;</span><br><span class="line">    contentVisibleRate()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">contentVisibleRate</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> location = IntArray(<span class="number">2</span>)</span><br><span class="line">    contentTv.getLocationOnScreen(location)</span><br><span class="line">    visibleHeight = (screenHeight - location[<span class="number">1</span>]).coerceAtLeast(visibleHeight)</span><br><span class="line">    <span class="keyword">if</span> (visibleHeight &gt;= totalHeight) &#123;</span><br><span class="line">        visibleHeight = totalHeight</span><br><span class="line">        removeOnScrollChangedListener()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">removeOnScrollChangedListener</span><span class="params">()</span></span> &#123;</span><br><span class="line">    mScrollChangeListener?.let &#123;</span><br><span class="line">        contentTv.viewTreeObserver.removeOnScrollChangedListener(mScrollChangeListener)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -782,7 +796,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-count">82</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

@@ -190,6 +190,148 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/09/13/Gson%E6%95%B0%E6%8D%AE%E8%A7%A3%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2021/09/13/Gson%E6%95%B0%E6%8D%AE%E8%A7%A3%E6%9E%90/" class="post-title-link" itemprop="url">Gson 数据解析</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-13 20:16:30" itemprop="dateCreated datePublished" datetime="2021-09-13T20:16:30+08:00">2021-09-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-26 18:11:50" itemprop="dateModified" datetime="2022-11-26T18:11:50+08:00">2022-11-26</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Gson-数据解析"><a href="#Gson-数据解析" class="headerlink" title="Gson 数据解析"></a>Gson 数据解析</h2><h3 id="0x01-Kotlin-Gson-解析-data-class-两条黄金法则："><a href="#0x01-Kotlin-Gson-解析-data-class-两条黄金法则：" class="headerlink" title="0x01 Kotlin Gson 解析 data class 两条黄金法则："></a>0x01 Kotlin Gson 解析 data class 两条黄金法则：</h3><h4 id="1、-String-必须是可空类型-String"><a href="#1、-String-必须是可空类型-String" class="headerlink" title="1、 String 必须是可空类型 String?"></a>1、 String 必须是可空类型 String?</h4><h4 id="2、-需要使用默认值，则全部字段都必须给予默认值，以满足kotlin对象有空的构造函数"><a href="#2、-需要使用默认值，则全部字段都必须给予默认值，以满足kotlin对象有空的构造函数" class="headerlink" title="2、 需要使用默认值，则全部字段都必须给予默认值，以满足kotlin对象有空的构造函数"></a>2、 需要使用默认值，则全部字段都必须给予默认值，以满足kotlin对象有空的构造函数</h4><h3 id="0x02-手动解析Gson基础字段"><a href="#0x02-手动解析Gson基础字段" class="headerlink" title="0x02 手动解析Gson基础字段"></a>0x02 手动解析Gson基础字段</h3><p>1、msg 可空String解析 <code>jsonReader.peek() == JsonToken.NULL</code></p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.google.gson.Gson</span><br><span class="line"><span class="keyword">import</span> com.google.gson.JsonSyntaxException</span><br><span class="line"><span class="keyword">import</span> com.google.gson.TypeAdapter</span><br><span class="line"><span class="keyword">import</span> com.google.gson.reflect.TypeToken</span><br><span class="line"><span class="keyword">import</span> com.google.gson.stream.JsonReader</span><br><span class="line"><span class="keyword">import</span> com.google.gson.stream.JsonToken</span><br><span class="line"><span class="keyword">import</span> okhttp3.ResponseBody</span><br><span class="line"><span class="keyword">import</span> retrofit2.Converter</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.ParameterizedType</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Type</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ResponseBodyConverter</span></span>(<span class="keyword">val</span> gson: Gson, <span class="keyword">val</span> type: Type) :</span><br><span class="line">    Converter&lt;ResponseBody, BaseResponse&lt;Any&gt;&gt; &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">convert</span><span class="params">(value: <span class="type">ResponseBody</span>)</span></span>: BaseResponse&lt;Any&gt; &#123;</span><br><span class="line">        <span class="keyword">val</span> dataType = GenericsUtils.getParameterUpperBound(</span><br><span class="line">            <span class="number">0</span>,</span><br><span class="line">            type <span class="keyword">as</span> ParameterizedType</span><br><span class="line">        )</span><br><span class="line">        <span class="keyword">val</span> baseResponse = BaseResponse&lt;Any&gt;()</span><br><span class="line">        <span class="keyword">val</span> jsonReader = JsonReader(value.charStream())</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            jsonReader.beginObject()</span><br><span class="line">            <span class="keyword">while</span> (jsonReader.hasNext()) &#123;</span><br><span class="line">                <span class="keyword">val</span> name: String = jsonReader.nextName()</span><br><span class="line">                <span class="keyword">when</span> (name) &#123;</span><br><span class="line">                    <span class="string">"code"</span> -&gt; &#123;</span><br><span class="line">                        baseResponse.code = jsonReader.nextString()</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="string">"msg"</span> -&gt; &#123;</span><br><span class="line">                        <span class="comment">// this works, but do not do this.</span></span><br><span class="line">                        <span class="keyword">if</span> (jsonReader.peek() == JsonToken.NULL) &#123;</span><br><span class="line">                            jsonReader.nextNull()</span><br><span class="line">                            baseResponse.msg = <span class="literal">null</span></span><br><span class="line">                        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                            baseResponse.msg = jsonReader.nextString()</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="string">"data"</span> -&gt; &#123;</span><br><span class="line">                        <span class="keyword">val</span> mapped: TypeAdapter&lt;*&gt;? = gson.getAdapter(TypeToken.<span class="keyword">get</span>(dataType))</span><br><span class="line">                        baseResponse.<span class="keyword">data</span> = mapped?.read(jsonReader)</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span> -&gt; &#123;</span><br><span class="line">                        jsonReader.skipValue()</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (e: IllegalStateException) &#123;</span><br><span class="line">            <span class="keyword">throw</span> JsonSyntaxException(e)</span><br><span class="line">        &#125; <span class="keyword">catch</span> (e: IllegalAccessException) &#123;</span><br><span class="line">            <span class="keyword">throw</span> AssertionError(e)</span><br><span class="line">        &#125;</span><br><span class="line">        jsonReader.endObject()</span><br><span class="line">        <span class="keyword">return</span> baseResponse</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/09/09/%E5%A4%A7%E9%87%8F%E6%96%87%E6%9C%AC%E7%9A%84%E6%B5%8F%E8%A7%88%E8%BF%9B%E5%BA%A6%E5%92%8C%E6%B5%8F%E8%A7%88%E6%97%B6%E9%95%BF%E7%BB%9F%E8%AE%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Dench">
+      <meta itemprop="description" content="Love & Peace">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2021/09/09/%E5%A4%A7%E9%87%8F%E6%96%87%E6%9C%AC%E7%9A%84%E6%B5%8F%E8%A7%88%E8%BF%9B%E5%BA%A6%E5%92%8C%E6%B5%8F%E8%A7%88%E6%97%B6%E9%95%BF%E7%BB%9F%E8%AE%A1/" class="post-title-link" itemprop="url">大量文本的浏览进度和浏览时长统计</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-09 22:57:15" itemprop="dateCreated datePublished" datetime="2021-09-09T22:57:15+08:00">2021-09-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-26 18:11:50" itemprop="dateModified" datetime="2022-11-26T18:11:50+08:00">2022-11-26</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="大量文本的浏览进度和浏览时长统计"><a href="#大量文本的浏览进度和浏览时长统计" class="headerlink" title="大量文本的浏览进度和浏览时长统计"></a>大量文本的浏览进度和浏览时长统计</h2><p>埋点需求，Android App 需要在onResume 和 onPause 方法中计算浏览的时长，同时上报浏览的进度。</p>
+<p>浏览进度Rate具体的计算方式的具体过程：</p>
+<p>1、在滚动屏幕过程中，通过 <code>textContent?.viewTreeObserver?.addOnScrollChangedListener</code> 来记录屏幕滚动的位置</p>
+<p>2、在滚动监听里通过<code>textContent?.getLocationOnScreen(location)</code>获取在屏幕的具体位置，同时，</p>
+<p>计算出<code>visibleHeight = screenHeight - location[1]</code> 当前文本的可见高度</p>
+<p>3、当可见高度超过目标的高度，则认为已经全部浏览，<code>rate = 100%</code> ，同时移除滚动监听<code>textContent?.viewTreeObserver?.removeOnScrollChangedListener(mScrollChangeListener)</code></p>
+<p>核心代码如下：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">var</span> totalHeight: <span class="built_in">Int</span> = <span class="number">0</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">var</span> visibleHeight: <span class="built_in">Int</span> = <span class="number">0</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">var</span> screenHeight = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">getViewRate</span><span class="params">()</span></span>: String? =</span><br><span class="line"><span class="keyword">if</span> (totalHeight &lt;= <span class="number">0</span> || visibleHeight &lt; <span class="number">0</span>) <span class="literal">null</span></span><br><span class="line"><span class="keyword">else</span> <span class="string">"<span class="subst">$&#123;(visibleHeight * <span class="number">100</span> / totalHeight)&#125;</span>%"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">bindViewTreeObserver</span><span class="params">()</span></span> &#123;</span><br><span class="line">    cleanCache()</span><br><span class="line">    contentTv.post &#123;</span><br><span class="line">        totalHeight = contentTv.height</span><br><span class="line">        screenHeight = ScreenUtils.getScreenHeight(context)</span><br><span class="line">        contentVisibleRate()</span><br><span class="line">    &#125;</span><br><span class="line">    contentTv.viewTreeObserver.addOnScrollChangedListener(mScrollChangeListener)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">cleanCache</span><span class="params">()</span></span> &#123;</span><br><span class="line">    totalHeight = <span class="number">0</span></span><br><span class="line">    screenHeight = <span class="number">0</span></span><br><span class="line">    visibleHeight = <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> mScrollChangeListener = ViewTreeObserver.OnScrollChangedListener &#123;</span><br><span class="line">    contentVisibleRate()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">contentVisibleRate</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> location = IntArray(<span class="number">2</span>)</span><br><span class="line">    contentTv.getLocationOnScreen(location)</span><br><span class="line">    visibleHeight = (screenHeight - location[<span class="number">1</span>]).coerceAtLeast(visibleHeight)</span><br><span class="line">    <span class="keyword">if</span> (visibleHeight &gt;= totalHeight) &#123;</span><br><span class="line">        visibleHeight = totalHeight</span><br><span class="line">        removeOnScrollChangedListener()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">removeOnScrollChangedListener</span><span class="params">()</span></span> &#123;</span><br><span class="line">    mScrollChangeListener?.let &#123;</span><br><span class="line">        contentTv.viewTreeObserver.removeOnScrollChangedListener(mScrollChangeListener)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/08/23/RecyclerViewHelper/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -530,213 +672,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/06/18/Problems%E4%B8%93%E9%A2%98%E4%B9%8BParcel/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2021/06/18/Problems%E4%B8%93%E9%A2%98%E4%B9%8BParcel/" class="post-title-link" itemprop="url">Problems专题：Parcel</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-06-18 08:00:00" itemprop="dateCreated datePublished" datetime="2021-06-18T08:00:00+08:00">2021-06-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-26 18:11:50" itemprop="dateModified" datetime="2022-11-26T18:11:50+08:00">2022-11-26</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Problems专题：Parcel"><a href="#Problems专题：Parcel" class="headerlink" title="Problems专题：Parcel"></a>Problems专题：Parcel</h2><h3 id="0x01-Unmarshalling-unknown-type"><a href="#0x01-Unmarshalling-unknown-type" class="headerlink" title="0x01 Unmarshalling unknown type"></a>0x01 Unmarshalling unknown type</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">Thread Name: &#39;main&#39; </span><br><span class="line">java.lang.RuntimeException: Parcel android.os.Parcel@bbfcc04: Unmarshalling unknown type code 2131296928 at offset 1088</span><br><span class="line">	at android.os.Parcel.readValue(Parcel.java:2750)</span><br><span class="line">	at android.os.Parcel.readSparseArrayInternal(Parcel.java:3126)</span><br><span class="line">	at android.os.Parcel.readSparseArray(Parcel.java:2354)</span><br><span class="line">	at android.os.Parcel.readValue(Parcel.java:2728)</span><br><span class="line">	at android.os.Parcel.readArrayMapInternal(Parcel.java:3045)</span><br><span class="line">	at android.os.BaseBundle.initializeFromParcelLocked(BaseBundle.java:288)</span><br><span class="line">	at android.os.BaseBundle.unparcel(BaseBundle.java:232)</span><br><span class="line">	at android.os.Bundle.getSparseParcelableArray(Bundle.java:1010)</span><br><span class="line">	at com.android.internal.policy.PhoneWindow.restoreHierarchyState(PhoneWindow.java:2133)</span><br><span class="line">	at android.app.Activity.onRestoreInstanceState(Activity.java:1173)</span><br><span class="line">	at android.app.Activity.performRestoreInstanceState(Activity.java:1128)</span><br><span class="line">	at android.app.Instrumentation.callActivityOnRestoreInstanceState(Instrumentation.java:1318)</span><br><span class="line">	at android.app.ActivityThread.handleStartActivity(ActivityThread.java:3025)</span><br><span class="line">	at android.app.servertransaction.TransactionExecutor.performLifecycleSequence(TransactionExecutor.java:180)</span><br><span class="line">	at android.app.servertransaction.TransactionExecutor.cycleToPath(TransactionExecutor.java:165)</span><br><span class="line">	at android.app.servertransaction.TransactionExecutor.executeLifecycleState(TransactionExecutor.java:142)</span><br><span class="line">	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:70)</span><br><span class="line">	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1840)</span><br><span class="line">	at android.os.Handler.dispatchMessage(Handler.java:106)</span><br><span class="line">	at android.os.Looper.loop(Looper.java:207)</span><br><span class="line">	at android.app.ActivityThread.main(ActivityThread.java:6878)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Native Method)</span><br><span class="line">	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:547)</span><br><span class="line">	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:876)</span><br></pre></td></tr></table></figure>
-
-<p><strong>问题分析</strong></p>
-<p>情况1 Parcelable 对象为空，反序列化异常</p>
-<p>情况2 Parcelable 序列化和反序列化的字段和顺序没有完全对应</p>
-<p>情况3 自定义View的数据保存与恢复</p>
-<p><strong>解决方案</strong></p>
-<p>情况1 Parcelable 对象在序列化和反序列化增加 null 值判断</p>
-<p>情况2 Parcelable 对象 read 和 write 字段的类型和顺序保持一直</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Account</span> <span class="keyword">implements</span> <span class="title">Parcelable</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Account</span><span class="params">(Parcel in)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = in.readString();</span><br><span class="line">        <span class="keyword">this</span>.type = in.readInt();</span><br><span class="line">        <span class="keyword">if</span> (TextUtils.isEmpty(name)) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> android.os.BadParcelableException(<span class="string">"the name must not be empty: "</span> + name);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        <span class="keyword">this</span>.accessId = in.readString();</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">describeContents</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writeToParcel</span><span class="params">(Parcel dest, <span class="keyword">int</span> flags)</span> </span>&#123;</span><br><span class="line">        dest.writeString(name);</span><br><span class="line">        dest.writeInt(type);</span><br><span class="line">        dest.writeString(accessId);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>情况3 自定义View的数据保存与恢复</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onSaveInstanceState</span><span class="params">()</span></span>: Parcelable? &#123;</span><br><span class="line">    Log.d(<span class="string">"NavigationBar"</span>, <span class="string">"onSaveInstanceState: selectedId=<span class="subst">$&#123;mSelectedId&#125;</span>"</span>)</span><br><span class="line">    <span class="keyword">return</span> SavedState(<span class="keyword">super</span>.onSaveInstanceState(), mSelectedId)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onRestoreInstanceState</span><span class="params">(state: <span class="type">Parcelable</span>?)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (state <span class="keyword">is</span> SavedState) &#123;</span><br><span class="line">        <span class="keyword">val</span> id = state.selectedId</span><br><span class="line">        Log.d(<span class="string">"NavigationBar"</span>, <span class="string">"onRestoreInstanceState: selectedId=<span class="subst">$&#123;state.selectedId&#125;</span>"</span>)</span><br><span class="line">        <span class="keyword">super</span>.onRestoreInstanceState(state.superState)</span><br><span class="line">        select(id)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">super</span>.onRestoreInstanceState(state)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">internal</span> <span class="class"><span class="keyword">class</span> <span class="title">SavedState</span> : <span class="type">BaseSavedState &#123;</span></span></span><br><span class="line">    <span class="keyword">var</span> selectedId: <span class="built_in">Int</span> = View.NO_ID</span><br><span class="line"></span><br><span class="line">    <span class="keyword">constructor</span>(source: Parcel) : <span class="keyword">super</span>(source) &#123;</span><br><span class="line">        selectedId = source.readInt()</span><br><span class="line">        Log.d(<span class="string">"NavigationBar"</span>, <span class="string">"readFromParcel: selectedId=<span class="variable">$selectedId</span>"</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">constructor</span>(superState: Parcelable?, selectedId: <span class="built_in">Int</span>) : <span class="keyword">super</span>(superState) &#123;</span><br><span class="line">        <span class="keyword">this</span>.selectedId = selectedId</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">writeToParcel</span><span class="params">(parcel: <span class="type">Parcel</span>, flags: <span class="type">Int</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.writeToParcel(parcel, flags)</span><br><span class="line">        parcel.writeInt(selectedId)</span><br><span class="line">        Log.d(<span class="string">"NavigationBar"</span>, <span class="string">"writeToParcel: selectedId=<span class="variable">$selectedId</span>"</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">describeContents</span><span class="params">()</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">companion</span> <span class="keyword">object</span> CREATOR : Parcelable.Creator&lt;SavedState&gt; &#123;</span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">createFromParcel</span><span class="params">(parcel: <span class="type">Parcel</span>)</span></span>: SavedState &#123;</span><br><span class="line">            <span class="keyword">return</span> SavedState(parcel)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">newArray</span><span class="params">(size: <span class="type">Int</span>)</span></span>: Array&lt;SavedState?&gt; &#123;</span><br><span class="line">            <span class="keyword">return</span> arrayOfNulls(size)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="0x02-android-os-TransactionTooLargeException"><a href="#0x02-android-os-TransactionTooLargeException" class="headerlink" title="0x02 android.os.TransactionTooLargeException"></a>0x02 android.os.TransactionTooLargeException</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">java.lang.RuntimeException: android.os.TransactionTooLargeException: data parcel size 542688 bytes</span><br><span class="line">	at android.app.servertransaction.PendingTransactionActions$StopInfo.run(PendingTransactionActions.java:160)</span><br><span class="line">	at android.os.Handler.handleCallback(Handler.java:873)</span><br><span class="line">	at android.os.Handler.dispatchMessage(Handler.java:99)</span><br><span class="line">	at android.os.Looper.loop(Looper.java:207)</span><br><span class="line">	at android.app.ActivityThread.main(ActivityThread.java:6878)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Native Method)</span><br><span class="line">	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:547)</span><br><span class="line">	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:876)</span><br><span class="line">Caused by: android.os.TransactionTooLargeException: data parcel size 542688 bytes</span><br><span class="line">	at android.os.BinderProxy.transactNative(Native Method)</span><br><span class="line">	at android.os.BinderProxy.transact(BinderProxy.java:479)</span><br><span class="line">	at android.app.IActivityManager$Stub$Proxy.activityStopped(IActivityManager.java:3941)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Native Method)</span><br><span class="line">	at com.taobao.monitor.impl.common.c.invoke(ActivityManagerHook.java:89)</span><br><span class="line">	at java.lang.reflect.Proxy.invoke(Proxy.java:1006)</span><br><span class="line">	at $Proxy2.activityStopped(Unknown Source)</span><br><span class="line">	at android.app.servertransaction.PendingTransactionActions$StopInfo.run(PendingTransactionActions.java:144)</span><br><span class="line">	... 7 more</span><br><span class="line">android.os.TransactionTooLargeException: data parcel size 542688 bytes</span><br><span class="line">	at android.os.BinderProxy.transactNative(Native Method)</span><br><span class="line">	at android.os.BinderProxy.transact(BinderProxy.java:479)</span><br><span class="line">	at android.app.IActivityManager$Stub$Proxy.activityStopped(IActivityManager.java:3941)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Native Method)</span><br><span class="line">	at com.taobao.monitor.impl.common.c.invoke(ActivityManagerHook.java:89)</span><br><span class="line">	at java.lang.reflect.Proxy.invoke(Proxy.java:1006)</span><br><span class="line">	at $Proxy2.activityStopped(Unknown Source)</span><br><span class="line">	at android.app.servertransaction.PendingTransactionActions$StopInfo.run(PendingTransactionActions.java:144)</span><br><span class="line">	at android.os.Handler.handleCallback(Handler.java:873)</span><br><span class="line">	at android.os.Handler.dispatchMessage(Handler.java:99)</span><br><span class="line">	at android.os.Looper.loop(Looper.java:207)</span><br><span class="line">	at android.app.ActivityThread.main(ActivityThread.java:6878)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Native Method)</span><br><span class="line">	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:547)</span><br><span class="line">	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:876)</span><br></pre></td></tr></table></figure>
-
-<p><strong>问题分析</strong></p>
-<p>1 Intent 传递的数据过大。</p>
-<p>2 onSaveInstance 保存的数据过大。</p>
-<p><strong>解决方案</strong></p>
-<p>尽可能的使用少量的数据。</p>
-<p>大数据考虑持久化和其他传递形式。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://denchopen.github.io/blog/2021/06/18/%E7%AE%97%E6%B3%95-%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Dench">
-      <meta itemprop="description" content="Love & Peace">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人小站">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2021/06/18/%E7%AE%97%E6%B3%95-%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4/" class="post-title-link" itemprop="url">链表相交</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-06-18 00:14:23" itemprop="dateCreated datePublished" datetime="2021-06-18T00:14:23+08:00">2021-06-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-26 18:11:50" itemprop="dateModified" datetime="2022-11-26T18:11:50+08:00">2022-11-26</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>编写一个程序，找到两个单链表相交的起始节点。</p>
-<p>例如，下面的两个链表：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">A:          a1 → a2</span><br><span class="line">                   ↘</span><br><span class="line">                     c1 → c2 → c3</span><br><span class="line">                   ↗            </span><br><span class="line">B:     b1 → b2 → b3</span><br></pre></td></tr></table></figure>
-
-<p>在节点 c1 开始相交。</p>
-<p><strong>注意：</strong></p>
-<ul>
-<li>如果两个链表没有交点，返回 <code>null</code>.</li>
-<li>在返回结果后，两个链表仍须保持原有的结构。</li>
-<li>可假定整个链表结构中没有循环。</li>
-<li>程序尽量满足 O(<em>n</em>) 时间复杂度，且仅用 O(<em>1</em>) 内存。</li>
-</ul>
-<h3 id="方法一：哈希集合"><a href="#方法一：哈希集合" class="headerlink" title="方法一：哈希集合"></a>方法一：哈希集合</h3><p><strong>思路和算法</strong></p>
-<p>判断两个链表是否相交，可以使用哈希集合存储链表节点。</p>
-<p>首先遍历链表 headA，并将链表 headA 中的每个节点加入哈希集合中。然后遍历链表 headB，对于遍历到的每个节点，判断该节点是否在哈希集合中：</p>
-<ul>
-<li><p>如果当前节点不在哈希集合中，则继续遍历下一个节点；</p>
-</li>
-<li><p>如果当前节点在哈希集合中，则后面的节点都在哈希集合中，即从当前节点开始的所有节点都在两个链表的相交部分，因此在链表 headB 中遍历到的第一个在哈希集合中的节点就是两个链表相交的节点，返回该节点。</p>
-</li>
-</ul>
-<p>如果链表 headB 中的所有节点都不在哈希集合中，则两个链表不相交，返回 null。</p>
-<p><strong>复杂度分析</strong></p>
-<p>时间复杂度：O(m+n)，其中 m 和 n 是分别是链表 headA 和 headB 的长度。需要遍历两个链表各一次。</p>
-<p>空间复杂度：O(m)，其中 m 是链表 headA 的长度。需要使用哈希集合存储链表 headA 中的全部节点。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * public class ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) &#123;</span></span><br><span class="line"><span class="comment"> *         val = x;</span></span><br><span class="line"><span class="comment"> *         next = null;</span></span><br><span class="line"><span class="comment"> *     &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">getIntersectionNode</span><span class="params">(ListNode headA, ListNode headB)</span> </span>&#123;</span><br><span class="line">        Set&lt;ListNode&gt; visited = <span class="keyword">new</span> HashSet&lt;ListNode&gt;();</span><br><span class="line">        ListNode temp = headA;</span><br><span class="line">        <span class="keyword">while</span> (temp != <span class="keyword">null</span>) &#123;</span><br><span class="line">            visited.add(temp);</span><br><span class="line">            temp = temp.next;</span><br><span class="line">        &#125;</span><br><span class="line">        temp = headB;</span><br><span class="line">        <span class="keyword">while</span> (temp != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (visited.contains(temp)) &#123;</span><br><span class="line">                <span class="keyword">return</span> temp;</span><br><span class="line">            &#125;</span><br><span class="line">            temp = temp.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="方法二：双指针"><a href="#方法二：双指针" class="headerlink" title="方法二：双指针"></a>方法二：双指针</h3><p><strong>思路和算法</strong></p>
-<p>使用双指针的方法，可以将空间复杂度降至 O(1)。</p>
-<p>只有当链表  headA 和  headB 都不为空时，两个链表才可能相交。因此首先判断链表  headA 和  headB 是否为空，如果其中至少有一个链表为空，则两个链表一定不相交，返回 null。</p>
-<p>当链表  headA 和  headB 都不为空时，创建两个指针 pA 和 pB，初始时分别指向两个链表的头节点  headA 和  headB，然后将两个指针依次遍历两个链表的每个节点。具体做法如下：</p>
-<ul>
-<li><p>每步操作需要同时更新指针 pA 和 pB；</p>
-</li>
-<li><p>如果指针 pA 不为空，则将指针 pA 移到下一个节点；如果指针 pB 不为空，则将指针 pB 移到下一个节点。</p>
-</li>
-<li><p>如果指针 pA 为空，则将指针 pA 移到链表  headB 的头节点；如果指针 pB 为空，则将指针 pB 移到链表  headA 的头节点。</p>
-</li>
-<li><p>当指针 pA 和 pB 指向同一个节点或者都为空时，返回它们指向的节点或者 null。</p>
-</li>
-</ul>
-<p><strong>证明</strong></p>
-<p>考虑两种情况，第一种情况是两个链表相交，第二种情况是两个链表不相交。</p>
-<p><strong>复杂度分析</strong></p>
-<p>时间复杂度：O(m+n)，其中 m 和 n 是分别是链表 headA 和 headB 的长度。两个指针同时遍历两个链表，每个指针遍历两个链表各一次。</p>
-<p>空间复杂度：O(1)。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * public class ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) &#123;</span></span><br><span class="line"><span class="comment"> *         val = x;</span></span><br><span class="line"><span class="comment"> *         next = null;</span></span><br><span class="line"><span class="comment"> *     &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> ListNode <span class="title">getIntersectionNode</span><span class="params">(ListNode headA, ListNode headB)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (headA == <span class="keyword">null</span> || headB == <span class="keyword">null</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ListNode pA = headA, pB = headB;</span><br><span class="line">    <span class="keyword">while</span> (pA != pB) &#123;</span><br><span class="line">      pA = pA == <span class="keyword">null</span> ? headB : pA.next;</span><br><span class="line">      pB = pB == <span class="keyword">null</span> ? headA : pB.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> pA;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>参考连接：</p>
-<p><a href="https://leetcode-cn.com/problems/intersection-of-two-linked-lists/solution/xiang-jiao-lian-biao-by-leetcode-solutio-a8jn/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/intersection-of-two-linked-lists/solution/xiang-jiao-lian-biao-by-leetcode-solutio-a8jn/</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/48313122" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/48313122</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -809,7 +744,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-count">82</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
