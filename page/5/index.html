@@ -360,7 +360,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/blog/2021/11/25/Android%E4%B8%93%E6%A0%8F-adb/" class="post-title-link" itemprop="url">ADB</a>
+            <a href="/blog/2021/11/25/Android%E4%B8%93%E6%A0%8F-adb/" class="post-title-link" itemprop="url">adb常用指令</a>
         </h1>
 
         <div class="post-meta">
@@ -377,7 +377,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-26 18:11:50" itemprop="dateModified" datetime="2022-11-26T18:11:50+08:00">2022-11-26</time>
+                <time title="修改时间：2023-04-07 22:36:32" itemprop="dateModified" datetime="2023-04-07T22:36:32+08:00">2023-04-07</time>
               </span>
 
           
@@ -391,9 +391,65 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="ADB"><a href="#ADB" class="headerlink" title="ADB"></a>ADB</h2><h3 id="0x01-adb-shell"><a href="#0x01-adb-shell" class="headerlink" title="0x01 adb shell"></a>0x01 adb shell</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> adb shell </span></span><br><span class="line"><span class="meta">$</span><span class="bash"> adb devices <span class="comment"># List of devices attached.</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> adb start-server</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> adb <span class="built_in">kill</span>-server</span></span><br></pre></td></tr></table></figure>
+          <h2 id="adb常用指令指引"><a href="#adb常用指令指引" class="headerlink" title="adb常用指令指引"></a>adb常用指令指引</h2><p><strong>官网下载：</strong> <a href="http://adbshell.com/downloads" target="_blank" rel="noopener">http://adbshell.com/downloads</a></p>
+<p><strong>命令参考：</strong> <a href="http://adbshell.com/commands" target="_blank" rel="noopener">http://adbshell.com/commands</a></p>
+<p><strong>Android官网adb介绍：</strong> <a href="https://developer.android.google.cn/studio/command-line/adb?hl=zh_cn" target="_blank" rel="noopener">https://developer.android.google.cn/studio/command-line/adb?hl=zh_cn</a></p>
+<p><strong>Mumu adb常用指令指引：</strong> <a href="https://mumu.163.com/help/20210513/35047_947512.html" target="_blank" rel="noopener">https://mumu.163.com/help/20210513/35047_947512.html</a></p>
+<h3 id="0x01-查询和连接设备"><a href="#0x01-查询和连接设备" class="headerlink" title="0x01 查询和连接设备"></a>0x01 查询和连接设备</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 连接/断开连接网络电视</span></span><br><span class="line">adb connect 170.2.10.20</span><br><span class="line">adb disconnect 170.2.10.20</span><br><span class="line"></span><br><span class="line"><span class="comment">## 连接/断开本地模拟器端口</span></span><br><span class="line">adb connect 127.0.0.1:7555</span><br><span class="line">adb disconnect 127.0.0.1:7555</span><br><span class="line"></span><br><span class="line"><span class="comment">## 查询已连接设备列表</span></span><br><span class="line">adb devices -l</span><br></pre></td></tr></table></figure>
 
-<h3 id="0x02-adb-命令管理设备"><a href="#0x02-adb-命令管理设备" class="headerlink" title="0x02 adb 命令管理设备"></a>0x02 adb 命令管理设备</h3><table>
+<h3 id="0x02-adb服务器"><a href="#0x02-adb服务器" class="headerlink" title="0x02 adb服务器"></a>0x02 adb服务器</h3><p>在某些情况下，您可能需要终止 adb 服务器进程，然后重启才能解决问题。例如，如果 adb 不响应命令，就可能会发生这种情况。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 停止adb服务</span></span><br><span class="line">adb <span class="built_in">kill</span>-server</span><br><span class="line"></span><br><span class="line"><span class="comment">## 启动adb服务</span></span><br><span class="line">adb start-server</span><br><span class="line"></span><br><span class="line"><span class="comment">## 以root权限重启adb服务(需要可root设备)</span></span><br><span class="line">adb root</span><br></pre></td></tr></table></figure>
+
+<h3 id="0x03-指定设备操作"><a href="#0x03-指定设备操作" class="headerlink" title="0x03 指定设备操作"></a>0x03 指定设备操作</h3><p>命令格式：<code>adb -s &lt;serialNumber&gt; command</code>，如：<code>adb -s 127.0.0.1:7555 shell pm list package</code><br>可以通过 adb devices 获取目标设备的serialNumber</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ adb devices</span><br><span class="line">List of devices attached</span><br><span class="line">emulator-5554 device</span><br><span class="line">emulator-5555 device</span><br><span class="line"></span><br><span class="line">$ adb -s emulator-5555 install helloWorld.apk</span><br></pre></td></tr></table></figure>
+
+<h3 id="0x04-安装与卸载apk"><a href="#0x04-安装与卸载apk" class="headerlink" title="0x04 安装与卸载apk"></a>0x04 安装与卸载apk</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 安装apk</span></span><br><span class="line">adb install C:\\xx.apk</span><br><span class="line"></span><br><span class="line"><span class="comment">## 卸载apk</span></span><br><span class="line">adb uninstall C:\\xx.apk</span><br></pre></td></tr></table></figure>
+
+<h3 id="0x05-已安装应用列表"><a href="#0x05-已安装应用列表" class="headerlink" title="0x05 已安装应用列表"></a>0x05 已安装应用列表</h3><p>所有应用包名列表</p>
+<p><code>adb shell pm list packages</code></p>
+<p>第三方应用包名列表</p>
+<p><code>adb shell pm list packages -3</code></p>
+<p>系统应用包名列表</p>
+<p><code>adb shell pm list packages -s</code></p>
+<p>根据某个关键字查找包</p>
+<p><code>adb shell pm list packages |grep tencent</code></p>
+<p>查看包安装位置</p>
+<p><code>adb shell pm list packages -f |grep tencent</code></p>
+<h3 id="0x06-获取设备当前显示应用的包名和Activity"><a href="#0x06-获取设备当前显示应用的包名和Activity" class="headerlink" title="0x06 获取设备当前显示应用的包名和Activity"></a>0x06 获取设备当前显示应用的包名和Activity</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 正在运行应用包名和Activity</span></span><br><span class="line">$ adb shell dumpsys window | findstr mCurrentFocus</span><br><span class="line">mCurrentFocus=null</span><br><span class="line">mCurrentFocus=Window&#123;fe571d0 u0 com.zhongduomei.rrmj.society/com.rrtv.rrtvtrunk.main.presentation.MainActivity&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">## 设备当前显示应用的包名和Activity名称</span></span><br><span class="line">$ adb shell dumpsys window w |findstr \/ |findstr name=</span><br><span class="line">mSurface=Surface(name=NavigationBar0)/@0xe825312</span><br><span class="line">mSurface=Surface(name=StatusBar)/@0x2a132d5</span><br><span class="line">mSurface=Surface(name=com.tencent.qqlive/com.tencent.qqlive.ona.activity.SplashHomeActivity)/@0xc6af35b</span><br><span class="line">mSurface=Surface(name=com.android.systemui.ImageWallpaper)/@0x65b6a37</span><br></pre></td></tr></table></figure>
+
+<h3 id="0x07-启动应用"><a href="#0x07-启动应用" class="headerlink" title="0x07 启动应用"></a>0x07 启动应用</h3><p><code>adb shell am start -n 应用包名/应用Activity类名</code></p>
+<p>若想查看启动应用耗时，则可使用<code>adb shell am start -W 应用包名/应用Activity类名</code></p>
+<h3 id="0x08-关闭应用"><a href="#0x08-关闭应用" class="headerlink" title="0x08 关闭应用"></a>0x08 关闭应用</h3><p><code>adb shell am force-stop 应用包名</code></p>
+<h3 id="0x09-查看应用版本号"><a href="#0x09-查看应用版本号" class="headerlink" title="0x09 查看应用版本号"></a>0x09 查看应用版本号</h3><p><code>adb shell dumpsys package 应用包名 | findstr version</code></p>
+<h3 id="0x10-清理应用数据"><a href="#0x10-清理应用数据" class="headerlink" title="0x10 清理应用数据"></a>0x10 清理应用数据</h3><p><code>adb shell pm clear 应用包名</code></p>
+<h3 id="0x11-模拟输入"><a href="#0x11-模拟输入" class="headerlink" title="0x11 模拟输入"></a>0x11 模拟输入</h3><p>按键输入</p>
+<p><code>adb shell input keyevent 键值</code></p>
+<p>如：<code>adb shell input keyevent 3</code>表示按下HOME键，其他键值对应键位可网上搜索</p>
+<p>字符输入</p>
+<p><code>adb shell input text 字符</code></p>
+<p>如：<code>adb shell input text test</code>则表示输入了test字符串</p>
+<p>ps：字符不支持中文</p>
+<p>鼠标点击</p>
+<p><code>adb shell input tap X Y</code></p>
+<p>X Y分别为当前屏幕下的x和y轴坐标值</p>
+<p>鼠标滑动</p>
+<p><code>adb shell input swipe X1 Y1 X2 Y2</code></p>
+<p>X1 Y1 和X2 Y2分别为滑动起始点的坐标</p>
+<h3 id="0x12-从电脑上传文件至模拟器"><a href="#0x12-从电脑上传文件至模拟器" class="headerlink" title="0x12 从电脑上传文件至模拟器"></a>0x12 从电脑上传文件至模拟器</h3><p><code>adb push myfile.txt /sdcard/myfile.txt</code></p>
+<h3 id="0x13-从模拟器复制文件至电脑"><a href="#0x13-从模拟器复制文件至电脑" class="headerlink" title="0x13 从模拟器复制文件至电脑"></a>0x13 从模拟器复制文件至电脑</h3><p><code>adb pull /data/test.apk D:\</code></p>
+<h3 id="0x14-截图"><a href="#0x14-截图" class="headerlink" title="0x14 截图"></a>0x14 截图</h3><p>将模拟器当前显示截图</p>
+<p><code>adb shell screencap /data/screen.png</code></p>
+<p>将截图文件下载至电脑</p>
+<p><code>adb pull /data/screen.png C:\</code></p>
+<h3 id="0x15-录制视频"><a href="#0x15-录制视频" class="headerlink" title="0x15 录制视频"></a>0x15 录制视频</h3><p>开始录制</p>
+<p><code>adb shell screenrecord /data/test.mp4</code></p>
+<p>结束录制</p>
+<p>可按<code>CTRL+C</code>结束录制</p>
+<p>导出视频文件</p>
+<p><code>adb pull /data/test.mp4 C:\</code></p>
+<h3 id="0x16-查看设备信息"><a href="#0x16-查看设备信息" class="headerlink" title="0x16 查看设备信息"></a>0x16 查看设备信息</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 设备型号</span></span><br><span class="line">$ adb shell getprop ro.product.model</span><br><span class="line"></span><br><span class="line"><span class="comment">## 设备品牌</span></span><br><span class="line">$ adb shell getprop ro.product.brand</span><br><span class="line"></span><br><span class="line"><span class="comment">## 设备处理器型号</span></span><br><span class="line">$ adb shell getprop ro.product.board</span><br><span class="line"></span><br><span class="line"><span class="comment">## 设备安卓版本号</span></span><br><span class="line">$ adb shell getprop ro.build.version.release</span><br><span class="line"></span><br><span class="line"><span class="comment">## 设备abi</span></span><br><span class="line">$ adb shell getprop ro.product.cpu.abi</span><br><span class="line"></span><br><span class="line"><span class="comment">## 设备cpu信息</span></span><br><span class="line">$ adb shell cat /proc/cupinfo</span><br><span class="line"></span><br><span class="line"><span class="comment">## 设备引擎渲染模式</span></span><br><span class="line">$ adb shell dumpsys SurfaceFlinger|findstr <span class="string">"GLES"</span></span><br><span class="line"></span><br><span class="line"> <span class="comment">## grep product关键字（设备支持的abi列表）</span></span><br><span class="line"> $ adb shell getprop |grep product</span><br></pre></td></tr></table></figure>
+
+<h3 id="0x17-管理设备"><a href="#0x17-管理设备" class="headerlink" title="0x17 管理设备"></a>0x17 管理设备</h3><table>
 <thead>
 <tr>
 <th align="left">命令</th>
@@ -424,68 +480,7 @@
 <td align="left">adb reboot recovery</td>
 <td align="left">重启设备进入recovery模式</td>
 </tr>
-<tr>
-<td align="left">adb [-d|-e|-s <serialNumber> ] <command></td>
-<td align="left">发送命令到指定设备</td>
-</tr>
 </tbody></table>
-<table>
-<thead>
-<tr>
-<th align="left">命令</th>
-<th align="left">功能</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">adb kill-server</td>
-<td align="left">终止 adb 服务进程</td>
-</tr>
-<tr>
-<td align="left">adb start-server</td>
-<td align="left">重启 adb 服务进程</td>
-</tr>
-<tr>
-<td align="left">adb root</td>
-<td align="left">以 root 权限重启 adb 服务</td>
-</tr>
-</tbody></table>
-<h3 id="0x02-查看手机cpu"><a href="#0x02-查看手机cpu" class="headerlink" title="0x02 查看手机cpu"></a>0x02 查看手机cpu</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> adb shell getprop ro.product.cpu.abi</span></span><br></pre></td></tr></table></figure>
-
-<p>查看cpu全部信息</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> adb shell</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> cat /proc/cupinfo</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="0x03-查看设备信息"><a href="#0x03-查看设备信息" class="headerlink" title="0x03 查看设备信息"></a>0x03 查看设备信息</h3><table>
-<thead>
-<tr>
-<th align="left">命令</th>
-<th align="left">功能</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">adb shell cat /sys/class/net/wlan0/address</td>
-<td align="left">获取 wifi mac 地址</td>
-</tr>
-<tr>
-<td align="left">adb shell cat /proc/cpuinfo</td>
-<td align="left">获取 cpu 信息</td>
-</tr>
-<tr>
-<td align="left">adb shell cat /system/build.prop</td>
-<td align="left">获取设备编译属性(手机属性和手机配置信息)（需要系统权限）</td>
-</tr>
-<tr>
-<td align="left">adb shell cat /data/misc/wifi/*.conf</td>
-<td align="left">获取 wifi 配置信息（需要系统权限）</td>
-</tr>
-</tbody></table>
-<h3 id="0x04-adb配合grep命令"><a href="#0x04-adb配合grep命令" class="headerlink" title="0x04 adb配合grep命令"></a>0x04 adb配合grep命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># getprop手机属性中包含product关键字</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> adb shell getprop |grep product </span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 根据某个关键字查找包 </span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> pm list packages |grep tencent</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 查看包安装位置  </span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> pm list packages -f</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="0x05-查找手机屏幕当前显示的包名和Activity名称"><a href="#0x05-查找手机屏幕当前显示的包名和Activity名称" class="headerlink" title="0x05 查找手机屏幕当前显示的包名和Activity名称"></a>0x05 查找手机屏幕当前显示的包名和Activity名称</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> adb shell dumpsys window w |findstr \/ |findstr name=</span></span><br></pre></td></tr></table></figure>
-
 
       
     </div>
@@ -803,7 +798,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/blog/tags/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
